@@ -4,6 +4,7 @@ import { scoreGame } from "../engine/scoring";
 import { libraryOf, validatePack, validateRules } from "../content/validation";
 import { ENGINE_VERSION } from "../content/types";
 import { appendRecord, newRecord, signature } from "../replay/record";
+import { artworkMap } from "../assets/references";
 import type { GameState, Player } from "../engine/types";
 import type {
   CardStatistics,
@@ -131,6 +132,7 @@ export function runOne(
   try {
     state = createMatch(decks, lib, request.config, seed, starter);
     record = newRecord(state, lib, decks, request.content.id);
+    record.artwork = artworkMap(request.content);
     for (const p of state.players)
       for (const id of p.hand) count(state.cards[id].definitionId).drawn++;
     while (
@@ -183,8 +185,14 @@ export function runOne(
     summary.signature = signature(state);
     summary.scores = scoreGame(state, lib).totals;
     if (state.phase === "fault") {
-      summary.status = /invariant|unique logical location|Invalid occupying creature/i.test(state.fault??'')?'invariant':'fault';
-      summary.reason = summary.status==='invariant'?'invariant':'engine-fault';
+      summary.status =
+        /invariant|unique logical location|Invalid occupying creature/i.test(
+          state.fault ?? "",
+        )
+          ? "invariant"
+          : "fault";
+      summary.reason =
+        summary.status === "invariant" ? "invariant" : "engine-fault";
       summary.error = state.fault ?? "Engine fault";
     } else if (state.phase !== "finished") {
       summary.status = "timeout";

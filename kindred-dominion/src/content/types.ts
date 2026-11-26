@@ -11,6 +11,10 @@ export type CardMetadata = {
   rarity: string;
   artwork: string;
   notes: string;
+  sourceArtwork?: string;
+  artworkId?: string;
+  artworkApproval?: "experimental" | "testing" | "production";
+  artworkRef?: { id: string; revision: string };
 };
 export type Collection = {
   id: string;
@@ -47,6 +51,7 @@ export type ContentPack = {
   collections: Collection[];
   decks: TestDeck[];
   rulesets: Ruleset[];
+  assets?: import("../assets/types").OfficialAsset[];
 };
 export type Scenario = {
   id: string;

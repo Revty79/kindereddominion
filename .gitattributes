@@ -1,0 +1,4 @@
+kindred-dominion/public/assets/** -text
+kindred-dominion/artwork-source/** -text
+kindred-dominion/tests/fixtures/artwork/** -text
+*.kindred.zip binary

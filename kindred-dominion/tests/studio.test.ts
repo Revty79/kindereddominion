@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   baselineContent,
@@ -514,7 +515,7 @@ describe("replay, versions, backup and transactional imports", () => {
     let w = initialWorkspace();
     const metadata = {
       ...defaultMetadata(),
-      artwork: "data:image/png;base64,aGVsbG8=",
+      artwork: `data:image/png;base64,${readFileSync("tests/fixtures/artwork/test-sprout-source.png").toString("base64")}`,
     };
     w.working = saveCard(w.working, draftCard(), metadata, null);
     w = checkpoint(w, "Artwork checkpoint");

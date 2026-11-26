@@ -21,6 +21,7 @@ import { appendRecord, newRecord, traceAction } from "../replay/record";
 import type { MatchRecord } from "../replay/record";
 import { BoardView, Field, Issues, NumberField } from "./components";
 import Diagnostics from "./Diagnostics";
+import { artworkMap } from "../assets/references";
 export default function Sandbox({
   workspace,
   onSave,
@@ -154,7 +155,7 @@ export default function Sandbox({
   }
   async function saveReplay() {
     if (!record) return;
-    await onReplay(record);
+    await onReplay({ ...record, artwork: artworkMap(content) });
     setMessage("Sandbox action record saved in Replay & Diagnostics.");
   }
   const available = workspace.working.rulesets;

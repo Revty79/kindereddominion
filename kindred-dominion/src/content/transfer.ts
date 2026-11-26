@@ -44,7 +44,11 @@ export function validateWorkspace(value: unknown): void {
     if (seen.has(version.id))
       throw new Error("Duplicate content-version identifier.");
     seen.add(version.id);
-    const errors = validatePack(version).filter((i) => i.severity === "error");
+    const errors = validatePack(version).filter(
+      (i) =>
+        i.severity === "error" &&
+        !(version.kind === "draft" && i.path === "evolution"),
+    );
     if (errors.length)
       throw new Error(
         `${version.name}: ${errors.map((e) => `${e.path}: ${e.message}`).join("\n")}`,

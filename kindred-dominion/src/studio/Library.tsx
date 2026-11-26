@@ -4,6 +4,8 @@ import type { ContentPack } from "../content/types";
 import { EFFECTS, MECHANICS, TRIGGERS } from "../engine/registry";
 import { CardPreview, EvolutionGraph, Field, NumberField } from "./components";
 import { evolutionEdges } from "../content/validation";
+import { cardArtwork } from "../assets/references";
+import Artwork from "../ui/Artwork";
 export default function Library({
   content,
   onEdit,
@@ -224,6 +226,13 @@ export default function Library({
             {filtered.map((c) => (
               <tr key={c.id}>
                 <td>
+                  {cardArtwork(content, c.id) && (
+                    <Artwork
+                      className="studio-art-thumbnail"
+                      src={cardArtwork(content, c.id)!}
+                      alt={`${c.name} artwork`}
+                    />
+                  )}
                   <button
                     className="text-button"
                     onClick={() => setInspect(c.id)}

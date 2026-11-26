@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { CardDefinition, Prerequisite } from "../engine/types";
 import type { CardMetadata, ContentPack } from "../content/types";
 import { defaultMetadata } from "../content/baseline";
 import { saveCard } from "../content/operations";
-import { validateCard } from "../content/validation";
+import { validateCard, validatePack } from "../content/validation";
 import {
   CardPreview,
   Field,
@@ -13,6 +13,7 @@ import {
   split,
 } from "./components";
 import AbilityBuilder from "./AbilityBuilder";
+import { importLocalArtwork } from "../assets/artwork";
 export default function CardEditor({
   content,
   initial,
@@ -48,6 +49,7 @@ export default function CardEditor({
   );
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
+  const [readingArtwork, setReadingArtwork] = useState(false);
   const update = (patch: Partial<CardDefinition>) =>
     setCard((prev) => ({ ...prev, ...patch }));
   const prereq = (patch: Partial<Prerequisite>) =>
@@ -56,7 +58,14 @@ export default function CardEditor({
     ...content,
     cards: [...content.cards.filter((c) => c.id !== card.id), card],
   };
-  const issues = validateCard(card, previewContent);
+  const metadataIssues = useMemo(
+    () =>
+      validatePack({ ...previewContent, metadata: { [card.id]: meta } }).filter(
+        (i) => i.path.startsWith(`metadata.${card.id}`) || i.path === "assets",
+      ),
+    [card.id, meta, content.assets],
+  );
+  const issues = [...validateCard(card, previewContent), ...metadataIssues];
   async function save() {
     setSaving(true);
     try {
@@ -72,19 +81,24 @@ export default function CardEditor({
   }
   async function artwork(file: File | undefined) {
     if (!file) return;
-    if (
-      !["image/png", "image/jpeg", "image/webp", "image/gif"].includes(
-        file.type,
-      ) ||
-      file.size > 2 * 1024 * 1024
-    ) {
-      setMessage("Choose a PNG, JPEG, WebP or GIF image no larger than 2 MB.");
-      return;
+    setReadingArtwork(true);
+    try {
+      const imported = await importLocalArtwork(file);
+      setMeta((m) => ({
+        ...m,
+        ...imported,
+        artworkId: m.artworkId || `art-${card.id}`,
+        artworkApproval: "experimental",
+        artworkRef: undefined,
+      }));
+      setMessage(
+        "Source artwork preserved locally; optimized WebP preview generated. Artwork is experimental until explicitly approved.",
+      );
+    } catch (e) {
+      setMessage(String(e));
+    } finally {
+      setReadingArtwork(false);
     }
-    const reader = new FileReader();
-    reader.onload = () =>
-      setMeta((m) => ({ ...m, artwork: String(reader.result) }));
-    reader.readAsDataURL(file);
   }
   return (
     <div className="card-editor-layout">
@@ -93,7 +107,11 @@ export default function CardEditor({
           <h2>{originalId ? "Edit card" : "Create a card"}</h2>
           <button
             className="primary"
-            disabled={saving || issues.some((i) => i.severity === "error")}
+            disabled={
+              saving ||
+              readingArtwork ||
+              issues.some((i) => i.severity === "error")
+            }
             onClick={save}
           >
             {saving ? "Saving…" : "Save card"}
@@ -206,18 +224,57 @@ export default function CardEditor({
               onChange={(e) => setMeta({ ...meta, rarity: e.target.value })}
             />
           </Field>
-          <Field label="Local artwork (optional, up to 2 MB)">
+          <Field label="Local artwork (optional, PNG/JPEG/WebP/SVG, up to 10 MB)">
             <input
               type="file"
-              accept="image/png,image/jpeg,image/webp,image/gif"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
               onChange={(e) => void artwork(e.target.files?.[0])}
             />
+          </Field>
+          <Field label="Stable artwork identifier">
+            <input
+              value={meta.artworkId ?? ""}
+              placeholder={`art-${card.id}`}
+              onChange={(e) =>
+                setMeta({ ...meta, artworkId: e.target.value || undefined })
+              }
+            />
+          </Field>
+          <Field label="Artwork approval">
+            <select
+              value={meta.artworkApproval ?? "experimental"}
+              onChange={(e) =>
+                setMeta({
+                  ...meta,
+                  artworkApproval: e.target.value as
+                    | "experimental"
+                    | "testing"
+                    | "production",
+                })
+              }
+            >
+              <option value="experimental">Experimental · local only</option>
+              <option value="testing">
+                Explicitly approved temporary / testing artwork
+              </option>
+              <option value="production">
+                Explicitly approved production artwork
+              </option>
+            </select>
           </Field>
         </div>
         {meta.artwork && (
           <button
             type="button"
-            onClick={() => setMeta({ ...meta, artwork: "" })}
+            onClick={() =>
+              setMeta({
+                ...meta,
+                artwork: "",
+                sourceArtwork: undefined,
+                artworkRef: undefined,
+                artworkApproval: "experimental",
+              })
+            }
           >
             Remove artwork reference
           </button>
@@ -343,7 +400,11 @@ export default function CardEditor({
         <Issues issues={issues} />
         <button
           className="primary"
-          disabled={saving || issues.some((i) => i.severity === "error")}
+          disabled={
+            saving ||
+            readingArtwork ||
+            issues.some((i) => i.severity === "error")
+          }
           onClick={save}
         >
           Save card

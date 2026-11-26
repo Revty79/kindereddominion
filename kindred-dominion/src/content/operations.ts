@@ -25,6 +25,15 @@ export function saveCard(
   if (errors.length)
     throw new Error(errors.map((e) => `${e.path}: ${e.message}`).join("\n"));
   next.metadata[card.id] = structuredClone(metadata);
+  const metadataErrors = validatePack(next).filter(
+    (i) =>
+      i.severity === "error" &&
+      (i.path.startsWith(`metadata.${card.id}`) || i.path === "assets"),
+  );
+  if (metadataErrors.length)
+    throw new Error(
+      metadataErrors.map((e) => `${e.path}: ${e.message}`).join("\n"),
+    );
   return next;
 }
 export function duplicateCard(
@@ -71,6 +80,16 @@ export function restoreDraft(workspace: Workspace, version: string): Workspace {
   if (!pack) throw new Error("Version not found.");
   return {
     ...workspace,
+    versions: [
+      ...workspace.versions,
+      {
+        ...structuredClone(workspace.working),
+        id: `before-restore-${workspace.revision}-${Date.now().toString(36)}`,
+        name: `Automatic recovery before restoring ${pack.name}`,
+        kind: "draft",
+        createdAt: new Date().toISOString(),
+      },
+    ],
     working: {
       ...structuredClone(pack),
       id: "working",

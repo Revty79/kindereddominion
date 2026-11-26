@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import type { Workspace } from "../../src/content/types";
 const nav = (page: Page, name: string) =>
@@ -85,14 +86,13 @@ async function create(
   }
   if (options.artwork)
     await page
-      .getByLabel("Local artwork (optional, up to 2 MB)", { exact: true })
+      .getByLabel("Local artwork (optional, PNG/JPEG/WebP/SVG, up to 10 MB)", {
+        exact: true,
+      })
       .setInputFiles({
         name: "owner-pixel.png",
         mimeType: "image/png",
-        buffer: Buffer.from(
-          "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/2n0AAAAASUVORK5CYII=",
-          "base64",
-        ),
+        buffer: readFileSync("tests/fixtures/artwork/test-sprout-source.png"),
       });
   await page
     .getByRole("button", { name: "Save card", exact: true })
@@ -232,8 +232,11 @@ test("C: exact and classification evolution plus replacement sacrifice use the r
     ["crypt-harvester", "bone-thrall", "Crypt Harvester"],
   ]) {
     await nav(page, "Battlefield Sandbox");
-    const editConstruction=page.getByRole('button',{name:'Edit construction',exact:true});
-    if(await editConstruction.count())await editConstruction.click();
+    const editConstruction = page.getByRole("button", {
+      name: "Edit construction",
+      exact: true,
+    });
+    if (await editConstruction.count()) await editConstruction.click();
     await page
       .getByRole("button", { name: "New scenario from ruleset", exact: true })
       .click();
@@ -448,7 +451,7 @@ test("F: checkpoint and complete backup restore authored relationships and artwo
   expect(restored.working).toEqual(w.working);
   expect(restored.versions).toEqual(w.versions);
   expect(restored.working.metadata["backed-card"].artwork).toContain(
-    "data:image/png",
+    "data:image/webp",
   );
   expect(
     restored.working.cards.find((c) => c.id === "backed-evolution")

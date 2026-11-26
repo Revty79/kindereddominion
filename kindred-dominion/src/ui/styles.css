@@ -12,6 +12,24 @@
   --jade: #83c8ac;
   --amber: #e0aa7a;
 }
+.card-artwork {
+  display: block;
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  margin: 0.5rem 0;
+}
+.compact .card-artwork {
+  height: 70px;
+  margin: 0.25rem 0;
+}
+.creature-artwork {
+  display: block;
+  width: 100%;
+  height: 56px;
+  object-fit: contain;
+  margin: 0.25rem 0 0;
+}
 * {
   box-sizing: border-box;
 }

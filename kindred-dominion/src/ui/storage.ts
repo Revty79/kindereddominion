@@ -11,6 +11,7 @@ export type Session = {
   library?: CardLibrary;
   contentVersion?: string;
   record?: MatchRecord;
+  artwork?: Record<string, string>;
 };
 const KEY = "kindred-dominion:v1:match";
 export function readSession(): Session | null {

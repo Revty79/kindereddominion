@@ -16,6 +16,7 @@ import {
 import { recoveryWorkspace } from "../content/persistence";
 import { download, Field, Issues } from "./components";
 import { validatePack } from "../content/validation";
+import Publishing from "./Publishing";
 export default function Versions({
   workspace,
   onChange,
@@ -319,6 +320,7 @@ export default function Versions({
           Restore previous local transaction
         </button>
       </section>
+      <Publishing workspace={workspace} />
       {message && (
         <p className="studio-message" role="status">
           {message}

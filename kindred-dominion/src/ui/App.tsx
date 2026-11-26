@@ -17,6 +17,8 @@ import type { ContentPack } from "../content/types";
 import { libraryOf } from "../content/validation";
 import { newRecord, appendRecord } from "../replay/record";
 import type { MatchRecord } from "../replay/record";
+import Artwork from "./Artwork";
+import { artworkMap } from "../assets/references";
 import type {
   Action,
   CardDefinition,
@@ -47,9 +49,11 @@ function Crest() {
 function CardFace({
   card,
   compact = false,
+  artwork,
 }: {
   card: CardDefinition;
   compact?: boolean;
+  artwork?: string;
 }) {
   return (
     <div
@@ -69,9 +73,17 @@ function CardFace({
           <small>PWR</small>
         </strong>
       </div>
-      <div className="sigil" aria-hidden="true">
-        <span>{card.glyph}</span>
-      </div>
+      {artwork ? (
+        <Artwork
+          className="card-artwork"
+          src={artwork}
+          alt={`${card.name} artwork`}
+        />
+      ) : (
+        <div className="sigil" aria-hidden="true">
+          <span>{card.glyph}</span>
+        </div>
+      )}
       <div className="card-caption">
         <small>{card.kindred}</small>
         <strong>{card.name}</strong>
@@ -195,6 +207,8 @@ export default function App({
   );
   const [session, setSession] = useState<Session | null>(null);
   const CARDS = session?.library ?? activeLibrary;
+  const contentArtwork = useMemo(() => artworkMap(content), [content]);
+  const artwork = session?.artwork ?? contentArtwork;
   const CARD_LIST = useMemo(() => Object.values(CARDS), [CARDS]);
   const KINDREDS = content.collections.map((c) => c.id);
   const [saved, setSaved] = useState(readSession);
@@ -359,6 +373,7 @@ export default function App({
           session.decks,
           session.contentVersion ?? content.id,
         );
+    record.artwork ??= session.artwork ?? artwork;
     setSession({ ...session, game: next, record });
     if (next.phase === "finished" && onRecord)
       void onRecord(record).catch((e) =>
@@ -402,6 +417,7 @@ export default function App({
         deckNames: [deckName(0), deckName(1)],
         library: structuredClone(CARDS),
         contentVersion: content.id,
+        artwork: structuredClone(artwork),
         record: newRecord(next, CARDS, decks, content.id),
       });
       setCurtain(opponent === "local");
@@ -467,7 +483,11 @@ export default function App({
           </span>
         </a>
         <div className="header-right">
-          <span className="version">V1.1 · PLAYABLE FOUNDATION</span>
+          <span className="version">
+            {content.id === "v1.1-baseline"
+              ? "V1.1 · PLAYABLE FOUNDATION"
+              : "V1.2 · PROVISIONAL TESTING"}
+          </span>
           <button className="quiet" onClick={() => setLibrary(true)}>
             Card library
           </button>
@@ -513,7 +533,8 @@ export default function App({
             <div className="foundation-note">
               <span>LOCAL. OFFLINE. YOUR FIELD.</span>
               <p>
-                30 provisional cards · 5 Founding Kindreds
+                {content.cards.length} provisional cards ·{" "}
+                {content.collections.length} collections
                 <br />
                 One shared screen or a computer opponent.
               </p>
@@ -708,9 +729,10 @@ export default function App({
               </div>
               <p className="field-hint">
                 Five foundational cards permit 3 copies in Standard. Free Play
-                keeps all effect safeguards active. A single kindred has only
-                six test cards; use Free Play to build a 15-card
-                single-collection deck.
+                keeps all effect safeguards active.{" "}
+                {content.id === "v1.1-baseline"
+                  ? "A single kindred has only six test cards; use Free Play to build a 15-card single-collection deck."
+                  : "The complete Founding Kindreds support Standard Play pure decks. Use a supplied starting deck or build your own."}
               </p>
             </details>
             {deckErrors.length > 0 && (
@@ -938,18 +960,26 @@ export default function App({
                                     </span>
                                     {definition ? (
                                       <>
-                                        <span
-                                          className="creature-glyph"
-                                          style={{
-                                            color:
-                                              KINDRED_COLORS[
-                                                definition.kindred
-                                              ],
-                                          }}
-                                          aria-hidden="true"
-                                        >
-                                          {definition.glyph}
-                                        </span>
+                                        {artwork[definition.id] ? (
+                                          <Artwork
+                                            className="creature-artwork"
+                                            src={artwork[definition.id]}
+                                            alt={`${definition.name} artwork`}
+                                          />
+                                        ) : (
+                                          <span
+                                            className="creature-glyph"
+                                            style={{
+                                              color:
+                                                KINDRED_COLORS[
+                                                  definition.kindred
+                                                ],
+                                            }}
+                                            aria-hidden="true"
+                                          >
+                                            {definition.glyph}
+                                          </span>
+                                        )}
                                         <span className="creature-name">
                                           {definition.name}
                                         </span>
@@ -1119,7 +1149,11 @@ export default function App({
                               }
                             }}
                           >
-                            <CardFace card={c} compact />
+                            <CardFace
+                              card={c}
+                              compact
+                              artwork={artwork[c.id]}
+                            />
                             {game.phase === "mulligan" && chosen && (
                               <span className="exchange-tag">EXCHANGE</span>
                             )}
@@ -1169,7 +1203,7 @@ export default function App({
                 </div>
                 {cardDef && !hidden ? (
                   <>
-                    <CardFace card={cardDef} />
+                    <CardFace card={cardDef} artwork={artwork[cardDef.id]} />
                     <Pattern card={cardDef} player={game.active} />
                     <button
                       className="quiet inspect-button"
@@ -1353,7 +1387,7 @@ export default function App({
       )}
       <footer className="app-footer">
         <span>
-          KINDRED DOMINION <b>✦</b> 0.1.0
+          KINDRED DOMINION <b>✦</b> 0.2.0
         </span>
         <span>
           Development cards. A foundation to play, question and refine.
@@ -1366,7 +1400,7 @@ export default function App({
             const c = CARDS[instance?.definitionId ?? inspect];
             return c ? (
               <div className="detail-layout">
-                <CardFace card={c} />
+                <CardFace card={c} artwork={artwork[c.id]} />
                 <div>
                   <Pattern card={c} player={instance?.owner ?? 0} />
                   <p>{c.text}</p>
@@ -1522,7 +1556,7 @@ export default function App({
           <div className="library-grid">
             {filtered.map((c) => (
               <article key={c.id}>
-                <CardFace card={c} />
+                <CardFace card={c} artwork={artwork[c.id]} />
                 <Pattern card={c} />
                 {editor !== null ? (
                   <div className="copy-control">

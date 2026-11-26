@@ -1,4 +1,9 @@
-import { act, assertInvariants, createMatch } from "../engine/game";
+import {
+  act,
+  assertInvariants,
+  createMatch,
+  validateConfig,
+} from "../engine/game";
 import { scoreGame } from "../engine/scoring";
 import type {
   Action,
@@ -28,6 +33,7 @@ export type MatchRecord = {
   initialState: GameState;
   actions: RecordedAction[];
   finalResult: GameState["result"];
+  artwork?: Record<string, string>;
 };
 export function signature(state: GameState): string {
   const string = JSON.stringify(state);
@@ -119,6 +125,33 @@ export function validateRecord(value: unknown): void {
     record.actions.length > 2000
   )
     throw new Error("Invalid or incompatible replay.");
+  validateConfig(record.initialState.config);
+  for (const item of record.actions) {
+    const action = item.action;
+    if (
+      !action ||
+      !["mulligan", "play", "pass", "surrender"].includes(action.type) ||
+      ![0, 1].includes(action.player)
+    )
+      throw new Error("Replay contains an unsupported action.");
+    if (
+      action.type === "play" &&
+      (!Number.isInteger(action.row) ||
+        !Number.isInteger(action.col) ||
+        typeof action.card !== "string")
+    )
+      throw new Error("Replay placement fields are invalid.");
+  }
+  for (const url of Object.values(record.artwork ?? {}))
+    if (
+      typeof url !== "string" ||
+      !/^((\.\/|\/)?assets\/[a-z0-9/_\-.]+|data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+)$/.test(
+        url,
+      )
+    )
+      throw new Error(
+        "Replay artwork must use portable local assets or experimental embedded raster previews.",
+      );
   const result = replayAt(record, record.actions.length).state.result;
   if (JSON.stringify(result) !== JSON.stringify(record.finalResult))
     throw new Error("Replay final result does not match its action sequence.");

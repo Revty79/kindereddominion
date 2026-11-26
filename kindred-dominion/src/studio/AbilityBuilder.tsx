@@ -96,7 +96,12 @@ function TargetEditor({
           <input
             defaultValue={value.tags?.join(", ") ?? ""}
             onChange={(e) =>
-              onChange({ ...value, tags: split(e.target.value).length?split(e.target.value):undefined })
+              onChange({
+                ...value,
+                tags: split(e.target.value).length
+                  ? split(e.target.value)
+                  : undefined,
+              })
             }
           />
         </Field>

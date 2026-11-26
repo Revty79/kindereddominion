@@ -1,0 +1,60 @@
+{
+  "format": "kindred-dominion-asset-registry",
+  "schema": 1,
+  "assets": [
+    {
+      "id": "kindred-brand-crest",
+      "revision": "26af05c82eafcf24",
+      "path": "assets/branding/crest.svg",
+      "sha256": "26af05c82eafcf246516dbdc713fd6e005f56d45310130652a77d9cc3ded5288",
+      "mime": "image/svg+xml",
+      "bytes": 282,
+      "width": 64,
+      "height": 64,
+      "category": "branding",
+      "source": {
+        "path": "artwork-source/branding/crest.svg",
+        "sha256": "26af05c82eafcf246516dbdc713fd6e005f56d45310130652a77d9cc3ded5288",
+        "mime": "image/svg+xml",
+        "bytes": 282
+      },
+      "approval": "testing"
+    },
+    {
+      "id": "kindred-art-fallback",
+      "revision": "4e1940a4f569f28d",
+      "path": "assets/cards/fallback.svg",
+      "sha256": "4e1940a4f569f28daa37e81b02d60de3fa405e599ac1e562b76bd51210e133f0",
+      "mime": "image/svg+xml",
+      "bytes": 333,
+      "width": 240,
+      "height": 320,
+      "category": "cards",
+      "source": {
+        "path": "artwork-source/cards/fallback.svg",
+        "sha256": "4e1940a4f569f28daa37e81b02d60de3fa405e599ac1e562b76bd51210e133f0",
+        "mime": "image/svg+xml",
+        "bytes": 333
+      },
+      "approval": "testing"
+    },
+    {
+      "id": "art-sprout",
+      "revision": "ce9b71e2b4447e2c",
+      "path": "assets/cards/nature/art-sprout-ce9b71e2b4447e2c.webp",
+      "sha256": "ce9b71e2b4447e2c64568bcb36a588871a706e46a5d83ddfeb998dec7d4dd918",
+      "mime": "image/webp",
+      "bytes": 3336,
+      "width": 240,
+      "height": 320,
+      "source": {
+        "path": "artwork-source/cards/nature/art-sprout-2af723707e2a0421.png",
+        "sha256": "2af723707e2a0421a69f92fbaf03eb011fbfe50d4686006373b5c444a2ede25d",
+        "mime": "image/png",
+        "bytes": 10201
+      },
+      "category": "cards",
+      "approval": "testing"
+    }
+  ]
+}

@@ -12,6 +12,8 @@ import { currentPower, scoreGame } from "../engine/scoring";
 import { coordinate, relative } from "../engine/game";
 import { libraryOf, evolutionEdges } from "../content/validation";
 import { describeAbility, MECHANICS } from "../engine/registry";
+import { cardArtwork } from "../assets/references";
+import Artwork from "../ui/Artwork";
 export const split = (s: string) => [
   ...new Set(
     s
@@ -27,11 +29,16 @@ export function Field({
   label: string;
   children: React.ReactNode;
 }) {
-  const id=useId();
+  const id = useId();
   return (
     <label className="studio-field" htmlFor={id}>
       <span>{label}</span>
-      {isValidElement(children)?cloneElement(children as React.ReactElement<any>,{id,'aria-label':label}):children}
+      {isValidElement(children)
+        ? cloneElement(children as React.ReactElement<any>, {
+            id,
+            "aria-label": label,
+          })
+        : children}
     </label>
   );
 }
@@ -306,6 +313,7 @@ export function CardPreview({
 }) {
   const color =
     content.collections.find((c) => c.id === card.kindred)?.color ?? "#a7bcac";
+  const illustration = artwork || cardArtwork(content, card.id);
   const radius = Math.max(
     1,
     ...card.influence.flatMap((e) => [Math.abs(e.x), Math.abs(e.y)]),
@@ -319,8 +327,8 @@ export function CardPreview({
         </span>
         <b>{card.power} power</b>
       </div>
-      {artwork ? (
-        <img src={artwork} alt={`${card.name} local artwork`} />
+      {illustration ? (
+        <Artwork src={illustration} alt={`${card.name} artwork`} />
       ) : (
         <div className="studio-glyph" style={{ color }}>
           {card.glyph}
@@ -401,11 +409,13 @@ export function BoardView({
   content,
   onCell,
   selected,
+  artwork,
 }: {
   state: GameState;
   content: ContentPack;
   onCell?: (p: Position) => void;
   selected?: Position | null;
+  artwork?: Record<string, string>;
 }) {
   const lib = libraryOf(content);
   const score = scoreGame(state, lib);
@@ -435,6 +445,13 @@ export function BoardView({
               </span>
               {def ? (
                 <>
+                  {(artwork?.[def.id] || cardArtwork(content, def.id)) && (
+                    <Artwork
+                      className="sandbox-artwork"
+                      src={(artwork?.[def.id] || cardArtwork(content, def.id))!}
+                      alt={`${def.name} artwork`}
+                    />
+                  )}
                   <strong>{def.name}</strong>
                   <span>
                     {currentPower(state, lib, card!.id)} power ·{" "}
@@ -484,12 +501,12 @@ export function EvolutionGraph({
       content.cards.some((c) => c.id === e.to && c.kindred === collection),
   );
   const ids = [...new Set(edges.flatMap((e) => [e.from, e.to]))];
-  const depths=new Map<string,number>();
+  const depths = new Map<string, number>();
   const depth = (id: string, seen = new Set<string>()): number => {
     if (seen.has(id)) return 0;
-    if(depths.has(id))return depths.get(id)!;
+    if (depths.has(id)) return depths.get(id)!;
     const incoming = edges.filter((e) => e.to === id);
-    const result=incoming.length
+    const result = incoming.length
       ? Math.min(
           6,
           1 +
@@ -498,7 +515,8 @@ export function EvolutionGraph({
             ),
         )
       : 0;
-    depths.set(id,result);return result;
+    depths.set(id, result);
+    return result;
   };
   const levels = new Map<number, string[]>();
   ids.forEach((id) => {

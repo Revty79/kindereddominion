@@ -3,6 +3,7 @@ import { DECKS } from "../data/decks";
 import { DEFAULT_CONFIG } from "../engine/config";
 import type { CardMetadata, ContentPack, Workspace } from "./types";
 import { ENGINE_VERSION } from "./types";
+import { foundingContent } from "./founding";
 export const defaultMetadata = (): CardMetadata => ({
   status: "draft",
   description: "",
@@ -60,16 +61,17 @@ export function baselineContent(): ContentPack {
 }
 export function initialWorkspace(): Workspace {
   const base = baselineContent();
+  const founding = foundingContent(base);
   return {
     schema: 1,
     revision: 0,
     working: {
-      ...structuredClone(base),
+      ...structuredClone(founding),
       id: "working",
       name: "Working drafts",
       kind: "draft",
     },
-    versions: [base],
+    versions: [base, founding],
     activeVersion: base.id,
     scenarios: [],
     replays: [],

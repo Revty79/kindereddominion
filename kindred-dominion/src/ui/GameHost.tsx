@@ -5,6 +5,7 @@ import { loadWorkspace, persistWorkspace } from "../content/persistence";
 import { validateWorkspace } from "../content/transfer";
 import type { Workspace } from "../content/types";
 import type { MatchRecord } from "../replay/record";
+import { addBundledVersions } from "../content/bundled";
 const Studio =
   import.meta.env.VITE_STUDIO !== "0"
     ? lazy(() => import("../studio/Studio"))
@@ -16,11 +17,32 @@ export default function GameHost() {
     [error, setError] = useState("");
   const current = useRef(workspace),
     tail = useRef(Promise.resolve());
+  const initialization = useRef<Promise<Workspace> | null>(null);
   useEffect(() => {
     let live = true;
-    loadWorkspace()
+    // React development effect rechecks must share one initialization transaction.
+    // A real second tab may independently install the same bundled version; reload its committed revision.
+    if (!initialization.current)
+      initialization.current = (async () => {
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const value = await loadWorkspace();
+          validateWorkspace(value);
+          const withBundled = addBundledVersions(value);
+          if (withBundled === value) return value;
+          withBundled.revision = value.revision + 1;
+          try {
+            await persistWorkspace(withBundled, value.revision);
+            return withBundled;
+          } catch (error) {
+            if (!String(error).includes("newer Studio changes")) throw error;
+          }
+        }
+        throw new Error(
+          "Another tab is updating content. Reload after its save completes.",
+        );
+      })();
+    initialization.current
       .then((value) => {
-        validateWorkspace(value);
         if (live) {
           current.current = value;
           setWorkspace(value);

@@ -10,6 +10,7 @@ import { SCORING_RULES } from "../engine/scoring";
 import type { CardDefinition, CardLibrary, GameConfig } from "../engine/types";
 import type { ContentPack, Issue } from "./types";
 import { ENGINE_VERSION } from "./types";
+import { fromDataURL } from "../assets/artwork";
 export const libraryOf = (pack: ContentPack): CardLibrary =>
   Object.fromEntries(pack.cards.map((c) => [c.id, c]));
 export const ID = /^[a-zA-Z][a-zA-Z0-9_-]{0,79}$/;
@@ -266,7 +267,7 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
       !["friendly", "enemy", "any"].includes(t.relation)
     )
       error(path, "Invalid target relationship.");
-    if (t.tags !== undefined && (!strings(t.tags)||!t.tags.length))
+    if (t.tags !== undefined && (!strings(t.tags) || !t.tags.length))
       error(path, "Invalid target classifications.");
     if (t.excludeSelf !== undefined && typeof t.excludeSelf !== "boolean")
       error(path, "Exclude source must be a checkbox value.");
@@ -359,7 +360,16 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
         )
           error(ep, "Provide a nonzero bounded effect strength.");
         if ("target" in capability) validateTarget(e.target, ep);
-        if(['tokens','fortify','summon','replace','evolve'].includes(e.type)&&e.target?.relation==='enemy')error(ep,'This effect only modifies friendly positions or creatures. Choose friendly or any relationship.');
+        if (
+          ["tokens", "fortify", "summon", "replace", "evolve"].includes(
+            e.type,
+          ) &&
+          e.target?.relation === "enemy"
+        )
+          error(
+            ep,
+            "This effect only modifies friendly positions or creatures. Choose friendly or any relationship.",
+          );
         if ("card" in capability) {
           const ref = pack.cards.find((card) => card.id === e.card);
           if (!ref) error(ep, "Referenced generated/placed card is missing.");
@@ -476,8 +486,88 @@ export function validatePack(value: unknown): Issue[] {
     )
       error(
         `metadata.${id}.artwork`,
-        "Artwork must be an imported local raster image. External links and SVG are not supported.",
+        "Local previews must be raster images. Import SVG through the artwork picker to sanitize it and generate WebP.",
       );
+    if (meta.artwork) {
+      try {
+        fromDataURL(meta.artwork);
+      } catch (e) {
+        error(`metadata.${id}.artwork`, String(e));
+      }
+    }
+    if (meta.sourceArtwork) {
+      try {
+        fromDataURL(meta.sourceArtwork);
+      } catch (e) {
+        error(`metadata.${id}.sourceArtwork`, String(e));
+      }
+    }
+    if (
+      meta.artworkApproval !== undefined &&
+      !["experimental", "testing", "production"].includes(meta.artworkApproval)
+    )
+      error(`metadata.${id}.artworkApproval`, "Invalid artwork approval.");
+    if (
+      meta.artworkId !== undefined &&
+      !/^[a-z][a-z0-9-]{0,79}$/.test(meta.artworkId)
+    )
+      error(
+        `metadata.${id}.artworkId`,
+        "Artwork identifiers must be lowercase, stable and portable.",
+      );
+    if (
+      meta.artworkRef &&
+      !pack.assets?.some(
+        (a) =>
+          a.id === meta.artworkRef!.id &&
+          a.revision === meta.artworkRef!.revision,
+      )
+    )
+      error(
+        `metadata.${id}.artworkRef`,
+        "Official artwork reference is missing from this content asset manifest.",
+      );
+  }
+  if (pack.assets !== undefined) {
+    if (!list(pack.assets))
+      error("assets", "Asset manifest must be a bounded list.");
+    else {
+      const identities = new Set<string>(),
+        paths = new Set<string>();
+      for (const asset of pack.assets) {
+        if (
+          !obj(asset) ||
+          !str(asset.id) ||
+          !/^[a-z][a-z0-9-]{0,79}$/.test(asset.id) ||
+          !str(asset.revision) ||
+          !/^[a-f0-9]{16}$/.test(asset.revision) ||
+          !str(asset.sha256) ||
+          !/^[a-f0-9]{64}$/.test(asset.sha256) ||
+          !str(asset.path) ||
+          !/^assets\/(cards|card-backs|battlefields|icons|animations|branding)\/([a-z0-9._-]+\/)*[a-z0-9._-]+$/.test(
+            asset.path,
+          ) ||
+          asset.path.split("/").includes("..") ||
+          !num(asset.bytes, 1, 30 * 1024 * 1024) ||
+          !num(asset.width, 1, 20000) ||
+          !num(asset.height, 1, 20000) ||
+          !["image/webp", "image/png", "image/jpeg", "image/svg+xml"].includes(
+            asset.mime,
+          ) ||
+          !obj(asset.source) ||
+          !str(asset.source.path) ||
+          !asset.source.path.startsWith("artwork-source/")
+        ) {
+          error("assets", "Invalid portable artwork manifest entry.");
+          continue;
+        }
+        const key = `${asset.id}@${asset.revision}`;
+        if (identities.has(key) || paths.has(asset.path))
+          error("assets", "Duplicate asset identity or path.");
+        identities.add(key);
+        paths.add(asset.path);
+      }
+    }
   }
   for (const rule of pack.rulesets) {
     if (!obj(rule) || rule.completion !== "twoPasses" || !str(rule.name))
