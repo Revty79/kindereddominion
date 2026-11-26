@@ -225,6 +225,7 @@ export function validateNumberDefinition(
         "destroyedPower",
         "incomingPower",
         "stackDepth",
+        "maximumFortification",
       ];
       if (extras(v, ["kind", "value"]) || !values.includes(v.value))
         return [issue(path, "Unsupported numerical value.")];

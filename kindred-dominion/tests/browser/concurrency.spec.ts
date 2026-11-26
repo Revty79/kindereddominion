@@ -15,7 +15,7 @@ test("bundled content initializes once under StrictMode and stale tabs cannot ov
       .getByRole("button", { name: "Card Library", exact: true })
       .click();
     await p
-      .getByRole("button", { name: "Edit Briar Sprout", exact: true })
+      .getByRole("button", { name: "Edit Field Mouse", exact: true })
       .click();
   }
   await page.getByLabel("Base power", { exact: true }).fill("9");
@@ -40,7 +40,7 @@ test("bundled content initializes once under StrictMode and stale tabs cannot ov
     .getByRole("button", { name: "Card Library", exact: true })
     .click();
   await other
-    .getByRole("button", { name: "Edit Briar Sprout", exact: true })
+    .getByRole("button", { name: "Edit Field Mouse", exact: true })
     .click();
   await expect(other.getByLabel("Base power", { exact: true })).toHaveValue(
     "9",

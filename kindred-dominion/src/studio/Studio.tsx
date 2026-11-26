@@ -111,7 +111,7 @@ export default function Studio({
     <div className="studio">
       <header className="studio-header">
         <div>
-          <span className="eyebrow">KINDRED DOMINION / V1.3A</span>
+          <span className="eyebrow">KINDRED DOMINION / V1.3B/C</span>
           <h1>Developer Studio</h1>
         </div>
         <div>

@@ -1,3 +1,4 @@
+import { prepareHistoricalContent } from "./historical-setup";
 import { expect, test, type Page } from "@playwright/test";
 import {
   act,
@@ -199,6 +200,7 @@ test("touch-sized layout supports hand, board scroll, preview and surrender", as
     baseURL: "http://127.0.0.1:5173",
   });
   const page = await context.newPage();
+  await prepareHistoricalContent(page);
   await page.setViewportSize({ width: 390, height: 844 });
   await startLocal(page);
   await mulligans(page);
@@ -448,3 +450,5 @@ test("configurable 4 by 8 field and save storage failure remain playable", async
     page.getByRole("button", { name: /Pass turn|Confirm forced pass/ }),
   ).toBeVisible();
 });
+
+test.beforeEach(async ({ page }) => { await prepareHistoricalContent(page); });

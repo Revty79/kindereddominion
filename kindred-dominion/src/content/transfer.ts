@@ -7,6 +7,7 @@ import { validateRecord } from "../replay/record";
 import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
 import { hasAdvancedMechanics } from "../engine/evaluation";
 import { libraryOf } from "./validation";
+import { engineVersionFor, SUPPORTED_ENGINES } from "../engine/versions";
 const plain = (value: unknown): value is Record<string, any> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 function safeTree(value: unknown, depth = 0): void {
@@ -78,7 +79,7 @@ function validateReport(value: any): void {
   if (
     !plain(value) ||
     value.schema !== 1 ||
-    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(value.engineVersion) ||
+    !SUPPORTED_ENGINES.includes(value.engineVersion) ||
     !plain(value.request) ||
     !Array.isArray(value.failures) ||
     !Array.isArray(value.examples) ||
@@ -94,6 +95,16 @@ function validateReport(value: any): void {
   if (errors.length) throw new Error("Simulation content snapshot is invalid.");
   for (const summary of [...value.examples, ...value.failures])
     if (summary.replay) validateRecord(summary.replay);
+}
+function newestIncludedEngine(data: unknown, fallback: string): string {
+  let index = SUPPORTED_ENGINES.indexOf(fallback);
+  const visit = (value: unknown): void => {
+    if (!value || typeof value !== "object") return;
+    if ("engineVersion" in value) index = Math.max(index, SUPPORTED_ENGINES.indexOf(String(value.engineVersion)));
+    for (const child of Object.values(value)) visit(child);
+  };
+  visit(data);
+  return SUPPORTED_ENGINES[Math.max(0, index)];
 }
 export function exportTransfer(
   workspace: Workspace,
@@ -114,35 +125,7 @@ export function exportTransfer(
   return {
     format: "kindred-dominion-studio",
     schema: 1,
-    engineVersion:
-      workspace.working.engineVersion === ADVANCED_ENGINE_VERSION ||
-      (type === "backup" &&
-        ([...workspace.versions].some(
-          (v) => v.engineVersion === ADVANCED_ENGINE_VERSION,
-        ) ||
-          workspace.scenarios.some(
-            (s) => s.content.engineVersion === ADVANCED_ENGINE_VERSION,
-          ) ||
-          workspace.replays.some(
-            (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
-          ) ||
-          workspace.reports.some(
-            (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
-          ))) ||
-      (type === "scenarios" &&
-        workspace.scenarios.some(
-          (s) => s.content.engineVersion === ADVANCED_ENGINE_VERSION,
-        )) ||
-      (type === "replays" &&
-        workspace.replays.some(
-          (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
-        )) ||
-      (type === "reports" &&
-        workspace.reports.some(
-          (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
-        ))
-        ? ADVANCED_ENGINE_VERSION
-        : ENGINE_VERSION,
+    engineVersion: newestIncludedEngine(data, workspace.working.engineVersion),
     type,
     exportedAt: new Date().toISOString(),
     data: structuredClone(data),
@@ -157,7 +140,7 @@ export function parseTransfer(text: string): Transfer {
     !plain(value) ||
     value.format !== "kindred-dominion-studio" ||
     value.schema !== 1 ||
-    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(value.engineVersion) ||
+    !SUPPORTED_ENGINES.includes(value.engineVersion) ||
     ![
       "cards",
       "collections",
@@ -251,7 +234,7 @@ export function applyImport(
     hasAdvancedMechanics(libraryOf(next.working))
   ) {
     next.working.schema = 2;
-    next.working.engineVersion = ADVANCED_ENGINE_VERSION;
+    next.working.engineVersion = engineVersionFor(libraryOf(next.working));
   }
   validateWorkspace(next);
   return next;

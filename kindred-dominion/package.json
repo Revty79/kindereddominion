@@ -1,6 +1,6 @@
 {
   "name": "kindred-dominion",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,7 +16,9 @@
     "balance": "node scripts/balance.mjs",
     "content:import": "node scripts/import-content.mjs",
     "content:export": "node scripts/export-content.mjs",
-    "validate:v1.3a": "node scripts/validate-v1.3a.mjs"
+    "validate:v1.3a": "node scripts/validate-v1.3a.mjs",
+    "build:player": "node scripts/build-player.mjs",
+    "validate:owner": "node scripts/validate-owner.mjs"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.12",

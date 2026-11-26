@@ -21,7 +21,8 @@ const sourceCommit = execFileSync("git", ["rev-parse", "HEAD"], {
   encoding: "utf8",
 }).trim();
 await mkdir(".local/v1.3a", { recursive: true });
-await mkdir("docs/v1.3a", { recursive: true });
+const receiptDirectory = process.argv.find(a => a.startsWith("--output="))?.slice(9) ?? "docs/v1.3a";
+await mkdir(receiptDirectory, { recursive: true });
 const canonical = (value: unknown) =>
   JSON.stringify(value, (_, v) =>
     v && typeof v === "object" && !Array.isArray(v)
@@ -252,7 +253,7 @@ if (mode === "regression" || mode === "all") {
     runs: rows,
   };
   await writeFile(
-    "docs/v1.3a/REGRESSION.json",
+    `${receiptDirectory}/REGRESSION.json`,
     JSON.stringify(result, null, 2) + "\n",
   );
   if (!result.allIdentical) process.exitCode = 1;
@@ -333,7 +334,7 @@ if (mode === "laboratory" || mode === "all") {
     for (const key of Object.keys(totals) as (keyof typeof totals)[])
       totals[key] += r[key];
   await writeFile(
-    "docs/v1.3a/LABORATORY-RESULTS.json",
+    `${receiptDirectory}/LABORATORY-RESULTS.json`,
     JSON.stringify(
       {
         engineVersion: "1.3.0",
@@ -347,11 +348,11 @@ if (mode === "laboratory" || mode === "all") {
     ) + "\n",
   );
   await writeFile(
-    "docs/v1.3a/LABORATORY-CONTENT.json",
+    `${receiptDirectory}/LABORATORY-CONTENT.json`,
     JSON.stringify(content, null, 2) + "\n",
   );
   await writeFile(
-    "docs/v1.3a/LABORATORY-SCENARIOS.json",
+    `${receiptDirectory}/LABORATORY-SCENARIOS.json`,
     JSON.stringify(
       laboratoryScenarios().map((s) => ({
         id: s.id,

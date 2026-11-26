@@ -1,6 +1,14 @@
 node_modules/
 dist/
+dist-player/
 test-results/
 playwright-report/
 .local/
 *.log
+.env
+.env.*
+!.env.example
+*.dump
+*.backup
+.pgpass
+.pg_service.conf

@@ -14,7 +14,17 @@ try {
   const registry = JSON.parse(
     await readFile(path.join(project, "public/assets/manifest.json"), "utf8"),
   );
-  for (const a of registry.assets)
+  const playerOnly = process.argv.includes("--player");
+  const compiledRegistry = playerOnly ? JSON.parse(await readFile(path.join(directory, "assets/manifest.json"), "utf8")) : registry;
+  if (playerOnly && compiledRegistry.format !== "kindred-dominion-player-assets") throw new Error("Missing approved player asset manifest.");
+  for (const a of compiledRegistry.assets) {
+    if (!registry.assets.some(r => r.id === a.id && r.revision === a.revision && r.sha256 === a.sha256)) throw new Error("Player artwork does not match repository registry.");
+    if (playerOnly && !["kindred-art-fallback", "kindred-brand-crest"].includes(a.id) && a.approval !== "production") throw new Error("Unapproved player artwork.");
+  }
+  if (playerOnly) for (const a of registry.assets.filter(a => !compiledRegistry.assets.some(c => c.path === a.path))) {
+    try { await access(path.join(directory,a.path)); throw new Error("Unpublished artwork was included in player output."); } catch(error) { if(error.code !== "ENOENT") throw error; }
+  }
+  for (const a of compiledRegistry.assets)
     if (digest(await readFile(path.join(directory, a.path))) !== a.sha256)
       throw new Error(`Missing or corrupt compiled artwork: ${a.path}`);
   try {
@@ -43,7 +53,6 @@ try {
   const developmentChunks = scripts.filter((n) =>
     /^(Studio-|worker-)/i.test(path.basename(n)),
   ).length;
-  const playerOnly = process.argv.includes("--player");
   if (playerOnly) {
     if (developmentChunks)
       throw new Error(
@@ -52,14 +61,14 @@ try {
     const text = (
       await Promise.all(scripts.map((n) => readFile(n, "utf8")))
     ).join("\n");
-    if (text.includes("lab-bee") || text.includes("mechanics-laboratory-v1.3a"))
+    if (text.includes("lab-bee") || text.includes("mechanics-laboratory-v1.3a") || text.includes("Developer Studio") || text.includes("founding-artwork-test-v1"))
       throw new Error(
         "Development laboratory definitions were included in a player-only build.",
       );
   }
   console.log(
     JSON.stringify({
-      artwork: registry.assets.length,
+      artwork: compiledRegistry.assets.length,
       checksumsMatch: true,
       sourceMastersIncluded: false,
       playerOnly,

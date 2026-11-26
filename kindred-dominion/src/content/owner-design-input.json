@@ -1,0 +1,1502 @@
+[
+  {
+    "number": "N001",
+    "id": "n001",
+    "name": "Field Mouse",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, FU, FD",
+    "ability": "No special ability. Maximum three copies in Standard Play.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N002",
+    "id": "n002",
+    "name": "Wolf Cub",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, FU",
+    "ability": "Predecessor to Grey Wolf. Wolf and Mammal classifications.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N003",
+    "id": "n003",
+    "name": "Red Fox",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, FD, B",
+    "ability": "Flexible expansion.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N004",
+    "id": "n004",
+    "name": "Mountain Hare",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, F2",
+    "ability": "Long-range expansion.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N005",
+    "id": "n005",
+    "name": "Honeybee",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, U",
+    "ability": "Adjacent allies continuously gain +1 power.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N006",
+    "id": "n006",
+    "name": "Web Spider",
+    "type": "I",
+    "power": 2,
+    "influence": "E: FU, FD",
+    "ability": "On placement, weaken enemy at F by 1.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N007",
+    "id": "n007",
+    "name": "Tortoise",
+    "type": "I",
+    "power": 3,
+    "influence": "G: S, U, D",
+    "ability": "Immune to direct destruction.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N008",
+    "id": "n008",
+    "name": "Burrowing Mole",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, B, S",
+    "ability": "Develops underlying and neighboring placement tokens.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N009",
+    "id": "n009",
+    "name": "Caterpillar",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, D",
+    "ability": "Predecessor to Butterfly.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N010",
+    "id": "n010",
+    "name": "River Otter",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, U, D",
+    "ability": "Flexible expansion between rows.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N011",
+    "id": "n011",
+    "name": "Porcupine",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F; G: S",
+    "ability": "When first weakened by an explicit effect, weaken adjacent enemies by 1.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N012",
+    "id": "n012",
+    "name": "Raven",
+    "type": "I",
+    "power": 1,
+    "influence": "E: FU, FD",
+    "ability": "Gain +1 whenever another creature dies, maximum three activations per match.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N013",
+    "id": "n013",
+    "name": "Wild Boar",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F×2, FD",
+    "ability": "Concentrated expansion.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N014",
+    "id": "n014",
+    "name": "Golden Eagle",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F2, FU, FD",
+    "ability": "Long-range territorial influence.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N015",
+    "id": "n015",
+    "name": "Rattlesnake",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F",
+    "ability": "On placement, weaken enemies at F, FU and FD by 1.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N016",
+    "id": "n016",
+    "name": "Mountain Lion",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F, FU",
+    "ability": "On placement, weaken enemy at F by 2.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N017",
+    "id": "n017",
+    "name": "Giant Stag",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, U, D",
+    "ability": "Adjacent allied Mammals continuously gain +1 power.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N018",
+    "id": "n018",
+    "name": "Crocodile",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F, B",
+    "ability": "On placement, destroy enemy at F with effective power of 2 or less.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N019",
+    "id": "n019",
+    "name": "Giant Octopus",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, B, U, D",
+    "ability": "On placement, weaken adjacent enemies by 1.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N020",
+    "id": "n020",
+    "name": "Grizzly Bear",
+    "type": "III",
+    "power": 7,
+    "influence": "E: F",
+    "ability": "Gains +2 dynamic power while no allied creature is adjacent.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N021",
+    "id": "n021",
+    "name": "Rhinoceros",
+    "type": "III",
+    "power": 6,
+    "influence": "O: F; E: FU, FD",
+    "ability": "Territorial breakthrough.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N022",
+    "id": "n022",
+    "name": "African Elephant",
+    "type": "III",
+    "power": 6,
+    "influence": "E: F×2, FU, FD",
+    "ability": "On placement, enhance adjacent allies by 1.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N023",
+    "id": "n023",
+    "name": "Giant Sequoia",
+    "type": "III",
+    "power": 4,
+    "influence": "G: S×2, U, D, B",
+    "ability": "Adjacent allies continuously gain +2 power.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N024",
+    "id": "n024",
+    "name": "Carrion Vulture",
+    "type": "R",
+    "power": 2,
+    "influence": "E: F, FU, FD",
+    "ability": "Gains +1 dynamic power per historical allied creature death, including sacrifices, maximum +5. Count each death once.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N025",
+    "id": "n025",
+    "name": "Scavenging Hyena",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F, FD",
+    "ability": "On replacement, gain +2 power if an enemy creature previously died.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N026",
+    "id": "n026",
+    "name": "Venus Flytrap",
+    "type": "R",
+    "power": 2,
+    "influence": "E: F; G: S",
+    "ability": "On replacement, gain half the sacrificed creature's effective power, rounded down, maximum +5.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N027",
+    "id": "n027",
+    "name": "Grey Wolf",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, FU, FD",
+    "ability": "Requires N002. Gains +1 dynamic power per other allied Wolf, maximum +4.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N028",
+    "id": "n028",
+    "name": "Alpha Wolf",
+    "type": "Evo",
+    "power": 5,
+    "influence": "E: F×2, U, D",
+    "ability": "Requires N027. Other allied Wolves continuously gain +2 power.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N029",
+    "id": "n029",
+    "name": "Butterfly",
+    "type": "Evo",
+    "power": 2,
+    "influence": "E: F2, FU, FD",
+    "ability": "Requires N009. On evolution, generate one N009 in hand.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "N030",
+    "id": "n030",
+    "name": "Tarantula",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, FU, FD",
+    "ability": "Requires N006. Continuously weaken adjacent enemies by 1. Fantasy transformation.",
+    "kindred": "Nature"
+  },
+  {
+    "number": "M001",
+    "id": "m001",
+    "name": "Dragon Whelp",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, FU",
+    "ability": "Predecessor to Elder Dragon.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M002",
+    "id": "m002",
+    "name": "Griffin Hatchling",
+    "type": "I",
+    "power": 2,
+    "influence": "E: FU, FD",
+    "ability": "Predecessor to Royal Griffin.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M003",
+    "id": "m003",
+    "name": "Firebird",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, U",
+    "ability": "Predecessor to Phoenix.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M004",
+    "id": "m004",
+    "name": "Jackalope",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, FU, FD",
+    "ability": "Rapid opening expansion.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M005",
+    "id": "m005",
+    "name": "Faun",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, D",
+    "ability": "On placement, enhance ally at B by 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M006",
+    "id": "m006",
+    "name": "Peryton",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F2",
+    "ability": "Long-range influence.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M007",
+    "id": "m007",
+    "name": "Gargoyle",
+    "type": "I",
+    "power": 3,
+    "influence": "G: S, U",
+    "ability": "Immune to weakening.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M008",
+    "id": "m008",
+    "name": "Harpy",
+    "type": "I",
+    "power": 2,
+    "influence": "E: FU, FD",
+    "ability": "On placement, weaken enemy at U by 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M009",
+    "id": "m009",
+    "name": "Kelpie",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, D",
+    "ability": "On placement, weaken enemy at F by 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M010",
+    "id": "m010",
+    "name": "Kitsune",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, B",
+    "ability": "Predecessor to Nine-Tailed Fox.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M011",
+    "id": "m011",
+    "name": "Unicorn Foal",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, U, D",
+    "ability": "On placement, grant weakening immunity to ally at B.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M012",
+    "id": "m012",
+    "name": "Cockatrice",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F",
+    "ability": "On placement, destroy enemy at F with effective power of 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M013",
+    "id": "m013",
+    "name": "Centaur",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F, FU",
+    "ability": "On placement, enhance ally at B by 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M014",
+    "id": "m014",
+    "name": "Minotaur",
+    "type": "II",
+    "power": 5,
+    "influence": "E: F×2",
+    "ability": "Concentrated expansion.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M015",
+    "id": "m015",
+    "name": "Griffin",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F2, FU, FD",
+    "ability": "Long-range influence.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M016",
+    "id": "m016",
+    "name": "Basilisk",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F",
+    "ability": "Continuously weaken enemy at F by 2.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M017",
+    "id": "m017",
+    "name": "Manticore",
+    "type": "II",
+    "power": 4,
+    "influence": "E: FU, FD",
+    "ability": "On placement, weaken enemies at FU and FD by 2.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M018",
+    "id": "m018",
+    "name": "Pegasus",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F2, U, D",
+    "ability": "Award 2 additional points if its row is won and it survives.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M019",
+    "id": "m019",
+    "name": "Cyclops",
+    "type": "II",
+    "power": 5,
+    "influence": "O: F",
+    "ability": "Territorial breakthrough.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M020",
+    "id": "m020",
+    "name": "Dragon",
+    "type": "III",
+    "power": 7,
+    "influence": "E: F",
+    "ability": "On placement, weaken enemies at F, FU and FD by 2.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M021",
+    "id": "m021",
+    "name": "Hydra",
+    "type": "III",
+    "power": 5,
+    "influence": "E: FU, FD",
+    "ability": "Gains +2 dynamic power per adjacent enemy, maximum +6.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M022",
+    "id": "m022",
+    "name": "Roc",
+    "type": "III",
+    "power": 6,
+    "influence": "O: F2; E: FU, FD",
+    "ability": "Long-distance overthrow.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M023",
+    "id": "m023",
+    "name": "Leviathan",
+    "type": "III",
+    "power": 8,
+    "influence": "E: F×2",
+    "ability": "On placement, weaken all other creatures in its row, including allies, by 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M024",
+    "id": "m024",
+    "name": "Chimera",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F, FU, FD",
+    "ability": "On replacement, gain half sacrificed creature's effective power, rounded down, maximum +5.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M025",
+    "id": "m025",
+    "name": "Sphinx",
+    "type": "R",
+    "power": 4,
+    "influence": "E: U, D",
+    "ability": "Award 3 additional points if its row is won and it survives.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M026",
+    "id": "m026",
+    "name": "Cerberus",
+    "type": "R",
+    "power": 5,
+    "influence": "E: F",
+    "ability": "On replacement, destroy enemy at F with effective power of 4 or less.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M027",
+    "id": "m027",
+    "name": "Phoenix",
+    "type": "Evo",
+    "power": 5,
+    "influence": "E: F, FU, FD",
+    "ability": "Requires M003. On destruction, attempt self-resurrection once, subject to established evolution requirements.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M028",
+    "id": "m028",
+    "name": "Royal Griffin",
+    "type": "Evo",
+    "power": 6,
+    "influence": "O: F; E: FU, FD",
+    "ability": "Requires M002 or M015. On evolution, enhance adjacent allies by 1.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M029",
+    "id": "m029",
+    "name": "Elder Dragon",
+    "type": "Evo",
+    "power": 8,
+    "influence": "O: F; E: FU, FD",
+    "ability": "Requires M001 or M020. On evolution, weaken enemies at F, FU and FD by 3.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "M030",
+    "id": "m030",
+    "name": "Nine-Tailed Fox",
+    "type": "Evo",
+    "power": 5,
+    "influence": "E: F, B, U, D",
+    "ability": "Requires M010. On evolution, return enemy at F to its owner's hand.",
+    "kindred": "Mythical"
+  },
+  {
+    "number": "A001",
+    "id": "a001",
+    "name": "Will-o'-the-Wisp",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, FU, FD",
+    "ability": "Rapid expansion.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A002",
+    "id": "a002",
+    "name": "Arcane Familiar",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, B",
+    "ability": "On placement, draw one card.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A003",
+    "id": "a003",
+    "name": "Spark Sprite",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F",
+    "ability": "On placement, gain +1 power if at least three allied creatures are in play, including itself.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A004",
+    "id": "a004",
+    "name": "Frost Sprite",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, D",
+    "ability": "On placement, weaken enemy at F by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A005",
+    "id": "a005",
+    "name": "Flame Sprite",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, FU",
+    "ability": "On placement, weaken enemy at D by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A006",
+    "id": "a006",
+    "name": "Water Sprite",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, U, D",
+    "ability": "Predecessor to Water Elemental.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A007",
+    "id": "a007",
+    "name": "Earth Sprite",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F; G: S",
+    "ability": "Predecessor to Earth Elemental.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A008",
+    "id": "a008",
+    "name": "Mirror Sprite",
+    "type": "I",
+    "power": 1,
+    "influence": "E: FU, FD",
+    "ability": "When first explicitly enhanced, enhance ally at B by 2.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A009",
+    "id": "a009",
+    "name": "Living Shadow",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F",
+    "ability": "Continuously weaken enemy at F by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A010",
+    "id": "a010",
+    "name": "Lesser Mimic",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, B",
+    "ability": "Gains half the power of ally at B, rounded down, maximum +3. Use the safe pre-dynamic power calculation if required to prevent recursive scaling.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A011",
+    "id": "a011",
+    "name": "Mana Moth",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, U",
+    "ability": "When another ally is explicitly enhanced, gain +1 power, maximum three activations per match.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A012",
+    "id": "a012",
+    "name": "Enchanted Orb",
+    "type": "I",
+    "power": 2,
+    "influence": "E: S×2, F",
+    "ability": "Develops underlying placement tokens.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A013",
+    "id": "a013",
+    "name": "Air Elemental",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F2, FU, FD",
+    "ability": "On placement, return enemy at F with effective power of 2 or less.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A014",
+    "id": "a014",
+    "name": "Lightning Elemental",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, U",
+    "ability": "On placement, weaken enemies at F, FU and FD by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A015",
+    "id": "a015",
+    "name": "Crystal Elemental",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F; G: S",
+    "ability": "Adjacent allies continuously gain +1 power.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A016",
+    "id": "a016",
+    "name": "Magical Ooze",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, D",
+    "ability": "Gains +1 dynamic power per weakened enemy, maximum +4.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A017",
+    "id": "a017",
+    "name": "Illusion Beast",
+    "type": "II",
+    "power": 3,
+    "influence": "O: FU; E: FD",
+    "ability": "On placement, weaken enemy at F by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A018",
+    "id": "a018",
+    "name": "Living Grimoire",
+    "type": "II",
+    "power": 2,
+    "influence": "E: F, B",
+    "ability": "At the beginning of its owner's turn, draw one additional card, maximum two activations per match.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A019",
+    "id": "a019",
+    "name": "Mana Serpent",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, FD",
+    "ability": "Gains +1 dynamic power per other enhanced ally, maximum +4.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A020",
+    "id": "a020",
+    "name": "Arcane Leviathan",
+    "type": "III",
+    "power": 4,
+    "influence": "E: F, FU, FD",
+    "ability": "Continuously weaken enemy creatures in its row by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A021",
+    "id": "a021",
+    "name": "Storm Elemental",
+    "type": "III",
+    "power": 4,
+    "influence": "O: F; E: FU, FD",
+    "ability": "On placement, weaken all enemy creatures by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A022",
+    "id": "a022",
+    "name": "Astral Dragon",
+    "type": "III",
+    "power": 5,
+    "influence": "E: F2",
+    "ability": "Gains +1 dynamic power per other enhanced ally, maximum +5.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A023",
+    "id": "a023",
+    "name": "Void Spirit",
+    "type": "III",
+    "power": 4,
+    "influence": "E: F, B",
+    "ability": "On placement, banish enemy at F with effective power of 3 or less.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A024",
+    "id": "a024",
+    "name": "Spell Leech",
+    "type": "R",
+    "power": 2,
+    "influence": "E: F, FD",
+    "ability": "On replacement, weaken adjacent enemies by half the sacrificed creature's effective power, rounded down, maximum reduction of 3.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A025",
+    "id": "a025",
+    "name": "Mirror Doppelganger",
+    "type": "R",
+    "power": 1,
+    "influence": "E: F, U, D",
+    "ability": "On replacement, gain power equal to sacrificed creature's effective power, maximum +6.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A026",
+    "id": "a026",
+    "name": "Void Ooze",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F, B",
+    "ability": "On replacement, return enemy at F to its owner's hand.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A027",
+    "id": "a027",
+    "name": "Fire Elemental",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, FU, FD",
+    "ability": "Requires A005. Continuously weaken adjacent enemies by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A028",
+    "id": "a028",
+    "name": "Ice Elemental",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, D",
+    "ability": "Requires A004. Continuously weaken enemies at F, FU and FD by 1.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A029",
+    "id": "a029",
+    "name": "Water Elemental",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, U, D",
+    "ability": "Requires A006. Adjacent allies continuously gain +1 power.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "A030",
+    "id": "a030",
+    "name": "Earth Elemental",
+    "type": "Evo",
+    "power": 5,
+    "influence": "G: S×2, U, D; E: F",
+    "ability": "Requires A007. Immune to weakening while its position has at least two fortification.",
+    "kindred": "Arcane"
+  },
+  {
+    "number": "U001",
+    "id": "u001",
+    "name": "Skeleton",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, U",
+    "ability": "Predecessor to Skeleton Warrior.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U002",
+    "id": "u002",
+    "name": "Zombie",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F",
+    "ability": "On destruction, attempt self-resurrection once.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U003",
+    "id": "u003",
+    "name": "Ghost",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, FU, FD",
+    "ability": "Predecessor to Phantom.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U004",
+    "id": "u004",
+    "name": "Crawling Hand",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, F2",
+    "ability": "Rapid expansion.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U005",
+    "id": "u005",
+    "name": "Grave Rat",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, FD",
+    "ability": "On destruction, generate one U005 in hand.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U006",
+    "id": "u006",
+    "name": "Bone Hound",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, B",
+    "ability": "When sacrificed during replacement, enhance incoming replacement by 1.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U007",
+    "id": "u007",
+    "name": "Restless Spirit",
+    "type": "I",
+    "power": 1,
+    "influence": "E: FU, FD",
+    "ability": "On destruction, enhance adjacent allies by 1.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U008",
+    "id": "u008",
+    "name": "Ghoul",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F",
+    "ability": "Gain +1 whenever another allied creature dies, maximum three activations per match.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U009",
+    "id": "u009",
+    "name": "Floating Skull",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, U",
+    "ability": "On destruction, weaken adjacent enemies by 1.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U010",
+    "id": "u010",
+    "name": "Grave Beetle",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, D",
+    "ability": "On destruction, add one placement token to adjacent friendly territory.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U011",
+    "id": "u011",
+    "name": "Reanimated Crow",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F2, FU",
+    "ability": "On destruction, draw one card.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U012",
+    "id": "u012",
+    "name": "Vampire Bat",
+    "type": "I",
+    "power": 2,
+    "influence": "E: FU, FD",
+    "ability": "Gain +1 whenever an enemy creature dies, maximum three activations per match.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U013",
+    "id": "u013",
+    "name": "Mummy",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F; G: S",
+    "ability": "Immune to weakening.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U014",
+    "id": "u014",
+    "name": "Banshee",
+    "type": "II",
+    "power": 3,
+    "influence": "E: FU, FD",
+    "ability": "On destruction, weaken adjacent enemies by 2.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U015",
+    "id": "u015",
+    "name": "Wight",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, B",
+    "ability": "On placement, gain +1 per historical allied creature death, maximum +3.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U016",
+    "id": "u016",
+    "name": "Wraith",
+    "type": "II",
+    "power": 3,
+    "influence": "O: F; E: FD",
+    "ability": "Continuously weaken enemy at F by 1.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U017",
+    "id": "u017",
+    "name": "Vampire",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F",
+    "ability": "Gain +2 whenever an enemy creature dies, maximum two activations per match.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U018",
+    "id": "u018",
+    "name": "Revenant",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F, U",
+    "ability": "On destruction, attempt self-resurrection once.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U019",
+    "id": "u019",
+    "name": "Skeletal Horse",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F2, FU, FD",
+    "ability": "When sacrificed during replacement, grant incoming replacement weakening immunity.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U020",
+    "id": "u020",
+    "name": "Lich",
+    "type": "III",
+    "power": 5,
+    "influence": "E: F, U, D",
+    "ability": "On placement, resurrect first eligible allied graveyard creature.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U021",
+    "id": "u021",
+    "name": "Bone Dragon",
+    "type": "III",
+    "power": 6,
+    "influence": "E: F, FU, FD",
+    "ability": "On destruction, weaken enemies at F, FU and FD by 3.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U022",
+    "id": "u022",
+    "name": "Undead Giant",
+    "type": "III",
+    "power": 6,
+    "influence": "E: F×2",
+    "ability": "Gains +1 dynamic power per historical allied creature death, maximum +5.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U023",
+    "id": "u023",
+    "name": "Headless Horseman",
+    "type": "III",
+    "power": 5,
+    "influence": "O: F; E: FU",
+    "ability": "While surviving, award one additional point per historical enemy creature death, maximum 4.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U024",
+    "id": "u024",
+    "name": "Corpse Amalgam",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F, B",
+    "ability": "On replacement, gain power equal to sacrificed creature's effective power, maximum +6.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U025",
+    "id": "u025",
+    "name": "Soul Collector",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F, U, D",
+    "ability": "Gain +1 whenever another allied creature dies, maximum four activations per match.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U026",
+    "id": "u026",
+    "name": "Grave Devourer",
+    "type": "R",
+    "power": 4,
+    "influence": "E: F",
+    "ability": "On replacement, resurrect first eligible allied graveyard creature.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U027",
+    "id": "u027",
+    "name": "Skeleton Warrior",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, FU",
+    "ability": "Requires U001. On destruction, generate one U001 in hand.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U028",
+    "id": "u028",
+    "name": "Skeleton Champion",
+    "type": "Evo",
+    "power": 6,
+    "influence": "E: F×2, U, D",
+    "ability": "Requires U027. Other allied Skeletal creatures continuously gain +1 power.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U029",
+    "id": "u029",
+    "name": "Elder Vampire",
+    "type": "Evo",
+    "power": 6,
+    "influence": "E: F, FU, FD",
+    "ability": "Requires U017. Gain +2 whenever an enemy creature dies, maximum three activations per match, respecting inherited lineage restrictions.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "U030",
+    "id": "u030",
+    "name": "Phantom",
+    "type": "Evo",
+    "power": 4,
+    "influence": "O: F; E: FU, FD",
+    "ability": "Requires U003 or U007. On destruction, weaken all enemy creatures in its former row by 1.",
+    "kindred": "Undead"
+  },
+  {
+    "number": "C001",
+    "id": "c001",
+    "name": "Copper Beetle",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, U; G: S",
+    "ability": "Expansion and self-fortification.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C002",
+    "id": "c002",
+    "name": "Clockwork Spider",
+    "type": "I",
+    "power": 2,
+    "influence": "E: FU, FD",
+    "ability": "Predecessor to Clockwork Scorpion.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C003",
+    "id": "c003",
+    "name": "Tin Soldier",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F; G: S",
+    "ability": "Predecessor to Iron Soldier.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C004",
+    "id": "c004",
+    "name": "Animated Broom",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, B, D",
+    "ability": "Flexible expansion.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C005",
+    "id": "c005",
+    "name": "Brass Hound",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, FU",
+    "ability": "On placement, add one fortification to friendly territory at B.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C006",
+    "id": "c006",
+    "name": "Wooden Puppet",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F, D",
+    "ability": "On destruction, add one placement token to adjacent friendly territory.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C007",
+    "id": "c007",
+    "name": "Living Shield",
+    "type": "I",
+    "power": 2,
+    "influence": "G: S, U, D",
+    "ability": "Immune to direct destruction while its position has at least two fortification.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C008",
+    "id": "c008",
+    "name": "Watchtower Drone",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F2, FU",
+    "ability": "Long-range expansion.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C009",
+    "id": "c009",
+    "name": "Iron Scarab",
+    "type": "I",
+    "power": 2,
+    "influence": "E: F; G: U, D",
+    "ability": "Fortifies neighboring territory.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C010",
+    "id": "c010",
+    "name": "Clockwork Rat",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, F2",
+    "ability": "Rapid expansion.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C011",
+    "id": "c011",
+    "name": "Repair Automaton",
+    "type": "I",
+    "power": 1,
+    "influence": "E: F, B",
+    "ability": "On placement, enhance adjacent weakened allies by 1.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C012",
+    "id": "c012",
+    "name": "Clay Golem",
+    "type": "I",
+    "power": 3,
+    "influence": "G: S, B",
+    "ability": "Defensive opening creature.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C013",
+    "id": "c013",
+    "name": "Stone Golem",
+    "type": "II",
+    "power": 5,
+    "influence": "E: F; G: S",
+    "ability": "Immune to direct destruction.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C014",
+    "id": "c014",
+    "name": "Animated Armor",
+    "type": "II",
+    "power": 4,
+    "influence": "E: F, U",
+    "ability": "Immune to weakening.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C015",
+    "id": "c015",
+    "name": "Ballista Automaton",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F2",
+    "ability": "On placement, weaken enemy at F2 by 3.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C016",
+    "id": "c016",
+    "name": "Iron Tortoise",
+    "type": "II",
+    "power": 4,
+    "influence": "G: S×2, U, D",
+    "ability": "Gains +2 dynamic power while its position has maximum positive fortification.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C017",
+    "id": "c017",
+    "name": "Bronze Sentinel",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F; G: S",
+    "ability": "Continuously grants direct-destruction immunity to adjacent allies.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C018",
+    "id": "c018",
+    "name": "Siege Ram",
+    "type": "II",
+    "power": 4,
+    "influence": "O: F",
+    "ability": "Territorial breakthrough.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C019",
+    "id": "c019",
+    "name": "Repair Golem",
+    "type": "II",
+    "power": 3,
+    "influence": "E: F, B",
+    "ability": "At beginning of owner's turn, enhance adjacent weakened allies by 1, maximum three activations per match.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C020",
+    "id": "c020",
+    "name": "Iron Golem",
+    "type": "III",
+    "power": 7,
+    "influence": "E: F; G: S",
+    "ability": "Immune to weakening and direct destruction while occupying fully fortified territory with positive fortification.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C021",
+    "id": "c021",
+    "name": "Stone Titan",
+    "type": "III",
+    "power": 6,
+    "influence": "G: S×2, U, D",
+    "ability": "Gains +1 dynamic power per adjacent fortified friendly position, maximum +4.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C022",
+    "id": "c022",
+    "name": "Clockwork Dragon",
+    "type": "III",
+    "power": 5,
+    "influence": "O: F2; E: FU, FD",
+    "ability": "On placement, weaken enemy at F by 2.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C023",
+    "id": "c023",
+    "name": "Walking Fortress",
+    "type": "III",
+    "power": 4,
+    "influence": "G: S×3, U×2, D×2, B",
+    "ability": "While surviving, award one bonus point per fortified friendly territory in its row, maximum 5.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C024",
+    "id": "c024",
+    "name": "Salvage Automaton",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F; G: S, U, D",
+    "ability": "On replacement, add one placement token to adjacent friendly territory.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C025",
+    "id": "c025",
+    "name": "Scrap Giant",
+    "type": "R",
+    "power": 3,
+    "influence": "E: F, B",
+    "ability": "Gains +1 dynamic power per historical allied Construct death, maximum +5.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C026",
+    "id": "c026",
+    "name": "Furnace Golem",
+    "type": "R",
+    "power": 4,
+    "influence": "E: F; G: S",
+    "ability": "On replacement, weaken enemies at F, FU and FD by 2.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C027",
+    "id": "c027",
+    "name": "Iron Soldier",
+    "type": "Evo",
+    "power": 4,
+    "influence": "E: F, FU; G: S",
+    "ability": "Requires C003. Immune to direct destruction.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C028",
+    "id": "c028",
+    "name": "Steel Sentinel",
+    "type": "Evo",
+    "power": 6,
+    "influence": "E: F×2; G: U, D",
+    "ability": "Requires C027. Continuously grants weakening immunity to adjacent allies.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C029",
+    "id": "c029",
+    "name": "Clockwork Scorpion",
+    "type": "Evo",
+    "power": 4,
+    "influence": "O: F; E: FU, FD",
+    "ability": "Requires C002. On evolution, weaken enemies at FU and FD by 2.",
+    "kindred": "Constructs"
+  },
+  {
+    "number": "C030",
+    "id": "c030",
+    "name": "Granite Guardian",
+    "type": "Evo",
+    "power": 6,
+    "influence": "G: S×2, U, D, B",
+    "ability": "Requires C013. Adjacent allies continuously gain +1 power.",
+    "kindred": "Constructs"
+  }
+]

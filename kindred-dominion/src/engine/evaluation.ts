@@ -1,3 +1,4 @@
+import { matchesDefinition } from "./identity";
 import type {
   CardLibrary,
   Cell,
@@ -30,7 +31,7 @@ export function hasAdvancedMechanics(library: CardLibrary): boolean {
   return Object.values(library).some(
     (c) =>
       c &&
-      (c.continuous?.length ||
+      (c.collectible || c.continuous?.length ||
         c.scaling?.length ||
         c.scoring?.length ||
         (Array.isArray(c.abilities) ? c.abilities : []).some(
@@ -191,7 +192,7 @@ export function selectTargets(t: Target, e: Evaluation): Cell[] {
     if (
       (t.tags && !t.tags.some((x) => def?.tags.includes(x))) ||
       (t.kindreds && !t.kindreds.includes(def?.kindred ?? "")) ||
-      (t.definitions && !t.definitions.includes(def?.id ?? ""))
+      (t.definitions && (!def || !matchesDefinition(def, t.definitions)))
     )
       return false;
     if (
@@ -297,6 +298,7 @@ export function evaluateNumber(n: Numeric, e: Evaluation, depth = 0): number {
             : !position(s, source) && ctx?.participant?.id === source
               ? ctx.participant.stackDepth
               : c.stack.length + 1,
+        maximumFortification: s.config.battlefield.maxFortification,
       };
       result = values[n.value];
       break;

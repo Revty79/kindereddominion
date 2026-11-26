@@ -20,6 +20,11 @@ import type { MatchRecord } from "../replay/record";
 import Artwork from "./Artwork";
 import PowerDetails, { ScoreDetails } from "./PowerDetails";
 import ExecutableRules from "./ExecutableRules";
+import CollectionFilters from "./CollectionFilters";
+import { emptyCollectionFilter, filterCollection } from "./collection";
+import { actionPreview, presentationFrames, publicEventText, readPresentationPreferences, savePresentationPreferences } from "./readability";
+import type { PresentationFrame } from "./readability";
+import type { DiagnosticStep } from "../engine/types";
 import { artworkMap } from "../assets/references";
 import type {
   Action,
@@ -65,6 +70,7 @@ function CardFace({
       }
     >
       <div className="card-top">
+        {card.collectible && <span className="collectible-number">{card.collectible.number}</span>}
         <span>
           {card.type === "standard"
             ? `RANK ${rank(card.rank)}`
@@ -84,6 +90,7 @@ function CardFace({
       ) : (
         <div className="sigil" aria-hidden="true">
           <span>{card.glyph}</span>
+          {card.collectible && <small>Artwork pending</small>}
         </div>
       )}
       <div className="card-caption">
@@ -119,7 +126,7 @@ function Pattern({
             >
               {effects.length
                 ? effects
-                    .map((e) => `${e.mechanic[0].toUpperCase()}${e.amount}`)
+                    .map((e) => `${e.mechanic === "fortification" ? "G" : e.mechanic[0].toUpperCase()}${e.amount}`)
                     .join(" ")
                 : x === 0 && y === 0
                   ? "◆"
@@ -130,7 +137,7 @@ function Pattern({
       </div>
       <small>
         E · expansion
-        <br />F · fortification
+        <br />G · fortification
         <br />O · overthrow
       </small>
     </div>
@@ -241,7 +248,12 @@ export default function App({
   const [notice, setNotice] = useState("");
   const [filter, setFilter] = useState<Kindred | "all">("all");
   const [query, setQuery] = useState("");
+  const [collectionFilter, setCollectionFilter] = useState(emptyCollectionFilter);
+  const [preferences, setPreferences] = useState(readPresentationPreferences);
+  const [playback, setPlayback] = useState<{ frames: PresentationFrame[]; index: number; source: string } | null>(null);
   const game = session?.game;
+  const frame = playback?.frames[playback.index];
+  const field = frame?.state ?? game;
   const viewer: Player =
     game?.phase === "mulligan"
       ? !game.players[0].mulliganDone
@@ -253,11 +265,11 @@ export default function App({
     session.opponent === "computer" &&
     viewer === 1 &&
     (game?.phase === "playing" || game?.phase === "mulligan");
-  const hidden = !!game && (curtain || isComputer);
+  const hidden = !!game && (curtain || isComputer || !!playback);
   const legal = useMemo(() => (game ? legalPlays(game, CARDS) : []), [game]);
   const cardDef =
     selected && game ? CARDS[game.cards[selected].definitionId] : null;
-  const score = game ? scoreGame(game, CARDS) : null;
+  const score = field ? scoreGame(field, CARDS) : null;
   const prospective = useMemo(
     () =>
       game &&
@@ -271,7 +283,7 @@ export default function App({
         pending.row,
         pending.col,
       )
-        ? act(
+        ? actionPreview(
             game,
             { type: "play", player: game.active, card: selected, ...pending },
             CARDS,
@@ -279,17 +291,7 @@ export default function App({
         : null,
     [game, pending, selected],
   );
-  const previewEvents =
-    prospective && game
-      ? prospective.events
-          .slice(game.events.length)
-          .filter(
-            (e) =>
-              !["turnStart", "turnEnd", "turn", "draw", "forced-pass"].includes(
-                e.type,
-              ),
-          )
-      : [];
+  const previewChanges = prospective?.changes ?? [];
   const [rows, cols] = size.split("x").map(Number);
   const config = {
     ...structuredClone(DEFAULT_CONFIG),
@@ -320,7 +322,7 @@ export default function App({
       );
   }, [session]);
   useEffect(() => {
-    if (!curtain || !game || !["playing", "mulligan"].includes(game.phase))
+    if (playback || !curtain || !game || !["playing", "mulligan"].includes(game.phase))
       return;
     const button = document.querySelector<HTMLButtonElement>(
       ".privacy-curtain button",
@@ -334,9 +336,18 @@ export default function App({
     };
     document.addEventListener("keydown", trap, true);
     return () => document.removeEventListener("keydown", trap, true);
-  }, [curtain, game?.phase, viewer]);
+  }, [curtain, game?.phase, viewer, !!playback]);
+  useEffect(() => { savePresentationPreferences(preferences); }, [preferences]);
   useEffect(() => {
-    if (!game || !session || !isComputer) return;
+    if (!playback) return;
+    if (preferences.speed === "skip") { setPlayback(null); return; }
+    if (preferences.speed === "step") return;
+    const delay = { fast: 140, normal: 450, slow: 1000 }[preferences.speed];
+    const timer = window.setTimeout(() => setPlayback(p => p && (p.index + 1 < p.frames.length ? { ...p, index: p.index + 1 } : null)), delay);
+    return () => clearTimeout(timer);
+  }, [playback, preferences.speed]);
+  useEffect(() => {
+    if (!game || !session || !isComputer || playback) return;
     const timer = window.setTimeout(() => {
       try {
         const action: Action =
@@ -347,14 +358,16 @@ export default function App({
                 cards: computerMulligan(game, CARDS, 1),
               }
             : chooseComputerAction(game, CARDS);
-        update(act(game, action, CARDS), action);
+        const steps: DiagnosticStep[] = [];
+        const next = act(game, action, CARDS, action.type === "play" ? { captureStates: true, onStep: s => steps.push(s) } : undefined);
+        update(next, action, steps);
       } catch (error) {
         setNotice(String(error));
       }
     }, 550);
     return () => window.clearTimeout(timer);
-  }, [game, isComputer]);
-  function update(next: GameState, action?: Action) {
+  }, [game, isComputer, !!playback]);
+  function update(next: GameState, action?: Action, steps: DiagnosticStep[] = []) {
     if (!session) return;
     const record = action
       ? appendRecord(
@@ -377,6 +390,9 @@ export default function App({
         );
     record.artwork ??= session.artwork ?? artwork;
     setSession({ ...session, game: next, record });
+    if (action?.type === "play" && preferences.speed !== "skip" && !next.fault) {
+      setPlayback({ frames: presentationFrames(session.game, next, steps, CARDS), index: 0, source: CARDS[session.game.cards[action.card].definitionId].name });
+    } else setPlayback(null);
     if (next.phase === "finished" && onRecord)
       void onRecord(record).catch((e) =>
         setNotice(`Replay save failed: ${String(e)}`),
@@ -394,7 +410,9 @@ export default function App({
   function dispatch(action: Action) {
     if (!game) return;
     try {
-      update(act(game, action, CARDS), action);
+      const steps: DiagnosticStep[] = [];
+      const next = act(game, action, CARDS, action.type === "play" ? { captureStates: true, onStep: s => steps.push(s) } : undefined);
+      update(next, action, steps);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : String(error));
     }
@@ -452,13 +470,7 @@ export default function App({
     if (!saveCustomDecks(next, content.id))
       setNotice("Custom deck could not be saved to browser storage.");
   }
-  const filtered = CARD_LIST.filter(
-    (c) =>
-      (filter === "all" || c.kindred === filter) &&
-      `${c.name} ${c.text} ${c.type}`
-        .toLowerCase()
-        .includes(query.toLowerCase()),
-  );
+  const filtered = filterCollection(CARD_LIST, filter, query, collectionFilter);
   const influenceOrigin = pending ?? hovered;
   const influenceTargets =
     cardDef && influenceOrigin && game
@@ -488,7 +500,7 @@ export default function App({
           <span className="version">
             {content.id === "v1.1-baseline"
               ? "V1.1 · PLAYABLE FOUNDATION"
-              : "V1.3A · PROVISIONAL TESTING"}
+              : "V1.3B/C · EARLY TESTING"}
           </span>
           <button className="quiet" onClick={() => setLibrary(true)}>
             Card library
@@ -506,6 +518,12 @@ export default function App({
           </button>
         </div>
       )}
+      <details className="learning-options">
+        <summary>Learning and action playback</summary>
+        <label>Presentation speed<select aria-label="Presentation speed" value={preferences.speed} onChange={e => setPreferences({ ...preferences, speed: e.target.value as typeof preferences.speed })}><option value="fast">Fast</option><option value="normal">Normal</option><option value="slow">Slow</option><option value="step">Step through</option><option value="skip">Instant</option></select></label>
+        <label><input type="checkbox" checked={preferences.beginner} onChange={e => setPreferences({ ...preferences, beginner: e.target.checked })} /> Beginner explanations</label>
+        <p>Playback shows recorded battlefield steps. The rules and final result stay the same at every speed.</p>
+      </details>
       {!session ? (
         <main className="setup">
           <section className="intro">
@@ -760,7 +778,7 @@ export default function App({
             <p className="setup-foot">
               15-card decks · 5-card opening hands · One optional mulligan
             </p>
-            {onOpenStudio && (
+            {import.meta.env.VITE_STUDIO !== "0" && onOpenStudio && (
               <button
                 className="start quiet"
                 style={{ marginTop: "1rem" }}
@@ -771,13 +789,13 @@ export default function App({
             )}
             {content.id !== "v1.1-baseline" && (
               <p className="setup-foot">
-                Explicitly activated testing content: {content.name}
+                {content.name} · All cards freely available for testing. Statistics and names are provisional; final artwork is pending.
               </p>
             )}
           </section>
         </main>
       ) : (
-        game &&
+        game && field &&
         score && (
           <main
             className={`match ${game.config.battlefield.cols > 5 ? "wide-field" : ""}`}
@@ -791,7 +809,7 @@ export default function App({
                     : "FREE PLAY"}
                 </div>
                 <h1>
-                  {game.phase === "mulligan"
+                  {playback ? `Resolving ${playback.source}.` : game.phase === "mulligan"
                     ? "Choose your opening."
                     : game.phase === "finished"
                       ? "The field is decided."
@@ -836,6 +854,7 @@ export default function App({
                             Graveyard {game.players[p].graveyard.length}
                           </button>
                         </div>
+                        {score.breakdown && <small className="points-components">Rows {score.breakdown.ordinary[p]} · Creatures {score.breakdown.tactical[p]} · Card bonuses {score.breakdown.bonuses[p]}</small>}
                       </div>
                       <b className="total">
                         {score.totals[p]}
@@ -852,7 +871,13 @@ export default function App({
                       : "Win a row to score its surviving power"}
                   </span>
                 </div>
-                <ScoreDetails state={game} library={CARDS} />
+                {playback && frame && <section className="action-playback" aria-label="Action resolution playback" aria-live="polite">
+                  <strong>{playback.source} · step {playback.index + 1} / {playback.frames.length}</strong>
+                  <p>{frame.caption}</p>
+                  <button onClick={() => setPlayback(p => p && (p.index + 1 < p.frames.length ? { ...p, index: p.index + 1 } : null))}>Next resolution step</button>
+                  <button onClick={() => setPlayback(null)}>Skip presentation</button>
+                </section>}
+                <ScoreDetails state={field} library={CARDS} />
                 <div className="board-scroll">
                   <div
                     className="board"
@@ -878,12 +903,12 @@ export default function App({
                             <span className="row-label">
                               {String.fromCharCode(65 + row)}
                             </span>
-                            {game.board
+                            {field.board
                               .filter((c) => c.row === row)
                               .map((cell) => {
                                 const id = cell.creature;
                                 const definition = id
-                                  ? CARDS[game.cards[id].definitionId]
+                                  ? CARDS[field.cards[id].definitionId]
                                   : null;
                                 const isLegal =
                                   !!selected &&
@@ -900,15 +925,17 @@ export default function App({
                                   (e) =>
                                     e.row === cell.row && e.col === cell.col,
                                 );
+                                const marks = (frame?.changes ?? previewChanges).filter(c => c.row === cell.row && c.col === cell.col);
                                 return (
                                   <button
                                     key={cell.col}
-                                    className={`cell ${cell.owner === null ? "neutral" : `player-${cell.owner}`} ${isLegal && !hidden ? "legal" : ""} ${target ? "targeted" : ""}`}
-                                    aria-label={`${coordinate(cell)}: ${cell.owner === null ? "neutral" : names[cell.owner]}, ${cell.tokens} tokens, ${cell.fortification} fortification${definition ? `, ${definition.name}, ${currentPower(game, CARDS, id!)} power` : ", empty"}${isLegal && !hidden ? ", legal placement" : ""}`}
+                                    className={`cell ${cell.owner === null ? "neutral" : `player-${cell.owner}`} ${isLegal && !hidden ? "legal" : ""} ${target ? "targeted" : ""} ${marks.length ? "affected-cell" : ""}`}
+                                    aria-label={`${coordinate(cell)}: ${cell.owner === null ? "neutral" : names[cell.owner]}, ${cell.tokens} tokens, ${cell.fortification} fortification${definition ? `, ${definition.name}, ${currentPower(field, CARDS, id!)} power` : ", empty"}${isLegal && !hidden ? ", legal placement" : ""}`}
                                     data-testid={`cell-${cell.row}-${cell.col}`}
                                     onMouseEnter={() => setHovered(cell)}
                                     onMouseLeave={() => setHovered(null)}
                                     onClick={() => {
+                                      if (playback) return;
                                       if (hidden || game.phase !== "playing") {
                                         if (id && !curtain) setInspect(id);
                                         return;
@@ -933,6 +960,7 @@ export default function App({
                                     }}
                                   >
                                     <span className="cell-top">
+                                      <small className="territory-owner">{cell.owner === null ? "Neutral" : names[cell.owner]}</small>
                                       <span
                                         className="tokens"
                                         aria-hidden="true"
@@ -956,9 +984,7 @@ export default function App({
                                         className="fortification"
                                         title="Fortification"
                                       >
-                                        {cell.fortification > 0
-                                          ? `⬡ ${cell.fortification}`
-                                          : ""}
+                                        {`⬡ ${cell.fortification}`}
                                       </span>
                                     </span>
                                     {definition ? (
@@ -987,12 +1013,12 @@ export default function App({
                                           {definition.name}
                                         </span>
                                         <span className="power">
-                                          {currentPower(game, CARDS, id!)}
-                                          <small>PWR</small>
+                                          {currentPower(field, CARDS, id!)}
+                                          <small>effective · printed {definition.power}</small>
                                         </span>
-                                        {game.cards[id!].stack.length > 0 && (
+                                        {field.cards[id!].stack.length > 0 && (
                                           <span className="stack-count">
-                                            {game.cards[id!].stack.length + 1}{" "}
+                                            {field.cards[id!].stack.length + 1}{" "}
                                             forms
                                           </span>
                                         )}
@@ -1010,11 +1036,12 @@ export default function App({
                                         {influences
                                           .map(
                                             (e) =>
-                                              `${e.mechanic[0].toUpperCase()}${e.amount}`,
+                                              `${e.mechanic === "fortification" ? "G" : e.mechanic[0].toUpperCase()}${e.amount}`,
                                           )
                                           .join(" ")}
                                       </span>
                                     )}
+                                    {!!marks.length && <span className="consequence-marks" aria-label={marks.map(m => m.text).join(" ")}>{[...new Set(marks.map(m => m.label))].slice(0, 4).map(label => <b key={label}>{label}</b>)}</span>}
                                   </button>
                                 );
                               })}
@@ -1029,6 +1056,7 @@ export default function App({
                                     : ""
                                 }
                               >
+                                <small>Jade power</small>
                                 {score.rows[row].powers[0]}
                               </span>
                               <small>
@@ -1048,8 +1076,10 @@ export default function App({
                                     : ""
                                 }
                               >
+                                <small>Amber power</small>
                                 {score.rows[row].powers[1]}
                               </span>
+                              <small className="row-awarded">Points {score.rows[row].points[0]} / {score.rows[row].points[1]}</small>
                             </div>
                           </div>
                         ),
@@ -1157,6 +1187,7 @@ export default function App({
                               compact
                               artwork={artwork[c.id]}
                             />
+                            {game.phase === "playing" && <span className={`playability ${playable ? "ready" : "blocked"}`}>{playable ? `✓ ${legal.filter(a => a.card === id).length} legal positions` : c.type === "evolution" ? "Needs an eligible predecessor" : c.type === "replacement" ? "Needs an eligible friendly creature" : `Needs empty friendly rank ${rank(c.rank)} territory`}</span>}
                             {game.phase === "mulligan" && chosen && (
                               <span className="exchange-tag">EXCHANGE</span>
                             )}
@@ -1219,16 +1250,10 @@ export default function App({
                         <div className="eyebrow">
                           PREVIEW / {coordinate(pending)}
                         </div>
-                        {previewEvents.slice(0, 7).map((e) => (
-                          <p key={e.id}>{e.text}</p>
-                        ))}
-                        {previewEvents.length > 7 && (
-                          <small>
-                            + {previewEvents.length - 7} more events in the
-                            match log after placement
-                          </small>
-                        )}
-                        {prospective.phase === "fault" ? (
+                        <p className="preview-score">Immediate points: Jade {prospective.scoreBefore.totals[0]} → {prospective.scoreAfter.totals[0]} · Amber {prospective.scoreBefore.totals[1]} → {prospective.scoreAfter.totals[1]}</p>
+                        <ul className="public-consequences">{previewChanges.map((change, i) => <li key={i}><b>{change.label}</b> {change.text}</li>)}</ul>
+                        {preferences.beginner && <p>{prospective.privateConsequencesOmitted ? "This preview stops before a private draw. Remaining effects resolve after confirmation." : "This shows immediate battlefield effects. Turn-end, turn-start and private draws resolve after confirmation."}</p>}
+                        {prospective.fault ? (
                           <p className="error-text">{prospective.fault}</p>
                         ) : (
                           <button
@@ -1283,7 +1308,8 @@ export default function App({
                 )}
               </aside>
             </div>
-            <details className="event-log" open>
+            <details className="battlefield-legend"><summary>Battlefield symbols</summary><p>◆ Placement tokens · E Expansion · ⬡ G Fortification · O Overthrow · + Enhancement · − Weakening · DEST Destruction · SAC Sacrifice · REPLACE Replacement · EVO Evolution · REVIVE Resurrection · SHIELD Protection · ≈ Continuous effect · ★ Card bonus</p></details>
+            <details className="event-log">
               <summary>
                 <span>Match event log</span>
                 <small>{game.events.length} EVENTS · newest first</small>
@@ -1305,11 +1331,11 @@ export default function App({
                       >
                         {e.type}
                       </span>
-                      <p>{e.text}</p>
+                      <p>{publicEventText(e)}</p>
                     </div>
                   ))}
               </div>
-              <button
+              {import.meta.env.VITE_STUDIO !== "0" && onOpenStudio && <button
                 className="quiet"
                 onClick={() => {
                   const blob = new Blob([JSON.stringify(game, null, 2)], {
@@ -1324,9 +1350,9 @@ export default function App({
                 }}
               >
                 Export development record (includes both hands)
-              </button>
+              </button>}
             </details>
-            {curtain && ["mulligan", "playing"].includes(game.phase) && (
+            {curtain && !playback && ["mulligan", "playing"].includes(game.phase) && (
               <div
                 className="privacy-curtain"
                 role="dialog"
@@ -1390,7 +1416,7 @@ export default function App({
       )}
       <footer className="app-footer">
         <span>
-          KINDRED DOMINION <b>✦</b> 0.3.0
+          KINDRED DOMINION <b>✦</b> 0.4.0
         </span>
         <span>
           Development cards. A foundation to play, question and refine.
@@ -1502,7 +1528,7 @@ export default function App({
           }}
         >
           <p className="modal-intro">
-            {CARD_LIST.length} provisional cards. Full access for development;
+            {CARD_LIST.length} provisional cards. Unrestricted testing access; no commercial ownership or purchases.
             every duplicate remains a separate instance during play.
           </p>
           {editor !== null && (
@@ -1554,10 +1580,11 @@ export default function App({
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Name, effect or placement type"
+                placeholder="Number, name, classification or effect"
               />
             </label>
           </div>
+          <CollectionFilters cards={CARD_LIST} value={collectionFilter} onChange={setCollectionFilter} />
           {editor !== null && (
             <div className="builder-validation">
               {validateDeck(custom[editor], CARDS, config).map((e) => (
@@ -1575,6 +1602,12 @@ export default function App({
               <article key={c.id}>
                 <CardFace card={c} artwork={artwork[c.id]} />
                 <Pattern card={c} />
+                <div className="catalog-details">
+                  <strong>{c.collectible?.number ?? "Historical unnumbered card"} · {c.type} · rank {rank(c.rank)} · printed {c.power}</strong>
+                  <span>{c.tags.join(" · ")}</span>
+                  {c.collectible && <span>Set {c.collectible.setId} · Expansion {c.collectible.expansionId} · Edition {c.collectible.edition}</span>}
+                  {c.prerequisite?.definitions && <span>Requires {c.prerequisite.definitions.map(id => `${CARDS[id].collectible?.number ?? id} ${CARDS[id].name}`).join(" or ")}</span>}
+                </div>
                 {editor !== null ? (
                   <div className="copy-control">
                     <button

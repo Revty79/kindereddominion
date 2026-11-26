@@ -1,0 +1,16 @@
+.git
+node_modules
+dist
+dist-player
+.local
+.playwright-mcp
+test-results
+playwright-report
+*.log
+.env
+.env.*
+!.env.example
+*.dump
+*.backup
+*.pem
+*.key

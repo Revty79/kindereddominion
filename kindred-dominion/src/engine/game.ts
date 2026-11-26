@@ -1,3 +1,4 @@
+import { gameplayId, matchesDefinition } from "./identity";
 import { DEFAULT_CONFIG } from "./config";
 import { currentPower, SCORING_RULES, scoreGame } from "./scoring";
 import { AdvancedRuntime } from "./advanced-runtime";
@@ -88,7 +89,8 @@ export function validateDeck(
       errors.push(`Unknown card: ${id}.`);
       continue;
     }
-    counts[id] = (counts[id] ?? 0) + 1;
+    const identity = gameplayId(definition);
+    counts[identity] = (counts[identity] ?? 0) + 1;
     if (
       config.collection !== "mixed" &&
       config.collection !== definition.kindred
@@ -96,13 +98,15 @@ export function validateDeck(
       errors.push(`${definition.name} is outside ${config.collection}.`);
   }
   for (const [id, count] of Object.entries(counts)) {
+    const variants = Object.values(library).filter(c => gameplayId(c) === id);
+    const representative = variants[0];
     const max =
       config.mode === "free"
         ? config.deckSize
-        : (library[id].maxCopies ?? config.maxCopies);
+        : Math.min(...variants.map(c => c.maxCopies ?? config.maxCopies));
     if (count > max)
       errors.push(
-        `${library[id].name}: ${count} copies exceeds the limit of ${max}.`,
+        `${representative.name}: ${count} copies exceeds the limit of ${max}.`,
       );
   }
   return [...new Set(errors)];
@@ -293,7 +297,7 @@ function eligible(
   if (!req) return true;
   const previousDef = library[state.cards[previous].definitionId];
   return (
-    (!req.definitions || req.definitions.includes(previousDef.id)) &&
+    (!req.definitions || matchesDefinition(previousDef, req.definitions)) &&
     (!req.tags || req.tags.some((tag) => previousDef.tags.includes(tag))) &&
     (req.minPower === undefined ||
       currentPower(state, library, previous) >= req.minPower)
@@ -442,6 +446,8 @@ export class Resolver {
     context?: EventContext,
   ) {
     const before = this.state.players[player].hand.length;
+    if (amount > 0 && this.state.players[player].draw.length)
+      this.diagnostic("before-private-draw", "Private draw begins after this recorded boundary.", { player });
     drawCards(this.state, player, amount);
     this.advanced?.drawn(
       this.state.players[player].hand.slice(before),
@@ -1500,6 +1506,7 @@ export function act(
           action.player,
         );
       }
+      resolver.diagnostic("action-effects-complete", "Immediate action effects have resolved; turn transfer follows.");
       resolver.turnEffects("turnEnd");
       if (state.passes >= 2) finish(state, library, "passes");
       else if (SCORING_RULES[state.config.scoring].complete?.(state))

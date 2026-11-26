@@ -1,4 +1,4 @@
-import { act, assertInvariants, createMatch } from "../engine/game";
+import { act, assertInvariants, createMatch, validateDeck } from "../engine/game";
 import { chooseComputerAction, computerMulligan } from "../engine/ai";
 import { scoreGame } from "../engine/scoring";
 import { libraryOf, validatePack, validateRules } from "../content/validation";
@@ -70,6 +70,8 @@ export function validateSimulation(request: SimulationRequest): void {
   // Validate actual deck compositions, rather than silently repairing them for a simulation.
   const lib = libraryOf(request.content);
   for (const deck of request.decks) {
+    const legality = validateDeck(deck.cards, lib, request.config);
+    if (legality.length) throw new Error(`${deck.name}: ${legality.join(" ")}`);
     if (deck.cards.length !== request.config.deckSize)
       throw new Error(
         `${deck.name}: deck size does not match the selected ruleset.`,
@@ -212,7 +214,7 @@ export function runOne(
     summary.actions = actions;
   }
   if (record) summary.replay = record;
-  return { summary, stats };
+  return { summary, stats, state };
 }
 export function aggregateMatch(
   report: SimulationReport,
@@ -291,6 +293,7 @@ export async function runSimulation(
     cancelled?: () => boolean;
     progress?: (report: SimulationReport, total: number) => void;
     yield?: () => Promise<void>;
+    onMatch?: (summary: MatchSummary, stats: Record<string, CardStatistics>, finalState: GameState | undefined) => void;
   } = {},
 ): Promise<SimulationReport> {
   validateSimulation(request);
@@ -332,8 +335,9 @@ export async function runSimulation(
         report.cancelled = true;
         break outer;
       }
-      const { summary: s, stats } = runOne(request, pairs[p], i, p);
+      const { summary: s, stats, state } = runOne(request, pairs[p], i, p);
       aggregateMatch(report, s, stats);
+      options.onMatch?.(s, stats, state);
       for (const ch of `${s.seed}/${s.status}/${s.signature}/${s.winner}`)
         rolling = Math.imul(rolling ^ ch.charCodeAt(0), 16777619);
       report.digest = (rolling >>> 0).toString(16).padStart(8, "0");

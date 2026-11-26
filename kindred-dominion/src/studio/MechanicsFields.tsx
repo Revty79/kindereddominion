@@ -113,6 +113,7 @@ const valueNames = {
   destroyedPower: "Captured destroyed creature power",
   incomingPower: "Captured incoming creature power",
   stackDepth: "Source evolution stack depth",
+  maximumFortification: "Selected ruleset's maximum fortification",
 } as const;
 function expression(kind: string): Numeric {
   switch (kind) {

@@ -19,6 +19,8 @@ import {
 } from "../engine/advanced-validation";
 import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
 import { hasAdvancedMechanics } from "../engine/evaluation";
+import { OWNER_ENGINE_VERSION, SUPPORTED_ENGINES, requiresOwnerRules } from "../engine/versions";
+import { collectibleParts } from "../engine/identity";
 export const libraryOf = (pack: ContentPack): CardLibrary =>
   Object.fromEntries(pack.cards.map((c) => [c.id, c]));
 export const ID = /^[a-zA-Z][a-zA-Z0-9_-]{0,79}$/;
@@ -146,6 +148,16 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
       },
     ];
   const c = value;
+  if (c.collectible !== undefined) {
+    const identity = c.collectible;
+    if (!obj(identity) || !str(identity.number) || !collectibleParts(identity.number) ||
+      !str(identity.gameplayId) || !ID.test(identity.gameplayId) ||
+      !str(identity.setId) || !ID.test(identity.setId) ||
+      !str(identity.expansionId) || !ID.test(identity.expansionId) ||
+      !str(identity.edition) || !str(identity.artworkId) || !ID.test(identity.artworkId) ||
+      !num(identity.definitionRevision, 1, Number.MAX_SAFE_INTEGER))
+      error("collectible", "Use a permanent collectible number, gameplay identity, set, expansion, edition, artwork identity and positive definition revision.");
+  }
   if (!str(c.id) || !ID.test(c.id))
     error(
       "id",
@@ -391,7 +403,7 @@ export function validatePack(value: unknown): Issue[] {
   if (
     !obj(value) ||
     ![1, 2].includes(value.schema) ||
-    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(value.engineVersion) ||
+    !SUPPORTED_ENGINES.includes(value.engineVersion) ||
     !str(value.id) ||
     !str(value.name) ||
     !["baseline", "draft", "checkpoint", "testing", "archived"].includes(
@@ -414,7 +426,7 @@ export function validatePack(value: unknown): Issue[] {
   try {
     if (
       hasAdvancedMechanics(libraryOf(pack)) &&
-      (pack.schema !== 2 || pack.engineVersion !== ADVANCED_ENGINE_VERSION)
+      (pack.schema !== 2 || ![ADVANCED_ENGINE_VERSION, OWNER_ENGINE_VERSION].includes(pack.engineVersion))
     )
       error(
         "content",
@@ -422,6 +434,26 @@ export function validatePack(value: unknown): Issue[] {
       );
   } catch {
     error("cards", "Malformed card definitions.");
+  }
+  if (pack.cards.every(obj) && requiresOwnerRules(libraryOf(pack)) && pack.engineVersion !== OWNER_ENGINE_VERSION)
+    error("content", "Collectible identities and ruleset-cap expressions require engine 1.3.1; historical records are not reinterpreted.");
+  const collectibleNumbers = new Map<string, string>();
+  const gameplayNumbers = new Map<string, string>();
+  const gameplayDefinitions = new Map<string, string>();
+  const canonicalRules = (value: unknown): string => JSON.stringify(value, (_, v) =>
+    obj(v) ? Object.fromEntries(Object.keys(v).sort().map(k => [k, v[k]])) : v);
+  for (const card of pack.cards) if (obj(card) && obj(card.collectible)) {
+    const identity = card.collectible;
+    const previous = collectibleNumbers.get(identity.number);
+    if (previous && previous !== identity.gameplayId) error("collectible", "A collectible number cannot identify two gameplay cards.");
+    const number = gameplayNumbers.get(identity.gameplayId);
+    if (number && number !== identity.number) error("collectible", "Editions of one gameplay card must share its collectible number.");
+    collectibleNumbers.set(identity.number, identity.gameplayId);
+    gameplayNumbers.set(identity.gameplayId, identity.number);
+    const rules = canonicalRules(Object.fromEntries(["kindred", "rank", "power", "type", "tags", "influence", "abilities", "prerequisite", "protections", "maxCopies", "continuous", "scaling", "scoring"].map(k => [k, (card as any)[k]])));
+    const previousRules = gameplayDefinitions.get(identity.gameplayId);
+    if (previousRules && previousRules !== rules) error("collectible", "Alternative editions must share one gameplay definition and copy limit.");
+    gameplayDefinitions.set(identity.gameplayId, rules);
   }
   if (!obj(pack.metadata))
     error("metadata", "Card metadata must be a keyed object.");

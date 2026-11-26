@@ -128,6 +128,15 @@ export type Prerequisite = {
 };
 export type CardDefinition = {
   id: string;
+  collectible?: {
+    number: string;
+    gameplayId: string;
+    setId: string;
+    expansionId: string;
+    edition: string;
+    definitionRevision: number;
+    artworkId: string;
+  };
   name: string;
   kindred: Kindred;
   rank: 1 | 2 | 3;

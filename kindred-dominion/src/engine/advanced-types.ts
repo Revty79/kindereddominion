@@ -54,7 +54,8 @@ export type Numeric =
         | "sacrificedPower"
         | "destroyedPower"
         | "incomingPower"
-        | "stackDepth";
+        | "stackDepth"
+        | "maximumFortification";
     }
   | {
       kind: "count";

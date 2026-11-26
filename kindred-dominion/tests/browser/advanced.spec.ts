@@ -1,3 +1,4 @@
+import { prepareHistoricalContent } from "./historical-setup";
 import { expect, test, type Page } from "@playwright/test";
 import { execFileSync } from "node:child_process";
 import { mkdir } from "node:fs/promises";
@@ -836,3 +837,5 @@ test("a failed laboratory installation keeps the loaded owner draft and active l
   expect(kept.activeVersion).toBe("founding-kindreds-150-v1");
   expect(kept.versions.some((v) => v.engineVersion === "1.3.0")).toBe(false);
 });
+
+test.beforeEach(async ({ page }) => { await prepareHistoricalContent(page); });

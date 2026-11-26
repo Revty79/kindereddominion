@@ -1,3 +1,4 @@
+import { prepareHistoricalContent } from "./historical-setup";
 import { expect, test } from "@playwright/test";
 test("safe SVG imports as optimized artwork and unsafe SVG is rejected without replacing it", async ({
   page,
@@ -47,3 +48,5 @@ test("safe SVG imports as optimized artwork and unsafe SVG is rejected without r
     await page.locator(".studio-card-preview img").getAttribute("src"),
   ).toBe(good);
 });
+
+test.beforeEach(async ({ page }) => { await prepareHistoricalContent(page); });

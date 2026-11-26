@@ -1,3 +1,4 @@
+import { prepareHistoricalContent } from "./historical-setup";
 import { expect, test } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
@@ -227,3 +228,5 @@ test("published artwork and a new local illustration can be exported together wi
     true,
   );
 });
+
+test.beforeEach(async ({ page }) => { await prepareHistoricalContent(page); });

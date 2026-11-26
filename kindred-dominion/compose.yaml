@@ -1,0 +1,22 @@
+name: kindred-dominion
+services:
+  game:
+    image: "kindred-dominion:${KINDRED_REVISION:?Set KINDRED_REVISION to the checked-out Git commit}"
+    build:
+      context: .
+      args:
+        VCS_REF: "${KINDRED_REVISION:?Set KINDRED_REVISION}"
+        PLAYER_CONTENT_ID: "${KINDRED_CONTENT_ID:-founding-kindreds-owner-v1}"
+    ports:
+      - "${KINDRED_BIND:-127.0.0.1}:${KINDRED_PORT:?Choose an unused KINDRED_PORT}:8080"
+    init: true
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    stop_grace_period: 10s

@@ -1,3 +1,4 @@
+import { prepareHistoricalContent } from "./historical-setup";
 import { readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
 import type { Workspace } from "../../src/content/types";
@@ -481,3 +482,5 @@ test("F: checkpoint and complete backup restore authored relationships and artwo
   expect(await workspace(isolated)).toEqual(restored);
   await context.close();
 });
+
+test.beforeEach(async ({ page }) => { await prepareHistoricalContent(page); });

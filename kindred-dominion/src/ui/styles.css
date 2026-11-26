@@ -2192,3 +2192,66 @@ dd {
 .score-breakdown dd {
   margin: 0;
 }
+
+/* V1.3B/C: readable, shape-labelled gameplay and collection controls. */
+.learning-options { margin: .75rem 3%; padding: .6rem .9rem; border: 1px solid var(--line); border-radius: 6px; }
+.learning-options summary { font-size: .9rem; cursor: pointer; }
+.learning-options label { display: inline-flex; align-items: center; gap: .65rem; margin: .75rem 1.5rem .5rem 0; }
+.learning-options input[type=checkbox] { width: 1.1rem; height: 1.1rem; }
+.learning-options p { font-size: .9rem; color: var(--muted); }
+.app-shell select { appearance: none; padding-right: 2.2rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23dfe6e4' stroke-width='2'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .8rem center; }
+.app-shell .card-top { gap: .5rem; font-size: .875rem; flex-wrap: wrap; }
+.card-top .collectible-number { font-weight: 800; color: var(--gold); letter-spacing: .04em; }
+.sigil { position: relative; }
+.sigil > small { position: absolute; bottom: 0; width: 100%; text-align: center; font: .8rem "Segoe UI", sans-serif; color: #b9c8c5; }
+.app-shell .card-top small, .app-shell .compact .card-top small { font-size: .75rem; }
+.app-shell .card-caption small { font-size: .8rem; }
+.app-shell .card-caption strong { font-size: 1rem; line-height: 1.3; }
+.app-shell .hand-card { position: relative; min-width: 150px; overflow: hidden; display: flex; flex-direction: column; }
+.app-shell .hand-card .card-face { width: 100%; flex: 1; }
+.app-shell .hand-card.unplayable { opacity: 1; border-style: dashed; }
+.playability { display: block; width: 100%; font-size: .875rem; padding: .5rem; min-height: 3.3rem; line-height: 1.3; background: #19252a; color: #d7dfdc; }
+.playability.ready { color: #b0ecd4; background: #244c40; }
+.playability.blocked { color: #e6cfad; }
+.app-shell .hand-card.selected { outline: 3px solid #efd396; outline-offset: 3px; transform: translateY(-4px); }
+.app-shell .cell.legal { outline: 2px dashed #c5ecd7; outline-offset: -5px; }
+.app-shell .cell.targeted { outline: 3px solid #ffe0a1; outline-offset: -3px; }
+.app-shell .cell-top { flex-wrap: wrap; gap: .25rem .5rem; align-items: center; min-height: 2rem; }
+.territory-owner { font-size: .8rem; color: #d6e0dc; flex-basis: 100%; }
+.app-shell .fortification { font-size: .875rem; }
+.app-shell .creature-name { font-size: .9rem; line-height: 1.25; }
+.app-shell .power { font-size: 1.55rem; }
+.app-shell .power small { display: block; font-size: .8rem; font-weight: 400; line-height: 1.25; margin: .2rem 0 0; }
+.points-components { display: block; font-size: .8rem; color: #d4dfda; margin-top: .4rem; }
+.app-shell .row-score { min-width: 100px; padding: .5rem .25rem; }
+.app-shell .row-score > span { display: block; font-size: 1.5rem; }
+.app-shell .row-score > span > small { display: block; font-size: .75rem; font-weight: 400; color: #c4d3ce; margin: 0; }
+.app-shell .row-score > small { font-size: .75rem; line-height: 1.35; }
+.app-shell .row-awarded { border-top: 1px solid var(--line); padding-top: .3rem; margin-top: .3rem; }
+.action-playback { background: #263d36; border: 2px solid #92c1a5; border-radius: 6px; padding: 1rem; margin-bottom: 1rem; }
+.action-playback p { margin: .6rem 0; line-height: 1.5; }
+.action-playback button { margin: .25rem .5rem 0 0; }
+.affected-cell { box-shadow: inset 0 0 0 2px #dfbf77; }
+.consequence-marks { display: flex; flex-wrap: wrap; justify-content: center; gap: .2rem; margin-top: .3rem; }
+.consequence-marks b { background: #101f26; border: 1px solid #d4bb7e; color: #f4dc9b; border-radius: 3px; padding: .1rem .25rem; font-size: .75rem; }
+.public-consequences { padding-left: 1.2rem; max-height: 20rem; overflow-y: auto; }
+.public-consequences li { font-size: .9rem; margin: .65rem 0; line-height: 1.45; }
+.public-consequences b { color: #f2d59b; }
+.preview-score { border: 1px solid var(--line); padding: .65rem; font-size: .95rem; color: #f4dfb4; }
+.battlefield-legend { margin: 1rem 0; padding: .75rem; border: 1px solid var(--line); font-size: .9rem; }
+.battlefield-legend p { line-height: 1.9; }
+.collection-extra-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: .8rem; padding: 1rem 0; }
+.collection-extra-filters label { display: flex; flex-direction: column; gap: .35rem; font-size: .875rem; }
+.collection-extra-filters input, .collection-extra-filters select { width: 100%; min-height: 42px; }
+.catalog-details { display: flex; flex-direction: column; gap: .5rem; padding: .75rem 0; font-size: .875rem; line-height: 1.45; }
+.catalog-details > span { color: #bdcfca; }
+.library-grid .card-face > p { font-size: .95rem; line-height: 1.5; }
+.app-shell .copy-note { font-size: .875rem; }
+@media (max-width: 700px) {
+  .learning-options { margin: .5rem 1rem; }
+  .learning-options label { flex-wrap: wrap; }
+  .app-shell .row-score { min-width: 80px; }
+  .collection-extra-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app-shell .cell { min-height: 165px; }
+  .app-shell .hand-card { min-width: 155px; }
+}

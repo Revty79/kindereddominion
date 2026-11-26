@@ -7,6 +7,8 @@ import { DEFAULT_CONFIG } from "../engine/config";
 import { libraryOf } from "./validation";
 import { hasAdvancedMechanics } from "../engine/evaluation";
 import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
+import { engineVersionFor } from "../engine/versions";
+import { gameplayFingerprint } from "../engine/identity";
 export function saveCard(
   pack: ContentPack,
   card: CardDefinition,
@@ -21,11 +23,17 @@ export function saveCard(
     throw new Error("This card identifier already exists.");
   const next = structuredClone(pack);
   const index = next.cards.findIndex((c) => c.id === originalId);
+  const previousIdentity = index >= 0 ? next.cards[index].collectible : undefined;
+  if (previousIdentity && (!card.collectible || ["number", "gameplayId", "setId", "artworkId"].some(key =>
+    previousIdentity[key as keyof typeof previousIdentity] !== card.collectible![key as keyof typeof previousIdentity])))
+    throw new Error("Permanent collectible number, gameplay identity, founding set and artwork identity cannot be changed. Duplicate as an unnumbered draft instead.");
   if (index < 0) next.cards.push(structuredClone(card));
   else next.cards[index] = structuredClone(card);
+  if (previousIdentity && gameplayFingerprint(pack.cards[index]) !== gameplayFingerprint(card))
+    next.cards[index].collectible!.definitionRevision = previousIdentity.definitionRevision + 1;
   if (hasAdvancedMechanics(libraryOf(next))) {
     next.schema = 2;
-    next.engineVersion = ADVANCED_ENGINE_VERSION;
+    next.engineVersion = engineVersionFor(libraryOf(next));
   }
   const errors = validateCard(card, next).filter((i) => i.severity === "error");
   if (errors.length)
@@ -52,6 +60,7 @@ export function duplicateCard(
   const card = structuredClone(pack.cards.find((c) => c.id === id)!);
   if (!card) throw new Error("Card not found.");
   card.id = newId;
+  delete card.collectible;
   card.name += " copy";
   card.abilities.forEach((a, i) => (a.id = `${newId}-ability-${i + 1}`));
   return {

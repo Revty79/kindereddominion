@@ -16,6 +16,7 @@ import type {
 import { ENGINE_VERSION } from "../content/types";
 import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
 import { hasAdvancedMechanics } from "../engine/evaluation";
+import { engineVersionFor, SUPPORTED_ENGINES, OWNER_ENGINE_VERSION, requiresOwnerRules } from "../engine/versions";
 export type RecordedAction = {
   action: Action;
   signature: string;
@@ -53,7 +54,7 @@ export function newRecord(
 ): MatchRecord {
   return structuredClone({
     schema: 1,
-    engineVersion: state.mechanics ? ADVANCED_ENGINE_VERSION : ENGINE_VERSION,
+    engineVersion: engineVersionFor(library),
     id: `match-${state.seed}-${signature(state)}`,
     name,
     contentVersion,
@@ -92,7 +93,8 @@ export function replayAt(
 ): { state: GameState; steps: DiagnosticStep[] } {
   if (
     record.schema !== 1 ||
-    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(record.engineVersion) ||
+    !SUPPORTED_ENGINES.includes(record.engineVersion) ||
+    (record.engineVersion !== OWNER_ENGINE_VERSION && requiresOwnerRules(record.library)) ||
     (record.engineVersion === ENGINE_VERSION &&
       (record.initialState.mechanics || hasAdvancedMechanics(record.library)))
   )
@@ -125,7 +127,7 @@ export function validateRecord(value: unknown): void {
   if (
     !record ||
     record.schema !== 1 ||
-    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(record.engineVersion) ||
+    !SUPPORTED_ENGINES.includes(record.engineVersion) ||
     !record.library ||
     !record.initialState ||
     !Array.isArray(record.actions) ||

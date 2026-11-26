@@ -11,7 +11,7 @@ const Studio =
     ? lazy(() => import("../studio/Studio"))
     : null;
 export default function GameHost() {
-  const [workspace, setWorkspace] = useState(initialWorkspace),
+  const [workspace, setWorkspace] = useState(() => addBundledVersions(initialWorkspace())),
     [ready, setReady] = useState(false),
     [studio, setStudio] = useState(location.hash === "#studio"),
     [error, setError] = useState("");

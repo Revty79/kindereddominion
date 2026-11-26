@@ -1,0 +1,1393 @@
+{
+  "format": "kindred-dominion-collectible-registry",
+  "schema": 1,
+  "prefixes": [
+    {
+      "prefix": "N",
+      "kindred": "Nature",
+      "foundingFirst": "N001",
+      "foundingLast": "N030",
+      "firstExpansionNumber": "N031"
+    },
+    {
+      "prefix": "M",
+      "kindred": "Mythical",
+      "foundingFirst": "M001",
+      "foundingLast": "M030",
+      "firstExpansionNumber": "M031"
+    },
+    {
+      "prefix": "A",
+      "kindred": "Arcane",
+      "foundingFirst": "A001",
+      "foundingLast": "A030",
+      "firstExpansionNumber": "A031"
+    },
+    {
+      "prefix": "U",
+      "kindred": "Undead",
+      "foundingFirst": "U001",
+      "foundingLast": "U030",
+      "firstExpansionNumber": "U031"
+    },
+    {
+      "prefix": "C",
+      "kindred": "Constructs",
+      "foundingFirst": "C001",
+      "foundingLast": "C030",
+      "firstExpansionNumber": "C031"
+    }
+  ],
+  "entries": [
+    {
+      "number": "N001",
+      "gameplayId": "n001",
+      "kindred": "Nature",
+      "originalName": "Field Mouse",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N002",
+      "gameplayId": "n002",
+      "kindred": "Nature",
+      "originalName": "Wolf Cub",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N003",
+      "gameplayId": "n003",
+      "kindred": "Nature",
+      "originalName": "Red Fox",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N004",
+      "gameplayId": "n004",
+      "kindred": "Nature",
+      "originalName": "Mountain Hare",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N005",
+      "gameplayId": "n005",
+      "kindred": "Nature",
+      "originalName": "Honeybee",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N006",
+      "gameplayId": "n006",
+      "kindred": "Nature",
+      "originalName": "Web Spider",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N007",
+      "gameplayId": "n007",
+      "kindred": "Nature",
+      "originalName": "Tortoise",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N008",
+      "gameplayId": "n008",
+      "kindred": "Nature",
+      "originalName": "Burrowing Mole",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N009",
+      "gameplayId": "n009",
+      "kindred": "Nature",
+      "originalName": "Caterpillar",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N010",
+      "gameplayId": "n010",
+      "kindred": "Nature",
+      "originalName": "River Otter",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N011",
+      "gameplayId": "n011",
+      "kindred": "Nature",
+      "originalName": "Porcupine",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N012",
+      "gameplayId": "n012",
+      "kindred": "Nature",
+      "originalName": "Raven",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N013",
+      "gameplayId": "n013",
+      "kindred": "Nature",
+      "originalName": "Wild Boar",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N014",
+      "gameplayId": "n014",
+      "kindred": "Nature",
+      "originalName": "Golden Eagle",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N015",
+      "gameplayId": "n015",
+      "kindred": "Nature",
+      "originalName": "Rattlesnake",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N016",
+      "gameplayId": "n016",
+      "kindred": "Nature",
+      "originalName": "Mountain Lion",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N017",
+      "gameplayId": "n017",
+      "kindred": "Nature",
+      "originalName": "Giant Stag",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N018",
+      "gameplayId": "n018",
+      "kindred": "Nature",
+      "originalName": "Crocodile",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N019",
+      "gameplayId": "n019",
+      "kindred": "Nature",
+      "originalName": "Giant Octopus",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N020",
+      "gameplayId": "n020",
+      "kindred": "Nature",
+      "originalName": "Grizzly Bear",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N021",
+      "gameplayId": "n021",
+      "kindred": "Nature",
+      "originalName": "Rhinoceros",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N022",
+      "gameplayId": "n022",
+      "kindred": "Nature",
+      "originalName": "African Elephant",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N023",
+      "gameplayId": "n023",
+      "kindred": "Nature",
+      "originalName": "Giant Sequoia",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N024",
+      "gameplayId": "n024",
+      "kindred": "Nature",
+      "originalName": "Carrion Vulture",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N025",
+      "gameplayId": "n025",
+      "kindred": "Nature",
+      "originalName": "Scavenging Hyena",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N026",
+      "gameplayId": "n026",
+      "kindred": "Nature",
+      "originalName": "Venus Flytrap",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N027",
+      "gameplayId": "n027",
+      "kindred": "Nature",
+      "originalName": "Grey Wolf",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N028",
+      "gameplayId": "n028",
+      "kindred": "Nature",
+      "originalName": "Alpha Wolf",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N029",
+      "gameplayId": "n029",
+      "kindred": "Nature",
+      "originalName": "Butterfly",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "N030",
+      "gameplayId": "n030",
+      "kindred": "Nature",
+      "originalName": "Tarantula",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M001",
+      "gameplayId": "m001",
+      "kindred": "Mythical",
+      "originalName": "Dragon Whelp",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M002",
+      "gameplayId": "m002",
+      "kindred": "Mythical",
+      "originalName": "Griffin Hatchling",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M003",
+      "gameplayId": "m003",
+      "kindred": "Mythical",
+      "originalName": "Firebird",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M004",
+      "gameplayId": "m004",
+      "kindred": "Mythical",
+      "originalName": "Jackalope",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M005",
+      "gameplayId": "m005",
+      "kindred": "Mythical",
+      "originalName": "Faun",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M006",
+      "gameplayId": "m006",
+      "kindred": "Mythical",
+      "originalName": "Peryton",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M007",
+      "gameplayId": "m007",
+      "kindred": "Mythical",
+      "originalName": "Gargoyle",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M008",
+      "gameplayId": "m008",
+      "kindred": "Mythical",
+      "originalName": "Harpy",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M009",
+      "gameplayId": "m009",
+      "kindred": "Mythical",
+      "originalName": "Kelpie",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M010",
+      "gameplayId": "m010",
+      "kindred": "Mythical",
+      "originalName": "Kitsune",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M011",
+      "gameplayId": "m011",
+      "kindred": "Mythical",
+      "originalName": "Unicorn Foal",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M012",
+      "gameplayId": "m012",
+      "kindred": "Mythical",
+      "originalName": "Cockatrice",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M013",
+      "gameplayId": "m013",
+      "kindred": "Mythical",
+      "originalName": "Centaur",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M014",
+      "gameplayId": "m014",
+      "kindred": "Mythical",
+      "originalName": "Minotaur",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M015",
+      "gameplayId": "m015",
+      "kindred": "Mythical",
+      "originalName": "Griffin",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M016",
+      "gameplayId": "m016",
+      "kindred": "Mythical",
+      "originalName": "Basilisk",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M017",
+      "gameplayId": "m017",
+      "kindred": "Mythical",
+      "originalName": "Manticore",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M018",
+      "gameplayId": "m018",
+      "kindred": "Mythical",
+      "originalName": "Pegasus",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M019",
+      "gameplayId": "m019",
+      "kindred": "Mythical",
+      "originalName": "Cyclops",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M020",
+      "gameplayId": "m020",
+      "kindred": "Mythical",
+      "originalName": "Dragon",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M021",
+      "gameplayId": "m021",
+      "kindred": "Mythical",
+      "originalName": "Hydra",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M022",
+      "gameplayId": "m022",
+      "kindred": "Mythical",
+      "originalName": "Roc",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M023",
+      "gameplayId": "m023",
+      "kindred": "Mythical",
+      "originalName": "Leviathan",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M024",
+      "gameplayId": "m024",
+      "kindred": "Mythical",
+      "originalName": "Chimera",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M025",
+      "gameplayId": "m025",
+      "kindred": "Mythical",
+      "originalName": "Sphinx",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M026",
+      "gameplayId": "m026",
+      "kindred": "Mythical",
+      "originalName": "Cerberus",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M027",
+      "gameplayId": "m027",
+      "kindred": "Mythical",
+      "originalName": "Phoenix",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M028",
+      "gameplayId": "m028",
+      "kindred": "Mythical",
+      "originalName": "Royal Griffin",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M029",
+      "gameplayId": "m029",
+      "kindred": "Mythical",
+      "originalName": "Elder Dragon",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "M030",
+      "gameplayId": "m030",
+      "kindred": "Mythical",
+      "originalName": "Nine-Tailed Fox",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A001",
+      "gameplayId": "a001",
+      "kindred": "Arcane",
+      "originalName": "Will-o'-the-Wisp",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A002",
+      "gameplayId": "a002",
+      "kindred": "Arcane",
+      "originalName": "Arcane Familiar",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A003",
+      "gameplayId": "a003",
+      "kindred": "Arcane",
+      "originalName": "Spark Sprite",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A004",
+      "gameplayId": "a004",
+      "kindred": "Arcane",
+      "originalName": "Frost Sprite",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A005",
+      "gameplayId": "a005",
+      "kindred": "Arcane",
+      "originalName": "Flame Sprite",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A006",
+      "gameplayId": "a006",
+      "kindred": "Arcane",
+      "originalName": "Water Sprite",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A007",
+      "gameplayId": "a007",
+      "kindred": "Arcane",
+      "originalName": "Earth Sprite",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A008",
+      "gameplayId": "a008",
+      "kindred": "Arcane",
+      "originalName": "Mirror Sprite",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A009",
+      "gameplayId": "a009",
+      "kindred": "Arcane",
+      "originalName": "Living Shadow",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A010",
+      "gameplayId": "a010",
+      "kindred": "Arcane",
+      "originalName": "Lesser Mimic",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A011",
+      "gameplayId": "a011",
+      "kindred": "Arcane",
+      "originalName": "Mana Moth",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A012",
+      "gameplayId": "a012",
+      "kindred": "Arcane",
+      "originalName": "Enchanted Orb",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A013",
+      "gameplayId": "a013",
+      "kindred": "Arcane",
+      "originalName": "Air Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A014",
+      "gameplayId": "a014",
+      "kindred": "Arcane",
+      "originalName": "Lightning Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A015",
+      "gameplayId": "a015",
+      "kindred": "Arcane",
+      "originalName": "Crystal Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A016",
+      "gameplayId": "a016",
+      "kindred": "Arcane",
+      "originalName": "Magical Ooze",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A017",
+      "gameplayId": "a017",
+      "kindred": "Arcane",
+      "originalName": "Illusion Beast",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A018",
+      "gameplayId": "a018",
+      "kindred": "Arcane",
+      "originalName": "Living Grimoire",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A019",
+      "gameplayId": "a019",
+      "kindred": "Arcane",
+      "originalName": "Mana Serpent",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A020",
+      "gameplayId": "a020",
+      "kindred": "Arcane",
+      "originalName": "Arcane Leviathan",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A021",
+      "gameplayId": "a021",
+      "kindred": "Arcane",
+      "originalName": "Storm Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A022",
+      "gameplayId": "a022",
+      "kindred": "Arcane",
+      "originalName": "Astral Dragon",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A023",
+      "gameplayId": "a023",
+      "kindred": "Arcane",
+      "originalName": "Void Spirit",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A024",
+      "gameplayId": "a024",
+      "kindred": "Arcane",
+      "originalName": "Spell Leech",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A025",
+      "gameplayId": "a025",
+      "kindred": "Arcane",
+      "originalName": "Mirror Doppelganger",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A026",
+      "gameplayId": "a026",
+      "kindred": "Arcane",
+      "originalName": "Void Ooze",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A027",
+      "gameplayId": "a027",
+      "kindred": "Arcane",
+      "originalName": "Fire Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A028",
+      "gameplayId": "a028",
+      "kindred": "Arcane",
+      "originalName": "Ice Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A029",
+      "gameplayId": "a029",
+      "kindred": "Arcane",
+      "originalName": "Water Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "A030",
+      "gameplayId": "a030",
+      "kindred": "Arcane",
+      "originalName": "Earth Elemental",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U001",
+      "gameplayId": "u001",
+      "kindred": "Undead",
+      "originalName": "Skeleton",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U002",
+      "gameplayId": "u002",
+      "kindred": "Undead",
+      "originalName": "Zombie",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U003",
+      "gameplayId": "u003",
+      "kindred": "Undead",
+      "originalName": "Ghost",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U004",
+      "gameplayId": "u004",
+      "kindred": "Undead",
+      "originalName": "Crawling Hand",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U005",
+      "gameplayId": "u005",
+      "kindred": "Undead",
+      "originalName": "Grave Rat",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U006",
+      "gameplayId": "u006",
+      "kindred": "Undead",
+      "originalName": "Bone Hound",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U007",
+      "gameplayId": "u007",
+      "kindred": "Undead",
+      "originalName": "Restless Spirit",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U008",
+      "gameplayId": "u008",
+      "kindred": "Undead",
+      "originalName": "Ghoul",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U009",
+      "gameplayId": "u009",
+      "kindred": "Undead",
+      "originalName": "Floating Skull",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U010",
+      "gameplayId": "u010",
+      "kindred": "Undead",
+      "originalName": "Grave Beetle",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U011",
+      "gameplayId": "u011",
+      "kindred": "Undead",
+      "originalName": "Reanimated Crow",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U012",
+      "gameplayId": "u012",
+      "kindred": "Undead",
+      "originalName": "Vampire Bat",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U013",
+      "gameplayId": "u013",
+      "kindred": "Undead",
+      "originalName": "Mummy",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U014",
+      "gameplayId": "u014",
+      "kindred": "Undead",
+      "originalName": "Banshee",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U015",
+      "gameplayId": "u015",
+      "kindred": "Undead",
+      "originalName": "Wight",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U016",
+      "gameplayId": "u016",
+      "kindred": "Undead",
+      "originalName": "Wraith",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U017",
+      "gameplayId": "u017",
+      "kindred": "Undead",
+      "originalName": "Vampire",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U018",
+      "gameplayId": "u018",
+      "kindred": "Undead",
+      "originalName": "Revenant",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U019",
+      "gameplayId": "u019",
+      "kindred": "Undead",
+      "originalName": "Skeletal Horse",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U020",
+      "gameplayId": "u020",
+      "kindred": "Undead",
+      "originalName": "Lich",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U021",
+      "gameplayId": "u021",
+      "kindred": "Undead",
+      "originalName": "Bone Dragon",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U022",
+      "gameplayId": "u022",
+      "kindred": "Undead",
+      "originalName": "Undead Giant",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U023",
+      "gameplayId": "u023",
+      "kindred": "Undead",
+      "originalName": "Headless Horseman",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U024",
+      "gameplayId": "u024",
+      "kindred": "Undead",
+      "originalName": "Corpse Amalgam",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U025",
+      "gameplayId": "u025",
+      "kindred": "Undead",
+      "originalName": "Soul Collector",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U026",
+      "gameplayId": "u026",
+      "kindred": "Undead",
+      "originalName": "Grave Devourer",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U027",
+      "gameplayId": "u027",
+      "kindred": "Undead",
+      "originalName": "Skeleton Warrior",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U028",
+      "gameplayId": "u028",
+      "kindred": "Undead",
+      "originalName": "Skeleton Champion",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U029",
+      "gameplayId": "u029",
+      "kindred": "Undead",
+      "originalName": "Elder Vampire",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "U030",
+      "gameplayId": "u030",
+      "kindred": "Undead",
+      "originalName": "Phantom",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C001",
+      "gameplayId": "c001",
+      "kindred": "Constructs",
+      "originalName": "Copper Beetle",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C002",
+      "gameplayId": "c002",
+      "kindred": "Constructs",
+      "originalName": "Clockwork Spider",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C003",
+      "gameplayId": "c003",
+      "kindred": "Constructs",
+      "originalName": "Tin Soldier",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C004",
+      "gameplayId": "c004",
+      "kindred": "Constructs",
+      "originalName": "Animated Broom",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C005",
+      "gameplayId": "c005",
+      "kindred": "Constructs",
+      "originalName": "Brass Hound",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C006",
+      "gameplayId": "c006",
+      "kindred": "Constructs",
+      "originalName": "Wooden Puppet",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C007",
+      "gameplayId": "c007",
+      "kindred": "Constructs",
+      "originalName": "Living Shield",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C008",
+      "gameplayId": "c008",
+      "kindred": "Constructs",
+      "originalName": "Watchtower Drone",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C009",
+      "gameplayId": "c009",
+      "kindred": "Constructs",
+      "originalName": "Iron Scarab",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C010",
+      "gameplayId": "c010",
+      "kindred": "Constructs",
+      "originalName": "Clockwork Rat",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C011",
+      "gameplayId": "c011",
+      "kindred": "Constructs",
+      "originalName": "Repair Automaton",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C012",
+      "gameplayId": "c012",
+      "kindred": "Constructs",
+      "originalName": "Clay Golem",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C013",
+      "gameplayId": "c013",
+      "kindred": "Constructs",
+      "originalName": "Stone Golem",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C014",
+      "gameplayId": "c014",
+      "kindred": "Constructs",
+      "originalName": "Animated Armor",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C015",
+      "gameplayId": "c015",
+      "kindred": "Constructs",
+      "originalName": "Ballista Automaton",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C016",
+      "gameplayId": "c016",
+      "kindred": "Constructs",
+      "originalName": "Iron Tortoise",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C017",
+      "gameplayId": "c017",
+      "kindred": "Constructs",
+      "originalName": "Bronze Sentinel",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C018",
+      "gameplayId": "c018",
+      "kindred": "Constructs",
+      "originalName": "Siege Ram",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C019",
+      "gameplayId": "c019",
+      "kindred": "Constructs",
+      "originalName": "Repair Golem",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C020",
+      "gameplayId": "c020",
+      "kindred": "Constructs",
+      "originalName": "Iron Golem",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C021",
+      "gameplayId": "c021",
+      "kindred": "Constructs",
+      "originalName": "Stone Titan",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C022",
+      "gameplayId": "c022",
+      "kindred": "Constructs",
+      "originalName": "Clockwork Dragon",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C023",
+      "gameplayId": "c023",
+      "kindred": "Constructs",
+      "originalName": "Walking Fortress",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C024",
+      "gameplayId": "c024",
+      "kindred": "Constructs",
+      "originalName": "Salvage Automaton",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C025",
+      "gameplayId": "c025",
+      "kindred": "Constructs",
+      "originalName": "Scrap Giant",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C026",
+      "gameplayId": "c026",
+      "kindred": "Constructs",
+      "originalName": "Furnace Golem",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C027",
+      "gameplayId": "c027",
+      "kindred": "Constructs",
+      "originalName": "Iron Soldier",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C028",
+      "gameplayId": "c028",
+      "kindred": "Constructs",
+      "originalName": "Steel Sentinel",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C029",
+      "gameplayId": "c029",
+      "kindred": "Constructs",
+      "originalName": "Clockwork Scorpion",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    },
+    {
+      "number": "C030",
+      "gameplayId": "c030",
+      "kindred": "Constructs",
+      "originalName": "Granite Guardian",
+      "setId": "founding-kindreds-001",
+      "expansionId": "foundation",
+      "retired": false
+    }
+  ]
+}
