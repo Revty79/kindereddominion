@@ -103,6 +103,8 @@ test("clean production checkout provides all 150 packaged cards and repository a
         .evaluate((img: HTMLImageElement) => img.naturalWidth),
     )
     .toBeGreaterThan(0);
+  await page.getByRole("heading", { name: "Jade to command." }).waitFor();
+  await expect(page.locator(".hand-card img").first()).toBeVisible();
   await page.screenshot({
     path: ".local/artwork-validation/clean-production-hand-and-field.png",
     fullPage: true,

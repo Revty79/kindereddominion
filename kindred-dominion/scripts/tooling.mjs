@@ -18,5 +18,5 @@ export async function loadTS(entry, name = "tool") {
     outfile,
     logLevel: "silent",
   });
-  return import(`${pathToFileURL(outfile).href}?v=${Date.now()}`);
+  return import(/* @vite-ignore */ `${pathToFileURL(outfile).href}?v=${Date.now()}`);
 }
