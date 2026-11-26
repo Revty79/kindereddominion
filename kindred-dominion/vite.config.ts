@@ -2,9 +2,14 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { readFile, realpath } from "node:fs/promises";
 import path from "node:path";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { selectedPlayerContent, selectedPlayerAssets } from "./scripts/player-content";
 const playerOnly = process.env.VITE_STUDIO === "0";
 const root = process.cwd();
+function denyPrivatePaths(request:IncomingMessage,response:ServerResponse,next:()=>void){
+  let pathname:string;try{pathname=decodeURIComponent(new URL(request.url??"/","http://localhost").pathname);}catch{response.statusCode=400;response.end();return;}
+  if(/^\/(?:server|server-dist|\.local|backups|\.git)(?:\/|$)|(?:^|\/)\.env(?:\.|\/|$)/i.test(pathname)){response.statusCode=404;response.end("Unavailable.");return;}next();
+}
 export default defineConfig({
   base: "./",
   publicDir: playerOnly ? false : "public",
@@ -12,6 +17,7 @@ export default defineConfig({
   preview:{proxy:{"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}},
   plugins: [
     react(),
+    {name:"kindred-private-paths",configureServer(server){server.middlewares.use(denyPrivatePaths);},configurePreviewServer(server){server.middlewares.use(denyPrivatePaths);}},
     {
       name: "kindred-approved-player-content",
       resolveId(id) { if (id === "virtual:kindred-player-content") return "\0kindred-player-content"; },
