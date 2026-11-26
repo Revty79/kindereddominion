@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { act, relative, validateDeck } from "../src/engine/game";
+import { act, relative, validateDeck, legalPlays as legalActions } from "../src/engine/game";
 import { DEFAULT_CONFIG } from "../src/engine/config";
 import { signature } from "../src/replay/record";
 import { actionPreview, presentationFrames, publicEventText, publicChanges } from "../src/ui/readability";
@@ -11,6 +11,8 @@ import { libraryOf } from "../src/content/validation";
 import { validateSimulation } from "../src/simulation/run";
 import { ownerCardScenario } from "./helpers/owner-scenarios";
 import type { DiagnosticStep } from "../src/engine/types";
+import { ownerReadabilityScenarios } from "../src/content/owner-scenarios";
+import { validateScenario } from "../src/sandbox/scenario";
 
 it("defaults fresh ordinary games to the separate owner catalog while retaining all historical versions and existing drafts", () => {
   const fresh = addBundledVersions(initialWorkspace());
@@ -62,6 +64,15 @@ it("explains prevented destruction and weakening without inventing a successful 
     expect(preview.state.cards[enemy].modifier).toBe(-1);
   }
 });
+it("previews actual destruction and resurrection even when a creature ends on its original square", () => {
+  const { scenario, source, enemy } = ownerCardScenario("n018"), library = libraryOf(scenario.content);
+  scenario.state.cards[enemy].definitionId = "u002";
+  const preview = actionPreview(scenario.state, { type: "play", player: 0, card: source, row: 1, col: 1 }, library);
+  expect(preview.state.cards[enemy].location).toBe("battlefield");
+  expect(preview.changes.some(c => c.label === "DEST" && c.text.includes("Zombie"))).toBe(true);
+  expect(preview.changes.some(c => c.label === "REVIVE" && c.text.includes("Zombie"))).toBe(true);
+  expect(signature(scenario.state)).not.toBe(signature(preview.state));
+});
 it("filters the actual collection by number, set, power, placement, classification and executable mechanics", () => {
   const cards = ownerContent().cards, filter = { ...emptyCollectionFilter };
   expect(filterCollection(cards, "all", "N027", filter).map(c => c.id)).toEqual(["n027"]);
@@ -82,4 +93,11 @@ it("rejects an alternative-edition copy bypass before a simulation starts", () =
   const cards = ["n001", "n001", "n001-foil", "n001-foil", ...content.decks[0].cards.slice(1, 12)];
   expect(validateDeck(cards, libraryOf(content))).not.toEqual([]);
   expect(() => validateSimulation({ content, decks: [{ ...content.decks[0], cards }, content.decks[1]], config: structuredClone(DEFAULT_CONFIG), matches: 1, seed: 1, pairings: "single", mirrored: true, maxActions: 200, retainExamples: false })).toThrow(/4 copies/);
+});
+it.each(ownerReadabilityScenarios().map(s => [s.name, s] as const))("%s is a valid prepared owner-only experiment", (_, s) => {
+  expect(s.content.cards).toHaveLength(150);
+  expect(validateScenario(s).filter(i => i.severity === "error")).toEqual([]);
+  const actions = legalActions(s.state, libraryOf(s.content));
+  expect(actions.length).toBeGreaterThan(0);
+  expect(act(s.state, actions[0], libraryOf(s.content)).fault).toBeNull();
 });

@@ -1,0 +1,3008 @@
+[
+  {
+    "collectibleNumber": "N001",
+    "gameplayId": "n001",
+    "name": "Field Mouse",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Rodent"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n001",
+    "productionPath": "assets/cards/nature/n001-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Field Mouse; Mammal, Rodent. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N002",
+    "gameplayId": "n002",
+    "name": "Wolf Cub",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Wolf",
+      "Juvenile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n002",
+    "productionPath": "assets/cards/nature/n002-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [
+      "n027"
+    ],
+    "subject": "Wolf Cub; Mammal, Wolf, Juvenile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N003",
+    "gameplayId": "n003",
+    "name": "Red Fox",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Fox"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n003",
+    "productionPath": "assets/cards/nature/n003-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Red Fox; Mammal, Fox. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N004",
+    "gameplayId": "n004",
+    "name": "Mountain Hare",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Hare"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n004",
+    "productionPath": "assets/cards/nature/n004-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mountain Hare; Mammal, Hare. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N005",
+    "gameplayId": "n005",
+    "name": "Honeybee",
+    "kindred": "Nature",
+    "classifications": [
+      "Insect",
+      "Bee"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n005",
+    "productionPath": "assets/cards/nature/n005-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Honeybee; Insect, Bee. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N006",
+    "gameplayId": "n006",
+    "name": "Web Spider",
+    "kindred": "Nature",
+    "classifications": [
+      "Arachnid",
+      "Spider"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n006",
+    "productionPath": "assets/cards/nature/n006-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [
+      "n030"
+    ],
+    "subject": "Web Spider; Arachnid, Spider. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N007",
+    "gameplayId": "n007",
+    "name": "Tortoise",
+    "kindred": "Nature",
+    "classifications": [
+      "Reptile",
+      "Tortoise"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n007",
+    "productionPath": "assets/cards/nature/n007-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Tortoise; Reptile, Tortoise. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N008",
+    "gameplayId": "n008",
+    "name": "Burrowing Mole",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Mole"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n008",
+    "productionPath": "assets/cards/nature/n008-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Burrowing Mole; Mammal, Mole. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N009",
+    "gameplayId": "n009",
+    "name": "Caterpillar",
+    "kindred": "Nature",
+    "classifications": [
+      "Insect",
+      "Larva"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n009",
+    "productionPath": "assets/cards/nature/n009-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [
+      "n029"
+    ],
+    "subject": "Caterpillar; Insect, Larva. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N010",
+    "gameplayId": "n010",
+    "name": "River Otter",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Otter"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n010",
+    "productionPath": "assets/cards/nature/n010-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "River Otter; Mammal, Otter. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N011",
+    "gameplayId": "n011",
+    "name": "Porcupine",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Porcupine"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n011",
+    "productionPath": "assets/cards/nature/n011-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Porcupine; Mammal, Porcupine. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N012",
+    "gameplayId": "n012",
+    "name": "Raven",
+    "kindred": "Nature",
+    "classifications": [
+      "Bird",
+      "Corvid"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n012",
+    "productionPath": "assets/cards/nature/n012-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Raven; Bird, Corvid. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N013",
+    "gameplayId": "n013",
+    "name": "Wild Boar",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Boar"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n013",
+    "productionPath": "assets/cards/nature/n013-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Wild Boar; Mammal, Boar. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N014",
+    "gameplayId": "n014",
+    "name": "Golden Eagle",
+    "kindred": "Nature",
+    "classifications": [
+      "Bird",
+      "Raptor"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n014",
+    "productionPath": "assets/cards/nature/n014-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Golden Eagle; Bird, Raptor. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N015",
+    "gameplayId": "n015",
+    "name": "Rattlesnake",
+    "kindred": "Nature",
+    "classifications": [
+      "Reptile",
+      "Snake"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n015",
+    "productionPath": "assets/cards/nature/n015-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Rattlesnake; Reptile, Snake. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N016",
+    "gameplayId": "n016",
+    "name": "Mountain Lion",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Feline"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n016",
+    "productionPath": "assets/cards/nature/n016-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mountain Lion; Mammal, Feline. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N017",
+    "gameplayId": "n017",
+    "name": "Giant Stag",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Deer"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n017",
+    "productionPath": "assets/cards/nature/n017-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Giant Stag; Mammal, Deer. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N018",
+    "gameplayId": "n018",
+    "name": "Crocodile",
+    "kindred": "Nature",
+    "classifications": [
+      "Reptile",
+      "Crocodilian"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n018",
+    "productionPath": "assets/cards/nature/n018-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Crocodile; Reptile, Crocodilian. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N019",
+    "gameplayId": "n019",
+    "name": "Giant Octopus",
+    "kindred": "Nature",
+    "classifications": [
+      "Cephalopod",
+      "Octopus"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n019",
+    "productionPath": "assets/cards/nature/n019-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Giant Octopus; Cephalopod, Octopus. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N020",
+    "gameplayId": "n020",
+    "name": "Grizzly Bear",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Bear"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n020",
+    "productionPath": "assets/cards/nature/n020-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Grizzly Bear; Mammal, Bear. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N021",
+    "gameplayId": "n021",
+    "name": "Rhinoceros",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Rhinoceros"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n021",
+    "productionPath": "assets/cards/nature/n021-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Rhinoceros; Mammal, Rhinoceros. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N022",
+    "gameplayId": "n022",
+    "name": "African Elephant",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Elephant"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n022",
+    "productionPath": "assets/cards/nature/n022-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "African Elephant; Mammal, Elephant. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N023",
+    "gameplayId": "n023",
+    "name": "Giant Sequoia",
+    "kindred": "Nature",
+    "classifications": [
+      "Plant",
+      "Tree"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n023",
+    "productionPath": "assets/cards/nature/n023-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Giant Sequoia; Plant, Tree. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N024",
+    "gameplayId": "n024",
+    "name": "Carrion Vulture",
+    "kindred": "Nature",
+    "classifications": [
+      "Bird",
+      "Scavenger"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n024",
+    "productionPath": "assets/cards/nature/n024-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Carrion Vulture; Bird, Scavenger. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N025",
+    "gameplayId": "n025",
+    "name": "Scavenging Hyena",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Hyena",
+      "Scavenger"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n025",
+    "productionPath": "assets/cards/nature/n025-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Scavenging Hyena; Mammal, Hyena, Scavenger. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N026",
+    "gameplayId": "n026",
+    "name": "Venus Flytrap",
+    "kindred": "Nature",
+    "classifications": [
+      "Plant",
+      "Carnivorous"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n026",
+    "productionPath": "assets/cards/nature/n026-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Venus Flytrap; Plant, Carnivorous. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N027",
+    "gameplayId": "n027",
+    "name": "Grey Wolf",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Wolf"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n027",
+    "productionPath": "assets/cards/nature/n027-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [
+      "n002"
+    ],
+    "evolutions": [
+      "n028"
+    ],
+    "subject": "Grey Wolf; Mammal, Wolf. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N028",
+    "gameplayId": "n028",
+    "name": "Alpha Wolf",
+    "kindred": "Nature",
+    "classifications": [
+      "Mammal",
+      "Wolf"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n028",
+    "productionPath": "assets/cards/nature/n028-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [
+      "n027"
+    ],
+    "evolutions": [],
+    "subject": "Alpha Wolf; Mammal, Wolf. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N029",
+    "gameplayId": "n029",
+    "name": "Butterfly",
+    "kindred": "Nature",
+    "classifications": [
+      "Insect",
+      "Butterfly"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n029",
+    "productionPath": "assets/cards/nature/n029-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [
+      "n009"
+    ],
+    "evolutions": [],
+    "subject": "Butterfly; Insect, Butterfly. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "N030",
+    "gameplayId": "n030",
+    "name": "Tarantula",
+    "kindred": "Nature",
+    "classifications": [
+      "Arachnid",
+      "Spider"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "n030",
+    "productionPath": "assets/cards/nature/n030-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/nature/",
+    "predecessors": [
+      "n006"
+    ],
+    "evolutions": [],
+    "subject": "Tarantula; Arachnid, Spider. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M001",
+    "gameplayId": "m001",
+    "name": "Dragon Whelp",
+    "kindred": "Mythical",
+    "classifications": [
+      "Dragon",
+      "Reptile",
+      "Juvenile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m001",
+    "productionPath": "assets/cards/mythical/m001-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [
+      "m029"
+    ],
+    "subject": "Dragon Whelp; Dragon, Reptile, Juvenile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M002",
+    "gameplayId": "m002",
+    "name": "Griffin Hatchling",
+    "kindred": "Mythical",
+    "classifications": [
+      "Griffin",
+      "Hybrid",
+      "Bird",
+      "Juvenile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m002",
+    "productionPath": "assets/cards/mythical/m002-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [
+      "m028"
+    ],
+    "subject": "Griffin Hatchling; Griffin, Hybrid, Bird, Juvenile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M003",
+    "gameplayId": "m003",
+    "name": "Firebird",
+    "kindred": "Mythical",
+    "classifications": [
+      "Bird",
+      "Fire"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m003",
+    "productionPath": "assets/cards/mythical/m003-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [
+      "m027"
+    ],
+    "subject": "Firebird; Bird, Fire. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M004",
+    "gameplayId": "m004",
+    "name": "Jackalope",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Mammal",
+      "Hare"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m004",
+    "productionPath": "assets/cards/mythical/m004-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Jackalope; Hybrid, Mammal, Hare. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M005",
+    "gameplayId": "m005",
+    "name": "Faun",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Faun"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m005",
+    "productionPath": "assets/cards/mythical/m005-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Faun; Hybrid, Faun. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M006",
+    "gameplayId": "m006",
+    "name": "Peryton",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Peryton"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m006",
+    "productionPath": "assets/cards/mythical/m006-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Peryton; Hybrid, Peryton. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M007",
+    "gameplayId": "m007",
+    "name": "Gargoyle",
+    "kindred": "Mythical",
+    "classifications": [
+      "Construct",
+      "Stone",
+      "Gargoyle"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m007",
+    "productionPath": "assets/cards/mythical/m007-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Gargoyle; Construct, Stone, Gargoyle. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M008",
+    "gameplayId": "m008",
+    "name": "Harpy",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Bird",
+      "Harpy"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m008",
+    "productionPath": "assets/cards/mythical/m008-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Harpy; Hybrid, Bird, Harpy. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M009",
+    "gameplayId": "m009",
+    "name": "Kelpie",
+    "kindred": "Mythical",
+    "classifications": [
+      "Spirit",
+      "Horse"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m009",
+    "productionPath": "assets/cards/mythical/m009-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Kelpie; Spirit, Horse. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M010",
+    "gameplayId": "m010",
+    "name": "Kitsune",
+    "kindred": "Mythical",
+    "classifications": [
+      "Spirit",
+      "Mammal",
+      "Fox"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m010",
+    "productionPath": "assets/cards/mythical/m010-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [
+      "m030"
+    ],
+    "subject": "Kitsune; Spirit, Mammal, Fox. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M011",
+    "gameplayId": "m011",
+    "name": "Unicorn Foal",
+    "kindred": "Mythical",
+    "classifications": [
+      "Mammal",
+      "Unicorn",
+      "Juvenile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m011",
+    "productionPath": "assets/cards/mythical/m011-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Unicorn Foal; Mammal, Unicorn, Juvenile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M012",
+    "gameplayId": "m012",
+    "name": "Cockatrice",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Bird",
+      "Reptile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m012",
+    "productionPath": "assets/cards/mythical/m012-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Cockatrice; Hybrid, Bird, Reptile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M013",
+    "gameplayId": "m013",
+    "name": "Centaur",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Centaur"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m013",
+    "productionPath": "assets/cards/mythical/m013-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Centaur; Hybrid, Centaur. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M014",
+    "gameplayId": "m014",
+    "name": "Minotaur",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Minotaur"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m014",
+    "productionPath": "assets/cards/mythical/m014-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Minotaur; Hybrid, Minotaur. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M015",
+    "gameplayId": "m015",
+    "name": "Griffin",
+    "kindred": "Mythical",
+    "classifications": [
+      "Griffin",
+      "Hybrid",
+      "Bird"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m015",
+    "productionPath": "assets/cards/mythical/m015-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [
+      "m028"
+    ],
+    "subject": "Griffin; Griffin, Hybrid, Bird. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M016",
+    "gameplayId": "m016",
+    "name": "Basilisk",
+    "kindred": "Mythical",
+    "classifications": [
+      "Reptile",
+      "Basilisk"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m016",
+    "productionPath": "assets/cards/mythical/m016-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Basilisk; Reptile, Basilisk. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M017",
+    "gameplayId": "m017",
+    "name": "Manticore",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Manticore"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m017",
+    "productionPath": "assets/cards/mythical/m017-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Manticore; Hybrid, Manticore. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M018",
+    "gameplayId": "m018",
+    "name": "Pegasus",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Horse"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m018",
+    "productionPath": "assets/cards/mythical/m018-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Pegasus; Hybrid, Horse. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M019",
+    "gameplayId": "m019",
+    "name": "Cyclops",
+    "kindred": "Mythical",
+    "classifications": [
+      "Giant",
+      "Cyclops"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m019",
+    "productionPath": "assets/cards/mythical/m019-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Cyclops; Giant, Cyclops. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M020",
+    "gameplayId": "m020",
+    "name": "Dragon",
+    "kindred": "Mythical",
+    "classifications": [
+      "Dragon",
+      "Reptile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m020",
+    "productionPath": "assets/cards/mythical/m020-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [
+      "m029"
+    ],
+    "subject": "Dragon; Dragon, Reptile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M021",
+    "gameplayId": "m021",
+    "name": "Hydra",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hydra",
+      "Reptile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m021",
+    "productionPath": "assets/cards/mythical/m021-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Hydra; Hydra, Reptile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M022",
+    "gameplayId": "m022",
+    "name": "Roc",
+    "kindred": "Mythical",
+    "classifications": [
+      "Bird",
+      "Roc"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m022",
+    "productionPath": "assets/cards/mythical/m022-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Roc; Bird, Roc. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M023",
+    "gameplayId": "m023",
+    "name": "Leviathan",
+    "kindred": "Mythical",
+    "classifications": [
+      "SeaMonster",
+      "Leviathan"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m023",
+    "productionPath": "assets/cards/mythical/m023-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Leviathan; SeaMonster, Leviathan. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M024",
+    "gameplayId": "m024",
+    "name": "Chimera",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Chimera"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m024",
+    "productionPath": "assets/cards/mythical/m024-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Chimera; Hybrid, Chimera. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M025",
+    "gameplayId": "m025",
+    "name": "Sphinx",
+    "kindred": "Mythical",
+    "classifications": [
+      "Hybrid",
+      "Sphinx"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m025",
+    "productionPath": "assets/cards/mythical/m025-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Sphinx; Hybrid, Sphinx. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M026",
+    "gameplayId": "m026",
+    "name": "Cerberus",
+    "kindred": "Mythical",
+    "classifications": [
+      "Mammal",
+      "Hound",
+      "Cerberus"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m026",
+    "productionPath": "assets/cards/mythical/m026-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Cerberus; Mammal, Hound, Cerberus. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M027",
+    "gameplayId": "m027",
+    "name": "Phoenix",
+    "kindred": "Mythical",
+    "classifications": [
+      "Bird",
+      "Fire",
+      "Phoenix"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m027",
+    "productionPath": "assets/cards/mythical/m027-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [
+      "m003"
+    ],
+    "evolutions": [],
+    "subject": "Phoenix; Bird, Fire, Phoenix. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M028",
+    "gameplayId": "m028",
+    "name": "Royal Griffin",
+    "kindred": "Mythical",
+    "classifications": [
+      "Griffin",
+      "Hybrid",
+      "Bird"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m028",
+    "productionPath": "assets/cards/mythical/m028-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [
+      "m002",
+      "m015"
+    ],
+    "evolutions": [],
+    "subject": "Royal Griffin; Griffin, Hybrid, Bird. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M029",
+    "gameplayId": "m029",
+    "name": "Elder Dragon",
+    "kindred": "Mythical",
+    "classifications": [
+      "Dragon",
+      "Reptile"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m029",
+    "productionPath": "assets/cards/mythical/m029-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [
+      "m001",
+      "m020"
+    ],
+    "evolutions": [],
+    "subject": "Elder Dragon; Dragon, Reptile. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "M030",
+    "gameplayId": "m030",
+    "name": "Nine-Tailed Fox",
+    "kindred": "Mythical",
+    "classifications": [
+      "Spirit",
+      "Mammal",
+      "Fox"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "m030",
+    "productionPath": "assets/cards/mythical/m030-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/mythical/",
+    "predecessors": [
+      "m010"
+    ],
+    "evolutions": [],
+    "subject": "Nine-Tailed Fox; Spirit, Mammal, Fox. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A001",
+    "gameplayId": "a001",
+    "name": "Will-o'-the-Wisp",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Wisp"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a001",
+    "productionPath": "assets/cards/arcane/a001-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Will-o'-the-Wisp; Spirit, Wisp. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A002",
+    "gameplayId": "a002",
+    "name": "Arcane Familiar",
+    "kindred": "Arcane",
+    "classifications": [
+      "Familiar",
+      "Magical"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a002",
+    "productionPath": "assets/cards/arcane/a002-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Arcane Familiar; Familiar, Magical. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A003",
+    "gameplayId": "a003",
+    "name": "Spark Sprite",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Sprite",
+      "Lightning"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a003",
+    "productionPath": "assets/cards/arcane/a003-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Spark Sprite; Spirit, Sprite, Lightning. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A004",
+    "gameplayId": "a004",
+    "name": "Frost Sprite",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Sprite",
+      "Ice"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a004",
+    "productionPath": "assets/cards/arcane/a004-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [
+      "a028"
+    ],
+    "subject": "Frost Sprite; Spirit, Sprite, Ice. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A005",
+    "gameplayId": "a005",
+    "name": "Flame Sprite",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Sprite",
+      "Fire"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a005",
+    "productionPath": "assets/cards/arcane/a005-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [
+      "a027"
+    ],
+    "subject": "Flame Sprite; Spirit, Sprite, Fire. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A006",
+    "gameplayId": "a006",
+    "name": "Water Sprite",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Sprite",
+      "Water"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a006",
+    "productionPath": "assets/cards/arcane/a006-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [
+      "a029"
+    ],
+    "subject": "Water Sprite; Spirit, Sprite, Water. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A007",
+    "gameplayId": "a007",
+    "name": "Earth Sprite",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Sprite",
+      "Earth"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a007",
+    "productionPath": "assets/cards/arcane/a007-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [
+      "a030"
+    ],
+    "subject": "Earth Sprite; Spirit, Sprite, Earth. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A008",
+    "gameplayId": "a008",
+    "name": "Mirror Sprite",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Sprite",
+      "Mirror"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a008",
+    "productionPath": "assets/cards/arcane/a008-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mirror Sprite; Spirit, Sprite, Mirror. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A009",
+    "gameplayId": "a009",
+    "name": "Living Shadow",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Shadow"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a009",
+    "productionPath": "assets/cards/arcane/a009-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Living Shadow; Spirit, Shadow. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A010",
+    "gameplayId": "a010",
+    "name": "Lesser Mimic",
+    "kindred": "Arcane",
+    "classifications": [
+      "Shapeshifter",
+      "Mimic"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a010",
+    "productionPath": "assets/cards/arcane/a010-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Lesser Mimic; Shapeshifter, Mimic. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A011",
+    "gameplayId": "a011",
+    "name": "Mana Moth",
+    "kindred": "Arcane",
+    "classifications": [
+      "Insect",
+      "Moth",
+      "Magical"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a011",
+    "productionPath": "assets/cards/arcane/a011-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mana Moth; Insect, Moth, Magical. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A012",
+    "gameplayId": "a012",
+    "name": "Enchanted Orb",
+    "kindred": "Arcane",
+    "classifications": [
+      "Construct",
+      "Artifact",
+      "Orb"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a012",
+    "productionPath": "assets/cards/arcane/a012-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Enchanted Orb; Construct, Artifact, Orb. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A013",
+    "gameplayId": "a013",
+    "name": "Air Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Air"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a013",
+    "productionPath": "assets/cards/arcane/a013-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Air Elemental; Elemental, Air. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A014",
+    "gameplayId": "a014",
+    "name": "Lightning Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Lightning"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a014",
+    "productionPath": "assets/cards/arcane/a014-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Lightning Elemental; Elemental, Lightning. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A015",
+    "gameplayId": "a015",
+    "name": "Crystal Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Crystal"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a015",
+    "productionPath": "assets/cards/arcane/a015-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Crystal Elemental; Elemental, Crystal. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A016",
+    "gameplayId": "a016",
+    "name": "Magical Ooze",
+    "kindred": "Arcane",
+    "classifications": [
+      "Ooze",
+      "Magical"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a016",
+    "productionPath": "assets/cards/arcane/a016-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Magical Ooze; Ooze, Magical. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A017",
+    "gameplayId": "a017",
+    "name": "Illusion Beast",
+    "kindred": "Arcane",
+    "classifications": [
+      "Illusion",
+      "Beast"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a017",
+    "productionPath": "assets/cards/arcane/a017-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Illusion Beast; Illusion, Beast. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A018",
+    "gameplayId": "a018",
+    "name": "Living Grimoire",
+    "kindred": "Arcane",
+    "classifications": [
+      "Construct",
+      "Artifact",
+      "Book"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a018",
+    "productionPath": "assets/cards/arcane/a018-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Living Grimoire; Construct, Artifact, Book. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A019",
+    "gameplayId": "a019",
+    "name": "Mana Serpent",
+    "kindred": "Arcane",
+    "classifications": [
+      "Serpent",
+      "Magical"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a019",
+    "productionPath": "assets/cards/arcane/a019-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mana Serpent; Serpent, Magical. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A020",
+    "gameplayId": "a020",
+    "name": "Arcane Leviathan",
+    "kindred": "Arcane",
+    "classifications": [
+      "SeaMonster",
+      "Leviathan",
+      "Magical"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a020",
+    "productionPath": "assets/cards/arcane/a020-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Arcane Leviathan; SeaMonster, Leviathan, Magical. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A021",
+    "gameplayId": "a021",
+    "name": "Storm Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Storm"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a021",
+    "productionPath": "assets/cards/arcane/a021-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Storm Elemental; Elemental, Storm. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A022",
+    "gameplayId": "a022",
+    "name": "Astral Dragon",
+    "kindred": "Arcane",
+    "classifications": [
+      "Dragon",
+      "Astral"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a022",
+    "productionPath": "assets/cards/arcane/a022-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Astral Dragon; Dragon, Astral. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A023",
+    "gameplayId": "a023",
+    "name": "Void Spirit",
+    "kindred": "Arcane",
+    "classifications": [
+      "Spirit",
+      "Void"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a023",
+    "productionPath": "assets/cards/arcane/a023-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Void Spirit; Spirit, Void. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A024",
+    "gameplayId": "a024",
+    "name": "Spell Leech",
+    "kindred": "Arcane",
+    "classifications": [
+      "Parasite",
+      "Magical"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a024",
+    "productionPath": "assets/cards/arcane/a024-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Spell Leech; Parasite, Magical. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A025",
+    "gameplayId": "a025",
+    "name": "Mirror Doppelganger",
+    "kindred": "Arcane",
+    "classifications": [
+      "Shapeshifter",
+      "Mirror"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a025",
+    "productionPath": "assets/cards/arcane/a025-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mirror Doppelganger; Shapeshifter, Mirror. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A026",
+    "gameplayId": "a026",
+    "name": "Void Ooze",
+    "kindred": "Arcane",
+    "classifications": [
+      "Ooze",
+      "Void"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a026",
+    "productionPath": "assets/cards/arcane/a026-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Void Ooze; Ooze, Void. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A027",
+    "gameplayId": "a027",
+    "name": "Fire Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Fire"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a027",
+    "productionPath": "assets/cards/arcane/a027-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [
+      "a005"
+    ],
+    "evolutions": [],
+    "subject": "Fire Elemental; Elemental, Fire. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A028",
+    "gameplayId": "a028",
+    "name": "Ice Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Ice"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a028",
+    "productionPath": "assets/cards/arcane/a028-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [
+      "a004"
+    ],
+    "evolutions": [],
+    "subject": "Ice Elemental; Elemental, Ice. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A029",
+    "gameplayId": "a029",
+    "name": "Water Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Water"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a029",
+    "productionPath": "assets/cards/arcane/a029-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [
+      "a006"
+    ],
+    "evolutions": [],
+    "subject": "Water Elemental; Elemental, Water. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "A030",
+    "gameplayId": "a030",
+    "name": "Earth Elemental",
+    "kindred": "Arcane",
+    "classifications": [
+      "Elemental",
+      "Earth"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "a030",
+    "productionPath": "assets/cards/arcane/a030-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/arcane/",
+    "predecessors": [
+      "a007"
+    ],
+    "evolutions": [],
+    "subject": "Earth Elemental; Elemental, Earth. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U001",
+    "gameplayId": "u001",
+    "name": "Skeleton",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u001",
+    "productionPath": "assets/cards/undead/u001-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [
+      "u027"
+    ],
+    "subject": "Skeleton; Undead, Skeletal. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U002",
+    "gameplayId": "u002",
+    "name": "Zombie",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Zombie"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u002",
+    "productionPath": "assets/cards/undead/u002-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Zombie; Undead, Zombie. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U003",
+    "gameplayId": "u003",
+    "name": "Ghost",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Spirit"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u003",
+    "productionPath": "assets/cards/undead/u003-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [
+      "u030"
+    ],
+    "subject": "Ghost; Undead, Spirit. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U004",
+    "gameplayId": "u004",
+    "name": "Crawling Hand",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Hand"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u004",
+    "productionPath": "assets/cards/undead/u004-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Crawling Hand; Undead, Hand. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U005",
+    "gameplayId": "u005",
+    "name": "Grave Rat",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Mammal",
+      "Rodent"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u005",
+    "productionPath": "assets/cards/undead/u005-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Grave Rat; Undead, Mammal, Rodent. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U006",
+    "gameplayId": "u006",
+    "name": "Bone Hound",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal",
+      "Mammal",
+      "Hound"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u006",
+    "productionPath": "assets/cards/undead/u006-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Bone Hound; Undead, Skeletal, Mammal, Hound. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U007",
+    "gameplayId": "u007",
+    "name": "Restless Spirit",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Spirit"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u007",
+    "productionPath": "assets/cards/undead/u007-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [
+      "u030"
+    ],
+    "subject": "Restless Spirit; Undead, Spirit. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U008",
+    "gameplayId": "u008",
+    "name": "Ghoul",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Ghoul"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u008",
+    "productionPath": "assets/cards/undead/u008-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Ghoul; Undead, Ghoul. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U009",
+    "gameplayId": "u009",
+    "name": "Floating Skull",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal",
+      "Skull"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u009",
+    "productionPath": "assets/cards/undead/u009-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Floating Skull; Undead, Skeletal, Skull. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U010",
+    "gameplayId": "u010",
+    "name": "Grave Beetle",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Insect",
+      "Beetle"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u010",
+    "productionPath": "assets/cards/undead/u010-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Grave Beetle; Undead, Insect, Beetle. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U011",
+    "gameplayId": "u011",
+    "name": "Reanimated Crow",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Bird",
+      "Corvid"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u011",
+    "productionPath": "assets/cards/undead/u011-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Reanimated Crow; Undead, Bird, Corvid. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U012",
+    "gameplayId": "u012",
+    "name": "Vampire Bat",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Mammal",
+      "Bat",
+      "Vampire"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u012",
+    "productionPath": "assets/cards/undead/u012-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Vampire Bat; Undead, Mammal, Bat, Vampire. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U013",
+    "gameplayId": "u013",
+    "name": "Mummy",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Mummy"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u013",
+    "productionPath": "assets/cards/undead/u013-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Mummy; Undead, Mummy. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U014",
+    "gameplayId": "u014",
+    "name": "Banshee",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Spirit",
+      "Banshee"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u014",
+    "productionPath": "assets/cards/undead/u014-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Banshee; Undead, Spirit, Banshee. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U015",
+    "gameplayId": "u015",
+    "name": "Wight",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Wight"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u015",
+    "productionPath": "assets/cards/undead/u015-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Wight; Undead, Wight. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U016",
+    "gameplayId": "u016",
+    "name": "Wraith",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Spirit",
+      "Wraith"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u016",
+    "productionPath": "assets/cards/undead/u016-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Wraith; Undead, Spirit, Wraith. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U017",
+    "gameplayId": "u017",
+    "name": "Vampire",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Vampire"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u017",
+    "productionPath": "assets/cards/undead/u017-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [
+      "u029"
+    ],
+    "subject": "Vampire; Undead, Vampire. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U018",
+    "gameplayId": "u018",
+    "name": "Revenant",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Revenant"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u018",
+    "productionPath": "assets/cards/undead/u018-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Revenant; Undead, Revenant. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U019",
+    "gameplayId": "u019",
+    "name": "Skeletal Horse",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal",
+      "Mammal",
+      "Horse"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u019",
+    "productionPath": "assets/cards/undead/u019-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Skeletal Horse; Undead, Skeletal, Mammal, Horse. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U020",
+    "gameplayId": "u020",
+    "name": "Lich",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Lich"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u020",
+    "productionPath": "assets/cards/undead/u020-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Lich; Undead, Lich. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U021",
+    "gameplayId": "u021",
+    "name": "Bone Dragon",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal",
+      "Dragon"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u021",
+    "productionPath": "assets/cards/undead/u021-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Bone Dragon; Undead, Skeletal, Dragon. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U022",
+    "gameplayId": "u022",
+    "name": "Undead Giant",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Giant"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u022",
+    "productionPath": "assets/cards/undead/u022-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Undead Giant; Undead, Giant. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U023",
+    "gameplayId": "u023",
+    "name": "Headless Horseman",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Rider"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u023",
+    "productionPath": "assets/cards/undead/u023-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Headless Horseman; Undead, Rider. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U024",
+    "gameplayId": "u024",
+    "name": "Corpse Amalgam",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Amalgam"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u024",
+    "productionPath": "assets/cards/undead/u024-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Corpse Amalgam; Undead, Amalgam. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U025",
+    "gameplayId": "u025",
+    "name": "Soul Collector",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Spirit",
+      "Collector"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u025",
+    "productionPath": "assets/cards/undead/u025-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Soul Collector; Undead, Spirit, Collector. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U026",
+    "gameplayId": "u026",
+    "name": "Grave Devourer",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Devourer"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u026",
+    "productionPath": "assets/cards/undead/u026-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Grave Devourer; Undead, Devourer. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U027",
+    "gameplayId": "u027",
+    "name": "Skeleton Warrior",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u027",
+    "productionPath": "assets/cards/undead/u027-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [
+      "u001"
+    ],
+    "evolutions": [
+      "u028"
+    ],
+    "subject": "Skeleton Warrior; Undead, Skeletal. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U028",
+    "gameplayId": "u028",
+    "name": "Skeleton Champion",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Skeletal"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u028",
+    "productionPath": "assets/cards/undead/u028-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [
+      "u027"
+    ],
+    "evolutions": [],
+    "subject": "Skeleton Champion; Undead, Skeletal. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U029",
+    "gameplayId": "u029",
+    "name": "Elder Vampire",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Vampire"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u029",
+    "productionPath": "assets/cards/undead/u029-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [
+      "u017"
+    ],
+    "evolutions": [],
+    "subject": "Elder Vampire; Undead, Vampire. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "U030",
+    "gameplayId": "u030",
+    "name": "Phantom",
+    "kindred": "Undead",
+    "classifications": [
+      "Undead",
+      "Spirit",
+      "Phantom"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "u030",
+    "productionPath": "assets/cards/undead/u030-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/undead/",
+    "predecessors": [
+      "u003",
+      "u007"
+    ],
+    "evolutions": [],
+    "subject": "Phantom; Undead, Spirit, Phantom. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C001",
+    "gameplayId": "c001",
+    "name": "Copper Beetle",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Beetle"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c001",
+    "productionPath": "assets/cards/constructs/c001-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Copper Beetle; Construct, Mechanical, Beetle. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C002",
+    "gameplayId": "c002",
+    "name": "Clockwork Spider",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Spider"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c002",
+    "productionPath": "assets/cards/constructs/c002-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [
+      "c029"
+    ],
+    "subject": "Clockwork Spider; Construct, Mechanical, Spider. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C003",
+    "gameplayId": "c003",
+    "name": "Tin Soldier",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Soldier"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c003",
+    "productionPath": "assets/cards/constructs/c003-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [
+      "c027"
+    ],
+    "subject": "Tin Soldier; Construct, Mechanical, Soldier. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C004",
+    "gameplayId": "c004",
+    "name": "Animated Broom",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Wood",
+      "Broom"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c004",
+    "productionPath": "assets/cards/constructs/c004-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Animated Broom; Construct, Wood, Broom. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C005",
+    "gameplayId": "c005",
+    "name": "Brass Hound",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Hound"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c005",
+    "productionPath": "assets/cards/constructs/c005-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Brass Hound; Construct, Mechanical, Hound. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C006",
+    "gameplayId": "c006",
+    "name": "Wooden Puppet",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Wood",
+      "Puppet"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c006",
+    "productionPath": "assets/cards/constructs/c006-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Wooden Puppet; Construct, Wood, Puppet. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C007",
+    "gameplayId": "c007",
+    "name": "Living Shield",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Shield"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c007",
+    "productionPath": "assets/cards/constructs/c007-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Living Shield; Construct, Shield. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C008",
+    "gameplayId": "c008",
+    "name": "Watchtower Drone",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Drone"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c008",
+    "productionPath": "assets/cards/constructs/c008-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Watchtower Drone; Construct, Mechanical, Drone. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C009",
+    "gameplayId": "c009",
+    "name": "Iron Scarab",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Beetle"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c009",
+    "productionPath": "assets/cards/constructs/c009-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Iron Scarab; Construct, Mechanical, Beetle. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C010",
+    "gameplayId": "c010",
+    "name": "Clockwork Rat",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Rodent"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c010",
+    "productionPath": "assets/cards/constructs/c010-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Clockwork Rat; Construct, Mechanical, Rodent. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C011",
+    "gameplayId": "c011",
+    "name": "Repair Automaton",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Automaton"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c011",
+    "productionPath": "assets/cards/constructs/c011-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Repair Automaton; Construct, Mechanical, Automaton. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C012",
+    "gameplayId": "c012",
+    "name": "Clay Golem",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Clay",
+      "Golem"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c012",
+    "productionPath": "assets/cards/constructs/c012-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Clay Golem; Construct, Clay, Golem. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C013",
+    "gameplayId": "c013",
+    "name": "Stone Golem",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Stone",
+      "Golem"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c013",
+    "productionPath": "assets/cards/constructs/c013-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [
+      "c030"
+    ],
+    "subject": "Stone Golem; Construct, Stone, Golem. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C014",
+    "gameplayId": "c014",
+    "name": "Animated Armor",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Armor"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c014",
+    "productionPath": "assets/cards/constructs/c014-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Animated Armor; Construct, Armor. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C015",
+    "gameplayId": "c015",
+    "name": "Ballista Automaton",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Automaton"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c015",
+    "productionPath": "assets/cards/constructs/c015-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Ballista Automaton; Construct, Mechanical, Automaton. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C016",
+    "gameplayId": "c016",
+    "name": "Iron Tortoise",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Tortoise"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c016",
+    "productionPath": "assets/cards/constructs/c016-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Iron Tortoise; Construct, Mechanical, Tortoise. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C017",
+    "gameplayId": "c017",
+    "name": "Bronze Sentinel",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Sentinel"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c017",
+    "productionPath": "assets/cards/constructs/c017-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Bronze Sentinel; Construct, Mechanical, Sentinel. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C018",
+    "gameplayId": "c018",
+    "name": "Siege Ram",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Siege"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c018",
+    "productionPath": "assets/cards/constructs/c018-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Siege Ram; Construct, Mechanical, Siege. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C019",
+    "gameplayId": "c019",
+    "name": "Repair Golem",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Golem"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c019",
+    "productionPath": "assets/cards/constructs/c019-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Repair Golem; Construct, Golem. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C020",
+    "gameplayId": "c020",
+    "name": "Iron Golem",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Metal",
+      "Golem"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c020",
+    "productionPath": "assets/cards/constructs/c020-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Iron Golem; Construct, Metal, Golem. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C021",
+    "gameplayId": "c021",
+    "name": "Stone Titan",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Stone",
+      "Giant"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c021",
+    "productionPath": "assets/cards/constructs/c021-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Stone Titan; Construct, Stone, Giant. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C022",
+    "gameplayId": "c022",
+    "name": "Clockwork Dragon",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Dragon"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c022",
+    "productionPath": "assets/cards/constructs/c022-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Clockwork Dragon; Construct, Mechanical, Dragon. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C023",
+    "gameplayId": "c023",
+    "name": "Walking Fortress",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Fortress"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c023",
+    "productionPath": "assets/cards/constructs/c023-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Walking Fortress; Construct, Fortress. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C024",
+    "gameplayId": "c024",
+    "name": "Salvage Automaton",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Automaton"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c024",
+    "productionPath": "assets/cards/constructs/c024-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Salvage Automaton; Construct, Mechanical, Automaton. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C025",
+    "gameplayId": "c025",
+    "name": "Scrap Giant",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Metal",
+      "Giant"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c025",
+    "productionPath": "assets/cards/constructs/c025-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Scrap Giant; Construct, Metal, Giant. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C026",
+    "gameplayId": "c026",
+    "name": "Furnace Golem",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Metal",
+      "Golem"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c026",
+    "productionPath": "assets/cards/constructs/c026-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [],
+    "evolutions": [],
+    "subject": "Furnace Golem; Construct, Metal, Golem. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C027",
+    "gameplayId": "c027",
+    "name": "Iron Soldier",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Metal",
+      "Soldier"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c027",
+    "productionPath": "assets/cards/constructs/c027-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [
+      "c003"
+    ],
+    "evolutions": [
+      "c028"
+    ],
+    "subject": "Iron Soldier; Construct, Metal, Soldier. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C028",
+    "gameplayId": "c028",
+    "name": "Steel Sentinel",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Metal",
+      "Sentinel"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c028",
+    "productionPath": "assets/cards/constructs/c028-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [
+      "c027"
+    ],
+    "evolutions": [],
+    "subject": "Steel Sentinel; Construct, Metal, Sentinel. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C029",
+    "gameplayId": "c029",
+    "name": "Clockwork Scorpion",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Mechanical",
+      "Scorpion"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c029",
+    "productionPath": "assets/cards/constructs/c029-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [
+      "c002"
+    ],
+    "evolutions": [],
+    "subject": "Clockwork Scorpion; Construct, Mechanical, Scorpion. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  },
+  {
+    "collectibleNumber": "C030",
+    "gameplayId": "c030",
+    "name": "Granite Guardian",
+    "kindred": "Constructs",
+    "classifications": [
+      "Construct",
+      "Stone",
+      "Guardian"
+    ],
+    "setId": "founding-kindreds-001",
+    "expansionId": "foundation",
+    "artworkId": "c030",
+    "productionPath": "assets/cards/constructs/c030-<revision>.webp",
+    "sourceDirectory": "artwork-source/cards/constructs/",
+    "predecessors": [
+      "c013"
+    ],
+    "evolutions": [],
+    "subject": "Granite Guardian; Construct, Stone, Guardian. Creature illustration only; independent of frame, numbers, text, statistics and diagrams.",
+    "approval": "awaiting-owner-artwork-review"
+  }
+]

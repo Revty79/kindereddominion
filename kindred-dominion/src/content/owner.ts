@@ -1,5 +1,5 @@
-import input from "./owner-design-input.json";
-import registry from "./collectible-registry.json";
+import input from "./owner-design-input.json" with { type: "json" };
+import registry from "./collectible-registry.json" with { type: "json" };
 import { DEFAULT_CONFIG } from "../engine/config";
 import { OWNER_ENGINE_VERSION } from "../engine/versions";
 import type { Ability, CardDefinition, Condition, Effect, Influence, Protection, Target, Trigger } from "../engine/types";

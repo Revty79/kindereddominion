@@ -61,7 +61,7 @@ try {
     const text = (
       await Promise.all(scripts.map((n) => readFile(n, "utf8")))
     ).join("\n");
-    if (text.includes("lab-bee") || text.includes("mechanics-laboratory-v1.3a") || text.includes("Developer Studio") || text.includes("founding-artwork-test-v1"))
+    if (text.includes("lab-bee") || text.includes("mechanics-laboratory-v1.3a") || text.includes("Developer Studio") || text.includes("founding-artwork-test-v1") || text.includes("owner-demo-"))
       throw new Error(
         "Development laboratory definitions were included in a player-only build.",
       );

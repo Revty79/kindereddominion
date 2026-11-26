@@ -2,8 +2,14 @@
 # Run only in an owner-authorized disposable Docker environment.
 set -eu
 : "${KINDRED_PORT:?Choose an unused loopback host port}"
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Docker acceptance requires a clean Git checkout." >&2
+  exit 1
+fi
 KINDRED_REVISION="$(git rev-parse HEAD)"
 export KINDRED_REVISION
+COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-kindred-dominion-acceptance}"
+export COMPOSE_PROJECT_NAME
 docker compose config --quiet
 docker compose build --pull
 docker compose up -d --wait
@@ -16,4 +22,5 @@ if curl --fail "http://127.0.0.1:${KINDRED_PORT}/assets/cards/nature/art-sprout-
 fi
 docker compose restart game
 docker compose up -d --wait
-echo "Docker build, health, non-root serving, restart and unpublished-asset checks passed. Run browser acceptance against this port, then stop the isolated stack with docker compose down."
+echo "Docker build, health, non-root serving, restart and unpublished-asset checks passed. Run browser acceptance against this port."
+echo "Stop this acceptance stack with: docker compose -p ${COMPOSE_PROJECT_NAME} down"

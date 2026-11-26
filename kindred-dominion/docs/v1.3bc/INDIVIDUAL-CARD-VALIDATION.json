@@ -1,0 +1,4119 @@
+{
+  "sourceCommit": "4281df90d77f3525092a8aad6fe4bfc47abc5253",
+  "fixtures": "Declared test drivers, separate from official owner collection",
+  "passed": 150,
+  "scenarios": [
+    {
+      "collectibleNumber": "N001",
+      "cardId": "n001",
+      "name": "Field Mouse",
+      "status": "passed",
+      "initialSignature": "71b2475e",
+      "finalSignature": "dc3f50f8",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "dc3f50f8",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N002",
+      "cardId": "n002",
+      "name": "Wolf Cub",
+      "status": "passed",
+      "initialSignature": "e56e4d09",
+      "finalSignature": "2cf1ed2f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "2cf1ed2f",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N003",
+      "cardId": "n003",
+      "name": "Red Fox",
+      "status": "passed",
+      "initialSignature": "8de6cdb0",
+      "finalSignature": "dba3bec4",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "dba3bec4",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N004",
+      "cardId": "n004",
+      "name": "Mountain Hare",
+      "status": "passed",
+      "initialSignature": "7a72d94b",
+      "finalSignature": "6c1d8e56",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6c1d8e56",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N005",
+      "cardId": "n005",
+      "name": "Honeybee",
+      "status": "passed",
+      "initialSignature": "672f3882",
+      "finalSignature": "357adb37",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "357adb37",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N006",
+      "cardId": "n006",
+      "name": "Web Spider",
+      "status": "passed",
+      "initialSignature": "bc1a18dd",
+      "finalSignature": "ada8c8a4",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n006-ability:event:1": 1,
+        "n006-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ada8c8a4",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N007",
+      "cardId": "n007",
+      "name": "Tortoise",
+      "status": "passed",
+      "initialSignature": "a3d490f4",
+      "finalSignature": "d3659086",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "d3659086",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N008",
+      "cardId": "n008",
+      "name": "Burrowing Mole",
+      "status": "passed",
+      "initialSignature": "ce9ef92f",
+      "finalSignature": "caa598b8",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "caa598b8",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N009",
+      "cardId": "n009",
+      "name": "Caterpillar",
+      "status": "passed",
+      "initialSignature": "5b616b16",
+      "finalSignature": "a96c433f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a96c433f",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N010",
+      "cardId": "n010",
+      "name": "River Otter",
+      "status": "passed",
+      "initialSignature": "ccdd0220",
+      "finalSignature": "e6453b03",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "e6453b03",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N011",
+      "cardId": "n011",
+      "name": "Porcupine",
+      "status": "passed",
+      "initialSignature": "4eac5739",
+      "finalSignature": "6835bf64",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n011-ability:event:12": 1,
+        "n011-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a0f13483",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c14",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "6835bf64",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N012",
+      "cardId": "n012",
+      "name": "Raven",
+      "status": "passed",
+      "initialSignature": "c778844e",
+      "finalSignature": "706aff2b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n012-ability:event:9": 1,
+        "n012-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "89c4895e",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "706aff2b",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N013",
+      "cardId": "n013",
+      "name": "Wild Boar",
+      "status": "passed",
+      "initialSignature": "4e3c7647",
+      "finalSignature": "6e0d971b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6e0d971b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N014",
+      "cardId": "n014",
+      "name": "Golden Eagle",
+      "status": "passed",
+      "initialSignature": "a7799a24",
+      "finalSignature": "19ecf6c5",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "19ecf6c5",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N015",
+      "cardId": "n015",
+      "name": "Rattlesnake",
+      "status": "passed",
+      "initialSignature": "2a18d68d",
+      "finalSignature": "1a7efcdf",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n015-ability:event:1": 1,
+        "n015-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "1a7efcdf",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N016",
+      "cardId": "n016",
+      "name": "Mountain Lion",
+      "status": "passed",
+      "initialSignature": "ea583d72",
+      "finalSignature": "1ffa9415",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n016-ability:event:1": 1,
+        "n016-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "1ffa9415",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N017",
+      "cardId": "n017",
+      "name": "Giant Stag",
+      "status": "passed",
+      "initialSignature": "c8b9b13b",
+      "finalSignature": "9c939d75",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "9c939d75",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N018",
+      "cardId": "n018",
+      "name": "Crocodile",
+      "status": "passed",
+      "initialSignature": "cdbc9a38",
+      "finalSignature": "9f5dafa4",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n018-ability:event:1": 1,
+        "n018-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "9f5dafa4",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N019",
+      "cardId": "n019",
+      "name": "Giant Octopus",
+      "status": "passed",
+      "initialSignature": "4c4adaf1",
+      "finalSignature": "f0a6099b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n019-ability:event:1": 1,
+        "n019-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f0a6099b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N020",
+      "cardId": "n020",
+      "name": "Grizzly Bear",
+      "status": "passed",
+      "initialSignature": "168aab31",
+      "finalSignature": "56d6a362",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "56d6a362",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N021",
+      "cardId": "n021",
+      "name": "Rhinoceros",
+      "status": "passed",
+      "initialSignature": "8c1a9578",
+      "finalSignature": "68f5507f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "68f5507f",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N022",
+      "cardId": "n022",
+      "name": "African Elephant",
+      "status": "passed",
+      "initialSignature": "5525ba5f",
+      "finalSignature": "5ebd2c29",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n022-ability:event:1": 1,
+        "n022-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "5ebd2c29",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N023",
+      "cardId": "n023",
+      "name": "Giant Sequoia",
+      "status": "passed",
+      "initialSignature": "1f68b686",
+      "finalSignature": "1bdc2657",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "1bdc2657",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N024",
+      "cardId": "n024",
+      "name": "Carrion Vulture",
+      "status": "passed",
+      "initialSignature": "4364b2aa",
+      "finalSignature": "8e73e451",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "8e73e451",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N025",
+      "cardId": "n025",
+      "name": "Scavenging Hyena",
+      "status": "passed",
+      "initialSignature": "d9da9045",
+      "finalSignature": "857b73a0",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n025-ability:event:2": 1,
+        "n025-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "857b73a0",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N026",
+      "cardId": "n026",
+      "name": "Venus Flytrap",
+      "status": "passed",
+      "initialSignature": "ba60d004",
+      "finalSignature": "187212f3",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n026-ability:event:4": 1,
+        "n026-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "187212f3",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N027",
+      "cardId": "n027",
+      "name": "Grey Wolf",
+      "status": "passed",
+      "initialSignature": "e8e7f37b",
+      "finalSignature": "dcee16a1",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "dcee16a1",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N028",
+      "cardId": "n028",
+      "name": "Alpha Wolf",
+      "status": "passed",
+      "initialSignature": "24247d28",
+      "finalSignature": "ba24438f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c13",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ba24438f",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N029",
+      "cardId": "n029",
+      "name": "Butterfly",
+      "status": "passed",
+      "initialSignature": "305424d6",
+      "finalSignature": "e3186fd7",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "n029-ability:event:3": 1,
+        "n029-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "e3186fd7",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "N030",
+      "cardId": "n030",
+      "name": "Tarantula",
+      "status": "passed",
+      "initialSignature": "e284d243",
+      "finalSignature": "bb81751c",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "bb81751c",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M001",
+      "cardId": "m001",
+      "name": "Dragon Whelp",
+      "status": "passed",
+      "initialSignature": "52687e93",
+      "finalSignature": "c264245d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c264245d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M002",
+      "cardId": "m002",
+      "name": "Griffin Hatchling",
+      "status": "passed",
+      "initialSignature": "1d8b509c",
+      "finalSignature": "9b3a7eff",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "9b3a7eff",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M003",
+      "cardId": "m003",
+      "name": "Firebird",
+      "status": "passed",
+      "initialSignature": "e52f0525",
+      "finalSignature": "95953e62",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "95953e62",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M004",
+      "cardId": "m004",
+      "name": "Jackalope",
+      "status": "passed",
+      "initialSignature": "672ba566",
+      "finalSignature": "0c47ddc7",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "0c47ddc7",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M005",
+      "cardId": "m005",
+      "name": "Faun",
+      "status": "passed",
+      "initialSignature": "a7dea93f",
+      "finalSignature": "19283c8c",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m005-ability:event:1": 1,
+        "m005-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "19283c8c",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M006",
+      "cardId": "m006",
+      "name": "Peryton",
+      "status": "passed",
+      "initialSignature": "7e9134d8",
+      "finalSignature": "862a8a2d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "862a8a2d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M007",
+      "cardId": "m007",
+      "name": "Gargoyle",
+      "status": "passed",
+      "initialSignature": "144b6611",
+      "finalSignature": "2f037469",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "2f037469",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M008",
+      "cardId": "m008",
+      "name": "Harpy",
+      "status": "passed",
+      "initialSignature": "ae138912",
+      "finalSignature": "cc192364",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m008-ability:event:1": 1,
+        "m008-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "cc192364",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M009",
+      "cardId": "m009",
+      "name": "Kelpie",
+      "status": "passed",
+      "initialSignature": "ba3a745b",
+      "finalSignature": "6d3cae9d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m009-ability:event:1": 1,
+        "m009-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6d3cae9d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M010",
+      "cardId": "m010",
+      "name": "Kitsune",
+      "status": "passed",
+      "initialSignature": "aef17629",
+      "finalSignature": "0bfb0bec",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "0bfb0bec",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M011",
+      "cardId": "m011",
+      "name": "Unicorn Foal",
+      "status": "passed",
+      "initialSignature": "4dc254d0",
+      "finalSignature": "cf6ecd2e",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m011-ability:event:1": 1,
+        "m011-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "cf6ecd2e",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M012",
+      "cardId": "m012",
+      "name": "Cockatrice",
+      "status": "passed",
+      "initialSignature": "f7725777",
+      "finalSignature": "53308ea3",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m012-ability:event:1": 1,
+        "m012-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "53308ea3",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M013",
+      "cardId": "m013",
+      "name": "Centaur",
+      "status": "passed",
+      "initialSignature": "efe4ad7e",
+      "finalSignature": "1f89d7cb",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m013-ability:event:1": 1,
+        "m013-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "1f89d7cb",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M014",
+      "cardId": "m014",
+      "name": "Minotaur",
+      "status": "passed",
+      "initialSignature": "afb9627d",
+      "finalSignature": "9c19de06",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "9c19de06",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M015",
+      "cardId": "m015",
+      "name": "Griffin",
+      "status": "passed",
+      "initialSignature": "b9e66394",
+      "finalSignature": "89bdfcbf",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "89bdfcbf",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M016",
+      "cardId": "m016",
+      "name": "Basilisk",
+      "status": "passed",
+      "initialSignature": "4b8214eb",
+      "finalSignature": "bac8d553",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "bac8d553",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M017",
+      "cardId": "m017",
+      "name": "Manticore",
+      "status": "passed",
+      "initialSignature": "892adfa2",
+      "finalSignature": "29e0ec45",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m017-ability:event:1": 1,
+        "m017-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "29e0ec45",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M018",
+      "cardId": "m018",
+      "name": "Pegasus",
+      "status": "passed",
+      "initialSignature": "bfe4cfa1",
+      "finalSignature": "ae87d403",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ae87d403",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M019",
+      "cardId": "m019",
+      "name": "Cyclops",
+      "status": "passed",
+      "initialSignature": "eac5fbe8",
+      "finalSignature": "fa420ffd",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "fa420ffd",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M020",
+      "cardId": "m020",
+      "name": "Dragon",
+      "status": "passed",
+      "initialSignature": "3f549af8",
+      "finalSignature": "10b932a8",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m020-ability:event:1": 1,
+        "m020-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "10b932a8",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M021",
+      "cardId": "m021",
+      "name": "Hydra",
+      "status": "passed",
+      "initialSignature": "c9c4b0b1",
+      "finalSignature": "02809ce0",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "02809ce0",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M022",
+      "cardId": "m022",
+      "name": "Roc",
+      "status": "passed",
+      "initialSignature": "d2a2bc06",
+      "finalSignature": "17134ecf",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "17134ecf",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M023",
+      "cardId": "m023",
+      "name": "Leviathan",
+      "status": "passed",
+      "initialSignature": "085fbfdf",
+      "finalSignature": "a023e87b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m023-ability:event:1": 1,
+        "m023-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a023e87b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M024",
+      "cardId": "m024",
+      "name": "Chimera",
+      "status": "passed",
+      "initialSignature": "f7154ea9",
+      "finalSignature": "d44b911b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m024-ability:event:2": 1,
+        "m024-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "d44b911b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M025",
+      "cardId": "m025",
+      "name": "Sphinx",
+      "status": "passed",
+      "initialSignature": "d4f81c7e",
+      "finalSignature": "efceb261",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "efceb261",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M026",
+      "cardId": "m026",
+      "name": "Cerberus",
+      "status": "passed",
+      "initialSignature": "fd0a9b6b",
+      "finalSignature": "d93a5f3d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m026-ability:event:2": 1,
+        "m026-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "d93a5f3d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M027",
+      "cardId": "m027",
+      "name": "Phoenix",
+      "status": "passed",
+      "initialSignature": "aec9177c",
+      "finalSignature": "230d7cb7",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "m027-ability:event:9": 1,
+        "m027-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a0394e29",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "230d7cb7",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M028",
+      "cardId": "m028",
+      "name": "Royal Griffin",
+      "status": "passed",
+      "initialSignature": "5c4feaf8",
+      "finalSignature": "f3db438a",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m028-ability:event:1": 1,
+        "m028-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f3db438a",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M029",
+      "cardId": "m029",
+      "name": "Elder Dragon",
+      "status": "passed",
+      "initialSignature": "791a5548",
+      "finalSignature": "c21a4e02",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m029-ability:event:1": 1,
+        "m029-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c21a4e02",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "M030",
+      "cardId": "m030",
+      "name": "Nine-Tailed Fox",
+      "status": "passed",
+      "initialSignature": "f2e14b20",
+      "finalSignature": "00f931b8",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "m030-ability:event:1": 1,
+        "m030-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "00f931b8",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A001",
+      "cardId": "a001",
+      "name": "Will-o'-the-Wisp",
+      "status": "passed",
+      "initialSignature": "d6466567",
+      "finalSignature": "7a9de744",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "7a9de744",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A002",
+      "cardId": "a002",
+      "name": "Arcane Familiar",
+      "status": "passed",
+      "initialSignature": "cc940640",
+      "finalSignature": "c8236768",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a002-ability:event:1": 1,
+        "a002-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c8236768",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A003",
+      "cardId": "a003",
+      "name": "Spark Sprite",
+      "status": "passed",
+      "initialSignature": "5cb20bd9",
+      "finalSignature": "2de2f1ae",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a003-ability:event:1": 1,
+        "a003-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "2de2f1ae",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A004",
+      "cardId": "a004",
+      "name": "Frost Sprite",
+      "status": "passed",
+      "initialSignature": "6ceb7992",
+      "finalSignature": "33c0b18a",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a004-ability:event:1": 1,
+        "a004-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "33c0b18a",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A005",
+      "cardId": "a005",
+      "name": "Flame Sprite",
+      "status": "passed",
+      "initialSignature": "791264db",
+      "finalSignature": "4ca2448d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a005-ability:event:1": 1,
+        "a005-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "4ca2448d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A006",
+      "cardId": "a006",
+      "name": "Water Sprite",
+      "status": "passed",
+      "initialSignature": "72c2eb44",
+      "finalSignature": "06539e42",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "06539e42",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A007",
+      "cardId": "a007",
+      "name": "Earth Sprite",
+      "status": "passed",
+      "initialSignature": "19afa92d",
+      "finalSignature": "c3354e01",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c3354e01",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A008",
+      "cardId": "a008",
+      "name": "Mirror Sprite",
+      "status": "passed",
+      "initialSignature": "260395e6",
+      "finalSignature": "4d6340e2",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a008-ability:event:11": 1,
+        "a008-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "363c98a2",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c13",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "4d6340e2",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A009",
+      "cardId": "a009",
+      "name": "Living Shadow",
+      "status": "passed",
+      "initialSignature": "66b699bf",
+      "finalSignature": "6261b361",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6261b361",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A010",
+      "cardId": "a010",
+      "name": "Lesser Mimic",
+      "status": "passed",
+      "initialSignature": "6e9152fd",
+      "finalSignature": "32c964b9",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "32c964b9",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A011",
+      "cardId": "a011",
+      "name": "Mana Moth",
+      "status": "passed",
+      "initialSignature": "78be5414",
+      "finalSignature": "2bb45d99",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a011-ability:event:10": 1,
+        "a011-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6e60f8bc",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c13",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "2bb45d99",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A012",
+      "cardId": "a012",
+      "name": "Enchanted Orb",
+      "status": "passed",
+      "initialSignature": "0a5a056b",
+      "finalSignature": "867ea864",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "867ea864",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A013",
+      "cardId": "a013",
+      "name": "Air Elemental",
+      "status": "passed",
+      "initialSignature": "4802d022",
+      "finalSignature": "56550a38",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a013-ability:event:3": 1,
+        "a013-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "56550a38",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A014",
+      "cardId": "a014",
+      "name": "Lightning Elemental",
+      "status": "passed",
+      "initialSignature": "6dc966a9",
+      "finalSignature": "8b40d826",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a014-ability:event:1": 1,
+        "a014-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "8b40d826",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A015",
+      "cardId": "a015",
+      "name": "Crystal Elemental",
+      "status": "passed",
+      "initialSignature": "0c9a4550",
+      "finalSignature": "bde08e14",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "bde08e14",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A016",
+      "cardId": "a016",
+      "name": "Magical Ooze",
+      "status": "passed",
+      "initialSignature": "b64a47f7",
+      "finalSignature": "f0eaba2d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f0eaba2d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A017",
+      "cardId": "a017",
+      "name": "Illusion Beast",
+      "status": "passed",
+      "initialSignature": "aebc9dfe",
+      "finalSignature": "4965b5e7",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a017-ability:event:1": 1,
+        "a017-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "4965b5e7",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A018",
+      "cardId": "a018",
+      "name": "Living Grimoire",
+      "status": "passed",
+      "initialSignature": "d3ef2bb5",
+      "finalSignature": "941271a0",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a018-ability:event:9": 1,
+        "a018-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "8720e018",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "941271a0",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A019",
+      "cardId": "a019",
+      "name": "Mana Serpent",
+      "status": "passed",
+      "initialSignature": "ca3e426c",
+      "finalSignature": "8d50e6ca",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "8d50e6ca",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A020",
+      "cardId": "a020",
+      "name": "Arcane Leviathan",
+      "status": "passed",
+      "initialSignature": "89c20b3c",
+      "finalSignature": "d22bf220",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "d22bf220",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A021",
+      "cardId": "a021",
+      "name": "Storm Elemental",
+      "status": "passed",
+      "initialSignature": "c2954445",
+      "finalSignature": "ebd56079",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a021-ability:event:1": 1,
+        "a021-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ebd56079",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A022",
+      "cardId": "a022",
+      "name": "Astral Dragon",
+      "status": "passed",
+      "initialSignature": "6f664eaa",
+      "finalSignature": "b99aa184",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "b99aa184",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A023",
+      "cardId": "a023",
+      "name": "Void Spirit",
+      "status": "passed",
+      "initialSignature": "880d21b3",
+      "finalSignature": "5f058f93",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a023-ability:event:1": 1,
+        "a023-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "5f058f93",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A024",
+      "cardId": "a024",
+      "name": "Spell Leech",
+      "status": "passed",
+      "initialSignature": "314e33fd",
+      "finalSignature": "ae038505",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a024-ability:event:2": 1,
+        "a024-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ae038505",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A025",
+      "cardId": "a025",
+      "name": "Mirror Doppelganger",
+      "status": "passed",
+      "initialSignature": "8e750b22",
+      "finalSignature": "f71994d9",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a025-ability:event:2": 1,
+        "a025-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f71994d9",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A026",
+      "cardId": "a026",
+      "name": "Void Ooze",
+      "status": "passed",
+      "initialSignature": "07f9cd7f",
+      "finalSignature": "fc8e3e4d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "a026-ability:event:2": 1,
+        "a026-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "fc8e3e4d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A027",
+      "cardId": "a027",
+      "name": "Fire Elemental",
+      "status": "passed",
+      "initialSignature": "bed70186",
+      "finalSignature": "0ea69396",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "0ea69396",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A028",
+      "cardId": "a028",
+      "name": "Ice Elemental",
+      "status": "passed",
+      "initialSignature": "355c5b26",
+      "finalSignature": "f62b393e",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f62b393e",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A029",
+      "cardId": "a029",
+      "name": "Water Elemental",
+      "status": "passed",
+      "initialSignature": "b30d49a7",
+      "finalSignature": "ffb4327a",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ffb4327a",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "A030",
+      "cardId": "a030",
+      "name": "Earth Elemental",
+      "status": "passed",
+      "initialSignature": "1e363cb8",
+      "finalSignature": "841ab407",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "841ab407",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U001",
+      "cardId": "u001",
+      "name": "Skeleton",
+      "status": "passed",
+      "initialSignature": "0cc98b9b",
+      "finalSignature": "97fee87b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "97fee87b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U002",
+      "cardId": "u002",
+      "name": "Zombie",
+      "status": "passed",
+      "initialSignature": "17044a04",
+      "finalSignature": "acb6596c",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u002-ability:event:9": 1,
+        "u002-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "92c772c9",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "acb6596c",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U003",
+      "cardId": "u003",
+      "name": "Ghost",
+      "status": "passed",
+      "initialSignature": "379772ed",
+      "finalSignature": "f95eaff3",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f95eaff3",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U004",
+      "cardId": "u004",
+      "name": "Crawling Hand",
+      "status": "passed",
+      "initialSignature": "5d71ed2e",
+      "finalSignature": "cb015c48",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "cb015c48",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U005",
+      "cardId": "u005",
+      "name": "Grave Rat",
+      "status": "passed",
+      "initialSignature": "8ba97827",
+      "finalSignature": "723b27ea",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u005-ability:event:9": 1,
+        "u005-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "155ba41a",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "723b27ea",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U006",
+      "cardId": "u006",
+      "name": "Bone Hound",
+      "status": "passed",
+      "initialSignature": "f4a46400",
+      "finalSignature": "23cdbe79",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u006-ability:event:13": 1,
+        "u006-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "e68b9519",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "8af2d1a0",
+          "turn": 3
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "23cdbe79",
+          "turn": 4
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U007",
+      "cardId": "u007",
+      "name": "Restless Spirit",
+      "status": "passed",
+      "initialSignature": "704b4599",
+      "finalSignature": "dd464ea7",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u007-ability:event:9": 1,
+        "u007-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c91d0a2e",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "dd464ea7",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U008",
+      "cardId": "u008",
+      "name": "Ghoul",
+      "status": "passed",
+      "initialSignature": "06e269ca",
+      "finalSignature": "0cce3018",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u008-ability:event:9": 1,
+        "u008-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "19da5a09",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "0cce3018",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U009",
+      "cardId": "u009",
+      "name": "Floating Skull",
+      "status": "passed",
+      "initialSignature": "b40cb6d3",
+      "finalSignature": "8b5fa69a",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u009-ability:event:9": 1,
+        "u009-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a3a11818",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "8b5fa69a",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U010",
+      "cardId": "u010",
+      "name": "Grave Beetle",
+      "status": "passed",
+      "initialSignature": "8e80db31",
+      "finalSignature": "5937d076",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u010-ability:event:9": 1,
+        "u010-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "96285904",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "5937d076",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U011",
+      "cardId": "u011",
+      "name": "Reanimated Crow",
+      "status": "passed",
+      "initialSignature": "0410c578",
+      "finalSignature": "3903ed07",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u011-ability:event:11": 1,
+        "u011-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "01b625c5",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "3903ed07",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U012",
+      "cardId": "u012",
+      "name": "Vampire Bat",
+      "status": "passed",
+      "initialSignature": "cd1bea5f",
+      "finalSignature": "82b35f2f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u012-ability:event:9": 1,
+        "u012-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ae0510fe",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c17",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "82b35f2f",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U013",
+      "cardId": "u013",
+      "name": "Mummy",
+      "status": "passed",
+      "initialSignature": "975ee686",
+      "finalSignature": "7ab4ccaa",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "7ab4ccaa",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U014",
+      "cardId": "u014",
+      "name": "Banshee",
+      "status": "passed",
+      "initialSignature": "c8797e45",
+      "finalSignature": "aff8dbee",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u014-ability:event:9": 1,
+        "u014-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "d74fdb6e",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "aff8dbee",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U015",
+      "cardId": "u015",
+      "name": "Wight",
+      "status": "passed",
+      "initialSignature": "8fa6453c",
+      "finalSignature": "34c3d695",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u015-ability:event:1": 1,
+        "u015-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "34c3d695",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U016",
+      "cardId": "u016",
+      "name": "Wraith",
+      "status": "passed",
+      "initialSignature": "8df15bb3",
+      "finalSignature": "99a67e56",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "99a67e56",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U017",
+      "cardId": "u017",
+      "name": "Vampire",
+      "status": "passed",
+      "initialSignature": "754a88aa",
+      "finalSignature": "2293a714",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "owner-vampire-feeding:event:9": 1,
+        "owner-vampire-feeding:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6824054f",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c17",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "2293a714",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U018",
+      "cardId": "u018",
+      "name": "Revenant",
+      "status": "passed",
+      "initialSignature": "b9e28d79",
+      "finalSignature": "7760c82d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u018-ability:event:9": 1,
+        "u018-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "2a10b6eb",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "7760c82d",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U019",
+      "cardId": "u019",
+      "name": "Skeletal Horse",
+      "status": "passed",
+      "initialSignature": "31990e60",
+      "finalSignature": "24589fb3",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u019-ability:event:15": 1,
+        "u019-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "085c8396",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "2fa7040f",
+          "turn": 3
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "24589fb3",
+          "turn": 4
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U020",
+      "cardId": "u020",
+      "name": "Lich",
+      "status": "passed",
+      "initialSignature": "44d33220",
+      "finalSignature": "43838b24",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u020-ability:event:1": 1,
+        "u020-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "43838b24",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U021",
+      "cardId": "u021",
+      "name": "Bone Dragon",
+      "status": "passed",
+      "initialSignature": "c6a28739",
+      "finalSignature": "33a37af5",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u021-ability:event:9": 1,
+        "u021-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "1a6e371c",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "33a37af5",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U022",
+      "cardId": "u022",
+      "name": "Undead Giant",
+      "status": "passed",
+      "initialSignature": "3f6eb44e",
+      "finalSignature": "88f98923",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "88f98923",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U023",
+      "cardId": "u023",
+      "name": "Headless Horseman",
+      "status": "passed",
+      "initialSignature": "c632a647",
+      "finalSignature": "23b5b06d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "23b5b06d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U024",
+      "cardId": "u024",
+      "name": "Corpse Amalgam",
+      "status": "passed",
+      "initialSignature": "7a420b11",
+      "finalSignature": "f528b1e6",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u024-ability:event:2": 1,
+        "u024-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f528b1e6",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U025",
+      "cardId": "u025",
+      "name": "Soul Collector",
+      "status": "passed",
+      "initialSignature": "dac5e726",
+      "finalSignature": "bf867e81",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u025-ability:event:10": 1,
+        "u025-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "5ab2ba8f",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c17",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "bf867e81",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U026",
+      "cardId": "u026",
+      "name": "Grave Devourer",
+      "status": "passed",
+      "initialSignature": "68cb50f3",
+      "finalSignature": "9f0e225f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "u026-ability:event:2": 1,
+        "u026-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "9f0e225f",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U027",
+      "cardId": "u027",
+      "name": "Skeleton Warrior",
+      "status": "passed",
+      "initialSignature": "817b7722",
+      "finalSignature": "45f7cecd",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u027-ability:event:9": 1,
+        "u027-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "d3e00c75",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "45f7cecd",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U028",
+      "cardId": "u028",
+      "name": "Skeleton Champion",
+      "status": "passed",
+      "initialSignature": "5347fb50",
+      "finalSignature": "b7a31544",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c13",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "b7a31544",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U029",
+      "cardId": "u029",
+      "name": "Elder Vampire",
+      "status": "passed",
+      "initialSignature": "5a3924bd",
+      "finalSignature": "8ad3eba6",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "owner-vampire-feeding:event:9": 1,
+        "owner-vampire-feeding:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c9c1ab2f",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "8ad3eba6",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "U030",
+      "cardId": "u030",
+      "name": "Phantom",
+      "status": "passed",
+      "initialSignature": "99fc72b4",
+      "finalSignature": "2e9b4bae",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "u030-ability:event:9": 1,
+        "u030-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "2824d8c9",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "2e9b4bae",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C001",
+      "cardId": "c001",
+      "name": "Copper Beetle",
+      "status": "passed",
+      "initialSignature": "d7e6d835",
+      "finalSignature": "c8469bd6",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c8469bd6",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C002",
+      "cardId": "c002",
+      "name": "Clockwork Spider",
+      "status": "passed",
+      "initialSignature": "689e0e1a",
+      "finalSignature": "fa4ea3be",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "fa4ea3be",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C003",
+      "cardId": "c003",
+      "name": "Tin Soldier",
+      "status": "passed",
+      "initialSignature": "f22cb9e3",
+      "finalSignature": "4b40a9d9",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "4b40a9d9",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C004",
+      "cardId": "c004",
+      "name": "Animated Broom",
+      "status": "passed",
+      "initialSignature": "ad9598e8",
+      "finalSignature": "e0c96130",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "e0c96130",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C005",
+      "cardId": "c005",
+      "name": "Brass Hound",
+      "status": "passed",
+      "initialSignature": "82b46ca1",
+      "finalSignature": "062b886d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c005-ability:event:1": 1,
+        "c005-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "062b886d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C006",
+      "cardId": "c006",
+      "name": "Wooden Puppet",
+      "status": "passed",
+      "initialSignature": "05551b36",
+      "finalSignature": "ff303db4",
+      "sourceLocation": "graveyard",
+      "sourceActivations": {
+        "c006-ability:event:9": 1,
+        "c006-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "583a9955",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c15",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "ff303db4",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C007",
+      "cardId": "c007",
+      "name": "Living Shield",
+      "status": "passed",
+      "initialSignature": "efa1eb4f",
+      "finalSignature": "4263d984",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "4263d984",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C008",
+      "cardId": "c008",
+      "name": "Watchtower Drone",
+      "status": "passed",
+      "initialSignature": "7cb60094",
+      "finalSignature": "e7455884",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "e7455884",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C009",
+      "cardId": "c009",
+      "name": "Iron Scarab",
+      "status": "passed",
+      "initialSignature": "7288ff7d",
+      "finalSignature": "39fab4a1",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "39fab4a1",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C010",
+      "cardId": "c010",
+      "name": "Clockwork Rat",
+      "status": "passed",
+      "initialSignature": "41a9d0f3",
+      "finalSignature": "84d36749",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "84d36749",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C011",
+      "cardId": "c011",
+      "name": "Repair Automaton",
+      "status": "passed",
+      "initialSignature": "20dde0ea",
+      "finalSignature": "72fc056e",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c011-ability:event:1": 1,
+        "c011-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "72fc056e",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C012",
+      "cardId": "c012",
+      "name": "Clay Golem",
+      "status": "passed",
+      "initialSignature": "8a5bf485",
+      "finalSignature": "bc12fda0",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "bc12fda0",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C013",
+      "cardId": "c013",
+      "name": "Stone Golem",
+      "status": "passed",
+      "initialSignature": "7a8d487c",
+      "finalSignature": "a58b52fe",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a58b52fe",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C014",
+      "cardId": "c014",
+      "name": "Animated Armor",
+      "status": "passed",
+      "initialSignature": "b2df6d9f",
+      "finalSignature": "c8cd1873",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c8cd1873",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C015",
+      "cardId": "c015",
+      "name": "Ballista Automaton",
+      "status": "passed",
+      "initialSignature": "c864a3c6",
+      "finalSignature": "7555d37b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c015-ability:event:3": 1,
+        "c015-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "7555d37b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C016",
+      "cardId": "c016",
+      "name": "Iron Tortoise",
+      "status": "passed",
+      "initialSignature": "fdb53871",
+      "finalSignature": "b15686fb",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "b15686fb",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C017",
+      "cardId": "c017",
+      "name": "Bronze Sentinel",
+      "status": "passed",
+      "initialSignature": "7f26f7b8",
+      "finalSignature": "bdf1dac3",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "bdf1dac3",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C018",
+      "cardId": "c018",
+      "name": "Siege Ram",
+      "status": "passed",
+      "initialSignature": "7a240ebb",
+      "finalSignature": "a6dc84f7",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a6dc84f7",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C019",
+      "cardId": "c019",
+      "name": "Repair Golem",
+      "status": "passed",
+      "initialSignature": "9bc29af2",
+      "finalSignature": "d30b4c9f",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c019-ability:event:9": 1,
+        "c019-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "4bac6e91",
+          "turn": 2
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "d30b4c9f",
+          "turn": 3
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C020",
+      "cardId": "c020",
+      "name": "Iron Golem",
+      "status": "passed",
+      "initialSignature": "231ca4de",
+      "finalSignature": "a7961f13",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "a7961f13",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C021",
+      "cardId": "c021",
+      "name": "Stone Titan",
+      "status": "passed",
+      "initialSignature": "294fcb57",
+      "finalSignature": "ca6697e8",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "ca6697e8",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C022",
+      "cardId": "c022",
+      "name": "Clockwork Dragon",
+      "status": "passed",
+      "initialSignature": "3f512b30",
+      "finalSignature": "89d4c0ed",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c022-ability:event:1": 1,
+        "c022-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "89d4c0ed",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C023",
+      "cardId": "c023",
+      "name": "Walking Fortress",
+      "status": "passed",
+      "initialSignature": "96d8aa89",
+      "finalSignature": "8240a4e6",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "8240a4e6",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C024",
+      "cardId": "c024",
+      "name": "Salvage Automaton",
+      "status": "passed",
+      "initialSignature": "5a517ea3",
+      "finalSignature": "302b667b",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c024-ability:event:8": 1,
+        "c024-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "302b667b",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C025",
+      "cardId": "c025",
+      "name": "Scrap Giant",
+      "status": "passed",
+      "initialSignature": "0f9e48e0",
+      "finalSignature": "841ef205",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "841ef205",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C026",
+      "cardId": "c026",
+      "name": "Furnace Golem",
+      "status": "passed",
+      "initialSignature": "6a554181",
+      "finalSignature": "6b45dee3",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c026-ability:event:4": 1,
+        "c026-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6b45dee3",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C027",
+      "cardId": "c027",
+      "name": "Iron Soldier",
+      "status": "passed",
+      "initialSignature": "5e71f250",
+      "finalSignature": "953e3c51",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "953e3c51",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C028",
+      "cardId": "c028",
+      "name": "Steel Sentinel",
+      "status": "passed",
+      "initialSignature": "2e6470f4",
+      "finalSignature": "35503cce",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c13",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "35503cce",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C029",
+      "cardId": "c029",
+      "name": "Clockwork Scorpion",
+      "status": "passed",
+      "initialSignature": "1ec5f0e7",
+      "finalSignature": "73389172",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {
+        "c029-ability:event:1": 1,
+        "c029-ability:match": 1
+      },
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "73389172",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    },
+    {
+      "collectibleNumber": "C030",
+      "cardId": "c030",
+      "name": "Granite Guardian",
+      "status": "passed",
+      "initialSignature": "54f238d3",
+      "finalSignature": "6c76399d",
+      "sourceLocation": "battlefield",
+      "sourceActivations": {},
+      "actions": [
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "6c76399d",
+          "turn": 2
+        }
+      ],
+      "replayVerified": true
+    }
+  ]
+}

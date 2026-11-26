@@ -253,7 +253,7 @@ export default function App({
   const [playback, setPlayback] = useState<{ frames: PresentationFrame[]; index: number; source: string } | null>(null);
   const game = session?.game;
   const frame = playback?.frames[playback.index];
-  const field = frame?.state ?? game;
+  const field = game ? frame?.state ?? game : undefined;
   const viewer: Player =
     game?.phase === "mulligan"
       ? !game.players[0].mulliganDone
@@ -339,13 +339,13 @@ export default function App({
   }, [curtain, game?.phase, viewer, !!playback]);
   useEffect(() => { savePresentationPreferences(preferences); }, [preferences]);
   useEffect(() => {
-    if (!playback) return;
+    if (!playback || inspect) return;
     if (preferences.speed === "skip") { setPlayback(null); return; }
     if (preferences.speed === "step") return;
     const delay = { fast: 140, normal: 450, slow: 1000 }[preferences.speed];
     const timer = window.setTimeout(() => setPlayback(p => p && (p.index + 1 < p.frames.length ? { ...p, index: p.index + 1 } : null)), delay);
     return () => clearTimeout(timer);
-  }, [playback, preferences.speed]);
+  }, [playback, preferences.speed, inspect]);
   useEffect(() => {
     if (!game || !session || !isComputer || playback) return;
     const timer = window.setTimeout(() => {
@@ -452,6 +452,8 @@ export default function App({
     setCurtain(session.opponent === "local");
   }
   function leaveMatch() {
+    setPlayback(null);
+    setInspect(null);
     setSaved(session);
     setSession(null);
     setConfirm(null);
@@ -748,8 +750,7 @@ export default function App({
                 </label>
               </div>
               <p className="field-hint">
-                Five foundational cards permit 3 copies in Standard. Free Play
-                keeps all effect safeguards active.{" "}
+                Standard normally allows two copies. Overrides: {CARD_LIST.filter(c => c.maxCopies && c.maxCopies !== 2).map(c => `${c.name} (${c.maxCopies})`).join(", ") || "none"}. Free Play allows up to 15 copies and keeps all effect safeguards active.{" "}
                 {content.id === "v1.1-baseline"
                   ? "A single kindred has only six test cards; use Free Play to build a 15-card single-collection deck."
                   : "The complete Founding Kindreds support Standard Play pure decks. Use a supplied starting deck or build your own."}
@@ -935,7 +936,7 @@ export default function App({
                                     onMouseEnter={() => setHovered(cell)}
                                     onMouseLeave={() => setHovered(null)}
                                     onClick={() => {
-                                      if (playback) return;
+                                      if (playback) { if (id) setInspect(id); return; }
                                       if (hidden || game.phase !== "playing") {
                                         if (id && !curtain) setInspect(id);
                                         return;
@@ -1251,7 +1252,8 @@ export default function App({
                           PREVIEW / {coordinate(pending)}
                         </div>
                         <p className="preview-score">Immediate points: Jade {prospective.scoreBefore.totals[0]} → {prospective.scoreAfter.totals[0]} · Amber {prospective.scoreBefore.totals[1]} → {prospective.scoreAfter.totals[1]}</p>
-                        <ul className="public-consequences">{previewChanges.map((change, i) => <li key={i}><b>{change.label}</b> {change.text}</li>)}</ul>
+                        <p>Immediate resolution, in order:</p>
+                        <ol className="public-consequences">{previewChanges.map((change, i) => <li key={i}><b>{change.label}</b> {change.text}</li>)}</ol>
                         {preferences.beginner && <p>{prospective.privateConsequencesOmitted ? "This preview stops before a private draw. Remaining effects resolve after confirmation." : "This shows immediate battlefield effects. Turn-end, turn-start and private draws resolve after confirmation."}</p>}
                         {prospective.fault ? (
                           <p className="error-text">{prospective.fault}</p>
@@ -1425,7 +1427,7 @@ export default function App({
       {inspect && (
         <Modal title="Card details" close={() => setInspect(null)}>
           {(() => {
-            const instance = game?.cards[inspect];
+            const instance = field?.cards[inspect];
             const c = CARDS[instance?.definitionId ?? inspect];
             return c ? (
               <div className="detail-layout">
@@ -1433,7 +1435,7 @@ export default function App({
                 <div>
                   <Pattern card={c} player={instance?.owner ?? 0} />
                   <p>{c.text}</p>
-                  {(game?.mechanics ||
+                  {(field?.mechanics ||
                     c.continuous?.length ||
                     c.scaling?.length ||
                     c.scoring?.length ||
@@ -1442,7 +1444,7 @@ export default function App({
                   )}
                   {instance && (
                     <PowerDetails
-                      state={game!}
+                      state={field!}
                       library={CARDS}
                       id={instance.id}
                     />
@@ -1483,7 +1485,7 @@ export default function App({
                         </dd>
                         <dt>Resurrections</dt>
                         <dd>
-                          {game!.lineages[instance.lineage].resurrections} in
+                          {field!.lineages[instance.lineage].resurrections} in
                           this lineage
                         </dd>
                         <dt>Protection</dt>
@@ -1499,7 +1501,7 @@ export default function App({
                         <dd>
                           {instance.stack
                             .map(
-                              (id) => CARDS[game!.cards[id].definitionId].name,
+                              (id) => CARDS[field!.cards[id].definitionId].name,
                             )
                             .join(" → ") || "None"}
                         </dd>
@@ -1684,6 +1686,9 @@ export default function App({
       {help && (
         <Modal title="How to play" close={() => setHelp(false)}>
           <div className="help-copy">
+            <h3>Early tester notes</h3>
+            <p>All 150 owner-designed cards are freely available for testing. Statistics and names are provisional, and final artwork is pending. Browser saves belong to this device, browser and address. Cross-device progression, accounts, purchases and online player-versus-player matches are not available.</p>
+            <p>To report feedback, send the owner the match seed, scoring mode, card numbers, a screenshot, and what you expected compared with what happened, using your usual external communication channel.</p>
             <p>
               Build from your edge of the field. Jade faces right; Amber faces
               left. “Above” and “below” stay the same for both players.

@@ -1,62 +1,39 @@
 # Kindred Dominion
 
-Version **0.3.0** · **V1.3A — Advanced Mechanics and Rules Engine Completion**
+Version **0.4.0 · V1.3B/C — Owner Design V1**
 
-A standalone, local tactical card game with a real-engine design environment. Play the original V1.1 game, or explicitly activate the **150-card provisional Founding Kindreds** library: five 30-card collections, five pure starting decks and five mixed test decks. No accounts, database server, external AI or paid services are required.
+A local tactical card game and Developer Studio. New matches use the owner's **150-card Founding Kindreds**: Nature, Mythical, Arcane, Undead and Constructs, each with 30 permanently numbered cards and its exact supplied 15-card starter. Five mixed development decks are also included. Original V1.1, Cody's V1.2 library, temporary artwork experiment and V1.3A laboratory remain selectable development versions. Existing drafts and match snapshots are preserved.
 
-V1.3A adds continuous auras and protection, dynamic power, reactive events, condition transitions, variable magnitudes, historical counters and separate card scoring. The original libraries remain intact. The separate **45-card mechanics laboratory** includes **30 ready-made sandbox scenarios**.
+## Start on Windows
 
-Read the authoritative [Master Card Mechanics](docs/MASTER-CARD-MECHANICS.md), [V1.3A owner guide](docs/V1.3A-OWNER-GUIDE.md) and [validation report](docs/V1.3A-VALIDATION.md). No final commercial cards, illustrations or V1.3B interface redesign are included.
-
-## Try V1.3A
-
-Open **Developer Studio → Battlefield Sandbox → Load saved scenario** and select a LAB example. Execute its prepared action and inspect the effective-power breakdown, score breakdown and resolution snapshots. **Content Versions and Backups** contains **V1.3A · mechanics laboratory**: restore it as a new working draft to edit fixtures, or activate it for new ordinary matches. Export a complete backup before larger experiments.
-
-## Start and stop on Windows
-
-Double-click **`Start Kindred Dominion.cmd`**, or open PowerShell:
+Double-click **Start Kindred Dominion.cmd**, or open PowerShell:
 
 ```powershell
 cd D:\kindereddominion\kindred-dominion
+npm ci
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173/**. Keep the terminal open while playing. Stop with **Ctrl+C**; press **Y** if Windows asks to terminate the batch job.
+Open **http://127.0.0.1:5173/**. Keep the terminal open; stop with Ctrl+C. Install Node.js 22.12+ (24 recommended) first. `npm ci` needs internet; subsequent local play does not. Use the same browser and address for local saves. Port 5173 is fixed; stop another instance before starting.
 
-For a fresh checkout, or after pulling changed dependencies, install Node.js 22.12+ (24 recommended) and run `npm ci` in the application folder first. Dependency installation needs internet once. Gameplay and Studio tools run locally without internet. Use the same browser and address for local saves; `localhost` and `127.0.0.1` are different storage origins. Port 5173 is fixed: stop another instance before starting this one.
+## First test
 
-## Morning test: where to begin
+1. Choose a starter and Classic or Domination. Begin against the computer, or choose local two-player. Custom decks are available through **Build deck**.
+2. Keep or exchange your opening hand. Hand badges explain playable cards; select one to highlight legal positions. Select a position to review actual consequences and immediate score changes, then confirm.
+3. Open **Learning and action playback** for Fast, Normal, Slow, Step through or Instant. Step/skip displays recorded resolution without changing the result.
+4. Inspect a creature for printed/effective power, auras, dynamic effects and protection. Row summaries separate power from points; the scoreboard separates row, creature and card-bonus points.
+5. Open **Card library** to inspect all 150 cards, search `N027`, or filter by Kindred, set, power, placement, classification and mechanics.
+6. In **Developer Studio → Battlefield Sandbox**, choose one of nine OWNER experiments or 30 preserved LAB scenarios. **Content Versions and Backups** switches historical versions, creates checkpoints and exports complete backups.
 
-1. Open **Developer Studio** below Begin match on the home screen.
-2. **Card Library** browses all 150 working definitions. Inspect a card, edit it, or duplicate it as a template.
-3. To play the five new Kindreds, open **Content Versions and Backups**, find **Founding Kindreds · 150 provisional cards**, and click **Activate for new matches**. Return to game and choose the pure or mixed starting decks. The original V1.1 version remains available in the same table.
-4. For the temporary artwork example, activate **Founding Kindreds · temporary artwork validation** instead. It has the same 150 definitions, with a temporary Briar Sprout illustration. Restore it as a working draft to inspect/edit its packaged image in the Studio library. This is testing artwork, not final commercial art.
-5. Use **Battlefield Sandbox** to construct a scenario, execute a legal placement, then select a diagnostic step to inspect what happened. Construction and execution are separate.
-6. Create a checkpoint and download **Export complete Studio backup** before larger experiments.
+Read the [owner guide](docs/V1.3BC-OWNER-GUIDE.md) for exact demo steps, publication, backup and restoration. The [Master Card Mechanics](docs/MASTER-CARD-MECHANICS.md) defines implemented rules. The [owner review](docs/V1.3BC-OWNER-REVIEW.md) records interpretations and the Phoenix prerequisite issue.
 
-New ordinary matches default to the original V1.1 library until a testing version is explicitly activated. Existing matches retain their own definitions and artwork references. Existing owner drafts are preserved when bundled content is added; the new library is available as a saved version even when an older working draft is retained.
+## Cards and artwork
 
-## Play
+Gameplay IDs, public numbers, definition revisions, editions and artwork revisions are separate. Editions share copy limits. The [permanent registry](src/content/collectible-registry.json) reserves numbers; future expansions append assignments rather than renumbering. Current cards are freely available for testing, with provisional statistics and rarity.
 
-Choose Classic or Domination, computer or local two-player, and two legal decks. Draw five, then keep or exchange up to five cards. Select a hand card, select an illuminated position, review the preview and confirm placement. Standard cards require empty friendly territory with enough rank tokens. Replacement sacrifices an eligible friendly creature; evolution needs its predecessor. Tokens and fortification remain underneath creatures.
+The [catalog](docs/v1.3bc/OWNER-CATALOG.json), [classifications](docs/v1.3bc/CLASSIFICATIONS.json), [evolution diagrams](docs/v1.3bc/EVOLUTION-RELATIONSHIPS.md) and [150-card artwork production manifest](docs/v1.3bc/ARTWORK-PRODUCTION-MANIFEST.json) are committed. Final illustrations await separate creation and approval.
 
-Passing is temporary. A card play resets the pass counter; two consecutive passes end the match after effects resolve. Full fields and empty draw piles do not automatically end games. Classic scores full power in winning rows; tied rows award zero. Domination adds one point per surviving creature. Local handoffs conceal private hands.
-
-## Developer Studio
-
-The ten sections cover Overview, Card Library, Card Editor, Collection Manager, Deck Builder and Tester, Battlefield Sandbox, Tactical Ruleset Editor, Match Simulator, Match Replay and Diagnostics, and Content Versions and Backups.
-
-The form-based editor exposes the actual engine registry: all 27 triggers, 15 effect variants (including positive/negative power), continuous effects, dynamic scaling, scoring bonuses, variable magnitudes, structured conditions, precise targeting, prerequisites, protection and persistent activation limits. Influence patterns preview both player orientations. See the [master mechanics reference](docs/MASTER-CARD-MECHANICS.md) for exact behavior and supported limits.
-
-Simulation runs in a Web Worker, supports reproducible seeds, alternating starters, mirrored comparisons and round robin pairings, and preserves partial results on cancellation. Normal completed games, sandbox experiments and sampled simulations can be replayed using immutable definition snapshots. Studio data and experimental artwork persist in IndexedDB with conflict protection and a previous-transaction recovery snapshot.
-
-Read the practical [V1.2 owner guide](docs/V1.2-OWNER-GUIDE.md) for complete workflows and [V1.2 architecture](docs/V1.2-ARCHITECTURE.md) for formats, assumptions and limits.
-
-## Artwork portability
-
-Official runtime assets live in **`public/assets/`**; source masters live separately in **`artwork-source/`**. Published definitions contain stable references to immutable, checksummed asset revisions. They contain no embedded source images. Vite copies runtime assets into `dist/`, including for a future mobile wrapper. A Git pull retrieves committed definitions, original sources, optimized WebP artwork and the manifest together.
-
-The Studio can keep experimental artwork locally, generate optimized previews and export approved testing/production packages. It never silently approves an image. Import a reviewed package into the repository with:
+Official runtime artwork belongs in `public/assets/`; source masters stay in `artwork-source/`. Definitions use stable, portable, versioned references. Experimental Studio artwork remains local until explicitly approved and exported. Import a reviewed package with:
 
 ```powershell
 node scripts/import-content.mjs "C:\path\package.kindred.zip" --validate-only
@@ -64,51 +41,46 @@ node scripts/import-content.mjs "C:\path\package.kindred.zip"
 npm run validate:assets
 ```
 
-The importer validates references, checksums, actual image decoding, safe SVG, duplicates and portable filenames before writing. It preserves older asset revisions. Commit the content JSON, manifest, optimized artwork and source masters together. See [artwork publishing and recovery](docs/V1.2-ARTWORK.md).
+Commit definitions, manifest, optimized artwork and source masters together. Checks detect missing/corrupt files, invalid references, unsafe SVG and duplicates. Historical revisions remain available. See [artwork publication and recovery](docs/V1.2-ARTWORK.md).
 
-## Project structure
-
-```text
-public/assets/         Runtime cards, card backs, battlefields, icons,
-                       animations, audio, branding and asset manifest
-artwork-source/        Original source masters and temporary validation study
-src/
-  engine/              Deterministic rules, scoring, AI, capability registry
-  data/                Unchanged original V1.1 cards and decks
-  content/             Drafts, validation, versions, imports, IndexedDB,
-                       Founding Kindreds and committed published content
-  assets/              Image validation, SVG safety, portable references,
-                       approved publishing package creation
-  studio/              Ten separate owner/developer tool sections
-  sandbox/             Controlled scenario construction and validation
-  simulation/          Real-engine runner, statistics and worker
-  replay/              Immutable recording, reconstruction and diagnostics
-  ui/                  Preserved player application and content host
-scripts/               Asset import/export/validation and balance runner
-tests/                 Engine, content, assets and actual browser workflows
-docs/balance/          All 150 definitions, evolution diagrams, decks,
-                       matchup CSV, statistics and preliminary findings
-```
-
-## Validation and production build
+## Builds and validation
 
 ```powershell
-npm run typecheck
 npm test
-npm run test:browser
+npm run typecheck
 npm run build
+npm run build:player
 ```
 
-On a fresh test machine, run `npx playwright install chromium` before browser tests. Build output is `dist/`. To play that build, stop the dev server and run `npm run preview` on the same address. `prebuild` validates every registered runtime/source asset and published content reference.
+`dist/` includes the local Developer Studio. `dist-player/` is the invited-tester build: all 150 owner cards, no Studio/laboratory/simulation worker or unpublished test artwork. It emits selected approved assets plus the existing neutral crest/fallback. Source masters are never served. Validation checks references, checksums and Git tracking.
 
-To build without the Developer Studio controls:
+Preview the player build:
 
 ```powershell
-$env:VITE_STUDIO = "0"
-npm run build
-Remove-Item Env:\VITE_STUDIO
+npx vite preview --host 127.0.0.1 --port 5174 --strictPort --outDir dist-player
 ```
 
-To reproduce the full preliminary balance run: `npm run balance`. Full temporary replay reports go to ignored `.local/balance/`; concise JSON, CSV and Markdown evidence goes to `docs/balance/`. The completed run tested **4,720 matches**, with zero engine faults, invariant failures or simulation timeouts. Results are advisory; the current computer is not an expert-play model. See [preliminary balance findings](docs/balance/V1.2-PRELIMINARY-BALANCE.md).
+For browser tests, install Chromium with `npx playwright install chromium`, separately serve the full production `dist/` on port 5175, then run:
 
-See [V1.2 validation](docs/V1.2-VALIDATION.md) for test receipts, clean-checkout artwork acceptance and known limitations. The original [V1.1 documentation](docs/RULES-AND-ARCHITECTURE.md), [baseline receipt](docs/V1.2-BASELINE.md) and [infrastructure checkpoint](docs/V1.2-INFRASTRUCTURE-CHECKPOINT.md) remain available. No public hosting or V1.3 commercial approval is included.
+```powershell
+$env:KINDRED_PLAYER_URL = 'http://127.0.0.1:5174'
+$env:KINDRED_CLEAN_URL = 'http://127.0.0.1:5175'
+npm run test:browser
+```
+
+See [validation](docs/V1.3BC-VALIDATION.md) and [preliminary balance findings](docs/v1.3bc/PRELIMINARY-BALANCE.md). Reproduce owner runs with `npm run validate:owner -- --scoring=classic` and `npm run validate:owner -- --scoring=domination`; summarize saved evidence with `node scripts/summarize-owner.mjs`. Simulations never automatically rebalance cards.
+
+## Server preparation and future storage
+
+Docker/Compose files serve only the player build through digest-pinned unprivileged NGINX, with an explicit unused host port and loopback default. Follow [deployment preparation](docs/V1.3BC-DEPLOYMENT.md) for clean GitHub checkout, startup, health, update, shutdown, rollback and the acceptance script. **Docker execution remains pending owner validation by explicit instruction.** Actual home-server installation requires separate authorization.
+
+The [PostgreSQL proposal](docs/V1.3BC-STORAGE.md) covers a dedicated database, restricted roles, atomic inventory transactions, migrations, backups and independent restoration. No database or migration is created.
+
+Browser saves remain specific to device, browser and origin. Cross-device progression, server accounts, online multiplayer, purchases and final artwork are not implemented. Send feedback to the owner externally with version, mode, decks, seed, action/position and expected/observed result. Read the owner guide before sharing a developer replay containing both private hands.
+
+## Development references
+
+- [V1.3B/C architecture](docs/V1.3BC-ARCHITECTURE.md), [baseline checkpoint](docs/V1.3BC-BASELINE.md) and [authoritative brief](docs/V1.3BC-BRIEF.md)
+- [V1.3A owner guide](docs/V1.3A-OWNER-GUIDE.md) and [validation](docs/V1.3A-VALIDATION.md)
+- [V1.2 owner guide](docs/V1.2-OWNER-GUIDE.md), [architecture](docs/V1.2-ARCHITECTURE.md) and [validation](docs/V1.2-VALIDATION.md)
+- [Original V1.1 rules](docs/RULES-AND-ARCHITECTURE.md)

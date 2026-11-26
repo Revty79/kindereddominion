@@ -1,6 +1,6 @@
-# Master Card Mechanics — V1.3A
+# Master Card Mechanics — V1.3B/C
 
-This is the implemented rules reference for designing Kindred Dominion cards. It describes engine **1.3.0**, advanced content schema **2**, and the preserved engine **1.1.0** compatibility path. It does not approve any commercial card or change either preserved Founding library. The executable registry and validators live in `src/engine/registry.ts`, `advanced-validation.ts` and `src/content/validation.ts`.
+This is the implemented rules reference for designing Kindred Dominion cards. It describes engine **1.3.1**, advanced content schema **2**, and the preserved **1.3.0** and **1.1.0** compatibility paths. It does not approve any commercial card or change either preserved Founding library. The executable registry and validators live in `src/engine/registry.ts`, `advanced-validation.ts` and `src/content/validation.ts`.
 
 ## 1. Permanent identities and card properties
 
@@ -143,6 +143,7 @@ Supported expressions are fixed safe integers; named values; battlefield aggrega
 | `sourcePower` / `targetPower` | Authoritative effective power for triggered effects/scoring; a departed event source uses captured power |
 | `sourceIntrinsic` / `targetIntrinsic` | Printed plus permanent power |
 | `sourcePreDynamic` / `targetPreDynamic` | Power after auras and before scaling |
+| `maximumFortification` | Configured battlefield cap; safe in passive/scoring expressions, available in engine 1.3.1 |
 | `eventPower` | Frozen event participant effective power |
 | `sacrificedPower` | Frozen sacrificed participant power, only for a sacrifice context |
 | `destroyedPower` | Frozen active participant power for destruction, power death or sacrifice |
@@ -265,4 +266,14 @@ The separate laboratory contains 45 development fixtures, four valid decks and 3
 
 ## 15. Unsupported and deferred
 
-No arbitrary scripts/formulas, recursive final-power aura/scaling dependencies, pure-calculation random targeting, interactive ability-target prompts, timed poison/status duration system, new complete tactical rulesets, advanced AI, final commercial card design/artwork, online services or mobile platform projects are implemented. Auras/scaling are continuous calculations, not a general duration/status engine. V1.3B's player-interface redesign requires separate owner review and authorization.
+No arbitrary scripts/formulas, recursive final-power aura/scaling dependencies, pure-calculation random targeting, interactive ability-target prompts, timed poison/status duration system, new complete tactical rulesets, advanced AI, final commercial artwork, online services or mobile platform projects are implemented. Auras/scaling are continuous calculations, not a general duration/status engine. The authorized V1.3B/C readability implementation is documented in [the owner guide](V1.3BC-OWNER-GUIDE.md).
+
+## 16. Owner Design V1 conventions and engine 1.3.1
+
+The separate owner library has 150 permanent numbered identities and does not overwrite either historical Founding library. Its adjacency is explicitly orthogonal; legacy `adjacent` selectors retain eight-neighbor behavior. Triggered owner abilities default to one activation per event and match, except their explicit repeat caps. Evolution retains inherited activation usage; U017/U029 share their feeding identity.
+
+`maximumFortification` reads the actual selected ruleset cap. C016/C020 require positive fortification equal to that cap; zero-cap fields do not qualify. This is the only additional numerical capability needed for the supplied designs. Content using it or owner collectible metadata declares engine 1.3.1. Mixed backups select the newest required supported engine; older records and their exact signatures remain valid.
+
+Collectible number, underlying gameplay identity, set, expansion, edition, gameplay revision and artwork identity are distinct. Copy limits aggregate editions by gameplay identity. Editions claiming the same identity must have identical executable rules. Balancing/name/art changes create explicit revisions without renumbering. Duplicate creates an unnumbered draft; it never allocates an official number. Archived content and immutable match snapshots retain prior definitions and artwork.
+
+New installations/default matches select Owner Design V1 once while preserving working drafts and existing match snapshots. Historical libraries remain selectable. Nine OWNER sandbox experiments supplement the 30 LAB scenarios. Player-only builds use `npm run build:player`, which excludes Studio and unpublished assets; the normal local build retains development tools.

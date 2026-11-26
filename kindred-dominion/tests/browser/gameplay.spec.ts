@@ -398,9 +398,9 @@ test("simultaneous destruction and limited resurrection resolve visibly in the b
   await load(s);
   await page.getByRole("button", { name: /^Convergence, standard/ }).click();
   await page.getByTestId("cell-1-0").click();
-  await expect(page.locator(".resolution-preview")).toContainText(
-    "-2 power to 3",
-  );
+  await expect(page.locator(".resolution-preview")).toContainText("Convergence enters play");
+  await expect(page.locator(".resolution-preview")).toContainText("Convergence: is destroyed");
+  await expect(page.locator(".resolution-preview .public-consequences li").filter({ hasText: "is destroyed" })).toHaveCount(3);
   await page.getByRole("button", { name: "Place at B1", exact: true }).click();
   let next = await state(page);
   expect(next.cards[jade].location).toBe("graveyard");

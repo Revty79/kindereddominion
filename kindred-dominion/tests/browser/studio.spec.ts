@@ -189,7 +189,7 @@ test("A and B: visually author, persist, build a deck, execute, inspect and repe
   await expect(
     page.getByRole("heading", { name: "Ability resolution inspector" }),
   ).toBeVisible();
-  await page.getByRole("button", { name: /1 · action/ }).click();
+  await page.getByRole("button", { name: /^1 · action / }).click();
   await expect(
     page.getByText("READ-ONLY DIAGNOSTIC STEP", { exact: false }),
   ).toBeVisible();

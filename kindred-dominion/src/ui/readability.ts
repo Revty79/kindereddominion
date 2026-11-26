@@ -25,7 +25,7 @@ export function publicChanges(before: GameState, after: GameState, library: Card
       const definition = library[after.cards[incoming].definitionId];
       const revived = before.cards[incoming]?.location === "graveyard";
       const label = revived ? "REVIVE" : definition.type === "evolution" ? "EVO" : definition.type === "replacement" ? "REPLACE" : "PLAY";
-      add("arrival", label, `${definition.name} ${revived ? "returns from the graveyard" : definition.type === "evolution" ? "evolves here" : definition.type === "replacement" ? "replaces the sacrificed creature" : "enters play"} at ${currentPower(after, library, incoming)} effective power.`);
+      add("arrival", label, `${definition.name} ${revived ? "is resurrected from the graveyard" : definition.type === "evolution" ? "evolves here" : definition.type === "replacement" ? "replaces the sacrificed creature" : "enters play"} at ${currentPower(after, library, incoming)} effective power.`);
     }
     if (incoming && incoming === prior) {
       const name = library[after.cards[incoming].definitionId].name, old = oldPower[incoming], now = newPower[incoming];
@@ -46,7 +46,10 @@ export function actionPreview(before: GameState, action: Action, library: CardLi
   const boundary = steps.find(s => s.kind === "before-private-draw" || s.kind === "action-effects-complete");
   // A real recorded snapshot, before the first private draw or automatic turn transfer.
   const visible = boundary?.state ?? committed;
-  const changes = publicChanges(before, visible, library);
+  const included = boundary ? steps.slice(0, steps.indexOf(boundary) + 1) : steps;
+  // Include real intermediate arrivals/removals, even when the same creature
+  // returns or an incoming creature dies before the immediate action ends.
+  const changes = presentationFrames(before, visible, included, library).flatMap(frame => frame.changes);
   const seen = new Set<string>();
   const protectedTarget = (id: string, text: string) => {
     const cell = visible.board.find(c => c.creature === id);
@@ -54,7 +57,6 @@ export function actionPreview(before: GameState, action: Action, library: CardLi
     seen.add(id + text);
     changes.push({ row: cell.row, col: cell.col, kind: "protection", label: "SHIELD", text: `${coordinate(cell)} · ${library[visible.cards[id].definitionId].name}: ${text}` });
   };
-  const included = boundary ? steps.slice(0, steps.indexOf(boundary) + 1) : steps;
   for (const step of included) if (step.kind === "protection" && step.details && typeof step.details === "object" && "card" in step.details && typeof step.details.card === "string") protectedTarget(step.details.card, "Weakening protection prevents the attempted reduction.");
   for (const event of visible.events.slice(before.events.length)) if (event.type === "protection" && event.card) protectedTarget(event.card, "Direct-destruction protection prevents the attempted destruction.");
   return { state: visible, fault: committed.fault, changes, scoreBefore: scoreGame(before, library), scoreAfter: scoreGame(visible, library), privateConsequencesOmitted: boundary?.kind === "before-private-draw" };
