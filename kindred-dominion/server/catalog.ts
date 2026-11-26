@@ -3,6 +3,7 @@ import path from "node:path";
 import type {PoolClient} from "pg";
 import type {ContentPack} from "../src/content/types";
 import {ownerContent,collectibleRegistry} from "../src/content/owner";
+import {currentOwnerContent,CURRENT_OWNER_CONTENT_ID} from "../src/content/current";
 import {baselineContent} from "../src/content/baseline";
 import {foundingContent} from "../src/content/founding";
 import {laboratoryContent} from "../src/content/laboratory";
@@ -63,8 +64,8 @@ export async function publishContent(pool:DB,pack:ContentPack,channel:"official"
 export async function seedRepository(pool:DB,root=process.cwd()){
   const results=[];
   for(const pack of [baselineContent(),foundingContent(baselineContent()),laboratoryContent()])results.push(await publishContent(pool,pack,"archived",false,root));
-  for(const name of await fs.readdir(path.join(root,"src/content/published")))if(name.endsWith(".json"))results.push(await publishContent(pool,JSON.parse(await fs.readFile(path.join(root,"src/content/published",name),"utf8")),"archived",false,root));
+  for(const name of await fs.readdir(path.join(root,"src/content/published")))if(name.endsWith(".json")){const pack=JSON.parse(await fs.readFile(path.join(root,"src/content/published",name),"utf8"));results.push(await publishContent(pool,pack,pack.id===CURRENT_OWNER_CONTENT_ID?"official":"archived",false,root));}
   results.push(await publishContent(pool,ownerContent(),"official",false,root));
-  const {rows}=await pool.query("SELECT 1 FROM kd.content_selection");if(!rows.length)await publishContent(pool,ownerContent(),"official",true,root);
+  const {rows}=await pool.query("SELECT 1 FROM kd.content_selection");if(!rows.length)await publishContent(pool,currentOwnerContent(),"official",true,root);
   return results;
 }

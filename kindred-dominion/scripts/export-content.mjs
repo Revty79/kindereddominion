@@ -18,6 +18,11 @@ try {
       "utf8",
     ),
   );
+  if(process.argv.includes("--split")){
+    const {exportFoundingSet}=await import("./export-founding-set.mjs");
+    console.log(JSON.stringify(await exportFoundingSet(content,path.resolve(output))));
+  }else{
+  if((content.assets??[]).reduce((n,a)=>n+a.bytes+a.source.bytes,0)>150*1024*1024)throw Error("This collection exceeds the single-package bound. Use --split and import-founding-artwork.mjs.");
   const files = {};
   files["content.json"] = strToU8(JSON.stringify(content, null, 2));
   files["assets.json"] = strToU8(
@@ -57,6 +62,7 @@ try {
   );
   await writeFile(path.resolve(output), zipSync(files, { level: 6 }));
   console.log(`Exported ${id} with separate source and production artwork.`);
+  }
 } catch (error) {
   console.error(error.message);
   process.exitCode = 1;

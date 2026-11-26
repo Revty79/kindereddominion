@@ -24,6 +24,8 @@ export async function createPublication(
     );
   const errors = validatePack(pack).filter((i) => i.severity === "error");
   if (errors.length) throw new Error(errors.map((e) => e.message).join("\n"));
+  const sourceBytes=(pack.assets??[]).reduce((n,a)=>n+a.bytes+a.source.bytes,0)+Object.values(pack.metadata).reduce((n,m)=>n+Math.ceil(((m.sourceArtwork?.length??0)+(m.artwork?.length??0))*3/4),0);
+  if(sourceBytes>150*1024*1024)throw new Error("This collection exceeds a single portable package. Use repository export-content.mjs with --split, then import-founding-artwork.mjs.");
   const content = structuredClone(pack);
   content.id = id;
   content.name = name;
@@ -194,5 +196,7 @@ export async function createPublication(
     ),
   };
   files["publication.json"] = strToU8(JSON.stringify(publication, null, 2));
-  return zipSync(files, { level: 6 });
+  const zipped=zipSync(files, { level: 6 });
+  if(zipped.length>60*1024*1024)throw new Error("This export exceeds 60 MB. Export smaller batches or use the repository --split command.");
+  return zipped;
 }

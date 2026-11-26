@@ -107,6 +107,9 @@ it("validates genuine PNG, JPEG, WebP and safe geometric SVG; rejects unsupporte
   expect(identifyImage(new TextEncoder().encode(svg))).toBe("image/svg+xml");
   expect(() => identifyImage(new Uint8Array(20))).toThrow();
 });
+it("recognizes WebP when binary RIFF length bytes form a multibyte UTF-8 sequence",()=>{
+  expect(identifyImage(new Uint8Array([0x52,0x49,0x46,0x46,0xc2,0xa2,0,0,0x57,0x45,0x42,0x50]))).toBe("image/webp");
+});
 it.each([
   "<script>alert(1)</script>",
   "<foreignObject/>",

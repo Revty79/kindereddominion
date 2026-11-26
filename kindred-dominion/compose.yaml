@@ -6,7 +6,7 @@ services:
       context: .
       args:
         VCS_REF: "${KINDRED_REVISION:?Set KINDRED_REVISION}"
-        PLAYER_CONTENT_ID: "${KINDRED_CONTENT_ID:-founding-kindreds-owner-v1}"
+        PLAYER_CONTENT_ID: "${KINDRED_CONTENT_ID:-founding-kindreds-artwork-v1}"
     ports:
       - "${KINDRED_BIND:-127.0.0.1}:${KINDRED_PORT:?Choose an unused KINDRED_PORT}:8080"
     init: true

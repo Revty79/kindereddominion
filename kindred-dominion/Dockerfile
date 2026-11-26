@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --include=dev
 COPY . .
-ARG PLAYER_CONTENT_ID=founding-kindreds-owner-v1
+ARG PLAYER_CONTENT_ID=founding-kindreds-artwork-v1
 ENV VITE_PLAYER_CONTENT_ID=${PLAYER_CONTENT_ID}
 # Git tracking is verified in the source checkout. Archives intentionally contain no .git.
 RUN node scripts/build-player.mjs --source-archive

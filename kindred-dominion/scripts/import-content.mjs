@@ -5,9 +5,17 @@ import { project } from "./tooling.mjs";
 import { digest, readPackage } from "./asset-package.mjs";
 export async function importPackage(
   file,
-  { root = project, replace = false, validateOnly = false } = {},
+  options = {},
 ) {
   const bundle = await readPackage(path.resolve(file));
+  return importValidatedBundle(bundle, options);
+}
+// Internal shared write/rollback path. Callers must first validate every package
+// using readPackage; the bounded publication-set importer also checks assembly.
+export async function importValidatedBundle(
+  bundle,
+  { root = project, replace = false, validateOnly = false } = {},
+) {
   const destinations = new Map();
   for (const asset of bundle.manifest.assets)
     for (const name of [`public/${asset.path}`, asset.source.path])

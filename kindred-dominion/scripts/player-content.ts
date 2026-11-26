@@ -1,15 +1,16 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { ownerContent } from "../src/content/owner";
+import { currentOwnerContent } from "../src/content/current";
 import { validatePack } from "../src/content/validation";
 import type { ContentPack } from "../src/content/types";
 import type { OfficialAsset } from "../src/assets/types";
 
 export async function selectedPlayerContent(root: string): Promise<ContentPack> {
-  let content = ownerContent();
+  let content = currentOwnerContent();
   const selected = process.env.VITE_PLAYER_CONTENT_ID;
   if (selected && selected !== content.id) {
-    const candidates = await Promise.all((await readdir(path.join(root, "src/content/published"))).filter(n => n.endsWith(".json")).map(async n => JSON.parse(await readFile(path.join(root, "src/content/published", n), "utf8")) as ContentPack));
+    const candidates = [ownerContent(),...await Promise.all((await readdir(path.join(root, "src/content/published"))).filter(n => n.endsWith(".json")).map(async n => JSON.parse(await readFile(path.join(root, "src/content/published", n), "utf8")) as ContentPack))];
     const matches = candidates.filter(p => p.id === selected);
     if (matches.length !== 1) throw new Error("Select exactly one committed published player content version.");
     content = matches[0];

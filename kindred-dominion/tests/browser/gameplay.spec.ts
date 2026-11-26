@@ -116,8 +116,8 @@ test("complete human versus computer match using real UI placements", async ({
   const external: string[] = [];
   page.on("request", (req) => {
     if (
-      !req.url().startsWith("http://127.0.0.1:5173") &&
-      !req.url().startsWith("ws://127.0.0.1:5173")
+      !req.url().startsWith(new URL(String(test.info().project.use.baseURL)).origin+"/") &&
+      !req.url().startsWith(new URL(String(test.info().project.use.baseURL)).origin.replace(/^http/,"ws")+"/")
     )
       external.push(req.url());
   });
@@ -197,7 +197,7 @@ test("touch-sized layout supports hand, board scroll, preview and surrender", as
     viewport: { width: 390, height: 844 },
     hasTouch: true,
     isMobile: true,
-    baseURL: "http://127.0.0.1:5173",
+    baseURL: String(test.info().project.use.baseURL),
   });
   const page = await context.newPage();
   await prepareHistoricalContent(page);

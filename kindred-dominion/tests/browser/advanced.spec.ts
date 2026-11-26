@@ -397,7 +397,7 @@ test("owner authors all eight advanced card families, tests real power changes, 
   const backup = await exporting,
     before = await workspace(page);
   const context = await browser.newContext({
-      baseURL: "http://127.0.0.1:5173",
+      baseURL: String(test.info().project.use.baseURL),
     }),
     restored = await context.newPage();
   await open(restored);

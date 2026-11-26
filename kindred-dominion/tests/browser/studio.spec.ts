@@ -429,7 +429,7 @@ test("F: checkpoint and complete backup restore authored relationships and artwo
   const path = await backup.path();
   expect(path).not.toBeNull();
   const context = await browser.newContext({
-      baseURL: "http://127.0.0.1:5173",
+      baseURL: String(test.info().project.use.baseURL),
     }),
     isolated = await context.newPage();
   await openStudio(isolated);

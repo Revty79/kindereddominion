@@ -33,7 +33,7 @@ Read the [owner guide](docs/V1.3BC-OWNER-GUIDE.md) for exact demo steps, publica
 
 Gameplay IDs, public numbers, definition revisions, editions and artwork revisions are separate. Editions share copy limits. The [permanent registry](src/content/collectible-registry.json) reserves numbers; future expansions append assignments rather than renumbering. Current cards are freely available for testing, with provisional statistics and rarity.
 
-The [catalog](docs/v1.3bc/OWNER-CATALOG.json), [classifications](docs/v1.3bc/CLASSIFICATIONS.json), [evolution diagrams](docs/v1.3bc/EVOLUTION-RELATIONSHIPS.md) and [150-card artwork production manifest](docs/v1.3bc/ARTWORK-PRODUCTION-MANIFEST.json) are committed. Final illustrations await separate creation and approval.
+The [catalog](docs/v1.3bc/OWNER-CATALOG.json), [classifications](docs/v1.3bc/CLASSIFICATIONS.json), [evolution diagrams](docs/v1.3bc/EVOLUTION-RELATIONSHIPS.md) and [150-card artwork production manifest](docs/v1.3bc/ARTWORK-PRODUCTION-MANIFEST.json) are committed. All 150 owner illustrations are integrated in the `founding-kindreds-artwork-v1` release. Original PNG masters remain unchanged; optimized WebP files and revisioned references are packaged with the cards.
 
 Official runtime artwork belongs in `public/assets/`; source masters stay in `artwork-source/`. Definitions use stable, portable, versioned references. Experimental Studio artwork remains local until explicitly approved and exported. Import a reviewed package with:
 
@@ -80,7 +80,7 @@ V1.3D adds Fastify/TypeScript, PostgreSQL, four migrations, persistent sessions/
 - [Architecture/schema](docs/V1.3D-ARCHITECTURE.md), [security/limits](docs/V1.3D-SECURITY.md), [validation](docs/V1.3D-VALIDATION.md), [baseline](docs/V1.3D-BASELINE.md), [brief](docs/V1.3D-BRIEF.md).
 - [Future Ubuntu preparation](docs/V1.3D-DEPLOYMENT.md): separate frontend/backend, existing PostgreSQL, private configuration, update/rollback and backups.
 
-**Docker execution remains pending owner validation. TEST/PROD and Ubuntu were not accessed or changed.** No remote multiplayer, commerce, economy or final artwork generation is included. Incoming owner/Ember art is preserved for separate review/publication.
+**Docker execution remains pending owner validation. TEST/PROD and Ubuntu were not accessed or changed.** No remote multiplayer, commerce, economy or artwork generation is included. The owner/Ember illustrations are integrated through the existing publishing pipeline; the new collectible frame remains an isolated approval study.
 
 Run real PostgreSQL integration only in the owned disposable instance:
 
@@ -98,3 +98,18 @@ Use `node scripts/pg-isolate.mjs resume` for an existing instance, or `create-db
 - [V1.3A owner guide](docs/V1.3A-OWNER-GUIDE.md) and [validation](docs/V1.3A-VALIDATION.md)
 - [V1.2 owner guide](docs/V1.2-OWNER-GUIDE.md), [architecture](docs/V1.2-ARCHITECTURE.md) and [validation](docs/V1.2-VALIDATION.md)
 - [Original V1.1 rules](docs/RULES-AND-ARCHITECTURE.md)
+
+## Founding artwork and card-design review
+
+The complete [artwork roster](docs/FOUNDING-KINDREDS-ARTWORK.md), [inventory](docs/founding-artwork/INVENTORY.json) and [integration/verification report](docs/FOUNDING-ARTWORK-VERIFICATION.md) cover all five Kindreds. Fresh ordinary play and player builds use the illustrated owner release. Existing drafts, chosen historical versions and saved match snapshots remain recoverable. Begin a new match to use the new artwork.
+
+For the owner's separate visual approval checkpoint, open **http://127.0.0.1:5173/card-design.html** while the development server is running. Seven actual cards demonstrate collection/inspection, hand and battlefield sizes. [Review screenshots](docs/founding-artwork/review/collection.png) are committed. This prototype does not replace the gameplay card component and is excluded from ordinary production builds. Rollout requires explicit owner acceptance under the [presentation supplement](docs/FOUNDING-CARD-PRESENTATION-SUPPLEMENT.md).
+
+Re-export the complete collection as bounded packages, including its source masters:
+
+```powershell
+node scripts/export-content.mjs founding-kindreds-artwork-v1 .local/founding-artwork-backup --split
+node scripts/import-founding-artwork.mjs .local/founding-artwork-backup/set.json --validate-only
+```
+
+The importer validates every ordinary Studio-format member and assembles one complete immutable release. Source/runtime package bounds remain unchanged. Use a new content ID for revised artwork; never overwrite an old release.

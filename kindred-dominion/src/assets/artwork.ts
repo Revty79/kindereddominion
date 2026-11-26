@@ -118,7 +118,10 @@ export function identifyImage(
     return "image/png";
   if (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff)
     return "image/jpeg";
-  if (head.startsWith("RIFF") && head.slice(8, 12) === "WEBP")
+  // RIFF length bytes are binary, so UTF-8 decoding can change character
+  // offsets before WEBP. Inspect the fixed byte positions directly.
+  if (bytes[0]===0x52&&bytes[1]===0x49&&bytes[2]===0x46&&bytes[3]===0x46&&
+      bytes[8]===0x57&&bytes[9]===0x45&&bytes[10]===0x42&&bytes[11]===0x50)
     return "image/webp";
   if (/^\s*(<\?xml[^>]*>\s*)?<svg[\s>]/i.test(head)) {
     sanitizeSVG(new TextDecoder().decode(bytes));

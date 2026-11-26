@@ -4,7 +4,8 @@ import { DEFAULT_CONFIG } from "../src/engine/config";
 import { signature } from "../src/replay/record";
 import { actionPreview, presentationFrames, publicEventText, publicChanges } from "../src/ui/readability";
 import { filterCollection, emptyCollectionFilter } from "../src/ui/collection";
-import { ownerContent, OWNER_CONTENT_ID } from "../src/content/owner";
+import { CURRENT_OWNER_CONTENT_ID } from "../src/content/current";
+import { ownerContent } from "../src/content/owner";
 import { addBundledVersions } from "../src/content/bundled";
 import { initialWorkspace } from "../src/content/baseline";
 import { libraryOf } from "../src/content/validation";
@@ -16,7 +17,7 @@ import { validateScenario } from "../src/sandbox/scenario";
 
 it("defaults fresh ordinary games to the separate owner catalog while retaining all historical versions and existing drafts", () => {
   const fresh = addBundledVersions(initialWorkspace());
-  expect(fresh.activeVersion).toBe(OWNER_CONTENT_ID);
+  expect(fresh.activeVersion).toBe(CURRENT_OWNER_CONTENT_ID);
   expect(fresh.working.cards[0].collectible!.number).toBe("N001");
   expect(fresh.versions.some(v => v.id === "v1.1-baseline" && v.cards.length === 30)).toBe(true);
   expect(fresh.versions.some(v => v.id === "founding-kindreds-150-v1" && v.cards.length === 150)).toBe(true);
@@ -24,7 +25,7 @@ it("defaults fresh ordinary games to the separate owner catalog while retaining 
   const existing = initialWorkspace(); existing.revision = 7; existing.working.cards[0].name = "Owner's saved draft";
   const updated = addBundledVersions(existing);
   expect(updated.working).toEqual(existing.working);
-  expect(updated.activeVersion).toBe(OWNER_CONTENT_ID);
+  expect(updated.activeVersion).toBe(CURRENT_OWNER_CONTENT_ID);
   expect(addBundledVersions(updated)).toBe(updated);
 });
 it("uses actual recorded immediate action snapshots and stops before any private draw", () => {

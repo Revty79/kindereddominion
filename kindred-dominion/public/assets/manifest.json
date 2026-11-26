@@ -55,6 +55,2706 @@
       },
       "category": "cards",
       "approval": "testing"
+    },
+    {
+      "id": "a001",
+      "revision": "5af02872cf9cc3c7",
+      "path": "assets/cards/arcane/a001-5af02872cf9cc3c7.webp",
+      "sha256": "5af02872cf9cc3c7d5271fcd0eaee85654b17e20aae7c4d1017a54428b098ce8",
+      "mime": "image/webp",
+      "bytes": 226114,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a001-308c920866940c14.png",
+        "sha256": "308c920866940c14c616525338c85e67d030083f5110e9f22d8106e2f2cf29f8",
+        "mime": "image/png",
+        "bytes": 2642262
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a002",
+      "revision": "759ff3921cc06d76",
+      "path": "assets/cards/arcane/a002-759ff3921cc06d76.webp",
+      "sha256": "759ff3921cc06d76457d4997baefb2f0c50e27567bd0e0103e7d27a69b2d7df3",
+      "mime": "image/webp",
+      "bytes": 231066,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a002-d16c04734ecf4265.png",
+        "sha256": "d16c04734ecf42659b26098f86aad9d45eee8f0c1fe4253458cef7004823231b",
+        "mime": "image/png",
+        "bytes": 2828643
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a003",
+      "revision": "c38a9de35252634b",
+      "path": "assets/cards/arcane/a003-c38a9de35252634b.webp",
+      "sha256": "c38a9de35252634b4abca4d1d93318ca7505314f54ee6517d6013fbfc2d27e2a",
+      "mime": "image/webp",
+      "bytes": 219396,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a003-f54dacdc77650807.png",
+        "sha256": "f54dacdc77650807ecc71349cf76a85908b23c847c5caf99c41bc5abe4baa6f7",
+        "mime": "image/png",
+        "bytes": 2406208
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a004",
+      "revision": "63e7bc253153d511",
+      "path": "assets/cards/arcane/a004-63e7bc253153d511.webp",
+      "sha256": "63e7bc253153d511f059ea4ad2f4ffde9dbd519f6c2e6068361d63c81b526a9c",
+      "mime": "image/webp",
+      "bytes": 296736,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a004-61fd2d103f5dfe5b.png",
+        "sha256": "61fd2d103f5dfe5beb18aeba59ca178e875d5b97464fceb72db45f96ad243ac7",
+        "mime": "image/png",
+        "bytes": 2973234
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a005",
+      "revision": "65c9197cbfed6a4e",
+      "path": "assets/cards/arcane/a005-65c9197cbfed6a4e.webp",
+      "sha256": "65c9197cbfed6a4e216869815a50b40ce06b78a060de0d432807111b79d66ec3",
+      "mime": "image/webp",
+      "bytes": 239464,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a005-607e478d2846c7ed.png",
+        "sha256": "607e478d2846c7ed3dbae90b580f567770dc168a8baca55614a4d52c28a4ee69",
+        "mime": "image/png",
+        "bytes": 2478362
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a006",
+      "revision": "d1a985ae28f5cffe",
+      "path": "assets/cards/arcane/a006-d1a985ae28f5cffe.webp",
+      "sha256": "d1a985ae28f5cffe8b4c208c633c562c2cf6f759baa69bf5e2c92ae4f53da456",
+      "mime": "image/webp",
+      "bytes": 289048,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a006-cf9c603354a892eb.png",
+        "sha256": "cf9c603354a892eb50186c4e7c34886711e916456f00b0f8744388a50235a199",
+        "mime": "image/png",
+        "bytes": 2850731
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a007",
+      "revision": "a6c69c3d5b06b240",
+      "path": "assets/cards/arcane/a007-a6c69c3d5b06b240.webp",
+      "sha256": "a6c69c3d5b06b24030a49ae8ca787a64b714a438341386ad3f99545f57aac0d2",
+      "mime": "image/webp",
+      "bytes": 310648,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a007-5dc6b36793153aa7.png",
+        "sha256": "5dc6b36793153aa7266c6fbc71dc549bb4495bd0e2dd64e5b5080d223da3c633",
+        "mime": "image/png",
+        "bytes": 2921574
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a008",
+      "revision": "6932e5eb99f13834",
+      "path": "assets/cards/arcane/a008-6932e5eb99f13834.webp",
+      "sha256": "6932e5eb99f13834bb1551333231e714bcece2a85c27beb5666347a1badf263f",
+      "mime": "image/webp",
+      "bytes": 246298,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a008-d2258f2587e8982d.png",
+        "sha256": "d2258f2587e8982dbe809345f8415338e488117ed84b627cc8cfc02d3762bbe1",
+        "mime": "image/png",
+        "bytes": 2689824
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a009",
+      "revision": "9d70c86d77d7419a",
+      "path": "assets/cards/arcane/a009-9d70c86d77d7419a.webp",
+      "sha256": "9d70c86d77d7419a2e90b51df1246d864045cdcfedab54d70db06cc7a8468838",
+      "mime": "image/webp",
+      "bytes": 170444,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a009-89a67f5931f660a9.png",
+        "sha256": "89a67f5931f660a9d3e422a9223ab149714be8e1c24e3866c20e00c479ef4806",
+        "mime": "image/png",
+        "bytes": 2541903
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a010",
+      "revision": "7344535ece29c831",
+      "path": "assets/cards/arcane/a010-7344535ece29c831.webp",
+      "sha256": "7344535ece29c83192e867b1f9c35a2a51a0bbb57ecb2ad674f22acfb7627b0d",
+      "mime": "image/webp",
+      "bytes": 320292,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a010-02b3fa16ad322315.png",
+        "sha256": "02b3fa16ad322315176b5b5e3c2f86ca1ba631bbcbee92e3914b127d2d520a2a",
+        "mime": "image/png",
+        "bytes": 3138641
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a011",
+      "revision": "084d49e55d0fe6c7",
+      "path": "assets/cards/arcane/a011-084d49e55d0fe6c7.webp",
+      "sha256": "084d49e55d0fe6c7a8b5a9d9d340eaff0a17e6278c1d4544170abe1b56803ae0",
+      "mime": "image/webp",
+      "bytes": 278032,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a011-b74303f2a2d4291d.png",
+        "sha256": "b74303f2a2d4291d414921bb0d80ed91e7625acee758673028b1febe06ab6a22",
+        "mime": "image/png",
+        "bytes": 2909243
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a012",
+      "revision": "29b93af09a9dbca5",
+      "path": "assets/cards/arcane/a012-29b93af09a9dbca5.webp",
+      "sha256": "29b93af09a9dbca5b9ce4a9bbb92c03f3b227e6905ea5ace5faf4f087ea73bd8",
+      "mime": "image/webp",
+      "bytes": 234148,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a012-20bf6ae6ad00fe1c.png",
+        "sha256": "20bf6ae6ad00fe1cc116f4997638b343f4d6dcbc581a60a8059838014c791dd7",
+        "mime": "image/png",
+        "bytes": 2731051
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a013",
+      "revision": "0048cce2376bdf50",
+      "path": "assets/cards/arcane/a013-0048cce2376bdf50.webp",
+      "sha256": "0048cce2376bdf5026df784806d9fbc80be46d07e2557b46ae42349c48ba6f11",
+      "mime": "image/webp",
+      "bytes": 303902,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a013-a0c593295c38919b.png",
+        "sha256": "a0c593295c38919b8fbc82d94b17df274875ca85eec91b1993f9ac5f9762444b",
+        "mime": "image/png",
+        "bytes": 3090586
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a014",
+      "revision": "c075a329dcbf65da",
+      "path": "assets/cards/arcane/a014-c075a329dcbf65da.webp",
+      "sha256": "c075a329dcbf65dac4a6e9146c40f2603cdc0c6edeaa621781c9aaa8df8da121",
+      "mime": "image/webp",
+      "bytes": 335474,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a014-61f740bbecf0bfdd.png",
+        "sha256": "61f740bbecf0bfdd46ca38f8f7052b5eec33f17b74fd3bed17096ebde56118cd",
+        "mime": "image/png",
+        "bytes": 3022779
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a015",
+      "revision": "ecb7f76600e39109",
+      "path": "assets/cards/arcane/a015-ecb7f76600e39109.webp",
+      "sha256": "ecb7f76600e391098aaabb947de3d01ec06bf7eda836daf58962732b11d28315",
+      "mime": "image/webp",
+      "bytes": 316136,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a015-c8244632e6479489.png",
+        "sha256": "c8244632e647948936f9929ee3933a9dea120722bac7399fcf5c48b7bf052ec9",
+        "mime": "image/png",
+        "bytes": 3029130
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a016",
+      "revision": "5971d72c06f13682",
+      "path": "assets/cards/arcane/a016-5971d72c06f13682.webp",
+      "sha256": "5971d72c06f136826ed8c84d0d2eb18f427f546e2ba1685b8a83515fac03f3e2",
+      "mime": "image/webp",
+      "bytes": 350524,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a016-1c9418e8d3240313.png",
+        "sha256": "1c9418e8d32403137c21b28d431305d2df4fef64750eac8f5e06cf53eba431ae",
+        "mime": "image/png",
+        "bytes": 3159556
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a017",
+      "revision": "73f1c0865fd99d50",
+      "path": "assets/cards/arcane/a017-73f1c0865fd99d50.webp",
+      "sha256": "73f1c0865fd99d50dd0d3820747902a25c367752baa09fbd3f9b3916d2c92595",
+      "mime": "image/webp",
+      "bytes": 326294,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a017-d50e7369fcd9dbd4.png",
+        "sha256": "d50e7369fcd9dbd47f6d6a5e8198c163bb0f015fd6f55d2984e1e7ed84c10e72",
+        "mime": "image/png",
+        "bytes": 3084813
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a018",
+      "revision": "fa8448b42f2c860d",
+      "path": "assets/cards/arcane/a018-fa8448b42f2c860d.webp",
+      "sha256": "fa8448b42f2c860d9a0d320c077031a2b7fd789f8e04392d5e724c576b0d486d",
+      "mime": "image/webp",
+      "bytes": 351970,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a018-292adc1c16ed47f9.png",
+        "sha256": "292adc1c16ed47f9a91eef8562f78c67632d944f951edf4805cbb334d1d1b728",
+        "mime": "image/png",
+        "bytes": 3143677
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a019",
+      "revision": "e568edf36e88dd92",
+      "path": "assets/cards/arcane/a019-e568edf36e88dd92.webp",
+      "sha256": "e568edf36e88dd92d2a3a81755d7c371ed7f2214f52b089441c2922bab2f66bc",
+      "mime": "image/webp",
+      "bytes": 313476,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a019-69d7941b614b26c4.png",
+        "sha256": "69d7941b614b26c4d308eaa627b05a00bffb4e3de311157e5f6c494fcf35bbe5",
+        "mime": "image/png",
+        "bytes": 3047688
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a020",
+      "revision": "3fc3cfa1be241a6e",
+      "path": "assets/cards/arcane/a020-3fc3cfa1be241a6e.webp",
+      "sha256": "3fc3cfa1be241a6ed1791e2c932133085f094af950649e16d47fac7ad05b9d92",
+      "mime": "image/webp",
+      "bytes": 275330,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a020-606f6d41dc7d72cf.png",
+        "sha256": "606f6d41dc7d72cf99b68e49d23a4149508db45755d2ad93a493725cf2cb6e9e",
+        "mime": "image/png",
+        "bytes": 2985752
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a021",
+      "revision": "ee076a8845c6b5aa",
+      "path": "assets/cards/arcane/a021-ee076a8845c6b5aa.webp",
+      "sha256": "ee076a8845c6b5aa40b14886d8bc064e29c010fc5c52edcb1ef6b661ef2ee486",
+      "mime": "image/webp",
+      "bytes": 283562,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a021-ff6f37bbbcfc3020.png",
+        "sha256": "ff6f37bbbcfc30207a82370b1535f99a1bda7728a77f440c1f9f848758d945bb",
+        "mime": "image/png",
+        "bytes": 3185572
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a022",
+      "revision": "c44244a463694d78",
+      "path": "assets/cards/arcane/a022-c44244a463694d78.webp",
+      "sha256": "c44244a463694d78ae56f2928fc6c898535008e709ba5417ed878af1cd1b604f",
+      "mime": "image/webp",
+      "bytes": 315804,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a022-d2310a885aa75760.png",
+        "sha256": "d2310a885aa75760759800d129767a3c7ae9e2bdc0117ba6bbee842e5fb1a5d3",
+        "mime": "image/png",
+        "bytes": 3102491
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a023",
+      "revision": "9d3ca326a0b01274",
+      "path": "assets/cards/arcane/a023-9d3ca326a0b01274.webp",
+      "sha256": "9d3ca326a0b0127457276ccea8a202f0093e41b8eca9bae3d7e274c70891c5c6",
+      "mime": "image/webp",
+      "bytes": 85664,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a023-60b9694567127202.png",
+        "sha256": "60b96945671272028e4917496a1cc0d2655dbcee8db5d3c544b178de1f89c004",
+        "mime": "image/png",
+        "bytes": 2035048
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a024",
+      "revision": "a607deb4a0157e97",
+      "path": "assets/cards/arcane/a024-a607deb4a0157e97.webp",
+      "sha256": "a607deb4a0157e97136d271dba895e17a3383dc61275b558b750f535ad596831",
+      "mime": "image/webp",
+      "bytes": 229868,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a024-99ff4ff0149e4edc.png",
+        "sha256": "99ff4ff0149e4edca9f4f8de515ccbb53fa1b19b0b7012a8981ace319058cd2e",
+        "mime": "image/png",
+        "bytes": 2619472
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a025",
+      "revision": "6e5c900fc1e6f853",
+      "path": "assets/cards/arcane/a025-6e5c900fc1e6f853.webp",
+      "sha256": "6e5c900fc1e6f853fe286cb7ffa783c12aca66973632ecda0b6b8eeba2770041",
+      "mime": "image/webp",
+      "bytes": 407072,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a025-53c0348f94552238.png",
+        "sha256": "53c0348f945522387cf6e7b6187818c65742b010d1981fb9c25960737007f285",
+        "mime": "image/png",
+        "bytes": 3337627
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a026",
+      "revision": "61d8e392307ea33e",
+      "path": "assets/cards/arcane/a026-61d8e392307ea33e.webp",
+      "sha256": "61d8e392307ea33e7040ca9b71b3d6230abbc450c6d12a29f09cb361e46c6294",
+      "mime": "image/webp",
+      "bytes": 364000,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a026-bc3fbdccb0550dcc.png",
+        "sha256": "bc3fbdccb0550dcc49e0947c87263bd76b289b6d3adf65e91789c1e9a4d601f5",
+        "mime": "image/png",
+        "bytes": 3206701
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a027",
+      "revision": "4eda6163b150eb09",
+      "path": "assets/cards/arcane/a027-4eda6163b150eb09.webp",
+      "sha256": "4eda6163b150eb09ebabb9b9bfbe864595407632d238de05cd33326166bfd57d",
+      "mime": "image/webp",
+      "bytes": 420874,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a027-d91e5387cb929afc.png",
+        "sha256": "d91e5387cb929afc76ddbab76b111ab50a0256d3195eb5dc07f2ef2d9c3ebb71",
+        "mime": "image/png",
+        "bytes": 3182328
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a028",
+      "revision": "bd67b8cae560e346",
+      "path": "assets/cards/arcane/a028-bd67b8cae560e346.webp",
+      "sha256": "bd67b8cae560e3468e4ec7d95d24747e1a22a8db434d4fae094736339d23bf4d",
+      "mime": "image/webp",
+      "bytes": 294300,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a028-4783da840eff55f4.png",
+        "sha256": "4783da840eff55f4a952e0fbe50dffc506d85fc21819431e6b3fd2e8dd59c7fe",
+        "mime": "image/png",
+        "bytes": 3008243
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a029",
+      "revision": "cd399bedd5dd4043",
+      "path": "assets/cards/arcane/a029-cd399bedd5dd4043.webp",
+      "sha256": "cd399bedd5dd40430780612c35b8088aba1ae100cbdc432cab0c89809d13e882",
+      "mime": "image/webp",
+      "bytes": 326788,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a029-d338cc252ad29ecc.png",
+        "sha256": "d338cc252ad29ecc575b9fc7eb542fd829547787b4b2fe2c8da44472a66afbd3",
+        "mime": "image/png",
+        "bytes": 2993128
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "a030",
+      "revision": "9877489c489560ad",
+      "path": "assets/cards/arcane/a030-9877489c489560ad.webp",
+      "sha256": "9877489c489560ad4a04ec24392baef9d4576f4e1b60ecba4ebc1204dd496145",
+      "mime": "image/webp",
+      "bytes": 334144,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/arcane/a030-79c6225e290c44f8.png",
+        "sha256": "79c6225e290c44f85a7088ba4113a3f95b1e56bada3bc6ea993f9420d59d83cc",
+        "mime": "image/png",
+        "bytes": 3197866
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c001",
+      "revision": "67ce5ab4aed52b11",
+      "path": "assets/cards/constructs/c001-67ce5ab4aed52b11.webp",
+      "sha256": "67ce5ab4aed52b1171537e3391c72b5783d465ccddc9d9e8b597482d18aab679",
+      "mime": "image/webp",
+      "bytes": 266756,
+      "width": 1024,
+      "height": 1407,
+      "source": {
+        "path": "artwork-source/cards/constructs/c001-236178946c303267.png",
+        "sha256": "236178946c3032676fb0088ce219f602565bc689be22ee8212e15df29f2c3c1e",
+        "mime": "image/png",
+        "bytes": 2777630
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c002",
+      "revision": "d8b4d9dc92fdbf8d",
+      "path": "assets/cards/constructs/c002-d8b4d9dc92fdbf8d.webp",
+      "sha256": "d8b4d9dc92fdbf8ddb011166221d085c9c44af82f510b9bb84fd00361cab2003",
+      "mime": "image/webp",
+      "bytes": 330078,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c002-1d46664293b5f336.png",
+        "sha256": "1d46664293b5f336b78d04a13ea48682022268cd3de58522b64e32982eb2b333",
+        "mime": "image/png",
+        "bytes": 3054173
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c003",
+      "revision": "91e00ed67f81041c",
+      "path": "assets/cards/constructs/c003-91e00ed67f81041c.webp",
+      "sha256": "91e00ed67f81041c65746ee9e775f7250221defd56b924762555021e60c6d2a1",
+      "mime": "image/webp",
+      "bytes": 208416,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c003-cf5c6334c1058004.png",
+        "sha256": "cf5c6334c1058004beeb01b6aa05f3f77cef5f1b6ffd755be11a0a6f9e365674",
+        "mime": "image/png",
+        "bytes": 2550174
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c004",
+      "revision": "9df62b7d787205f6",
+      "path": "assets/cards/constructs/c004-9df62b7d787205f6.webp",
+      "sha256": "9df62b7d787205f6cf94c0a6569b7f23153e3940fc00c8a95eddf3ef67fa8534",
+      "mime": "image/webp",
+      "bytes": 232212,
+      "width": 1024,
+      "height": 1407,
+      "source": {
+        "path": "artwork-source/cards/constructs/c004-aba421ff1a1c28d7.png",
+        "sha256": "aba421ff1a1c28d74953d6ba861b15de02235a424389e0f0f93b3873dafd3a64",
+        "mime": "image/png",
+        "bytes": 2620136
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c005",
+      "revision": "75f5bb8ed05ff548",
+      "path": "assets/cards/constructs/c005-75f5bb8ed05ff548.webp",
+      "sha256": "75f5bb8ed05ff5480a2afac9a51fd51fb2db8e2c4099903e3c584fba13a9b37f",
+      "mime": "image/webp",
+      "bytes": 244530,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c005-96451e6f2f37bb16.png",
+        "sha256": "96451e6f2f37bb16fbe1411bb120642c0e0145fc5a6c77f66304e1fbc4e23f6f",
+        "mime": "image/png",
+        "bytes": 2769628
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c006",
+      "revision": "5b592790adf1d319",
+      "path": "assets/cards/constructs/c006-5b592790adf1d319.webp",
+      "sha256": "5b592790adf1d3190921e91675dfb84d3ad39dbe86f35cedd7fd94cb50176b8d",
+      "mime": "image/webp",
+      "bytes": 195406,
+      "width": 1024,
+      "height": 1407,
+      "source": {
+        "path": "artwork-source/cards/constructs/c006-eccaef0accbc1785.png",
+        "sha256": "eccaef0accbc17851a40fb2e562f16603838c613498836d2c8dc95ff566b8519",
+        "mime": "image/png",
+        "bytes": 2478488
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c007",
+      "revision": "9cbcc0ece566d802",
+      "path": "assets/cards/constructs/c007-9cbcc0ece566d802.webp",
+      "sha256": "9cbcc0ece566d802410d814327132e42f099f46c0ed4e9dc898a830b9a682a7a",
+      "mime": "image/webp",
+      "bytes": 298786,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c007-6a97c6da6bbbbe80.png",
+        "sha256": "6a97c6da6bbbbe80c431aeed51608aee71360ceadb8518c47c14a264cc03f083",
+        "mime": "image/png",
+        "bytes": 2892354
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c008",
+      "revision": "c63b2cd2cce88726",
+      "path": "assets/cards/constructs/c008-c63b2cd2cce88726.webp",
+      "sha256": "c63b2cd2cce887266c424cf7ed7c359c68544b681a41692db8164e59de7be264",
+      "mime": "image/webp",
+      "bytes": 216978,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c008-0816c5b5e5a65ec6.png",
+        "sha256": "0816c5b5e5a65ec6bf1d37f37e22e600fa352f08d65bd7a8abad1e8ad2229897",
+        "mime": "image/png",
+        "bytes": 2548262
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c009",
+      "revision": "27404b20caef7922",
+      "path": "assets/cards/constructs/c009-27404b20caef7922.webp",
+      "sha256": "27404b20caef792278633ec84692ec70f22f9686c2df5fa57ed72419b2064f41",
+      "mime": "image/webp",
+      "bytes": 285194,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c009-3aecfe6d3384288f.png",
+        "sha256": "3aecfe6d3384288f7a3447da9b6acfb2cd8be4854c25834787f44fe476f71331",
+        "mime": "image/png",
+        "bytes": 2897945
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c010",
+      "revision": "4f582c35414b77de",
+      "path": "assets/cards/constructs/c010-4f582c35414b77de.webp",
+      "sha256": "4f582c35414b77deafa117ff36fd12b5598c9d011e73b4ee67263db4fd25a752",
+      "mime": "image/webp",
+      "bytes": 199236,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c010-eba091ea6af236d9.png",
+        "sha256": "eba091ea6af236d97a1212a54f63fe60b07fafa8eaeb19a93569b4b74f6e1eb7",
+        "mime": "image/png",
+        "bytes": 2486272
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c011",
+      "revision": "3fef197c4bda2ffa",
+      "path": "assets/cards/constructs/c011-3fef197c4bda2ffa.webp",
+      "sha256": "3fef197c4bda2ffa2ef551c58fb51f2e145209430aad0fd6fb0e17ed949450fe",
+      "mime": "image/webp",
+      "bytes": 286114,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c011-b2ffe49c855b18c0.png",
+        "sha256": "b2ffe49c855b18c0ac7878d4eb0438647ae0c0805f91c564a8e09bcbe4ea3437",
+        "mime": "image/png",
+        "bytes": 2857960
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c012",
+      "revision": "f281ac82e93746dd",
+      "path": "assets/cards/constructs/c012-f281ac82e93746dd.webp",
+      "sha256": "f281ac82e93746ddefef3b8d6975bf78bece5dc6667e917fee8fb2f2732f9830",
+      "mime": "image/webp",
+      "bytes": 228528,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c012-3fc4ad5a994a787a.png",
+        "sha256": "3fc4ad5a994a787a2545a8f8b7a1bbf6e25dc6eda7de5b7ba7815a2589faa777",
+        "mime": "image/png",
+        "bytes": 2722218
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c013",
+      "revision": "464f6027948deb1c",
+      "path": "assets/cards/constructs/c013-464f6027948deb1c.webp",
+      "sha256": "464f6027948deb1c59de06d6c894de645c0422368d609e9267be3f3aa09f0b69",
+      "mime": "image/webp",
+      "bytes": 311518,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c013-4367d6e280d449bb.png",
+        "sha256": "4367d6e280d449bbc6d8710791c92d32574a1f62c847c1c01b15cefdab9ab4c4",
+        "mime": "image/png",
+        "bytes": 3120297
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c014",
+      "revision": "e28110f98aa658a0",
+      "path": "assets/cards/constructs/c014-e28110f98aa658a0.webp",
+      "sha256": "e28110f98aa658a0db11d07b44e0ce86e724d9c9ca1dfa088e8b6b69775e5bb1",
+      "mime": "image/webp",
+      "bytes": 233722,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c014-5a484115daf00094.png",
+        "sha256": "5a484115daf0009455a2d17e76bedfe9711421299621ce3ee5dea02a84f3e3c9",
+        "mime": "image/png",
+        "bytes": 2599769
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c015",
+      "revision": "2470435ec0f15d29",
+      "path": "assets/cards/constructs/c015-2470435ec0f15d29.webp",
+      "sha256": "2470435ec0f15d2913f7cb52dd302205dc0c740a93b6f3f4ba5b928c69317e8c",
+      "mime": "image/webp",
+      "bytes": 312840,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c015-4ed5c2d67999a03b.png",
+        "sha256": "4ed5c2d67999a03b1d58e429fc44d50cc242ebcdfed4d327fdf2f81c4d3b776a",
+        "mime": "image/png",
+        "bytes": 3006233
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c016",
+      "revision": "e29c8bc6cbd5cf6a",
+      "path": "assets/cards/constructs/c016-e29c8bc6cbd5cf6a.webp",
+      "sha256": "e29c8bc6cbd5cf6ac1c9c33c8397ef9deb0c73f52838d0b81244d46b8dfe722a",
+      "mime": "image/webp",
+      "bytes": 220770,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c016-ff0542c59739db4b.png",
+        "sha256": "ff0542c59739db4bf2d6e47dbd87b16b2e567208165450ad3e4181b76fb87ce5",
+        "mime": "image/png",
+        "bytes": 2600449
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c017",
+      "revision": "7d1c7c5500f90685",
+      "path": "assets/cards/constructs/c017-7d1c7c5500f90685.webp",
+      "sha256": "7d1c7c5500f906857389c127a042a3ecf0967d84c4a32289da53049f0e81e5a5",
+      "mime": "image/webp",
+      "bytes": 253890,
+      "width": 1024,
+      "height": 1407,
+      "source": {
+        "path": "artwork-source/cards/constructs/c017-62fbb0ff363ca7b2.png",
+        "sha256": "62fbb0ff363ca7b2c877b825e82908b444236e464ad49d712762f711e1d67042",
+        "mime": "image/png",
+        "bytes": 2854266
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c018",
+      "revision": "fb4909f800181ae9",
+      "path": "assets/cards/constructs/c018-fb4909f800181ae9.webp",
+      "sha256": "fb4909f800181ae907c52ade739c483572abc8a1a300e97f326c811412664e1f",
+      "mime": "image/webp",
+      "bytes": 274136,
+      "width": 1024,
+      "height": 1056,
+      "source": {
+        "path": "artwork-source/cards/constructs/c018-ace5c43642bf0bc5.png",
+        "sha256": "ace5c43642bf0bc5d0402e54cfff9d904e4498e203927ef81fa25eaa97497659",
+        "mime": "image/png",
+        "bytes": 3135202
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c019",
+      "revision": "066e47daad2159cf",
+      "path": "assets/cards/constructs/c019-066e47daad2159cf.webp",
+      "sha256": "066e47daad2159cf375c9f444b62e84ebe74cc43b9ff071140ee563f076e2a9f",
+      "mime": "image/webp",
+      "bytes": 336574,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c019-f8947d1f0c7cd21a.png",
+        "sha256": "f8947d1f0c7cd21ae26fbbfb932d6c8d7a22f5d1ad7bf866ff2b1c9aff0b6e36",
+        "mime": "image/png",
+        "bytes": 3122989
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c020",
+      "revision": "b8bda92adf492778",
+      "path": "assets/cards/constructs/c020-b8bda92adf492778.webp",
+      "sha256": "b8bda92adf492778ce0441d28fc702dd1451b52809c98b40f0903077945eba7c",
+      "mime": "image/webp",
+      "bytes": 294548,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c020-92f18fa8c3e0c5a3.png",
+        "sha256": "92f18fa8c3e0c5a303d1289bbe7d8a5d9d9c297c8109510dbc81b421f99a216c",
+        "mime": "image/png",
+        "bytes": 3048773
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c021",
+      "revision": "34107b0f56b7fb35",
+      "path": "assets/cards/constructs/c021-34107b0f56b7fb35.webp",
+      "sha256": "34107b0f56b7fb35e316cc79d1ee7c1ca771460dd626b8a7185e318d06c8b163",
+      "mime": "image/webp",
+      "bytes": 325226,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c021-b13ae8dc38ac253c.png",
+        "sha256": "b13ae8dc38ac253c35c6044892bd759eb383f40838db7a104ecafc39942d60b0",
+        "mime": "image/png",
+        "bytes": 3328345
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c022",
+      "revision": "0e9e0d474ef3010f",
+      "path": "assets/cards/constructs/c022-0e9e0d474ef3010f.webp",
+      "sha256": "0e9e0d474ef3010fbec42342a134c9a4ba66c3a54ea13414a983aa16507e6e32",
+      "mime": "image/webp",
+      "bytes": 330192,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c022-619aa669c0c2a913.png",
+        "sha256": "619aa669c0c2a913ca70ced8e56ed36831169415399e63a04960fbb752e8088f",
+        "mime": "image/png",
+        "bytes": 3168619
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c023",
+      "revision": "532bcff7554bb892",
+      "path": "assets/cards/constructs/c023-532bcff7554bb892.webp",
+      "sha256": "532bcff7554bb89219bb36509261abbcc274d578f6a8f5977dc51e5c3a772b52",
+      "mime": "image/webp",
+      "bytes": 346664,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c023-4b7441a953732c37.png",
+        "sha256": "4b7441a953732c378502c920582d441abb06d4c04a51435ab7850f709524370c",
+        "mime": "image/png",
+        "bytes": 3371559
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c024",
+      "revision": "e599b4bbe9b87ee1",
+      "path": "assets/cards/constructs/c024-e599b4bbe9b87ee1.webp",
+      "sha256": "e599b4bbe9b87ee182095c2f1b0b079e933151579fbaef577f88790e337216df",
+      "mime": "image/webp",
+      "bytes": 307634,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c024-bbbf70f88f97d31f.png",
+        "sha256": "bbbf70f88f97d31f01a1a994e7101ca3995fca04041f859a3c7a9812569008b1",
+        "mime": "image/png",
+        "bytes": 2975226
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c025",
+      "revision": "301cc11acadc0c9d",
+      "path": "assets/cards/constructs/c025-301cc11acadc0c9d.webp",
+      "sha256": "301cc11acadc0c9d79b50c23e1b7355611de7f8c2f3e1314a287f1da56e55801",
+      "mime": "image/webp",
+      "bytes": 383340,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c025-ad064da8f01565a9.png",
+        "sha256": "ad064da8f01565a97cd90603a3419f07bee305f090b118b1881edff162adde34",
+        "mime": "image/png",
+        "bytes": 3365424
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c026",
+      "revision": "71eb935e3b4dbdcd",
+      "path": "assets/cards/constructs/c026-71eb935e3b4dbdcd.webp",
+      "sha256": "71eb935e3b4dbdcd21433a9f4b2ac77ae1240b98492bd6d8206f69351033598f",
+      "mime": "image/webp",
+      "bytes": 351180,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c026-c01505b7115818fc.png",
+        "sha256": "c01505b7115818fc13093042fdd8794ebf577ce64ef31def7629ef5130c8af0c",
+        "mime": "image/png",
+        "bytes": 3097377
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c027",
+      "revision": "340529607f2f138e",
+      "path": "assets/cards/constructs/c027-340529607f2f138e.webp",
+      "sha256": "340529607f2f138e21be097143370db5a04ab4cc9b872ccf34410df8543077b5",
+      "mime": "image/webp",
+      "bytes": 338436,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c027-3eb929ddd2c6baad.png",
+        "sha256": "3eb929ddd2c6baad2acd744eed8f7f09a21dd14785212553cb31f6be2dfb322b",
+        "mime": "image/png",
+        "bytes": 3169181
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c028",
+      "revision": "eb3551d72840d07e",
+      "path": "assets/cards/constructs/c028-eb3551d72840d07e.webp",
+      "sha256": "eb3551d72840d07e17f8fcf9c87fda0fe28828cac03f501d58e35f15d35e1c00",
+      "mime": "image/webp",
+      "bytes": 372310,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c028-2f8e10946e740320.png",
+        "sha256": "2f8e10946e7403200c1ae03ea580fa36608af82c35ea9aa1e7be31e1a13eb2ef",
+        "mime": "image/png",
+        "bytes": 3292850
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c029",
+      "revision": "06ae84be2b63596e",
+      "path": "assets/cards/constructs/c029-06ae84be2b63596e.webp",
+      "sha256": "06ae84be2b63596e36b3cdf41b0d2c7c0dff905d4a46daf6193384c8742afdd2",
+      "mime": "image/webp",
+      "bytes": 333996,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c029-3cd5ca6528e8dcb1.png",
+        "sha256": "3cd5ca6528e8dcb101c60066459a46a19d0860b2a91c888332591a17d9824732",
+        "mime": "image/png",
+        "bytes": 3032573
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "c030",
+      "revision": "c112fb82f22b807e",
+      "path": "assets/cards/constructs/c030-c112fb82f22b807e.webp",
+      "sha256": "c112fb82f22b807e32cce0602a542bf3614ecfa8c206036a434fe3bd56f67e85",
+      "mime": "image/webp",
+      "bytes": 354774,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/constructs/c030-536b79b80a9cd3b0.png",
+        "sha256": "536b79b80a9cd3b05bf951b81cfbb17ebd0c0140005d327c465f319f49973902",
+        "mime": "image/png",
+        "bytes": 3315365
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m001",
+      "revision": "135f4a306a55a88f",
+      "path": "assets/cards/mythical/m001-135f4a306a55a88f.webp",
+      "sha256": "135f4a306a55a88f1fd8b918dc06c324d4694e879ec8619961be5a5aecbb0dc6",
+      "mime": "image/webp",
+      "bytes": 323316,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/mythical/m001-fce300c7fa878bd2.png",
+        "sha256": "fce300c7fa878bd2b6377c33afafac347ecf8f19c2da8c2420586d865d85a958",
+        "mime": "image/png",
+        "bytes": 3336542
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m002",
+      "revision": "e9beea828730059b",
+      "path": "assets/cards/mythical/m002-e9beea828730059b.webp",
+      "sha256": "e9beea828730059b3fc3d3e07028bbfa751a382f0f82e0d63e09d146b5f9193a",
+      "mime": "image/webp",
+      "bytes": 260006,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/mythical/m002-d30d87ad0bcb0b08.png",
+        "sha256": "d30d87ad0bcb0b084d0c34ff0ca41ac8843a050e2cc9c5c3635a177319934554",
+        "mime": "image/png",
+        "bytes": 3073811
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m003",
+      "revision": "ad1d114dae007681",
+      "path": "assets/cards/mythical/m003-ad1d114dae007681.webp",
+      "sha256": "ad1d114dae00768195d4bf0a10341a9d5b671b5719d58361c474a9c1e3d033da",
+      "mime": "image/webp",
+      "bytes": 353552,
+      "width": 1024,
+      "height": 1536,
+      "source": {
+        "path": "artwork-source/cards/mythical/m003-a2c1d9024d50e4ae.png",
+        "sha256": "a2c1d9024d50e4ae396163614eea5e17782c31acae189311a7605b460436cdc4",
+        "mime": "image/png",
+        "bytes": 2890936
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m004",
+      "revision": "fffd0153ad032e3e",
+      "path": "assets/cards/mythical/m004-fffd0153ad032e3e.webp",
+      "sha256": "fffd0153ad032e3ee6231240244baa5fa5a5f8086d6fcaf52ad49a8ce2d02392",
+      "mime": "image/webp",
+      "bytes": 359772,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m004-8bbd0456e3ef3b38.png",
+        "sha256": "8bbd0456e3ef3b38951f109fb74ae586f2bc4cfd5021ef00692e2e4d08bc9ba6",
+        "mime": "image/png",
+        "bytes": 3406890
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m005",
+      "revision": "e16ac5a1fa39c264",
+      "path": "assets/cards/mythical/m005-e16ac5a1fa39c264.webp",
+      "sha256": "e16ac5a1fa39c264282ef4ad91397373b8b48ab29ec8718be84e3fee16ca0dc5",
+      "mime": "image/webp",
+      "bytes": 308726,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m005-f3fc033a0853537a.png",
+        "sha256": "f3fc033a0853537a8c6a9ea4fb72b9fb7603619e9f8b938850c785c2218ee484",
+        "mime": "image/png",
+        "bytes": 3107875
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m006",
+      "revision": "0e2c6f42461a3f5b",
+      "path": "assets/cards/mythical/m006-0e2c6f42461a3f5b.webp",
+      "sha256": "0e2c6f42461a3f5bb6bf153ad09f080ec0705806a5d77af617c5858bb35a81aa",
+      "mime": "image/webp",
+      "bytes": 250358,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m006-fac6c7e6154f0fc3.png",
+        "sha256": "fac6c7e6154f0fc37482e135d76a8f7b89348a5b7afb4b1a4163a1541faad79d",
+        "mime": "image/png",
+        "bytes": 2878186
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m007",
+      "revision": "a856a9ad891ccc16",
+      "path": "assets/cards/mythical/m007-a856a9ad891ccc16.webp",
+      "sha256": "a856a9ad891ccc1616129d47419811cffbb46f07e43ef24316b1c191a5a1c0b5",
+      "mime": "image/webp",
+      "bytes": 273298,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m007-17ee737367ac210f.png",
+        "sha256": "17ee737367ac210f037b507b6870ea4ecad423e8933e73ba9f18d93cf4aecb0e",
+        "mime": "image/png",
+        "bytes": 2980822
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m008",
+      "revision": "75d2c8daa2156e57",
+      "path": "assets/cards/mythical/m008-75d2c8daa2156e57.webp",
+      "sha256": "75d2c8daa2156e576af156e3f04225f0feb5fea2a87d0d41a45c9bfea3628f90",
+      "mime": "image/webp",
+      "bytes": 263120,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m008-8626a15ba66b396d.png",
+        "sha256": "8626a15ba66b396ddebabdebd3e184fd46b46d9fec2e12fe5630438a91d86d52",
+        "mime": "image/png",
+        "bytes": 3002779
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m009",
+      "revision": "78451615fb36c319",
+      "path": "assets/cards/mythical/m009-78451615fb36c319.webp",
+      "sha256": "78451615fb36c319c2993305b652c5f74b6b1ecac9b6b8961e381adf0d55a087",
+      "mime": "image/webp",
+      "bytes": 290994,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m009-8e7e23e13c5631f2.png",
+        "sha256": "8e7e23e13c5631f2dec362d38d501b48d73a80b8170db9ae05444a01dc944b52",
+        "mime": "image/png",
+        "bytes": 3093657
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m010",
+      "revision": "1f1ab386f8d884f7",
+      "path": "assets/cards/mythical/m010-1f1ab386f8d884f7.webp",
+      "sha256": "1f1ab386f8d884f70f651ae4194cf51190ea9dc2b0a263f4a6620cc105776bf2",
+      "mime": "image/webp",
+      "bytes": 264892,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/mythical/m010-6c9433b6fac43f50.png",
+        "sha256": "6c9433b6fac43f50253accb6b08840b3d1b64e80de682b975637c5dd4a7ae6ad",
+        "mime": "image/png",
+        "bytes": 3046877
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m011",
+      "revision": "04910c8120c146a3",
+      "path": "assets/cards/mythical/m011-04910c8120c146a3.webp",
+      "sha256": "04910c8120c146a3dcebf7ce35d6265f8778844e44a813d08f62b08f41fee735",
+      "mime": "image/webp",
+      "bytes": 320958,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m011-d75533114a1b729e.png",
+        "sha256": "d75533114a1b729e12467015ffa2efc4fc1632806471b734ecbc7fa90a240807",
+        "mime": "image/png",
+        "bytes": 3091951
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m012",
+      "revision": "5b8f32676a0e5ff2",
+      "path": "assets/cards/mythical/m012-5b8f32676a0e5ff2.webp",
+      "sha256": "5b8f32676a0e5ff2df7a746ec268c57469fb80daaa34639523fe0fa2d9af8692",
+      "mime": "image/webp",
+      "bytes": 323226,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/mythical/m012-a7adc5b5a532108d.png",
+        "sha256": "a7adc5b5a532108d8e8d5962f6d03a8614db371bc1b066308f4b085975ab1702",
+        "mime": "image/png",
+        "bytes": 3396679
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m013",
+      "revision": "02e9963ac11d717b",
+      "path": "assets/cards/mythical/m013-02e9963ac11d717b.webp",
+      "sha256": "02e9963ac11d717bdca830237448f0d490dbd7f461e1ab068cd02669d66354a3",
+      "mime": "image/webp",
+      "bytes": 357330,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m013-e1d6800d1ede09b4.png",
+        "sha256": "e1d6800d1ede09b4b7c0821f3b35d1c07419f4e25bc3982ea2bc552a08d68238",
+        "mime": "image/png",
+        "bytes": 3398358
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m014",
+      "revision": "2e189db965b856da",
+      "path": "assets/cards/mythical/m014-2e189db965b856da.webp",
+      "sha256": "2e189db965b856da2272577b144b87d0f9e8dd202d75b0f771c1cea06191a303",
+      "mime": "image/webp",
+      "bytes": 328460,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m014-52d13b43256bc433.png",
+        "sha256": "52d13b43256bc433afbd4a5f0a75f3aca97e29c019b2b40783b4e368b51ae298",
+        "mime": "image/png",
+        "bytes": 3333730
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m015",
+      "revision": "3c0dc55191a0df61",
+      "path": "assets/cards/mythical/m015-3c0dc55191a0df61.webp",
+      "sha256": "3c0dc55191a0df6174a1c359a9edbed82fae24b30428c8ee09a4a7284341511b",
+      "mime": "image/webp",
+      "bytes": 313632,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/mythical/m015-bb46fb03da6fbc5b.png",
+        "sha256": "bb46fb03da6fbc5ba93fe36ffd3fa2f89d7171f5d0a874afa78a369b2831da66",
+        "mime": "image/png",
+        "bytes": 3314421
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m016",
+      "revision": "89add8bca23a15a4",
+      "path": "assets/cards/mythical/m016-89add8bca23a15a4.webp",
+      "sha256": "89add8bca23a15a479b3cd6c1277ff7f40644a4793d54e27613c12c88b85f5cc",
+      "mime": "image/webp",
+      "bytes": 376126,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m016-87351f5d480b1ed4.png",
+        "sha256": "87351f5d480b1ed43f0999b7e61e93d832c10ba80d5f1409f8f6376264ed38c6",
+        "mime": "image/png",
+        "bytes": 3390109
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m017",
+      "revision": "12c3e6a7c415ca28",
+      "path": "assets/cards/mythical/m017-12c3e6a7c415ca28.webp",
+      "sha256": "12c3e6a7c415ca28f013b19ab6aae56a8f829b714467e3bc4fc8a6bb5b014e07",
+      "mime": "image/webp",
+      "bytes": 325380,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m017-24cb677bfb79bfd1.png",
+        "sha256": "24cb677bfb79bfd187d8e5f4cc28f7719a007fef24a429b96de3c66debe5d819",
+        "mime": "image/png",
+        "bytes": 3227164
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m018",
+      "revision": "368194c72281cb15",
+      "path": "assets/cards/mythical/m018-368194c72281cb15.webp",
+      "sha256": "368194c72281cb15efb0b0689712340b8b5ad38a536eacf5b4b71f8d338d27c1",
+      "mime": "image/webp",
+      "bytes": 272304,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m018-3c8aee31b1366e46.png",
+        "sha256": "3c8aee31b1366e465de80e9a201b65137e65d6dc50caeef4b328265dc13bf310",
+        "mime": "image/png",
+        "bytes": 2983288
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m019",
+      "revision": "7eac426d93f1dd7a",
+      "path": "assets/cards/mythical/m019-7eac426d93f1dd7a.webp",
+      "sha256": "7eac426d93f1dd7a0378d3e4f630c4b2d98505965089778e36694faba4565d3d",
+      "mime": "image/webp",
+      "bytes": 223898,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m019-0d8064b21b69bcf8.png",
+        "sha256": "0d8064b21b69bcf8a4245b9b6d987993af7679c2bffa2be3a2453ca17d8e326a",
+        "mime": "image/png",
+        "bytes": 2415536
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m020",
+      "revision": "76df91beb4b8dd79",
+      "path": "assets/cards/mythical/m020-76df91beb4b8dd79.webp",
+      "sha256": "76df91beb4b8dd793320ca45f6ac0348ac2945c7017dfaa4a010f8049dcd59ed",
+      "mime": "image/webp",
+      "bytes": 209972,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m020-913946ea64d08f25.png",
+        "sha256": "913946ea64d08f25f025a2a6d746cb844e07395c30d25a6eb12457ee4cc46d98",
+        "mime": "image/png",
+        "bytes": 2279816
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m021",
+      "revision": "ffae48fe49fe8dd6",
+      "path": "assets/cards/mythical/m021-ffae48fe49fe8dd6.webp",
+      "sha256": "ffae48fe49fe8dd6927e91bb5bf12205353219fb69771597e778e786f47c3441",
+      "mime": "image/webp",
+      "bytes": 226810,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m021-0746c692950c3819.png",
+        "sha256": "0746c692950c3819e5d405a13c4b54a1b32893b3d634bcc170d25883fbc1b362",
+        "mime": "image/png",
+        "bytes": 2441605
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m022",
+      "revision": "57548c76cc6d87ee",
+      "path": "assets/cards/mythical/m022-57548c76cc6d87ee.webp",
+      "sha256": "57548c76cc6d87ee106a882d58faafe61d7102e19c0c86e1394fcf14f6b71f47",
+      "mime": "image/webp",
+      "bytes": 351088,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m022-a367402eb39219f4.png",
+        "sha256": "a367402eb39219f44890b2d033f977f057c5382a0353408f695435f77a7437b8",
+        "mime": "image/png",
+        "bytes": 3228875
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m023",
+      "revision": "1d6ea2e28aef30e2",
+      "path": "assets/cards/mythical/m023-1d6ea2e28aef30e2.webp",
+      "sha256": "1d6ea2e28aef30e2be87200bb3a1063ed2c1d0a6803aafdd8ecc79061f847e68",
+      "mime": "image/webp",
+      "bytes": 392102,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m023-ea23e32f1a58921a.png",
+        "sha256": "ea23e32f1a58921a3c0d91665256c3e17a7b1d910f17225f27c3c162f906067b",
+        "mime": "image/png",
+        "bytes": 3473550
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m024",
+      "revision": "e05a9775c10bf85c",
+      "path": "assets/cards/mythical/m024-e05a9775c10bf85c.webp",
+      "sha256": "e05a9775c10bf85c4992aa84a5929a530a2ba9b7e2c9c86937c7bddee638d539",
+      "mime": "image/webp",
+      "bytes": 355072,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m024-865a509dd0e7bf2e.png",
+        "sha256": "865a509dd0e7bf2e37128ea1a708c5fe4fb677da910c1ad189fd517d3205cfe9",
+        "mime": "image/png",
+        "bytes": 3420752
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m025",
+      "revision": "1242ef2808489cc3",
+      "path": "assets/cards/mythical/m025-1242ef2808489cc3.webp",
+      "sha256": "1242ef2808489cc320718e5c859e1cd26191dc2ac5188ae5824f0f437e3e095b",
+      "mime": "image/webp",
+      "bytes": 380672,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m025-3fb690ac0e38326e.png",
+        "sha256": "3fb690ac0e38326e109db0382f6adf2124089015e6000ed3cd9359d8907a0259",
+        "mime": "image/png",
+        "bytes": 3421726
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m026",
+      "revision": "c4c40ff6c2f93e6e",
+      "path": "assets/cards/mythical/m026-c4c40ff6c2f93e6e.webp",
+      "sha256": "c4c40ff6c2f93e6e43f3c632eeb723eeca5d4e3cb6e951f6faf74aa9b71ed11a",
+      "mime": "image/webp",
+      "bytes": 370762,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m026-ec0e127b89d4fa44.png",
+        "sha256": "ec0e127b89d4fa441a95e0e97731f1c99408e50cff7d93685b231c1d0a801729",
+        "mime": "image/png",
+        "bytes": 3222934
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m027",
+      "revision": "89971933af2c1e5c",
+      "path": "assets/cards/mythical/m027-89971933af2c1e5c.webp",
+      "sha256": "89971933af2c1e5c4a52df9bf9e74af7677ed074319c5f994004fc49929b9289",
+      "mime": "image/webp",
+      "bytes": 383944,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m027-022307e20fcb6924.png",
+        "sha256": "022307e20fcb69247c2084ea0bc5992821b95d11bd8a9eb462c2e79f788c1905",
+        "mime": "image/png",
+        "bytes": 3108420
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m028",
+      "revision": "582c0a0bc039c50f",
+      "path": "assets/cards/mythical/m028-582c0a0bc039c50f.webp",
+      "sha256": "582c0a0bc039c50f3dd1b09e65e80c141676c0a4a64e8b1fc3e32d18a77d9929",
+      "mime": "image/webp",
+      "bytes": 413500,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m028-17ffa29dede00e9a.png",
+        "sha256": "17ffa29dede00e9a2eae4e387fbf0d9fd1310c0146f9ef59b7dda3324c6bec06",
+        "mime": "image/png",
+        "bytes": 3533052
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m029",
+      "revision": "8d618633959d5439",
+      "path": "assets/cards/mythical/m029-8d618633959d5439.webp",
+      "sha256": "8d618633959d5439f704fe5d3755983fb3c683d3af6e99e893d7098f68c3eb19",
+      "mime": "image/webp",
+      "bytes": 388620,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m029-d61420a11e021735.png",
+        "sha256": "d61420a11e021735873dc432553945aae5fe7ee7474ba32cf85810177a2397ef",
+        "mime": "image/png",
+        "bytes": 3396502
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "m030",
+      "revision": "47eebaf2170ca1f7",
+      "path": "assets/cards/mythical/m030-47eebaf2170ca1f7.webp",
+      "sha256": "47eebaf2170ca1f7924b06e149ef5eaf18658506b1f4598ce765787379eab72f",
+      "mime": "image/webp",
+      "bytes": 356806,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/mythical/m030-4fc279ffe9c89dae.png",
+        "sha256": "4fc279ffe9c89dae0edd0ba053e1b7717501ee7dc1452b8fc1823080444cab7c",
+        "mime": "image/png",
+        "bytes": 3285595
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n001",
+      "revision": "f57bd97aa5c95ab2",
+      "path": "assets/cards/nature/n001-f57bd97aa5c95ab2.webp",
+      "sha256": "f57bd97aa5c95ab28e92a883c07a18fd7c7940dd2136d5230654f1ee81fd0ba7",
+      "mime": "image/webp",
+      "bytes": 198922,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n001-d6a065c7c9090144.png",
+        "sha256": "d6a065c7c90901445631db834634ebaf5cf5eb2f92bfc3bc4a9959d20df3287f",
+        "mime": "image/png",
+        "bytes": 2692444
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n002",
+      "revision": "79dfe4cff169df58",
+      "path": "assets/cards/nature/n002-79dfe4cff169df58.webp",
+      "sha256": "79dfe4cff169df581179b6496f1e03efb69518f381fc229211027d80824d0ae8",
+      "mime": "image/webp",
+      "bytes": 204474,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n002-fcc8e3cc42dd2c8d.png",
+        "sha256": "fcc8e3cc42dd2c8d063885ff95fadaef6368f2c8bf11f99b404e6066092a81d4",
+        "mime": "image/png",
+        "bytes": 2668761
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n003",
+      "revision": "7b07e0b77b61d9f5",
+      "path": "assets/cards/nature/n003-7b07e0b77b61d9f5.webp",
+      "sha256": "7b07e0b77b61d9f5dd68490f93e67485e019dacd0e8daeee070c8d9b9dc10527",
+      "mime": "image/webp",
+      "bytes": 237448,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n003-21d09717b7929e47.png",
+        "sha256": "21d09717b7929e473fb31579d48f9f539d27ed38c4507fbc410a2d95a9eabedb",
+        "mime": "image/png",
+        "bytes": 2788466
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n004",
+      "revision": "2a217c45e86c7be3",
+      "path": "assets/cards/nature/n004-2a217c45e86c7be3.webp",
+      "sha256": "2a217c45e86c7be37641f9adb75d86cf18b9f56be00cb42bcbc78aefc5a3cc57",
+      "mime": "image/webp",
+      "bytes": 415536,
+      "width": 1024,
+      "height": 1536,
+      "source": {
+        "path": "artwork-source/cards/nature/n004-52742cb7261a6384.png",
+        "sha256": "52742cb7261a63848c965f6f6103e08af8144c77b87c91d110c212773e5dd77e",
+        "mime": "image/png",
+        "bytes": 3308646
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n005",
+      "revision": "4acca2c12b323941",
+      "path": "assets/cards/nature/n005-4acca2c12b323941.webp",
+      "sha256": "4acca2c12b32394119725dfe9e7df3702f0ace66e2064342649febcb1c85f5e8",
+      "mime": "image/webp",
+      "bytes": 359228,
+      "width": 1024,
+      "height": 1536,
+      "source": {
+        "path": "artwork-source/cards/nature/n005-3b8a80f426cf7b66.png",
+        "sha256": "3b8a80f426cf7b665948a5b158635e32415124f41ad9e9918327340c3d297ca3",
+        "mime": "image/png",
+        "bytes": 3048791
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n006",
+      "revision": "c4b433191d083030",
+      "path": "assets/cards/nature/n006-c4b433191d083030.webp",
+      "sha256": "c4b433191d0830303f8d5f6d303fa7bdbedb109f55d4a3578bb62cc132666f42",
+      "mime": "image/webp",
+      "bytes": 299206,
+      "width": 1024,
+      "height": 1536,
+      "source": {
+        "path": "artwork-source/cards/nature/n006-02da059b8b083a82.png",
+        "sha256": "02da059b8b083a82ad4440c0ca30a08b8777386caa2948e29f9988ac7e3d839a",
+        "mime": "image/png",
+        "bytes": 2738219
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n007",
+      "revision": "63a45517e1320e35",
+      "path": "assets/cards/nature/n007-63a45517e1320e35.webp",
+      "sha256": "63a45517e1320e35b97c5afaa136302c298aac0cedaaaa56966cecc124839b4f",
+      "mime": "image/webp",
+      "bytes": 473998,
+      "width": 1024,
+      "height": 1536,
+      "source": {
+        "path": "artwork-source/cards/nature/n007-90177955d51d2efe.png",
+        "sha256": "90177955d51d2efeec6e382a46fd74f38f428eb05268aad08cee5b5a2a14a03b",
+        "mime": "image/png",
+        "bytes": 3421206
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n008",
+      "revision": "8e2577c34a6215e6",
+      "path": "assets/cards/nature/n008-8e2577c34a6215e6.webp",
+      "sha256": "8e2577c34a6215e68a2bd845bffa184cde846552fb496107ba991d37d1a9b1ac",
+      "mime": "image/webp",
+      "bytes": 257660,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n008-d6c6ec2df5d83698.png",
+        "sha256": "d6c6ec2df5d83698c49fbe4a75595cf024531dccd3427e459772d1d205178202",
+        "mime": "image/png",
+        "bytes": 2841121
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n009",
+      "revision": "dd357b8b141b9396",
+      "path": "assets/cards/nature/n009-dd357b8b141b9396.webp",
+      "sha256": "dd357b8b141b9396a83e85d192731ad6d3579e81b6e4b48d12bc3c488bf9f62e",
+      "mime": "image/webp",
+      "bytes": 227298,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n009-b7f9778901060905.png",
+        "sha256": "b7f97789010609054492f5f530ccb4da6263d89fcaa660afac6a38b5822625ea",
+        "mime": "image/png",
+        "bytes": 2595569
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n010",
+      "revision": "edfc55919d84ba45",
+      "path": "assets/cards/nature/n010-edfc55919d84ba45.webp",
+      "sha256": "edfc55919d84ba45957417fecaf4e43af635ca2739f54424cb3f58881e3b8916",
+      "mime": "image/webp",
+      "bytes": 313842,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n010-2cb35629ba54b5c4.png",
+        "sha256": "2cb35629ba54b5c4357a8a10fc5bbdeb8948cfd770d27e5f9cd527ef8558d3f1",
+        "mime": "image/png",
+        "bytes": 3068570
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n011",
+      "revision": "5d302ae5803e1e68",
+      "path": "assets/cards/nature/n011-5d302ae5803e1e68.webp",
+      "sha256": "5d302ae5803e1e68757b62b4f616452f1cff4a3357ea78b45d6dacd54907d945",
+      "mime": "image/webp",
+      "bytes": 404172,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n011-11b451f882e793f3.png",
+        "sha256": "11b451f882e793f3cf488ff363f30efe48e11579168974648657446c43d026e5",
+        "mime": "image/png",
+        "bytes": 3579143
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n012",
+      "revision": "8f2f6e7c0df3edd2",
+      "path": "assets/cards/nature/n012-8f2f6e7c0df3edd2.webp",
+      "sha256": "8f2f6e7c0df3edd2e026afce269c915cd23800b1535bdc9e8d9061d0af3a75b4",
+      "mime": "image/webp",
+      "bytes": 266178,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n012-c0f49f5e4a9c5de1.png",
+        "sha256": "c0f49f5e4a9c5de150bdef7d50ec3c9dbd1217b7c044f1fbe1659e7bd9117c47",
+        "mime": "image/png",
+        "bytes": 2861256
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n013",
+      "revision": "7655b0f2a9748594",
+      "path": "assets/cards/nature/n013-7655b0f2a9748594.webp",
+      "sha256": "7655b0f2a97485941908f90b0f2bcea692ed268e4337d01f4c5ef7a887c96bde",
+      "mime": "image/webp",
+      "bytes": 374264,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n013-7add1707d1cdf6b3.png",
+        "sha256": "7add1707d1cdf6b33fb44ebf90e7ad178abf17c9601e9371f3d98b8e1279d55c",
+        "mime": "image/png",
+        "bytes": 3404780
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n014",
+      "revision": "716c3df1b5ae3b51",
+      "path": "assets/cards/nature/n014-716c3df1b5ae3b51.webp",
+      "sha256": "716c3df1b5ae3b5117b69681ab19923c95f56d9e9446847f1b8aa2faaee74578",
+      "mime": "image/webp",
+      "bytes": 273802,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n014-4a5cec50a96b8ab4.png",
+        "sha256": "4a5cec50a96b8ab49be0afa8aa701d9a2d997db9399f98be76ae83e9a1c17a6a",
+        "mime": "image/png",
+        "bytes": 2902887
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n015",
+      "revision": "478c6feed55c8e02",
+      "path": "assets/cards/nature/n015-478c6feed55c8e02.webp",
+      "sha256": "478c6feed55c8e02e6b6a172fe3bd9dcdda61ae9e0db8a4a24f21fa3ffc7b229",
+      "mime": "image/webp",
+      "bytes": 306306,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n015-b1d116141284133f.png",
+        "sha256": "b1d116141284133ff17a7d898d603091c446b46f370214cc6a9e3edaa62613c4",
+        "mime": "image/png",
+        "bytes": 3060228
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n016",
+      "revision": "ee9159d1a3ca5693",
+      "path": "assets/cards/nature/n016-ee9159d1a3ca5693.webp",
+      "sha256": "ee9159d1a3ca5693d24b92a9e79f213601c64a4744e9d14fbf1935b905efd992",
+      "mime": "image/webp",
+      "bytes": 310606,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n016-039e3cf5811e631c.png",
+        "sha256": "039e3cf5811e631cbee6c4b5f6a0f2966f3533905808ffcf178adb489a8635d6",
+        "mime": "image/png",
+        "bytes": 3188143
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n017",
+      "revision": "c835ae7668ee7368",
+      "path": "assets/cards/nature/n017-c835ae7668ee7368.webp",
+      "sha256": "c835ae7668ee7368a87dc962830be2384273b9ae4c9e471a59134b2da9bb8603",
+      "mime": "image/webp",
+      "bytes": 297986,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n017-b9fdb22cbf1dcc88.png",
+        "sha256": "b9fdb22cbf1dcc8856a67917c50ff17ebb96deae4d1699fece0ab50efc18a193",
+        "mime": "image/png",
+        "bytes": 3043806
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n018",
+      "revision": "04752005609f5954",
+      "path": "assets/cards/nature/n018-04752005609f5954.webp",
+      "sha256": "04752005609f5954bec9840aee5b175dba724ae0d9de24a75df5953434d32396",
+      "mime": "image/webp",
+      "bytes": 284306,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n018-c1745fcedaa6188a.png",
+        "sha256": "c1745fcedaa6188afd05867b223961c363f5fae2262b83c58219f7d560670df0",
+        "mime": "image/png",
+        "bytes": 2898807
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n019",
+      "revision": "74aa789492fe3dfb",
+      "path": "assets/cards/nature/n019-74aa789492fe3dfb.webp",
+      "sha256": "74aa789492fe3dfb65f48bafcd252e2392a4f14af3e903555cf5794c95aed44c",
+      "mime": "image/webp",
+      "bytes": 335430,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n019-2eaffbe7ba0b037d.png",
+        "sha256": "2eaffbe7ba0b037dd724f48aebd027d37eb408dc8e9dc3805d285ff787e1b18e",
+        "mime": "image/png",
+        "bytes": 3246521
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n020",
+      "revision": "6d059075507dfe41",
+      "path": "assets/cards/nature/n020-6d059075507dfe41.webp",
+      "sha256": "6d059075507dfe4171ec2314bd582758ff2a75efb5786e725c48317844341963",
+      "mime": "image/webp",
+      "bytes": 345274,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n020-6d91bd68256e6bda.png",
+        "sha256": "6d91bd68256e6bdafd37dcc816eb2c9d293e9ac9f7e7d3e6f946c590daf8dcb5",
+        "mime": "image/png",
+        "bytes": 3403051
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n021",
+      "revision": "ca3d75503fea65de",
+      "path": "assets/cards/nature/n021-ca3d75503fea65de.webp",
+      "sha256": "ca3d75503fea65def09764bede2672c9c079d138b6297acbcc71ef1ca219f545",
+      "mime": "image/webp",
+      "bytes": 310954,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n021-2916e394aa3940d9.png",
+        "sha256": "2916e394aa3940d9632b805952e12e3942bfeb35d070395bc51df0e854b025b3",
+        "mime": "image/png",
+        "bytes": 3296482
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n022",
+      "revision": "d4993ebb6fc3e9bd",
+      "path": "assets/cards/nature/n022-d4993ebb6fc3e9bd.webp",
+      "sha256": "d4993ebb6fc3e9bd03f96c7cc7703f13e796b9cdcb5fbd77fa818d2190aa98df",
+      "mime": "image/webp",
+      "bytes": 343170,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n022-23ff9a3754aa9cf2.png",
+        "sha256": "23ff9a3754aa9cf297eb713ea025ae75e68c3b5b3cf680c6c075d55c219a5da5",
+        "mime": "image/png",
+        "bytes": 3300773
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n023",
+      "revision": "3d667f3b5c3015c7",
+      "path": "assets/cards/nature/n023-3d667f3b5c3015c7.webp",
+      "sha256": "3d667f3b5c3015c7923859fa2e3039d6f84b3b8ca8bec60e252e4e4467280e0b",
+      "mime": "image/webp",
+      "bytes": 432688,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n023-d4b53406daf9d998.png",
+        "sha256": "d4b53406daf9d998ae633bf7323f2ab4b88b7952bc467479794a948fc996bd46",
+        "mime": "image/png",
+        "bytes": 3679653
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n024",
+      "revision": "0a4b0ed1dee880b5",
+      "path": "assets/cards/nature/n024-0a4b0ed1dee880b5.webp",
+      "sha256": "0a4b0ed1dee880b55e35a12b5a13ecadabee844ab2b15c927de1a086312c0f28",
+      "mime": "image/webp",
+      "bytes": 280598,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n024-d24026e95a43d1e3.png",
+        "sha256": "d24026e95a43d1e30ad60d52cf9dd8e5c228d007a0c69f7dda997394eb46ed05",
+        "mime": "image/png",
+        "bytes": 2999419
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n025",
+      "revision": "6762fc7c7925291a",
+      "path": "assets/cards/nature/n025-6762fc7c7925291a.webp",
+      "sha256": "6762fc7c7925291a6b2df104ac07d04716cf37404c711ad4d8b2dd36a57a164e",
+      "mime": "image/webp",
+      "bytes": 224250,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n025-0dcd098024fff56b.png",
+        "sha256": "0dcd098024fff56b7de87b1b902b556266fc939dd99649e8e9248e24558144cb",
+        "mime": "image/png",
+        "bytes": 2785792
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n026",
+      "revision": "3e6caefc5390711b",
+      "path": "assets/cards/nature/n026-3e6caefc5390711b.webp",
+      "sha256": "3e6caefc5390711bfe3ce3c3f4c347faab65ae52fd26a596208a32e07c1113ac",
+      "mime": "image/webp",
+      "bytes": 284024,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n026-29d6f70e9d49d0a2.png",
+        "sha256": "29d6f70e9d49d0a22817c02e6635b3a853697e5c8dd4c0296728685c909f2ed0",
+        "mime": "image/png",
+        "bytes": 2749655
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n027",
+      "revision": "2c5415d7c4622345",
+      "path": "assets/cards/nature/n027-2c5415d7c4622345.webp",
+      "sha256": "2c5415d7c4622345c1686b7c8168fc25daee989c4ece5c95d71736003a10d3f1",
+      "mime": "image/webp",
+      "bytes": 313542,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n027-ea84b98114cb7284.png",
+        "sha256": "ea84b98114cb7284eeee2815540476472a068213bbd8379a80b4880d8b5e1ce6",
+        "mime": "image/png",
+        "bytes": 3221947
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n028",
+      "revision": "1b17f8930825b4a5",
+      "path": "assets/cards/nature/n028-1b17f8930825b4a5.webp",
+      "sha256": "1b17f8930825b4a51853ceb87eda321cf23a6bc9880e4225a68ecbeb912af235",
+      "mime": "image/webp",
+      "bytes": 342830,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/nature/n028-e2bac3982b477c43.png",
+        "sha256": "e2bac3982b477c438ed8dbba16001ba7d1ef8f587cab9c967c9d377c08e1cea0",
+        "mime": "image/png",
+        "bytes": 3382874
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n029",
+      "revision": "d41c04bd55e497c4",
+      "path": "assets/cards/nature/n029-d41c04bd55e497c4.webp",
+      "sha256": "d41c04bd55e497c44b099e71c701522175dc21713fe2262693e95ec5974fb4ff",
+      "mime": "image/webp",
+      "bytes": 244516,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/nature/n029-8648bb2a86804a6c.png",
+        "sha256": "8648bb2a86804a6c2ed83e2cc1fb58e6ce557591e169b976d0696ae5dae52c5f",
+        "mime": "image/png",
+        "bytes": 2819662
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "n030",
+      "revision": "bb2697bbf0879bc5",
+      "path": "assets/cards/nature/n030-bb2697bbf0879bc5.webp",
+      "sha256": "bb2697bbf0879bc57cf18772abe2c4c72adc7a1ed40ec58fbee30bc2a46ccfbc",
+      "mime": "image/webp",
+      "bytes": 269122,
+      "width": 1024,
+      "height": 1121,
+      "source": {
+        "path": "artwork-source/cards/nature/n030-f0fe1f9ab2ba74aa.png",
+        "sha256": "f0fe1f9ab2ba74aa56111b92fe22560148d38633e91a2ed55ed34f2593f94af7",
+        "mime": "image/png",
+        "bytes": 3030413
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u001",
+      "revision": "a0b26fb8d8009f5a",
+      "path": "assets/cards/undead/u001-a0b26fb8d8009f5a.webp",
+      "sha256": "a0b26fb8d8009f5a3ba6451127fefad0516023e85a9d43b36c484d5f443ca018",
+      "mime": "image/webp",
+      "bytes": 194920,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u001-e3d016733528603f.png",
+        "sha256": "e3d016733528603f54ce52e4dcb8a1e46c0a3440f6b1885102420c5e6c742841",
+        "mime": "image/png",
+        "bytes": 2542404
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u002",
+      "revision": "a31505525e0ccf38",
+      "path": "assets/cards/undead/u002-a31505525e0ccf38.webp",
+      "sha256": "a31505525e0ccf3878107297579d2c36ceecc72da9e215d636ad5d9dfc523d48",
+      "mime": "image/webp",
+      "bytes": 222232,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u002-167badd0e34a8f06.png",
+        "sha256": "167badd0e34a8f068a0923179ecf7ecb9378203f63359c9473e41ebd53dbf878",
+        "mime": "image/png",
+        "bytes": 2659336
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u003",
+      "revision": "6d79c738fd3187f5",
+      "path": "assets/cards/undead/u003-6d79c738fd3187f5.webp",
+      "sha256": "6d79c738fd3187f5dc3fc64634bec245e1213f8a7529555e60f931541a47c807",
+      "mime": "image/webp",
+      "bytes": 221386,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u003-fc43db01f71ca37e.png",
+        "sha256": "fc43db01f71ca37e8b189dc77bf037638aa17dbe16bba393c0aed3822481b1fd",
+        "mime": "image/png",
+        "bytes": 2858275
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u004",
+      "revision": "5fb6575f79635242",
+      "path": "assets/cards/undead/u004-5fb6575f79635242.webp",
+      "sha256": "5fb6575f796352424f117f99e96fccd3377e28584966bc7ac9727f71c8bbdc5d",
+      "mime": "image/webp",
+      "bytes": 225140,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u004-7aae47989a2a8d7a.png",
+        "sha256": "7aae47989a2a8d7a9ed7f8adbd0f03dd003b9da13f27cefdfafa66dbdcf4e6cf",
+        "mime": "image/png",
+        "bytes": 2662861
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u005",
+      "revision": "1d7ccf6043b30b4d",
+      "path": "assets/cards/undead/u005-1d7ccf6043b30b4d.webp",
+      "sha256": "1d7ccf6043b30b4d7d10928e39639915fbe35e6865c2256a89c6724727375115",
+      "mime": "image/webp",
+      "bytes": 260918,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u005-b58166082f514c0d.png",
+        "sha256": "b58166082f514c0db7f18518a3bf83509b3ec5eab65ec2a52c7221d3dd6e1559",
+        "mime": "image/png",
+        "bytes": 2939702
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u006",
+      "revision": "658c5aa9cdc710ae",
+      "path": "assets/cards/undead/u006-658c5aa9cdc710ae.webp",
+      "sha256": "658c5aa9cdc710ae58fd0203720a559ea9869d8ef1fa84c9dc6404e4ed3c9dda",
+      "mime": "image/webp",
+      "bytes": 237360,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u006-e9066cf74a9e227b.png",
+        "sha256": "e9066cf74a9e227b5bf2aac7d7ddb3bd0bcf1c77934ab3e7a8be37b3ae8fe838",
+        "mime": "image/png",
+        "bytes": 2749845
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u007",
+      "revision": "16e5aa006942f754",
+      "path": "assets/cards/undead/u007-16e5aa006942f754.webp",
+      "sha256": "16e5aa006942f7544fa07b1203181d265cfbe79be0e4e863542b5a9f6d9f7140",
+      "mime": "image/webp",
+      "bytes": 263700,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u007-52617b1f1394ad3a.png",
+        "sha256": "52617b1f1394ad3a116c02ffe1497dd5d57fba796b10ceaa22bfbbabb0bd1365",
+        "mime": "image/png",
+        "bytes": 2968574
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u008",
+      "revision": "7257ac6a8f4f6149",
+      "path": "assets/cards/undead/u008-7257ac6a8f4f6149.webp",
+      "sha256": "7257ac6a8f4f6149ed0f014b59f2204f0a04ce135c0182135757250c0db7c644",
+      "mime": "image/webp",
+      "bytes": 298700,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u008-5ad01b6b7556f930.png",
+        "sha256": "5ad01b6b7556f930c6448f648024876eb0196956f76acdbc3fd1c5d9d725cf46",
+        "mime": "image/png",
+        "bytes": 3094657
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u009",
+      "revision": "faeb39d594487d7c",
+      "path": "assets/cards/undead/u009-faeb39d594487d7c.webp",
+      "sha256": "faeb39d594487d7c66b9c797bc13ccd56cfdf7364cc9b706f3e3ea17f9c5ee35",
+      "mime": "image/webp",
+      "bytes": 227974,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u009-57db766e441f92fb.png",
+        "sha256": "57db766e441f92fb3f5f7afd82960c8682fbdb665559ecccfa8c60f7dc4037c5",
+        "mime": "image/png",
+        "bytes": 2627766
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u010",
+      "revision": "e1994878992215d3",
+      "path": "assets/cards/undead/u010-e1994878992215d3.webp",
+      "sha256": "e1994878992215d364add6517b04154d687090d1458fbe0965c6c82c4001919b",
+      "mime": "image/webp",
+      "bytes": 273136,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u010-c46b8dee6acdc859.png",
+        "sha256": "c46b8dee6acdc8590b454e2f06261c02c85cdb09df067c4483ffd6105be04776",
+        "mime": "image/png",
+        "bytes": 2855120
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u011",
+      "revision": "215da6184f6c1e66",
+      "path": "assets/cards/undead/u011-215da6184f6c1e66.webp",
+      "sha256": "215da6184f6c1e6601d89d96c2807da791e3f9be29665141051166c602fc6748",
+      "mime": "image/webp",
+      "bytes": 244578,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u011-12b85ff9bd5aa5ff.png",
+        "sha256": "12b85ff9bd5aa5ff8a91a91bfd6cedb0769d93c5aeb13b257b6c21bceae1aeb7",
+        "mime": "image/png",
+        "bytes": 2807097
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u012",
+      "revision": "d1f217e9be93924d",
+      "path": "assets/cards/undead/u012-d1f217e9be93924d.webp",
+      "sha256": "d1f217e9be93924d71add072347a7559a4d2644a250f5f8ad2941a590e3d2866",
+      "mime": "image/webp",
+      "bytes": 232478,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u012-0f8c4e6ee57d9adb.png",
+        "sha256": "0f8c4e6ee57d9adb4b0c554346f7c1bd2e62fafb1bc7d2f2a707c2bf314d8e57",
+        "mime": "image/png",
+        "bytes": 2754358
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u013",
+      "revision": "2bf1a254f7bf41a7",
+      "path": "assets/cards/undead/u013-2bf1a254f7bf41a7.webp",
+      "sha256": "2bf1a254f7bf41a7e864feab32aca1c24dbf83c2bdd27801f5bd7597bd54b743",
+      "mime": "image/webp",
+      "bytes": 286442,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u013-5545628ecc210212.png",
+        "sha256": "5545628ecc2102126dab7c2a0baed7c120b22791d008fd1bb822f34ec954e5c3",
+        "mime": "image/png",
+        "bytes": 3006257
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u014",
+      "revision": "8c37b9c847cfc808",
+      "path": "assets/cards/undead/u014-8c37b9c847cfc808.webp",
+      "sha256": "8c37b9c847cfc80831aa7a5b73584ef37f9c852a5102306b9f72e04bdc6dcfcb",
+      "mime": "image/webp",
+      "bytes": 275896,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u014-f875dda8484fbc45.png",
+        "sha256": "f875dda8484fbc45680eb26a232dcfd8b27f23e83d51fada19955cffc57b925a",
+        "mime": "image/png",
+        "bytes": 3065253
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u015",
+      "revision": "79ebff78ec06a931",
+      "path": "assets/cards/undead/u015-79ebff78ec06a931.webp",
+      "sha256": "79ebff78ec06a9315de582247ea28533823bbcfb7b18618891ffd636156f031b",
+      "mime": "image/webp",
+      "bytes": 312116,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u015-83226cd0e114de63.png",
+        "sha256": "83226cd0e114de6313166c41e642a44e3a000257c7d8888d3938d3d4f866fc01",
+        "mime": "image/png",
+        "bytes": 3136374
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u016",
+      "revision": "dfcd8ee30eb6d1d6",
+      "path": "assets/cards/undead/u016-dfcd8ee30eb6d1d6.webp",
+      "sha256": "dfcd8ee30eb6d1d66ba7659d9694ff8e28333db05929c36fc91071dfa936f8a7",
+      "mime": "image/webp",
+      "bytes": 213484,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u016-60562446be81aa79.png",
+        "sha256": "60562446be81aa79e2d96a4355e93f5da5d9f33bc656678ddc18e550c5dcb47e",
+        "mime": "image/png",
+        "bytes": 2511151
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u017",
+      "revision": "963b9574a415e9ee",
+      "path": "assets/cards/undead/u017-963b9574a415e9ee.webp",
+      "sha256": "963b9574a415e9eea5b66c7ecac888e438c8b445eaa6a52c5d40685e5aa43de5",
+      "mime": "image/webp",
+      "bytes": 240832,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u017-6994d09caa650749.png",
+        "sha256": "6994d09caa650749d05405f2f22425a44cecd162a4a469e33851bbb869f03c3d",
+        "mime": "image/png",
+        "bytes": 2684036
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u018",
+      "revision": "7d371e56983feb19",
+      "path": "assets/cards/undead/u018-7d371e56983feb19.webp",
+      "sha256": "7d371e56983feb19f857b5513167c9652accef676707b2adaffcb1ef7593e602",
+      "mime": "image/webp",
+      "bytes": 271760,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u018-defe28f541e622c7.png",
+        "sha256": "defe28f541e622c77cc2a400adf557fb4b41e588de7ec3e02c8de749432b9d87",
+        "mime": "image/png",
+        "bytes": 2915047
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u019",
+      "revision": "9b86c2cfd9538d81",
+      "path": "assets/cards/undead/u019-9b86c2cfd9538d81.webp",
+      "sha256": "9b86c2cfd9538d815fd76b8d3aa350315aaca25c9c94f76b9613e8f32b44986f",
+      "mime": "image/webp",
+      "bytes": 273840,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u019-2efe2548b12458a9.png",
+        "sha256": "2efe2548b12458a9c71aca0af684086c0c5f4938e5eff7027efe620e80400940",
+        "mime": "image/png",
+        "bytes": 2803079
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u020",
+      "revision": "75e34a14f40e2378",
+      "path": "assets/cards/undead/u020-75e34a14f40e2378.webp",
+      "sha256": "75e34a14f40e237867c3d7231e6d68f16e6e24e0bb0eeb6b668102685b5f5e3f",
+      "mime": "image/webp",
+      "bytes": 359862,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u020-0084d539471e832b.png",
+        "sha256": "0084d539471e832b48c07989e3669a8dc2d8cef4029b69dfd144ba3519c65c38",
+        "mime": "image/png",
+        "bytes": 3215974
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u021",
+      "revision": "50286e42138c45bf",
+      "path": "assets/cards/undead/u021-50286e42138c45bf.webp",
+      "sha256": "50286e42138c45bf0fabdbe196a7a8ab1e9e80e47e5ddfa142c65bb4cafed234",
+      "mime": "image/webp",
+      "bytes": 313460,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u021-749b96e8f6377804.png",
+        "sha256": "749b96e8f6377804fcbc2a95d01946a28ebd0f73eea6fc50284ea7dcd251f099",
+        "mime": "image/png",
+        "bytes": 3054366
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u022",
+      "revision": "427fd074a3d5ef4d",
+      "path": "assets/cards/undead/u022-427fd074a3d5ef4d.webp",
+      "sha256": "427fd074a3d5ef4dc1b139220f4dfee6ac7e0733425ec59bb1eb167cf2741124",
+      "mime": "image/webp",
+      "bytes": 255728,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u022-f1565872f8747e4e.png",
+        "sha256": "f1565872f8747e4e7236d1e1bfaa31d0e4673d7499f9a64e95e8d67a91c9a3fa",
+        "mime": "image/png",
+        "bytes": 3066014
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u023",
+      "revision": "9e14bb25165d1092",
+      "path": "assets/cards/undead/u023-9e14bb25165d1092.webp",
+      "sha256": "9e14bb25165d1092b591738029e9991860a129d29c11ca409537d02a9bee1c25",
+      "mime": "image/webp",
+      "bytes": 254906,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u023-0cf1d5778d600bdc.png",
+        "sha256": "0cf1d5778d600bdcc7bc6a0cc5a1228f065643cf24b67e50c2e42625d9ef880b",
+        "mime": "image/png",
+        "bytes": 3087325
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u024",
+      "revision": "9d386b881eeaf730",
+      "path": "assets/cards/undead/u024-9d386b881eeaf730.webp",
+      "sha256": "9d386b881eeaf730b996c601661f4e34d8600157b412c3a2c798b849661bedcd",
+      "mime": "image/webp",
+      "bytes": 312916,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u024-a3efaa204f78be6b.png",
+        "sha256": "a3efaa204f78be6b4a14734b9d9485f7e461e07e66b7f51a609e0c5a4cef2756",
+        "mime": "image/png",
+        "bytes": 3256610
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u025",
+      "revision": "d7256ada0c021eea",
+      "path": "assets/cards/undead/u025-d7256ada0c021eea.webp",
+      "sha256": "d7256ada0c021eeaa73f19c920007525085bc83376a3589db33043692eb89ce9",
+      "mime": "image/webp",
+      "bytes": 303270,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u025-f6d574ca87ab49e0.png",
+        "sha256": "f6d574ca87ab49e086055f6445ba81b7b10c79bcfe28f90ffe7da30aaa9a63c8",
+        "mime": "image/png",
+        "bytes": 3093748
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u026",
+      "revision": "544c29620122e218",
+      "path": "assets/cards/undead/u026-544c29620122e218.webp",
+      "sha256": "544c29620122e218f91680c5d4a80120d287abb9c52c7a1730760b9b7ffbfa1f",
+      "mime": "image/webp",
+      "bytes": 327792,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u026-9243ab690b57d98d.png",
+        "sha256": "9243ab690b57d98dada3952ee3e3576b11f1f0f7fddab2af534db837a299c63c",
+        "mime": "image/png",
+        "bytes": 3269382
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u027",
+      "revision": "551b9415221fb438",
+      "path": "assets/cards/undead/u027-551b9415221fb438.webp",
+      "sha256": "551b9415221fb43837894b0daf069a66c827775ece1fd55b1aa102bad54b9597",
+      "mime": "image/webp",
+      "bytes": 286930,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u027-c4d2a908211a5a69.png",
+        "sha256": "c4d2a908211a5a6980607e63d837df3282bff714d234745aed55bd76185bc23b",
+        "mime": "image/png",
+        "bytes": 3034247
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u028",
+      "revision": "6c8851a7ded1f6e7",
+      "path": "assets/cards/undead/u028-6c8851a7ded1f6e7.webp",
+      "sha256": "6c8851a7ded1f6e7baa06d45a0df320e264201dc1d68b6cb77647ef1ff8730db",
+      "mime": "image/webp",
+      "bytes": 320952,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u028-36e4eafe2a7de275.png",
+        "sha256": "36e4eafe2a7de275f20fecf49188aba4344b895cf37dc3675021c08b1372111c",
+        "mime": "image/png",
+        "bytes": 3134746
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u029",
+      "revision": "1485e09429cc378a",
+      "path": "assets/cards/undead/u029-1485e09429cc378a.webp",
+      "sha256": "1485e09429cc378aebc5b262d2e6f52a27d37191197a36bc34836d973f13e34f",
+      "mime": "image/webp",
+      "bytes": 259248,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u029-42c86d935318839e.png",
+        "sha256": "42c86d935318839efc055b90f4f05ae9c0d88bfc337baa198be65c8f5e0ae484",
+        "mime": "image/png",
+        "bytes": 2870876
+      },
+      "category": "cards",
+      "approval": "production"
+    },
+    {
+      "id": "u030",
+      "revision": "02d2b046412a9d01",
+      "path": "assets/cards/undead/u030-02d2b046412a9d01.webp",
+      "sha256": "02d2b046412a9d0147a454c16f56df6ed55e125e54c58f0cf3d10effa4dd94aa",
+      "mime": "image/webp",
+      "bytes": 281016,
+      "width": 1024,
+      "height": 1365,
+      "source": {
+        "path": "artwork-source/cards/undead/u030-7f766d66d1b9d103.png",
+        "sha256": "7f766d66d1b9d10394f04ab49995ce0e65f693e0e81fd7bec3a6f8d4e2ca662a",
+        "mime": "image/png",
+        "bytes": 3023775
+      },
+      "category": "cards",
+      "approval": "production"
     }
   ]
 }
