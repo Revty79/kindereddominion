@@ -1,0 +1,220 @@
+{
+  "engineVersion": "1.1.0",
+  "id": "simulation-20261126-mwx9s6nu",
+  "attempted": 1000,
+  "completed": 1000,
+  "elapsedMs": 60454.30000001192,
+  "digest": "4e8164f9",
+  "faults": 0,
+  "invariants": 0,
+  "timeouts": 0,
+  "loopSafeguards": 0,
+  "cancelled": false,
+  "draws": 18,
+  "actions": {
+    "sum": 26541,
+    "min": 10,
+    "max": 34
+  },
+  "first": {
+    "games": 1000,
+    "wins": 451
+  },
+  "decks": {
+    "verdant-bulwark": {
+      "attempted": 1000,
+      "completed": 1000,
+      "wins": 502,
+      "losses": 480,
+      "draws": 18,
+      "firstWins": 230,
+      "firstGames": 500,
+      "secondWins": 272,
+      "secondGames": 500,
+      "score": 25458
+    },
+    "ashen-covenant": {
+      "attempted": 1000,
+      "completed": 1000,
+      "wins": 480,
+      "losses": 502,
+      "draws": 18,
+      "firstWins": 221,
+      "firstGames": 500,
+      "secondWins": 259,
+      "secondGames": 500,
+      "score": 26498
+    }
+  },
+  "matchups": {
+    "verdant-bulwark vs ashen-covenant": {
+      "completed": 500,
+      "wins": [
+        258,
+        230
+      ],
+      "draws": 12
+    },
+    "ashen-covenant vs verdant-bulwark": {
+      "completed": 500,
+      "wins": [
+        250,
+        244
+      ],
+      "draws": 6
+    }
+  },
+  "request": {
+    "matches": 1000,
+    "seed": 20261126,
+    "contentVersion": "working",
+    "contentCardCount": 31,
+    "contentCardIds": [
+      "sprout",
+      "leafguard",
+      "grove-tender",
+      "brood-bough",
+      "elderroot",
+      "wildcrown",
+      "embercub",
+      "dawnwing",
+      "stormwyrm",
+      "ashen-phoenix",
+      "rift-titan",
+      "sunlance",
+      "rune-initiate",
+      "mirror-adept",
+      "hex-weaver",
+      "transmuter",
+      "void-seer",
+      "convergence",
+      "bone-thrall",
+      "grave-acolyte",
+      "crypt-harvester",
+      "revenant",
+      "death-shepherd",
+      "ossuary-monarch",
+      "brass-scout",
+      "bastion",
+      "siege-walker",
+      "aegis-core",
+      "iron-colossus",
+      "watchwork",
+      "manual-sentinel"
+    ],
+    "config": {
+      "battlefield": {
+        "rows": 3,
+        "cols": 5,
+        "maxTokens": 3,
+        "maxFortification": 3,
+        "starts": [
+          {
+            "player": 0,
+            "positions": [
+              {
+                "row": 0,
+                "col": 0
+              },
+              {
+                "row": 1,
+                "col": 0
+              },
+              {
+                "row": 2,
+                "col": 0
+              }
+            ],
+            "tokens": 1,
+            "fortification": 0
+          },
+          {
+            "player": 1,
+            "positions": [
+              {
+                "row": 0,
+                "col": 4
+              },
+              {
+                "row": 1,
+                "col": 4
+              },
+              {
+                "row": 2,
+                "col": 4
+              }
+            ],
+            "tokens": 1,
+            "fortification": 0
+          }
+        ]
+      },
+      "scoring": "classic",
+      "mode": "standard",
+      "collection": "mixed",
+      "deckSize": 15,
+      "openingHand": 5,
+      "maxCopies": 2,
+      "safeguards": {
+        "maxResolutionSteps": 300,
+        "maxGeneratedPerMatch": 30,
+        "maxResurrections": 2,
+        "maxCards": 100
+      }
+    },
+    "decks": [
+      {
+        "id": "verdant-bulwark",
+        "name": "Verdant Bulwark",
+        "subtitle": "Nature · Constructs / Grow, fortify, evolve",
+        "cards": [
+          "sprout",
+          "sprout",
+          "sprout",
+          "leafguard",
+          "leafguard",
+          "elderroot",
+          "elderroot",
+          "wildcrown",
+          "brood-bough",
+          "grove-tender",
+          "brass-scout",
+          "brass-scout",
+          "watchwork",
+          "siege-walker",
+          "iron-colossus"
+        ],
+        "strategy": "Nature · Constructs / Grow, fortify, evolve",
+        "collection": "mixed"
+      },
+      {
+        "id": "ashen-covenant",
+        "name": "Ashen Covenant",
+        "subtitle": "Undead · Mythical / Sacrifice, return, overwhelm",
+        "cards": [
+          "bone-thrall",
+          "bone-thrall",
+          "bone-thrall",
+          "grave-acolyte",
+          "grave-acolyte",
+          "embercub",
+          "embercub",
+          "dawnwing",
+          "crypt-harvester",
+          "crypt-harvester",
+          "revenant",
+          "ossuary-monarch",
+          "ashen-phoenix",
+          "rift-titan",
+          "death-shepherd"
+        ],
+        "strategy": "Undead · Mythical / Sacrifice, return, overwhelm",
+        "collection": "mixed"
+      }
+    ],
+    "pairings": "single",
+    "mirrored": true,
+    "maxActions": 200,
+    "retainExamples": true
+  }
+}
