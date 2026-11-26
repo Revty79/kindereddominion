@@ -22,6 +22,8 @@ import type { MatchRecord } from "../replay/record";
 import { BoardView, Field, Issues, NumberField } from "./components";
 import Diagnostics from "./Diagnostics";
 import { artworkMap } from "../assets/references";
+import PowerDetails from "../ui/PowerDetails";
+import { MAX_POWER } from "../engine/advanced-types";
 export default function Sandbox({
   workspace,
   onSave,
@@ -353,7 +355,7 @@ export default function Sandbox({
         selected={selected}
         onCell={(p) => {
           setSelected({ row: p.row, col: p.col });
-          if (!running) {
+          if (!running || !hand) {
             setInstance(cellAt(state, p.row, p.col)?.creature ?? "");
           } else if (hand) {
             const action = legal.find(
@@ -367,6 +369,25 @@ export default function Sandbox({
           }
         }}
       />
+      <section className="studio-subpanel">
+        <h3>Effective-power inspection</h3>
+        <Field label="Inspect effective-power instance">
+          <select
+            value={chosen?.id ?? ""}
+            onChange={(e) => setInstance(e.target.value)}
+          >
+            <option value="">Select a creature or zone instance</option>
+            {Object.values(display.cards).map((c) => (
+              <option key={c.id} value={c.id}>
+                {lib[c.definitionId].name} · {c.id} · {c.location}
+              </option>
+            ))}
+          </select>
+        </Field>
+        {chosen && display.cards[chosen.id] && (
+          <PowerDetails state={display} library={lib} id={chosen.id} />
+        )}
+      </section>
       {!running ? (
         <>
           <div className="studio-grid two">
@@ -549,14 +570,16 @@ export default function Sandbox({
                 </p>
                 <div className="studio-grid three">
                   <NumberField
-                    label="Current creature power"
-                    min={-1000}
-                    max={1000}
+                    label="Intrinsic creature power (base plus permanent)"
+                    min={state.mechanics ? -MAX_POWER : -1000}
+                    max={state.mechanics ? MAX_POWER : 1000}
                     value={lib[chosen.definitionId].power + chosen.modifier}
                     onChange={(power) =>
                       patch((s) => {
                         s.cards[chosen.id].modifier =
                           power - lib[chosen.definitionId].power;
+                        delete s.cards[chosen.id].permanentEnhancement;
+                        delete s.cards[chosen.id].permanentWeakening;
                       })
                     }
                   />

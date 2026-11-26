@@ -34,7 +34,12 @@ export default function GameHost() {
             await persistWorkspace(withBundled, value.revision);
             return withBundled;
           } catch (error) {
-            if (!String(error).includes("newer Studio changes")) throw error;
+            if (!String(error).includes("newer Studio changes")) {
+              setError(
+                `Your saved workspace is available, but the bundled content update could not be saved: ${String(error)}. Export a complete backup before retrying storage changes.`,
+              );
+              return value;
+            }
           }
         }
         throw new Error(

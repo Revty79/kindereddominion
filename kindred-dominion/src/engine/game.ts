@@ -1,5 +1,21 @@
 import { DEFAULT_CONFIG } from "./config";
 import { currentPower, SCORING_RULES, scoreGame } from "./scoring";
+import { AdvancedRuntime } from "./advanced-runtime";
+import {
+  bound,
+  emptyMechanics,
+  evaluateCondition,
+  evaluateNumber,
+  hasAdvancedMechanics,
+  participant,
+  powerTable,
+  selectTargets,
+} from "./evaluation";
+import type { EventContext, EventParticipant, Numeric } from "./advanced-types";
+import {
+  validateAdvancedLibrary,
+  validateMechanicsState,
+} from "./advanced-validation";
 import type {
   Ability,
   Action,
@@ -186,6 +202,10 @@ export function createMatch(
     result: null,
     fault: null,
   };
+  if (hasAdvancedMechanics(library)) {
+    validateAdvancedLibrary(library);
+    state.mechanics = emptyMechanics();
+  }
   state.startingPlayer = startingPlayer ?? (random(state) < 0.5 ? 0 : 1);
   state.active = state.startingPlayer;
   const b = config.battlefield;
@@ -371,27 +391,65 @@ export function applyInfluence(
     }
   }
 }
-type Source = { id: string; player: Player; position: Position };
-type EventContext = {
-  id: number;
-  card?: string;
+export type Source = {
+  id: string;
   player: Player;
-  resurrected?: boolean;
+  position: Position;
+  snapshot?: EventParticipant;
 };
-type Queued = {
+export type Queued = {
   source: Source;
   ability: Ability;
   context: EventContext;
   index: number;
 };
-class Resolver {
+export class Resolver {
   queue: Queued[] = [];
   steps = 0;
+  advanced?: AdvancedRuntime;
   constructor(
     readonly state: GameState,
     readonly library: CardLibrary,
     readonly observer?: ResolutionObserver,
-  ) {}
+  ) {
+    if (state.mechanics) this.advanced = new AdvancedRuntime(this);
+  }
+  event(type: string, text: string, player?: Player, card?: string) {
+    return log(this.state, type, text, player, card);
+  }
+  amount(
+    n: Numeric,
+    source: Source,
+    context: EventContext,
+    target?: string,
+  ): number {
+    return typeof n === "number"
+      ? n
+      : evaluateNumber(n, {
+          state: this.state,
+          library: this.library,
+          source: source.id,
+          sourceSnapshot: source.snapshot,
+          context,
+          target,
+          origin: source.position,
+        });
+  }
+  draw(
+    player: Player,
+    amount: number,
+    source?: Source,
+    context?: EventContext,
+  ) {
+    const before = this.state.players[player].hand.length;
+    drawCards(this.state, player, amount);
+    this.advanced?.drawn(
+      this.state.players[player].hand.slice(before),
+      "draw",
+      source,
+      context,
+    );
+  }
   diagnostic(kind: string, message: string, details: unknown = null): void {
     if (!this.observer) return;
     this.observer.onStep({
@@ -438,17 +496,27 @@ class Resolver {
     this.queue.push(...items);
   }
   drain(): void {
+    this.advanced?.settle();
     while (this.queue.length) {
       this.step();
       const task = this.queue.shift()!;
       const { source, ability, context } = task;
       const card = this.state.cards[source.id];
+      if (this.advanced && !this.advanced.canRun(ability, source, context))
+        continue;
       this.diagnostic(
         "trigger",
         `${ability.id}: evaluating ${ability.trigger}`,
         { source, ability, context },
       );
-      if (context.resurrected && !ability.allowOnResurrect) {
+      if (
+        context.resurrected &&
+        !ability.allowOnResurrect &&
+        (!this.advanced ||
+          ["placement", "evolution", "replacement", "otherPlacement"].includes(
+            ability.trigger,
+          ))
+      ) {
         this.diagnostic(
           "blocked",
           "Resurrection-triggered activation is disabled.",
@@ -458,6 +526,24 @@ class Resolver {
       }
       const condition = ability.condition;
       if (
+        this.advanced &&
+        !evaluateCondition(condition, {
+          state: this.state,
+          library: this.library,
+          source: source.id,
+          sourceSnapshot: source.snapshot,
+          context,
+          origin: source.position,
+        })
+      ) {
+        this.diagnostic("condition", "Structured condition did not pass.", {
+          condition,
+          context,
+        });
+        continue;
+      }
+      if (
+        !this.advanced &&
         condition?.kind === "eventFriendly" &&
         context.player !== source.player
       ) {
@@ -469,6 +555,7 @@ class Resolver {
         continue;
       }
       if (
+        !this.advanced &&
         condition?.kind === "friendlyCount" &&
         this.state.board.filter(
           (c) =>
@@ -490,6 +577,7 @@ class Resolver {
         continue;
       }
       if (
+        !this.advanced &&
         condition?.kind === "sourcePower" &&
         currentPower(this.state, this.library, source.id) < condition.atLeast
       ) {
@@ -520,6 +608,13 @@ class Resolver {
         ]);
       if (ability.limit?.perMatch !== undefined)
         keys.push([`${ability.id}:match`, ability.limit.perMatch]);
+      else if (
+        this.advanced &&
+        (["firstEnhanced", "firstWeakened"].includes(ability.trigger) ||
+          (["condition", "powerThreshold"].includes(ability.trigger) &&
+            !ability.repeatable))
+      )
+        keys.push([`${ability.id}:match`, 1]);
       if (
         keys.some(([key, max]) =>
           counters.some((counts) => (counts[key] ?? 0) >= max),
@@ -553,12 +648,24 @@ class Resolver {
           `Resolve ${effect.type}. Multi-target effects select one simultaneous group; effects execute in declaration order.`,
           { effect, source },
         );
-        this.effect(effect, source, context);
+        const effectContext =
+          this.advanced?.chain(ability, source, context) ?? context;
+        this.effect(effect, source, effectContext);
+        this.advanced?.settle(effect.type, source, effectContext);
         this.diagnostic("effect-end", `${effect.type} completed.`, { effect });
       }
     }
   }
   targets(target: Target, source: Source, context: EventContext): Cell[] {
+    if (this.advanced)
+      return selectTargets(target, {
+        state: this.state,
+        library: this.library,
+        source: source.id,
+        context,
+        origin: source.position,
+        random: () => random(this.state),
+      });
     let cells: Cell[];
     if (target.kind === "self") {
       const p = positionOf(this.state, source.id);
@@ -595,7 +702,7 @@ class Resolver {
       return true;
     });
   }
-  influence(id: string): void {
+  influence(id: string, parent?: EventContext): void {
     const source = this.source(id);
     const position = positionOf(this.state, id);
     if (!position) return;
@@ -605,7 +712,8 @@ class Resolver {
       const p = relative(position, influence.x, influence.y, source.player);
       const cell = cellAt(this.state, p.row, p.col);
       if (cell) {
-        const previous = this.observer ? structuredClone(cell) : null;
+        const previous =
+          this.observer || this.advanced ? structuredClone(cell) : null;
         const before = `${cell.owner}/${cell.tokens}/${cell.fortification}`;
         applyInfluence(
           this.state,
@@ -627,6 +735,7 @@ class Resolver {
             source.player,
             id,
           );
+        if (previous) this.advanced?.territory(previous, cell, source, parent);
       }
     }
   }
@@ -634,9 +743,10 @@ class Resolver {
     id: string,
     trigger: "placement" | "evolution" | "replacement",
     resurrected = false,
+    parent?: EventContext,
   ): void {
     const source = this.source(id);
-    const context = {
+    let context: EventContext = {
       id: log(
         this.state,
         trigger,
@@ -647,7 +757,10 @@ class Resolver {
       card: id,
       player: source.player,
       resurrected,
+      ...(parent?.chain ? { chain: parent.chain } : {}),
     };
+    if (this.advanced)
+      context = this.advanced.placed(id, trigger, resurrected, context);
     const tasks = this.collect(source, trigger, context);
     if (trigger === "replacement")
       tasks.push(...this.collect(source, "placement", context));
@@ -665,6 +778,7 @@ class Resolver {
   remove(
     ids: string[],
     cause: "destruction" | "sacrifice" | "power" | "return" | "banish",
+    parent?: EventContext,
   ): void {
     this.diagnostic(
       "lifecycle",
@@ -673,14 +787,43 @@ class Resolver {
     );
     const watchers = this.state.board
       .filter((c) => c.creature)
-      .map((c) => this.source(c.creature!));
+      .map((c) => {
+        const source = this.source(c.creature!);
+        if (this.advanced)
+          source.snapshot = participant(
+            this.state,
+            this.library,
+            c.creature!,
+            cause,
+          );
+        return source;
+      });
     const removed: { source: Source; context: EventContext }[] = [];
+    const snapshots = this.advanced
+      ? new Map(
+          ids
+            .filter((id) => positionOf(this.state, id))
+            .map((id) => [
+              id,
+              participant(this.state, this.library, id, cause),
+            ]),
+        )
+      : null;
+    const protectedBatch =
+      this.advanced && cause === "destruction"
+        ? new Set(ids.filter((id) => this.protected(id, "destruction")))
+        : null;
     // Remove the complete batch BEFORE scheduling any death ability.
     for (const id of [...new Set(ids)]) {
       const card = this.state.cards[id];
       const cell = positionOf(this.state, id);
       if (!cell) continue;
-      if (cause === "destruction" && this.protected(id, "destruction")) {
+      if (
+        cause === "destruction" &&
+        (protectedBatch
+          ? protectedBatch.has(id)
+          : this.protected(id, "destruction"))
+      ) {
         log(
           this.state,
           "protection",
@@ -691,6 +834,7 @@ class Resolver {
         continue;
       }
       const source = this.source(id, { row: cell.row, col: cell.col });
+      if (snapshots?.has(id)) source.snapshot = snapshots.get(id);
       cell.creature = null;
       const location =
         cause === "return"
@@ -711,10 +855,13 @@ class Resolver {
         card.owner,
         id,
       );
+      const context = snapshots?.get(id)
+        ? this.advanced!.removed(snapshots.get(id)!, eventId, cause, parent)
+        : { id: eventId, card: id, player: card.owner };
       if (location === "graveyard")
         removed.push({
           source,
-          context: { id: eventId, card: id, player: card.owner },
+          context,
         });
     }
     const tasks: Queued[] = [];
@@ -729,6 +876,7 @@ class Resolver {
     this.enqueue(tasks);
   }
   protected(id: string, status: "destruction" | "weakening"): boolean {
+    if (this.advanced) return this.advanced.protected(id, status);
     const card = this.state.cards[id];
     return (
       card.statuses.includes(status) ||
@@ -736,14 +884,16 @@ class Resolver {
     );
   }
   effect(effect: Effect, source: Source, context: EventContext): void {
+    const amount =
+      "amount" in effect ? this.amount(effect.amount, source, context) : 0;
     if (effect.type === "draw") {
-      drawCards(this.state, source.player, effect.amount);
+      this.draw(source.player, Math.max(0, amount), source, context);
       return;
     }
     if (effect.type === "generate") {
       if (!this.library[effect.card])
         throw new Error(`Unknown generated card ${effect.card}.`);
-      for (let i = 0; i < effect.amount; i++) {
+      for (let i = 0; i < amount; i++) {
         if (
           this.state.generated >=
             this.state.config.safeguards.maxGeneratedPerMatch ||
@@ -767,11 +917,12 @@ class Resolver {
           source.player,
           card.id,
         );
+        this.advanced?.drawn([card.id], "generate", source, context);
       }
       return;
     }
     if (effect.type === "resurrect") {
-      this.resurrect(effect, source);
+      this.resurrect(effect, source, context);
       return;
     }
     const cells = this.targets(effect.target, source, context);
@@ -782,29 +933,53 @@ class Resolver {
       { effect, cells, instances: ids },
     );
     switch (effect.type) {
-      case "power":
-        for (const id of ids)
-          if (!(effect.amount < 0 && this.protected(id, "weakening")))
-            this.state.cards[id].modifier += effect.amount;
+      case "power": {
+        const changes = ids.map((id) => ({
+          id,
+          amount: this.amount(effect.amount, source, context, id),
+          blocked: this.protected(id, "weakening"),
+        }));
+        for (const { id, amount, blocked } of changes)
+          if (!(amount < 0 && blocked)) {
+            const c = this.state.cards[id];
+            if (this.advanced) {
+              c.permanentEnhancement ??= Math.max(0, c.modifier);
+              c.permanentWeakening ??= Math.min(0, c.modifier);
+              if (amount > 0)
+                c.permanentEnhancement = bound(c.permanentEnhancement + amount);
+              else c.permanentWeakening = bound(c.permanentWeakening + amount);
+            }
+            c.modifier = this.advanced
+              ? bound(c.modifier + amount)
+              : c.modifier + amount;
+            this.advanced?.powerEffect(id, amount);
+          } else
+            this.diagnostic(
+              "protection",
+              "Weakening was prevented; no successful power-change event is emitted.",
+              { card: id, amount },
+            );
         log(
           this.state,
           "power",
-          `${effect.amount >= 0 ? "+" : ""}${effect.amount} power to ${ids.length} eligible creature(s).`,
+          `${typeof effect.amount === "number" && amount >= 0 ? "+" : ""}${typeof effect.amount === "number" ? amount : "Variable"} power to ${ids.length} eligible creature(s).`,
           source.player,
         );
-        this.remove(
-          ids.filter((id) => currentPower(this.state, this.library, id) <= 0),
-          "power",
-        );
+        if (!this.advanced)
+          this.remove(
+            ids.filter((id) => currentPower(this.state, this.library, id) <= 0),
+            "power",
+          );
         break;
+      }
       case "destroy":
-        this.remove(ids, "destruction");
+        this.remove(ids, "destruction", context);
         break;
       case "return":
-        this.remove(ids, "return");
+        this.remove(ids, "return", context);
         break;
       case "banish":
-        this.remove(ids, "banish");
+        this.remove(ids, "banish", context);
         break;
       case "protect":
         for (const id of ids)
@@ -812,31 +987,63 @@ class Resolver {
             this.state.cards[id].statuses.push(effect.protection);
         break;
       case "tokens":
-        for (const cell of cells)
+        for (const { cell, amount } of cells.map((cell) => ({
+          cell,
+          amount: this.amount(
+            effect.amount,
+            source,
+            context,
+            cell.creature ?? "",
+          ),
+        })))
           if (cell.owner === source.player)
             cell.tokens = clamp(
-              cell.tokens + effect.amount,
+              cell.tokens + amount,
               this.state.config.battlefield.maxTokens,
             );
         break;
       case "fortify":
-        for (const cell of cells)
-          if (cell.owner === source.player)
+        for (const { cell, amount } of cells.map((cell) => ({
+          cell,
+          amount: this.amount(
+            effect.amount,
+            source,
+            context,
+            cell.creature ?? "",
+          ),
+        })))
+          if (cell.owner === source.player) {
+            const previous = this.advanced ? structuredClone(cell) : null;
             cell.fortification = clamp(
-              cell.fortification + effect.amount,
+              cell.fortification + amount,
               this.state.config.battlefield.maxFortification,
             );
+            if (previous)
+              this.advanced?.territory(previous, cell, source, context);
+          }
         break;
       case "capture":
       case "overthrow":
-        for (const cell of cells)
+        for (const { cell, amount } of cells.map((cell) => ({
+          cell,
+          amount: this.amount(
+            effect.amount,
+            source,
+            context,
+            cell.creature ?? "",
+          ),
+        }))) {
+          const previous = this.advanced ? structuredClone(cell) : null;
           applyInfluence(
             this.state,
             cell,
             source.player,
             effect.type === "capture" ? "expansion" : "overthrow",
-            effect.amount,
+            this.advanced ? Math.max(0, Math.min(100, amount)) : amount,
           );
+          if (previous)
+            this.advanced?.territory(previous, cell, source, context);
+        }
         break;
       case "replace":
       case "evolve": {
@@ -880,6 +1087,7 @@ class Resolver {
             "battlefield",
           );
           this.state.generated++;
+          this.advanced?.prepareIncoming(card.id, cell.creature);
           placements.push({ cell, card, previous: cell.creature });
         }
         if (effect.type === "evolve")
@@ -889,6 +1097,7 @@ class Resolver {
           this.remove(
             placements.map((p) => p.previous),
             "sacrifice",
+            context,
           );
           for (const p of placements) p.cell.creature = p.card.id;
           // Every incoming creature is present before this simultaneous sacrifice branch resolves.
@@ -905,8 +1114,13 @@ class Resolver {
         );
         for (const p of placements)
           if (positionOf(this.state, p.card.id)) {
-            this.influence(p.card.id);
-            this.placed(p.card.id, def.type as "replacement" | "evolution");
+            this.influence(p.card.id, context);
+            this.placed(
+              p.card.id,
+              def.type as "replacement" | "evolution",
+              false,
+              context,
+            );
           }
         break;
       }
@@ -938,8 +1152,8 @@ class Resolver {
           );
           this.state.generated++;
           cell.creature = card.id;
-          this.influence(card.id);
-          this.placed(card.id, "placement");
+          this.influence(card.id, context);
+          this.placed(card.id, "placement", false, context);
         }
         break;
       }
@@ -948,6 +1162,7 @@ class Resolver {
   resurrect(
     effect: Extract<Effect, { type: "resurrect" }>,
     source: Source,
+    context?: EventContext,
   ): void {
     const grave = this.state.players[source.player].graveyard;
     const candidates = effect.target === "self" ? [source.id] : grave.slice();
@@ -1023,16 +1238,18 @@ class Resolver {
         destination.creature = id;
         card.location = "battlefield";
       }
+      this.advanced?.resurrected(id, context);
       // Power changes and statuses persist; nonpositive returning creatures die again normally.
       if (currentPower(this.state, this.library, id) <= 0) {
-        this.remove([id], "power");
+        this.remove([id], "power", context);
         return;
       }
-      this.influence(id);
+      this.influence(id, context);
       this.placed(
         id,
         def.type === "evolution" ? "evolution" : "placement",
         true,
+        context,
       );
       return;
     }
@@ -1041,6 +1258,17 @@ class Resolver {
     const incoming = this.state.cards[id];
     const prior = this.state.cards[previous];
     const cell = positionOf(this.state, previous)!;
+    if (this.advanced) {
+      this.advanced.prepareIncoming(id, previous);
+      incoming.permanentEnhancement = bound(
+        (incoming.permanentEnhancement ?? Math.max(0, incoming.modifier)) +
+          (prior.permanentEnhancement ?? Math.max(0, prior.modifier)),
+      );
+      incoming.permanentWeakening = bound(
+        (incoming.permanentWeakening ?? Math.min(0, incoming.modifier)) +
+          (prior.permanentWeakening ?? Math.min(0, prior.modifier)),
+      );
+    }
     incoming.modifier += prior.modifier;
     incoming.statuses = [
       ...new Set([
@@ -1103,7 +1331,11 @@ class Resolver {
     this.state.players[this.state.active].turns++;
     this.turnEffects("turnStart");
     if (this.state.players[this.state.active].turns > 1)
-      drawCards(this.state, this.state.active, 1);
+      this.draw(this.state.active, 1);
+    if (this.advanced) {
+      this.advanced.settle("turnStart");
+      this.drain();
+    }
     const forced = legalPlays(this.state, this.library).length === 0;
     log(
       this.state,
@@ -1179,6 +1411,11 @@ export function act(
     }
   }
   const state = structuredClone(original);
+  if (!state.mechanics && hasAdvancedMechanics(library))
+    state.mechanics = emptyMechanics();
+  // The original is already isolated from all resolver mutations by the clone above.
+  // Clone it again only if rollback is actually needed, rather than for every AI candidate.
+  const recovery = state.mechanics ? original : null;
   const resolver = new Resolver(state, library, observer);
   resolver.diagnostic(
     "action",
@@ -1198,7 +1435,7 @@ export function act(
     if (action.type === "mulligan") {
       const player = state.players[action.player];
       player.hand = player.hand.filter((id) => !action.cards.includes(id));
-      drawCards(state, action.player, action.cards.length);
+      resolver.draw(action.player, action.cards.length);
       for (const id of action.cards) {
         state.cards[id].location = "draw";
         player.draw.push(id);
@@ -1222,6 +1459,8 @@ export function act(
         const card = state.cards[action.card];
         const def = library[card.definitionId];
         const cell = cellAt(state, action.row, action.col)!;
+        if (cell.creature)
+          resolver.advanced?.prepareIncoming(card.id, cell.creature);
         state.players[action.player].hand.splice(
           state.players[action.player].hand.indexOf(action.card),
           1,
@@ -1232,7 +1471,7 @@ export function act(
           cell.creature = card.id;
           card.location = "battlefield";
           // The replacement is already present when sacrifice/death abilities resolve.
-          resolver.drain();
+          if (!resolver.advanced || def.type !== "standard") resolver.drain();
         }
         if (positionOf(state, card.id)) {
           resolver.influence(card.id);
@@ -1272,10 +1511,21 @@ export function act(
     }
     assertInvariants(state, library);
   } catch (error) {
+    if (recovery) {
+      for (const key of Object.keys(state)) delete (state as any)[key];
+      Object.assign(state, structuredClone(recovery));
+      state.mechanics ??= emptyMechanics();
+    }
     state.phase = "fault";
     state.result = null;
     state.fault = error instanceof Error ? error.message : String(error);
     log(state, "fault", state.fault);
+    if (recovery)
+      resolver.diagnostic(
+        "fault",
+        "Resolution failed; the advanced action was rolled back and no competitive result was awarded.",
+        { reason: state.fault, rolledBack: true },
+      );
   }
   resolver.diagnostic(
     "committed",
@@ -1302,6 +1552,8 @@ export function rematch(
   );
 }
 export function assertInvariants(state: GameState, library: CardLibrary): void {
+  if (state.mechanics) validateMechanicsState(state.mechanics);
+  const powers = state.mechanics ? powerTable(state, library) : null;
   const seen = new Set<string>();
   const visit = (
     id: string,
@@ -1309,6 +1561,29 @@ export function assertInvariants(state: GameState, library: CardLibrary): void {
     owner?: Player,
   ) => {
     const card = state.cards[id];
+    if (state.mechanics && card) {
+      if (
+        !Number.isSafeInteger(card.modifier) ||
+        Math.abs(card.modifier) > 100000
+      )
+        throw new Error("Permanent modifier safety bound exceeded.");
+      if (
+        card.permanentEnhancement !== undefined ||
+        card.permanentWeakening !== undefined
+      ) {
+        if (
+          !Number.isSafeInteger(card.permanentEnhancement) ||
+          !Number.isSafeInteger(card.permanentWeakening) ||
+          card.permanentEnhancement! < 0 ||
+          card.permanentWeakening! > 0 ||
+          Math.abs(card.permanentEnhancement!) > 100000 ||
+          Math.abs(card.permanentWeakening!) > 100000 ||
+          card.permanentEnhancement! + card.permanentWeakening! !==
+            card.modifier
+        )
+          throw new Error("Permanent power breakdown is inconsistent.");
+      }
+    }
     if (
       !card ||
       !library[card.definitionId] ||
@@ -1339,7 +1614,9 @@ export function assertInvariants(state: GameState, library: CardLibrary): void {
       visit(cell.creature, "battlefield", cell.owner ?? undefined);
       if (
         cell.owner === null ||
-        currentPower(state, library, cell.creature) <= 0
+        (powers
+          ? powers[cell.creature].effective
+          : currentPower(state, library, cell.creature)) <= 0
       )
         throw new Error("Invalid occupying creature.");
       for (const stage of state.cards[cell.creature].stack)

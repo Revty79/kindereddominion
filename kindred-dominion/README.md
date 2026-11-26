@@ -1,8 +1,16 @@
 # Kindred Dominion
 
-Version **0.2.0** · **V1.2 — Developer Studio and Balancing Infrastructure**
+Version **0.3.0** · **V1.3A — Advanced Mechanics and Rules Engine Completion**
 
 A standalone, local tactical card game with a real-engine design environment. Play the original V1.1 game, or explicitly activate the **150-card provisional Founding Kindreds** library: five 30-card collections, five pure starting decks and five mixed test decks. No accounts, database server, external AI or paid services are required.
+
+V1.3A adds continuous auras and protection, dynamic power, reactive events, condition transitions, variable magnitudes, historical counters and separate card scoring. The original libraries remain intact. The separate **45-card mechanics laboratory** includes **30 ready-made sandbox scenarios**.
+
+Read the authoritative [Master Card Mechanics](docs/MASTER-CARD-MECHANICS.md), [V1.3A owner guide](docs/V1.3A-OWNER-GUIDE.md) and [validation report](docs/V1.3A-VALIDATION.md). No final commercial cards, illustrations or V1.3B interface redesign are included.
+
+## Try V1.3A
+
+Open **Developer Studio → Battlefield Sandbox → Load saved scenario** and select a LAB example. Execute its prepared action and inspect the effective-power breakdown, score breakdown and resolution snapshots. **Content Versions and Backups** contains **V1.3A · mechanics laboratory**: restore it as a new working draft to edit fixtures, or activate it for new ordinary matches. Export a complete backup before larger experiments.
 
 ## Start and stop on Windows
 

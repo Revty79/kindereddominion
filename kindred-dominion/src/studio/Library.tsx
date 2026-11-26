@@ -26,6 +26,7 @@ export default function Library({
     [rank, setRank] = useState(""),
     [trigger, setTrigger] = useState(""),
     [effect, setEffect] = useState(""),
+    [advanced, setAdvanced] = useState(""),
     [mechanic, setMechanic] = useState(""),
     [status, setStatus] = useState(""),
     [related, setRelated] = useState(""),
@@ -47,6 +48,23 @@ export default function Library({
             (!rank || c.rank === Number(rank)) &&
             c.power >= min &&
             c.power <= max &&
+            (!advanced ||
+              (advanced === "continuousPower" &&
+                c.continuous?.some((a) => a.kind === "power")) ||
+              (advanced === "continuousProtection" &&
+                c.continuous?.some((a) => a.kind === "protection")) ||
+              (advanced === "scaling" && c.scaling?.length) ||
+              (advanced === "scoring" && c.scoring?.length) ||
+              (advanced === "transition" &&
+                c.abilities.some((a) =>
+                  ["condition", "powerThreshold"].includes(a.trigger),
+                )) ||
+              (advanced === "variable" &&
+                c.abilities.some((a) =>
+                  a.effects.some(
+                    (e) => "amount" in e && typeof e.amount === "object",
+                  ),
+                ))) &&
             (!trigger || c.abilities.some((a) => a.trigger === trigger)) &&
             (!effect ||
               c.abilities.some((a) =>
@@ -87,6 +105,7 @@ export default function Library({
       max,
       trigger,
       effect,
+      advanced,
       mechanic,
       status,
       related,
@@ -180,6 +199,14 @@ export default function Library({
           setTrigger,
           Object.entries(TRIGGERS).map(([id, name]) => ({ id, name })),
         )}
+        {dropdown("Advanced mechanic filter", advanced, setAdvanced, [
+          { id: "continuousPower", name: "Continuous power" },
+          { id: "continuousProtection", name: "Continuous protection" },
+          { id: "scaling", name: "Dynamic scaling" },
+          { id: "scoring", name: "Card scoring" },
+          { id: "transition", name: "Condition/power transitions" },
+          { id: "variable", name: "Variable-strength effects" },
+        ])}
         {dropdown(
           "Ability effect filter",
           effect,

@@ -11,7 +11,14 @@ import type { ContentPack, Issue } from "../content/types";
 import { currentPower, scoreGame } from "../engine/scoring";
 import { coordinate, relative } from "../engine/game";
 import { libraryOf, evolutionEdges } from "../content/validation";
-import { describeAbility, MECHANICS } from "../engine/registry";
+import {
+  describeAbility,
+  describeCondition,
+  describeNumber,
+  describeTarget,
+  MECHANICS,
+} from "../engine/registry";
+import { ScoreDetails } from "../ui/PowerDetails";
 import { cardArtwork } from "../assets/references";
 import Artwork from "../ui/Artwork";
 export const split = (s: string) => [
@@ -374,6 +381,29 @@ export function CardPreview({
           </div>
         ))}
       </details>
+      {(card.continuous ?? []).map((a) => (
+        <p key={a.id}>
+          <b>Continuous:</b>{" "}
+          {a.kind === "power"
+            ? describeNumber(a.amount)
+            : `${a.protection} protection`}{" "}
+          to {describeTarget(a.target)}
+          {a.condition ? ` if ${describeCondition(a.condition)}` : ""}. Requires
+          this source to remain on the battlefield.
+        </p>
+      ))}
+      {(card.scaling ?? []).map((a) => (
+        <p key={a.id}>
+          <b>Dynamic power:</b> {describeNumber(a.amount)}
+          {a.condition ? ` if ${describeCondition(a.condition)}` : ""}.
+        </p>
+      ))}
+      {(card.scoring ?? []).map((a) => (
+        <p key={a.id}>
+          <b>Scoring:</b> {describeNumber(a.amount)} bonus points; {a.when}
+          {a.condition ? ` if ${describeCondition(a.condition)}` : ""}.
+        </p>
+      ))}
       {card.abilities.map((a) => (
         <div className="preview-ability" key={a.id}>
           <p>{describeAbility(a)}</p>
@@ -483,6 +513,7 @@ export function BoardView({
           </span>
         )}
       </div>
+      <ScoreDetails state={state} library={lib} />
     </div>
   );
 }

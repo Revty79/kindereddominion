@@ -40,7 +40,7 @@ export type Ruleset = {
   completion: "twoPasses";
 };
 export type ContentPack = {
-  schema: 1;
+  schema: 1 | 2;
   engineVersion: string;
   id: string;
   name: string;

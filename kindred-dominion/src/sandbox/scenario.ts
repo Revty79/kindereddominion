@@ -6,6 +6,7 @@ import {
   validateConfig,
 } from "../engine/game";
 import { currentPower } from "../engine/scoring";
+import { MAX_POWER } from '../engine/advanced-types';
 import type {
   CardInstance,
   GameConfig,
@@ -226,7 +227,7 @@ export function validateScenario(scenario: Scenario): Issue[] {
         s.cards[c.id] !== c ||
         ![0, 1].includes(c.owner) ||
         !Number.isSafeInteger(c.modifier) ||
-        Math.abs(c.modifier) > 1000 ||
+        Math.abs(c.modifier) > (s.mechanics?MAX_POWER:1000) ||
         !Array.isArray(c.statuses) ||
         c.statuses.some((v) => !["weakening", "destruction"].includes(v))
       )

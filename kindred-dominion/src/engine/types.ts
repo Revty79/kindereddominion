@@ -1,3 +1,13 @@
+import type {
+  AdvancedCondition,
+  ContinuousEffect,
+  DynamicScaling,
+  EventFilter,
+  MechanicsState,
+  Numeric,
+  PowerChange,
+  ScoringBonus,
+} from "./advanced-types";
 export type Player = 0 | 1;
 // Collections are content identifiers. The five founding names are baseline data, not an engine limit.
 export type Kindred = string;
@@ -24,28 +34,74 @@ export type Trigger =
   | "turnStart"
   | "turnEnd"
   | "otherPlacement"
-  | "otherDestruction";
+  | "otherDestruction"
+  | "enhanced"
+  | "weakened"
+  | "otherEnhanced"
+  | "otherWeakened"
+  | "firstEnhanced"
+  | "firstWeakened"
+  | "powerThreshold"
+  | "condition"
+  | "territoryClaimed"
+  | "territoryCaptured"
+  | "territoryLost"
+  | "territoryFortified"
+  | "fortificationReduced"
+  | "resurrected"
+  | "banished"
+  | "returned"
+  | "drawn"
+  | "generated";
 export type Target = {
-  kind: "self" | "event" | "all" | "pattern";
+  kind:
+    | "self"
+    | "event"
+    | "all"
+    | "pattern"
+    | "incoming"
+    | "sacrificed"
+    | "destroyed"
+    | "adjacent"
+    | "orthogonal"
+    | "diagonal"
+    | "row"
+    | "column";
   relation?: "friendly" | "enemy" | "any";
   offsets?: Offset[];
   excludeSelf?: boolean;
   tags?: string[];
+  definitions?: string[];
+  kindreds?: string[];
+  territory?: "friendly" | "enemy" | "neutral" | "any";
+  occupied?: "occupied" | "empty";
+  row?: number;
+  column?: number;
+  minTokens?: number;
+  maxTokens?: number;
+  minFortification?: number;
+  maxFortification?: number;
+  minPower?: number;
+  maxPower?: number;
+  status?: "enhanced" | "weakened";
+  order?: "coordinate" | "reverse" | "random";
+  maxTargets?: number;
 };
 export type Condition =
   | { kind: "friendlyCount"; atLeast: number }
   | { kind: "sourcePower"; atLeast: number }
-  | { kind: "eventFriendly" };
+  | { kind: "eventFriendly" }
+  | AdvancedCondition;
 export type Effect =
   | {
       type: "power" | "tokens" | "fortify" | "capture" | "overthrow";
-      amount: number;
+      amount: Numeric;
       target: Target;
     }
   | { type: "destroy" | "return" | "banish"; target: Target }
   | { type: "protect"; protection: Protection; target: Target }
-  | { type: "draw"; amount: number }
-  | { type: "generate"; card: string; amount: number }
+  | { type: "draw"; amount: Numeric }
+  | { type: "generate"; card: string; amount: Numeric }
   | { type: "summon"; card: string; target: Target }
   | { type: "replace" | "evolve"; card: string; target: Target }
   | {
@@ -61,6 +117,9 @@ export type Ability = {
   condition?: Condition;
   limit?: { perTurn?: number; perMatch?: number; perEvent?: number };
   allowOnResurrect?: boolean;
+  eventFilter?: EventFilter;
+  threshold?: { value: number; direction: "up" | "down" | "either" };
+  repeatable?: boolean;
 };
 export type Prerequisite = {
   definitions?: string[];
@@ -82,6 +141,9 @@ export type CardDefinition = {
   prerequisite?: Prerequisite;
   protections?: Protection[];
   maxCopies?: number;
+  continuous?: ContinuousEffect[];
+  scaling?: DynamicScaling[];
+  scoring?: ScoringBonus[];
 };
 export type CardLibrary = Record<string, CardDefinition>;
 export type CardInstance = {
@@ -95,6 +157,8 @@ export type CardInstance = {
   stack: string[];
   activations: Record<string, number>;
   resurrections: number;
+  permanentEnhancement?: number;
+  permanentWeakening?: number;
 };
 export type Lineage = {
   activations: Record<string, number>;
@@ -149,12 +213,25 @@ export type GameEvent = {
   text: string;
   player?: Player;
   card?: string;
+  change?: PowerChange;
+  details?: unknown;
 };
 export type Score = {
   rows: { powers: [number, number]; points: [number, number] }[];
   columns: [number, number][];
   creatures: [number, number];
   totals: [number, number];
+  breakdown?: {
+    ordinary: [number, number];
+    tactical: [number, number];
+    bonuses: [number, number];
+    sources: {
+      source: string;
+      ability: string;
+      player: Player;
+      points: number;
+    }[];
+  };
 };
 export type MatchResult = {
   winner: Player | null;
@@ -181,6 +258,7 @@ export type GameState = {
   generated: number;
   result: MatchResult | null;
   fault: string | null;
+  mechanics?: MechanicsState;
 };
 export type Action =
   | { type: "mulligan"; player: Player; cards: string[] }

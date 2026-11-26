@@ -14,6 +14,8 @@ import type {
   Player,
 } from "../engine/types";
 import { ENGINE_VERSION } from "../content/types";
+import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
+import { hasAdvancedMechanics } from "../engine/evaluation";
 export type RecordedAction = {
   action: Action;
   signature: string;
@@ -51,7 +53,7 @@ export function newRecord(
 ): MatchRecord {
   return structuredClone({
     schema: 1,
-    engineVersion: ENGINE_VERSION,
+    engineVersion: state.mechanics ? ADVANCED_ENGINE_VERSION : ENGINE_VERSION,
     id: `match-${state.seed}-${signature(state)}`,
     name,
     contentVersion,
@@ -88,7 +90,12 @@ export function replayAt(
   index: number,
   captureLast = false,
 ): { state: GameState; steps: DiagnosticStep[] } {
-  if (record.schema !== 1 || record.engineVersion !== ENGINE_VERSION)
+  if (
+    record.schema !== 1 ||
+    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(record.engineVersion) ||
+    (record.engineVersion === ENGINE_VERSION &&
+      (record.initialState.mechanics || hasAdvancedMechanics(record.library)))
+  )
     throw new Error(
       "Replay engine version is incompatible. The record has not been reconstructed.",
     );
@@ -118,7 +125,7 @@ export function validateRecord(value: unknown): void {
   if (
     !record ||
     record.schema !== 1 ||
-    record.engineVersion !== ENGINE_VERSION ||
+    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(record.engineVersion) ||
     !record.library ||
     !record.initialState ||
     !Array.isArray(record.actions) ||

@@ -1,6 +1,6 @@
 {
   "name": "kindred-dominion",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,7 +15,8 @@
     "prebuild": "node scripts/validate-assets.mjs",
     "balance": "node scripts/balance.mjs",
     "content:import": "node scripts/import-content.mjs",
-    "content:export": "node scripts/export-content.mjs"
+    "content:export": "node scripts/export-content.mjs",
+    "validate:v1.3a": "node scripts/validate-v1.3a.mjs"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.9.12",

@@ -4,7 +4,7 @@ import type { CardMetadata, ContentPack, Workspace } from "../content/types";
 import { defaultMetadata } from "../content/baseline";
 import { duplicateCard } from "../content/operations";
 import { validatePack } from "../content/validation";
-import { EFFECTS, TRIGGERS } from "../engine/registry";
+import { ADVANCED_MECHANICS, EFFECTS, TRIGGERS } from "../engine/registry";
 import Library from "./Library";
 import CardEditor from "./CardEditor";
 import Collections from "./Collections";
@@ -111,7 +111,7 @@ export default function Studio({
     <div className="studio">
       <header className="studio-header">
         <div>
-          <span className="eyebrow">KINDRED DOMINION / V1.2</span>
+          <span className="eyebrow">KINDRED DOMINION / V1.3A</span>
           <h1>Developer Studio</h1>
         </div>
         <div>
@@ -216,6 +216,13 @@ export default function Studio({
                 </section>
                 <section className="studio-subpanel">
                   <h3>Supported mechanics registry</h3>
+                  <p>{Object.values(ADVANCED_MECHANICS).join(" · ")}</p>
+                  <p>
+                    The V1.3A mechanics laboratory and 30 ready-made scenarios
+                    are separate from your working draft and both Founding
+                    libraries. Read docs/MASTER-CARD-MECHANICS.md for exact
+                    behavior.
+                  </p>
                   <p>{Object.values(TRIGGERS).join(" · ")}</p>
                   <p>
                     {Object.values(EFFECTS)

@@ -4,6 +4,9 @@ import type { ContentPack, EntityType, Transfer, Workspace } from "./types";
 import { validatePack } from "./validation";
 import { validateScenario } from "../sandbox/scenario";
 import { validateRecord } from "../replay/record";
+import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
+import { hasAdvancedMechanics } from "../engine/evaluation";
+import { libraryOf } from "./validation";
 const plain = (value: unknown): value is Record<string, any> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 function safeTree(value: unknown, depth = 0): void {
@@ -75,7 +78,7 @@ function validateReport(value: any): void {
   if (
     !plain(value) ||
     value.schema !== 1 ||
-    value.engineVersion !== ENGINE_VERSION ||
+    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(value.engineVersion) ||
     !plain(value.request) ||
     !Array.isArray(value.failures) ||
     !Array.isArray(value.examples) ||
@@ -111,7 +114,35 @@ export function exportTransfer(
   return {
     format: "kindred-dominion-studio",
     schema: 1,
-    engineVersion: ENGINE_VERSION,
+    engineVersion:
+      workspace.working.engineVersion === ADVANCED_ENGINE_VERSION ||
+      (type === "backup" &&
+        ([...workspace.versions].some(
+          (v) => v.engineVersion === ADVANCED_ENGINE_VERSION,
+        ) ||
+          workspace.scenarios.some(
+            (s) => s.content.engineVersion === ADVANCED_ENGINE_VERSION,
+          ) ||
+          workspace.replays.some(
+            (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
+          ) ||
+          workspace.reports.some(
+            (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
+          ))) ||
+      (type === "scenarios" &&
+        workspace.scenarios.some(
+          (s) => s.content.engineVersion === ADVANCED_ENGINE_VERSION,
+        )) ||
+      (type === "replays" &&
+        workspace.replays.some(
+          (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
+        )) ||
+      (type === "reports" &&
+        workspace.reports.some(
+          (r) => r.engineVersion === ADVANCED_ENGINE_VERSION,
+        ))
+        ? ADVANCED_ENGINE_VERSION
+        : ENGINE_VERSION,
     type,
     exportedAt: new Date().toISOString(),
     data: structuredClone(data),
@@ -126,7 +157,7 @@ export function parseTransfer(text: string): Transfer {
     !plain(value) ||
     value.format !== "kindred-dominion-studio" ||
     value.schema !== 1 ||
-    value.engineVersion !== ENGINE_VERSION ||
+    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(value.engineVersion) ||
     ![
       "cards",
       "collections",
@@ -215,6 +246,13 @@ export function applyImport(
     ];
   }
   // Entire candidate is validated BEFORE the caller can commit a single IndexedDB transaction.
+  if (
+    transfer.type === "cards" &&
+    hasAdvancedMechanics(libraryOf(next.working))
+  ) {
+    next.working.schema = 2;
+    next.working.engineVersion = ADVANCED_ENGINE_VERSION;
+  }
   validateWorkspace(next);
   return next;
 }

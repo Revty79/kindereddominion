@@ -11,6 +11,14 @@ import type { CardDefinition, CardLibrary, GameConfig } from "../engine/types";
 import type { ContentPack, Issue } from "./types";
 import { ENGINE_VERSION } from "./types";
 import { fromDataURL } from "../assets/artwork";
+import {
+  validateAdvancedCard,
+  validateConditionDefinition,
+  validateNumberDefinition,
+  validateTargetDefinition,
+} from "../engine/advanced-validation";
+import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
+import { hasAdvancedMechanics } from "../engine/evaluation";
 export const libraryOf = (pack: ContentPack): CardLibrary =>
   Object.fromEntries(pack.cards.map((c) => [c.id, c]));
 export const ID = /^[a-zA-Z][a-zA-Z0-9_-]{0,79}$/;
@@ -258,35 +266,7 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
     }
   }
   const validateTarget = (t: any, path: string) => {
-    if (!obj(t) || !(t.kind in TARGETS)) {
-      error(path, "Select a supported targeting method.");
-      return;
-    }
-    if (
-      t.relation !== undefined &&
-      !["friendly", "enemy", "any"].includes(t.relation)
-    )
-      error(path, "Invalid target relationship.");
-    if (t.tags !== undefined && (!strings(t.tags) || !t.tags.length))
-      error(path, "Invalid target classifications.");
-    if (t.excludeSelf !== undefined && typeof t.excludeSelf !== "boolean")
-      error(path, "Exclude source must be a checkbox value.");
-    if (
-      t.kind === "pattern" &&
-      (!list(t.offsets) ||
-        !t.offsets.length ||
-        t.offsets.some(
-          (o: any) => !obj(o) || !num(o.x, -20, 20) || !num(o.y, -20, 20),
-        ))
-    )
-      error(path, "Relative targeting needs at least one bounded position.");
-    if (
-      Object.keys(t).some(
-        (k) =>
-          !["kind", "relation", "tags", "excludeSelf", "offsets"].includes(k),
-      )
-    )
-      error(path, "Unsupported target property.");
+    out.push(...validateTargetDefinition(t, path, pack));
   };
   if (!list(c.abilities)) error("abilities", "Abilities must be a list.");
   else {
@@ -327,19 +307,8 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
             "Activation restrictions must be positive counts up to 100.",
           );
       }
-      if (
-        a.condition !== undefined &&
-        (!obj(a.condition) ||
-          !["friendlyCount", "sourcePower", "eventFriendly"].includes(
-            a.condition.kind,
-          ) ||
-          (a.condition.kind !== "eventFriendly" &&
-            !num(a.condition.atLeast, 0, 100)))
-      )
-        error(
-          path,
-          "Choose a supported population, source-power or event-ownership condition.",
-        );
+      if (a.condition !== undefined)
+        out.push(...validateConditionDefinition(a.condition, path, pack));
       a.effects.forEach((e: any, j: number) => {
         const ep = `${path}.effects.${j}`;
         if (!obj(e) || !(e.type in EFFECTS)) {
@@ -349,16 +318,19 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
         const capability = EFFECTS[e.type as keyof typeof EFFECTS];
         if (
           "amount" in capability &&
+          typeof e.amount !== "object" &&
           (!num(
             e.amount,
             e.type === "power" || e.type === "tokens" || e.type === "fortify"
-              ? -100
+              ? -100000
               : 1,
-            100,
+            100000,
           ) ||
             e.amount === 0)
         )
           error(ep, "Provide a nonzero bounded effect strength.");
+        if ("amount" in capability && typeof e.amount === "object")
+          out.push(...validateNumberDefinition(e.amount, ep, pack));
         if ("target" in capability) validateTarget(e.target, ep);
         if (
           ["tokens", "fortify", "summon", "replace", "evolve"].includes(
@@ -402,6 +374,7 @@ export function validateCard(value: unknown, pack: ContentPack): Issue[] {
       });
     });
   }
+  out.push(...validateAdvancedCard(c, pack));
   if (num(c.power, 1, 100) && c.power > 12)
     out.push({
       severity: "warning",
@@ -417,8 +390,8 @@ export function validatePack(value: unknown): Issue[] {
     out.push({ severity: "error", path, message });
   if (
     !obj(value) ||
-    value.schema !== 1 ||
-    value.engineVersion !== ENGINE_VERSION ||
+    ![1, 2].includes(value.schema) ||
+    ![ENGINE_VERSION, ADVANCED_ENGINE_VERSION].includes(value.engineVersion) ||
     !str(value.id) ||
     !str(value.name) ||
     !["baseline", "draft", "checkpoint", "testing", "archived"].includes(
@@ -436,6 +409,20 @@ export function validatePack(value: unknown): Issue[] {
     if (!list(value[key])) error(key, "Required bounded list is missing.");
   if (out.length) return out;
   const pack = value as ContentPack;
+  if (pack.schema !== (pack.engineVersion === ENGINE_VERSION ? 1 : 2))
+    error("content", "Content schema and engine version do not agree.");
+  try {
+    if (
+      hasAdvancedMechanics(libraryOf(pack)) &&
+      (pack.schema !== 2 || pack.engineVersion !== ADVANCED_ENGINE_VERSION)
+    )
+      error(
+        "content",
+        "Advanced definitions require content schema 2 and engine 1.3.0; legacy versions are never silently reinterpreted.",
+      );
+  } catch {
+    error("cards", "Malformed card definitions.");
+  }
   if (!obj(pack.metadata))
     error("metadata", "Card metadata must be a keyed object.");
   for (const key of ["cards", "collections", "decks", "rulesets"] as const) {

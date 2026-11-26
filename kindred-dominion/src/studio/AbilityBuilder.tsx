@@ -13,7 +13,13 @@ import {
   TARGETS,
   TRIGGERS,
 } from "../engine/registry";
-import { Field, NumberField, PatternPicker, split } from "./components";
+import { Field, NumberField } from "./components";
+import TargetEditor from "./TargetEditor";
+import {
+  ConditionEditor,
+  ExpressionEditor,
+  FilterEditor,
+} from "./MechanicsFields";
 function defaultEffect(type: Effect["type"], cards: CardDefinition[]): Effect {
   const target: Target = { kind: "self" };
   const card = (placement?: string) =>
@@ -46,84 +52,6 @@ function defaultEffect(type: Effect["type"], cards: CardDefinition[]): Effect {
     default:
       return { type, amount: 1, target };
   }
-}
-function TargetEditor({
-  value,
-  onChange,
-}: {
-  value: Target;
-  onChange: (t: Target) => void;
-}) {
-  return (
-    <div className="target-editor">
-      <div className="studio-grid two">
-        <Field label="Target selection">
-          <select
-            value={value.kind}
-            onChange={(e) =>
-              onChange({
-                ...value,
-                kind: e.target.value as Target["kind"],
-                ...(e.target.value === "pattern"
-                  ? { offsets: value.offsets ?? [{ x: 1, y: 0 }] }
-                  : {}),
-              })
-            }
-          >
-            {Object.entries(TARGETS).map(([id, name]) => (
-              <option key={id} value={id}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </Field>
-        <Field label="Target relationship">
-          <select
-            value={value.relation ?? "any"}
-            onChange={(e) =>
-              onChange({
-                ...value,
-                relation: e.target.value as Target["relation"],
-              })
-            }
-          >
-            <option value="any">Any relationship</option>
-            <option value="friendly">Friendly</option>
-            <option value="enemy">Enemy</option>
-          </select>
-        </Field>
-        <Field label="Target classifications (comma separated)">
-          <input
-            defaultValue={value.tags?.join(", ") ?? ""}
-            onChange={(e) =>
-              onChange({
-                ...value,
-                tags: split(e.target.value).length
-                  ? split(e.target.value)
-                  : undefined,
-              })
-            }
-          />
-        </Field>
-        <label className="studio-check">
-          <input
-            type="checkbox"
-            checked={value.excludeSelf ?? false}
-            onChange={(e) =>
-              onChange({ ...value, excludeSelf: e.target.checked })
-            }
-          />
-          Exclude source
-        </label>
-      </div>
-      {value.kind === "pattern" && (
-        <PatternPicker
-          offsets={value.offsets ?? []}
-          onChange={(offsets) => onChange({ ...value, offsets })}
-        />
-      )}
-    </div>
-  );
 }
 export default function AbilityBuilder({
   abilities,
@@ -213,6 +141,27 @@ export default function AbilityBuilder({
                   update(index, {
                     ...a,
                     trigger: e.target.value as Ability["trigger"],
+                    ...(e.target.value === "powerThreshold"
+                      ? {
+                          threshold: { value: 5, direction: "up" as const },
+                          eventFilter: {
+                            ...a.eventFilter,
+                            powerChanges: a.eventFilter?.powerChanges ?? [
+                              "permanent",
+                              "aura",
+                              "dynamic",
+                            ],
+                          },
+                        }
+                      : { threshold: undefined }),
+                    ...(e.target.value === "condition" && !a.condition
+                      ? {
+                          condition: {
+                            kind: "sourcePower" as const,
+                            atLeast: 5,
+                          },
+                        }
+                      : {}),
                   })
                 }
               >
@@ -223,48 +172,76 @@ export default function AbilityBuilder({
                 ))}
               </select>
             </Field>
-            <Field label="Activation condition">
-              <select
-                value={a.condition?.kind ?? "none"}
-                onChange={(e) =>
-                  update(index, {
-                    ...a,
-                    condition:
-                      e.target.value === "none"
-                        ? undefined
-                        : e.target.value === "eventFriendly"
-                          ? { kind: "eventFriendly" }
-                          : {
-                              kind: e.target.value as
-                                | "friendlyCount"
-                                | "sourcePower",
-                              atLeast: 1,
-                            },
-                  })
-                }
-              >
-                {Object.entries(CONDITIONS).map(([id, label]) => (
-                  <option key={id} value={id}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            {a.condition && a.condition.kind !== "eventFriendly" && (
+            <ConditionEditor
+              value={a.condition}
+              onChange={(condition) => update(index, { ...a, condition })}
+            />
+          </div>
+          {a.trigger === "powerThreshold" && (
+            <div className="studio-grid two">
               <NumberField
-                label="Condition threshold"
-                value={a.condition.atLeast}
-                min={0}
-                max={100}
-                onChange={(atLeast) =>
+                label="Power crossing threshold"
+                value={a.threshold?.value ?? 5}
+                min={-100000}
+                max={100000}
+                onChange={(value) =>
                   update(index, {
                     ...a,
-                    condition: { ...a.condition, atLeast } as Condition,
+                    threshold: {
+                      value,
+                      direction: a.threshold?.direction ?? "up",
+                    },
                   })
                 }
               />
-            )}
-          </div>
+              <Field label="Power crossing direction">
+                <select
+                  value={a.threshold?.direction ?? "up"}
+                  onChange={(e) =>
+                    update(index, {
+                      ...a,
+                      threshold: {
+                        value: a.threshold?.value ?? 5,
+                        direction: e.target.value as "up" | "down" | "either",
+                      },
+                    })
+                  }
+                >
+                  <option value="up">Reaches or exceeds</option>
+                  <option value="down">Falls below</option>
+                  <option value="either">Either crossing</option>
+                </select>
+              </Field>
+            </div>
+          )}
+          {["condition", "powerThreshold"].includes(a.trigger) && (
+            <label className="studio-check">
+              <input
+                type="checkbox"
+                checked={a.repeatable ?? false}
+                onChange={(e) =>
+                  update(index, { ...a, repeatable: e.target.checked })
+                }
+              />
+              Allow repeated false-to-true/crossing activations (other limits
+              still apply)
+            </label>
+          )}
+          <details>
+            <summary>
+              Reactive relationship, cause and power-change filters
+            </summary>
+            <FilterEditor
+              event
+              value={
+                a.eventFilter ??
+                (a.trigger === "powerThreshold"
+                  ? { powerChanges: ["permanent", "aura", "dynamic"] }
+                  : {})
+              }
+              onChange={(eventFilter) => update(index, { ...a, eventFilter })}
+            />
+          </details>
           <div className="studio-grid three">
             {(["perEvent", "perTurn", "perMatch"] as const).map((key) => (
               <Field
@@ -375,22 +352,16 @@ export default function AbilityBuilder({
                     </select>
                   </Field>
                   {"amount" in effect && (
-                    <NumberField
+                    <ExpressionEditor
                       label={
                         effect.type === "power"
                           ? "Power change (negative weakens)"
                           : "Effect strength / count"
                       }
-                      min={
-                        ["power", "tokens", "fortify"].includes(effect.type)
-                          ? -100
-                          : 1
-                      }
-                      max={100}
                       value={effect.amount}
                       onChange={(amount) => change({ ...effect, amount })}
                     />
-                  )}{" "}
+                  )}
                   {"card" in effect && (
                     <Field label="Referenced card">
                       <select

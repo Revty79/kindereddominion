@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import PowerDetails from "../ui/PowerDetails";
 import type { MatchRecord } from "../replay/record";
 import { replayAt } from "../replay/record";
 import { baselineContent } from "../content/baseline";
@@ -210,6 +211,11 @@ export default function Replay({ records }: { records: MatchRecord[] }) {
                               )
                               .join(" → ") || "none"}
                           </p>
+                          <PowerDetails
+                            state={state}
+                            library={record.library}
+                            id={card.id}
+                          />
                           <pre>
                             {JSON.stringify(
                               {

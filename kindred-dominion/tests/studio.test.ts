@@ -182,7 +182,20 @@ describe("authored content and registry validation", () => {
     ).not.toHaveLength(0);
   });
   it("supports all nine triggers and all registered effects with truthful descriptions", () => {
-    expect(Object.keys(TRIGGERS)).toHaveLength(9);
+    expect(Object.keys(TRIGGERS)).toHaveLength(27);
+    expect(Object.keys(TRIGGERS)).toEqual(
+      expect.arrayContaining([
+        "placement",
+        "replacement",
+        "evolution",
+        "destruction",
+        "sacrifice",
+        "turnStart",
+        "turnEnd",
+        "otherPlacement",
+        "otherDestruction",
+      ]),
+    );
     expect(Object.keys(EFFECTS)).toHaveLength(15);
     const description = describeAbility(draftCard().abilities[0]);
     expect(description).toContain("On placement");

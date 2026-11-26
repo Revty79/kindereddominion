@@ -299,7 +299,7 @@ export async function runSimulation(
   const total = pairs.length * request.matches;
   const report: SimulationReport = {
     schema: 1,
-    engineVersion: ENGINE_VERSION,
+    engineVersion: request.content.engineVersion,
     id: `simulation-${request.seed}-${Date.now().toString(36)}`,
     name: `${request.matches} matches per pairing · ${request.config.scoring}`,
     request: structuredClone(request),

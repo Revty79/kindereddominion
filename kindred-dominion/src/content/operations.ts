@@ -5,6 +5,8 @@ import { ID, validateCard, validatePack } from "./validation";
 import { validateDeck } from "../engine/game";
 import { DEFAULT_CONFIG } from "../engine/config";
 import { libraryOf } from "./validation";
+import { hasAdvancedMechanics } from "../engine/evaluation";
+import { ADVANCED_ENGINE_VERSION } from "../engine/advanced-types";
 export function saveCard(
   pack: ContentPack,
   card: CardDefinition,
@@ -21,6 +23,10 @@ export function saveCard(
   const index = next.cards.findIndex((c) => c.id === originalId);
   if (index < 0) next.cards.push(structuredClone(card));
   else next.cards[index] = structuredClone(card);
+  if (hasAdvancedMechanics(libraryOf(next))) {
+    next.schema = 2;
+    next.engineVersion = ADVANCED_ENGINE_VERSION;
+  }
   const errors = validateCard(card, next).filter((i) => i.severity === "error");
   if (errors.length)
     throw new Error(errors.map((e) => `${e.path}: ${e.message}`).join("\n"));

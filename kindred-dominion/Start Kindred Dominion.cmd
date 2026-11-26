@@ -9,7 +9,7 @@ if errorlevel 1 (
 )
 if not exist node_modules (
   echo Installing dependencies. This first step requires internet access.
-  call npm install
+  call npm ci
   if errorlevel 1 (
     pause
     exit /b 1

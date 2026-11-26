@@ -2175,3 +2175,20 @@ dd {
     scroll-behavior: auto !important;
   }
 }
+.power-breakdown,
+.score-breakdown {
+  border: 1px solid var(--line, #36524f);
+  padding: 12px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.power-breakdown dl,
+.score-breakdown dl {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(60px, 1fr);
+  gap: 6px 12px;
+}
+.power-breakdown dd,
+.score-breakdown dd {
+  margin: 0;
+}

@@ -13,6 +13,7 @@ import {
   split,
 } from "./components";
 import AbilityBuilder from "./AbilityBuilder";
+import { AdvancedCardEditor } from "./MechanicsFields";
 import { importLocalArtwork } from "../assets/artwork";
 export default function CardEditor({
   content,
@@ -397,6 +398,7 @@ export default function CardEditor({
           cards={previewContent.cards}
           cardId={card.id}
         />
+        <AdvancedCardEditor card={card} onChange={update} />
         <Issues issues={issues} />
         <button
           className="primary"

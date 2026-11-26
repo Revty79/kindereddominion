@@ -18,6 +18,8 @@ import { libraryOf } from "../content/validation";
 import { newRecord, appendRecord } from "../replay/record";
 import type { MatchRecord } from "../replay/record";
 import Artwork from "./Artwork";
+import PowerDetails, { ScoreDetails } from "./PowerDetails";
+import ExecutableRules from "./ExecutableRules";
 import { artworkMap } from "../assets/references";
 import type {
   Action,
@@ -486,7 +488,7 @@ export default function App({
           <span className="version">
             {content.id === "v1.1-baseline"
               ? "V1.1 · PLAYABLE FOUNDATION"
-              : "V1.2 · PROVISIONAL TESTING"}
+              : "V1.3A · PROVISIONAL TESTING"}
           </span>
           <button className="quiet" onClick={() => setLibrary(true)}>
             Card library
@@ -850,6 +852,7 @@ export default function App({
                       : "Win a row to score its surviving power"}
                   </span>
                 </div>
+                <ScoreDetails state={game} library={CARDS} />
                 <div className="board-scroll">
                   <div
                     className="board"
@@ -1387,7 +1390,7 @@ export default function App({
       )}
       <footer className="app-footer">
         <span>
-          KINDRED DOMINION <b>✦</b> 0.2.0
+          KINDRED DOMINION <b>✦</b> 0.3.0
         </span>
         <span>
           Development cards. A foundation to play, question and refine.
@@ -1404,6 +1407,20 @@ export default function App({
                 <div>
                   <Pattern card={c} player={instance?.owner ?? 0} />
                   <p>{c.text}</p>
+                  {(game?.mechanics ||
+                    c.continuous?.length ||
+                    c.scaling?.length ||
+                    c.scoring?.length ||
+                    content.engineVersion === "1.3.0") && (
+                    <ExecutableRules card={c} />
+                  )}
+                  {instance && (
+                    <PowerDetails
+                      state={game!}
+                      library={CARDS}
+                      id={instance.id}
+                    />
+                  )}
                   <dl>
                     <dt>Placement</dt>
                     <dd>
