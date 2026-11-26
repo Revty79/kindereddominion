@@ -46,7 +46,7 @@ Passing is temporary. A card play resets the pass counter; two consecutive passe
 
 The ten sections cover Overview, Card Library, Card Editor, Collection Manager, Deck Builder and Tester, Battlefield Sandbox, Tactical Ruleset Editor, Match Simulator, Match Replay and Diagnostics, and Content Versions and Backups.
 
-The form-based editor exposes the actual engine registry: all nine triggers, 15 effect variants (including positive/negative power), relative targeting, supported conditions, prerequisites, protection and persistent activation limits. Influence patterns preview both player orientations. Unsupported mechanics are identified, not presented as functioning controls.
+The form-based editor exposes the actual engine registry: all 27 triggers, 15 effect variants (including positive/negative power), continuous effects, dynamic scaling, scoring bonuses, variable magnitudes, structured conditions, precise targeting, prerequisites, protection and persistent activation limits. Influence patterns preview both player orientations. See the [master mechanics reference](docs/MASTER-CARD-MECHANICS.md) for exact behavior and supported limits.
 
 Simulation runs in a Web Worker, supports reproducible seeds, alternating starters, mirrored comparisons and round robin pairings, and preserves partial results on cancellation. Normal completed games, sandbox experiments and sampled simulations can be replayed using immutable definition snapshots. Studio data and experimental artwork persist in IndexedDB with conflict protection and a previous-transaction recovery snapshot.
 
