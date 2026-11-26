@@ -1,0 +1,308 @@
+{
+  "stage": "V1.3B/C",
+  "recordedAt": "2026-11-26T19:09:51.029Z",
+  "implementationCommit": "42af713c6231ddb0ec81052bde710584a4964195",
+  "completionTag": "v1.3bc-owner-design",
+  "baseline": {
+    "commit": "4a0fd016ac30a7d25f423fb4bfc38b9b763f40d2",
+    "tag": "v1.3bc-baseline",
+    "tests": 216,
+    "browserCases": 22
+  },
+  "cleanGitHubCheckout": {
+    "repository": "https://github.com/Revty79/kindereddominion",
+    "directory": "D:/kindred-v13bc-check-20261126",
+    "commit": "42af713c6231ddb0ec81052bde710584a4964195",
+    "emptyTrackedWorkingTree": true,
+    "node": "v24.18.0",
+    "npmCi": "passed",
+    "unitTests": {
+      "passed": 393,
+      "files": 8
+    },
+    "strictTypeScript": "passed",
+    "studioProductionBuild": "passed",
+    "playerProductionBuild": "passed",
+    "trackedSourceAndRuntimeAssetValidation": "passed",
+    "studioRuntimeAssets": 3,
+    "playerRuntimeAssets": 2,
+    "unpublishedCreatureArtworkIncluded": false,
+    "playerStudioChunks": 0
+  },
+  "artifactComparison": [
+    {
+      "output": "dist",
+      "files": 23,
+      "cleanInventorySHA256": "8ddd1cf0ec1bb288e0b49d81386f1c0050eedeab0882939a87f0d7d4262e87ba",
+      "allCompiledBundlesAndRegisteredAssetBytesIdentical": true,
+      "textLineEndingDifferences": [
+        {
+          "path": "crest.svg",
+          "reason": "Only checkout LF/CRLF differs"
+        },
+        {
+          "path": "index.html",
+          "reason": "Only checkout LF/CRLF differs"
+        }
+      ]
+    },
+    {
+      "output": "dist-player",
+      "files": 7,
+      "cleanInventorySHA256": "4b3c9dfd3eaff70e2d85f060c7851fb328d264deb145d346ef37feb3efa087b7",
+      "allCompiledBundlesAndRegisteredAssetBytesIdentical": true,
+      "textLineEndingDifferences": [
+        {
+          "path": "index.html",
+          "reason": "Only checkout LF/CRLF differs"
+        }
+      ]
+    }
+  ],
+  "browser": {
+    "runner": "Chromium / Playwright",
+    "studioDevelopmentURL": "http://127.0.0.1:5173",
+    "cleanStudioProductionURL": "http://127.0.0.1:5175",
+    "cleanPlayerProductionURL": "http://127.0.0.1:5174",
+    "freshIsolatedContexts": true,
+    "startTime": "2026-11-26T19:04:54.254Z",
+    "duration": 265082.992,
+    "expected": 28,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "cases": [
+      {
+        "file": "advanced.spec.ts",
+        "name": "owner authors all eight advanced card families, tests real power changes, publishes, replays and restores",
+        "status": "passed",
+        "durationMs": 52757
+      },
+      {
+        "file": "advanced.spec.ts",
+        "name": "laboratory scenarios expose aura loss, conditional protection, thresholds, captured power and separate scoring through real controls",
+        "status": "passed",
+        "durationMs": 6518
+      },
+      {
+        "file": "advanced.spec.ts",
+        "name": "the laboratory plays through the ordinary interface, records an advanced match and leaves both old libraries available",
+        "status": "passed",
+        "durationMs": 7675
+      },
+      {
+        "file": "advanced.spec.ts",
+        "name": "recursive form controls persist combined conditions, history arithmetic, stage targeting and bounded random effect targets",
+        "status": "passed",
+        "durationMs": 6734
+      },
+      {
+        "file": "advanced.spec.ts",
+        "name": "a failed laboratory installation keeps the loaded owner draft and active library available",
+        "status": "passed",
+        "durationMs": 6535
+      },
+      {
+        "file": "artwork.spec.ts",
+        "name": "temporary artwork travels from Studio approval to a validated portable package and live gameplay",
+        "status": "passed",
+        "durationMs": 8574
+      },
+      {
+        "file": "artwork.spec.ts",
+        "name": "published artwork and a new local illustration can be exported together with original source masters",
+        "status": "passed",
+        "durationMs": 4409
+      },
+      {
+        "file": "clean-publication.spec.ts",
+        "name": "clean production checkout provides all 150 packaged cards and repository artwork with empty browser storage",
+        "status": "passed",
+        "durationMs": 9892
+      },
+      {
+        "file": "concurrency.spec.ts",
+        "name": "bundled content initializes once under StrictMode and stale tabs cannot overwrite newer drafts",
+        "status": "passed",
+        "durationMs": 3885
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "complete local Domination match, privacy handoffs, rematch and recovery",
+        "status": "passed",
+        "durationMs": 16575
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "complete human versus computer match using real UI placements",
+        "status": "passed",
+        "durationMs": 19124
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "library search, custom Free Play deck, legal 15 duplicate instances",
+        "status": "passed",
+        "durationMs": 4265
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "touch-sized layout supports hand, board scroll, preview and surrender",
+        "status": "passed",
+        "durationMs": 5408
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "full battlefield permits replacement, evolution, death and graveyard inspection",
+        "status": "passed",
+        "durationMs": 3562
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "simultaneous destruction and limited resurrection resolve visibly in the browser",
+        "status": "passed",
+        "durationMs": 4277
+      },
+      {
+        "file": "gameplay.spec.ts",
+        "name": "configurable 4 by 8 field and save storage failure remain playable",
+        "status": "passed",
+        "durationMs": 3440
+      },
+      {
+        "file": "owner.spec.ts",
+        "name": "a clean owner installation exposes all 150 numbered cards, useful filters and preserved development versions",
+        "status": "passed",
+        "durationMs": 3919
+      },
+      {
+        "file": "owner.spec.ts",
+        "name": "owner classic gameplay previews consequences, steps through actual states and records a completed match",
+        "status": "passed",
+        "durationMs": 4061
+      },
+      {
+        "file": "owner.spec.ts",
+        "name": "owner domination gameplay previews consequences, steps through actual states and records a completed match",
+        "status": "passed",
+        "durationMs": 4130
+      },
+      {
+        "file": "owner.spec.ts",
+        "name": "prepared owner scenarios visibly explain Honeybee aura loss, sacrifice gifts, score bonuses and Phoenix requirements",
+        "status": "passed",
+        "durationMs": 3500
+      },
+      {
+        "file": "owner.spec.ts",
+        "name": "invited player build desktop starts clean, plays owner cards and excludes Studio and unpublished art",
+        "status": "passed",
+        "durationMs": 5000
+      },
+      {
+        "file": "owner.spec.ts",
+        "name": "invited player build touch-sized starts clean, plays owner cards and excludes Studio and unpublished art",
+        "status": "passed",
+        "durationMs": 5259
+      },
+      {
+        "file": "studio.spec.ts",
+        "name": "A and B: visually author, persist, build a deck, execute, inspect and repeat a card",
+        "status": "passed",
+        "durationMs": 9922
+      },
+      {
+        "file": "studio.spec.ts",
+        "name": "C: exact and classification evolution plus replacement sacrifice use the real engine",
+        "status": "passed",
+        "durationMs": 6771
+      },
+      {
+        "file": "studio.spec.ts",
+        "name": "D: 100 real matches are reproducible; a 10,000-match worker workload remains responsive and cancellable",
+        "status": "passed",
+        "durationMs": 27715
+      },
+      {
+        "file": "studio.spec.ts",
+        "name": "E and G: complete original match is recorded, replayed and unchanged by draft edits",
+        "status": "passed",
+        "durationMs": 10430
+      },
+      {
+        "file": "studio.spec.ts",
+        "name": "F: checkpoint and complete backup restore authored relationships and artwork atomically",
+        "status": "passed",
+        "durationMs": 14944
+      },
+      {
+        "file": "svg-artwork.spec.ts",
+        "name": "safe SVG imports as optimized artwork and unsafe SVG is rejected without replacing it",
+        "status": "passed",
+        "durationMs": 3555
+      }
+    ]
+  },
+  "simulations": {
+    "sourceCommit": "4281df90d77f3525092a8aad6fe4bfc47abc5253",
+    "serializedOwnerCatalogConfirmedUnchanged": true,
+    "ownerClassic": {
+      "attempted": 2430,
+      "completed": 2430,
+      "draws": 33,
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    "ownerDomination": {
+      "attempted": 2430,
+      "completed": 2430,
+      "draws": 40,
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    "legacy": {
+      "matches": 4720,
+      "configurationDigests": 46,
+      "allIdentical": true
+    },
+    "laboratory": {
+      "attempted": 1200,
+      "completed": 1200,
+      "draws": 8,
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0,
+      "runDigests": 24,
+      "allIdentical": true
+    },
+    "totalMatches": 10780,
+    "individualOwnerCardScenarios": 150
+  },
+  "preservation": {
+    "original30": true,
+    "provisional150": true,
+    "laboratory45": true,
+    "publishedArtworkAndSources": true,
+    "historicalReportsAndFixtures": true,
+    "existingDraftsAndMatchSnapshots": "validated by unit/browser recovery/version tests"
+  },
+  "docker": {
+    "execution": "pending-owner-validation",
+    "ownerInstruction": "Leave Docker execution pending for owner validation",
+    "reason": "Docker and WSL unavailable on development machine",
+    "shellSyntax": "passed bash -n",
+    "containerBuildOrStartupClaimed": false,
+    "homeServerInstallationPerformed": false
+  },
+  "humanAcceptancePending": [
+    "Owner usability review",
+    "Physical Android/iOS browsers",
+    "Competitive balance with human players",
+    "Artwork approval",
+    "Commercial naming clearance"
+  ]
+}
