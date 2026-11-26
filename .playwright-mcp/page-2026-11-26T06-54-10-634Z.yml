@@ -1,0 +1,96 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: "#"
+      - generic [ref=e8]:
+        - text: Kindred
+        - strong [ref=e9]: Dominion
+    - generic [ref=e10]:
+      - button "Card library" [ref=e11] [cursor=pointer]
+      - button "How to play" [ref=e12] [cursor=pointer]
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: A TACTICAL CARD GAME
+      - heading [level=1] [ref=e17]:
+        - text: Every position.
+        - emphasis [ref=e18]: A possibility.
+      - paragraph [ref=e19]: Grow your territory. Gather your kindred.Claim the rows that decide your dominion.
+      - generic [aria-hidden] [ref=e20]:
+        - generic [ref=e21]: ◆
+        - generic [ref=e25]: ◆
+        - generic [ref=e26]: ◆
+        - generic [ref=e28]: ✦
+        - generic [ref=e30]: ◆
+        - generic [ref=e31]: ◆
+        - generic [ref=e35]: ◆
+      - generic [ref=e36]:
+        - text: LOCAL. OFFLINE. YOUR FIELD.
+        - paragraph [ref=e37]: 30 provisional cards · 5 Founding KindredsOne shared screen or a computer opponent.
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]: THE NEXT ENCOUNTER
+          - heading "Prepare the battlefield" [level=2] [ref=e42]
+        - generic [ref=e43]: ◇
+      - group "01 / Tactical ruleset" [ref=e44]:
+        - generic [ref=e46]:
+          - button "☷ Classic Win rows. Score the full power of each row you win. Ties score zero." [pressed] [ref=e47] [cursor=pointer]:
+            - generic [ref=e48]: ☷
+            - strong [ref=e49]: Classic
+            - generic [ref=e50]: Win rows. Score the full power of each row you win. Ties score zero.
+          - button "▦ Domination Classic scoring, plus one point for every surviving creature." [ref=e51] [cursor=pointer]:
+            - generic [ref=e52]: ▦
+            - strong [ref=e53]: Domination
+            - generic [ref=e54]: Classic scoring, plus one point for every surviving creature.
+      - group "02 / Your opponent" [ref=e55]:
+        - generic [ref=e57]:
+          - button "Computer" [pressed] [ref=e58] [cursor=pointer]
+          - button "Local two-player" [ref=e59] [cursor=pointer]
+        - paragraph [ref=e60]: A local tactical opponent. No connection or account needed.
+      - group "03 / Choose your kindred" [ref=e61]:
+        - generic [ref=e63]:
+          - generic [ref=e64]: "1"
+          - generic [ref=e65]:
+            - strong [ref=e66]: Jade · Player 1
+            - combobox "Jade deck" [ref=e67]:
+              - option "Verdant Bulwark" [selected]
+              - option "Ashen Covenant"
+              - option "Prism Engine"
+              - option "Dawn March"
+              - option "Custom deck (0/15)"
+            - generic [ref=e68]: Nature · Constructs / Grow, fortify, evolve
+          - button "Build deck" [ref=e69] [cursor=pointer]
+        - generic [ref=e70]:
+          - generic [ref=e71]: "2"
+          - generic [ref=e72]:
+            - strong [ref=e73]: Amber · Computer
+            - combobox "Amber deck" [ref=e74]:
+              - option "Verdant Bulwark"
+              - option "Ashen Covenant" [selected]
+              - option "Prism Engine"
+              - option "Dawn March"
+              - option "Custom deck (0/15)"
+            - generic [ref=e75]: Undead · Mythical / Sacrifice, return, overwhelm
+          - button "Build deck" [ref=e76] [cursor=pointer]
+      - group [ref=e77]:
+        - generic "Play format & battlefield options" [ref=e78] [cursor=pointer]
+        - option "Standard Play · default 2 copies" [selected]
+        - option "Unrestricted Free Play · up to 15"
+        - option "Mixed collections" [selected]
+        - option "Nature"
+        - option "Mythical"
+        - option "Arcane"
+        - option "Undead"
+        - option "Constructs"
+        - option "3 × 5" [selected]
+        - option "3 × 6"
+        - option "4 × 5"
+        - option "4 × 6"
+        - option "4 × 8"
+      - button "Begin match ✦" [ref=e79] [cursor=pointer]:
+        - text: Begin match
+        - generic [ref=e80]: ✦
+      - paragraph [ref=e81]: 15-card decks · 5-card opening hands · One optional mulligan
+  - contentinfo [ref=e82]:
+    - generic [ref=e83]: KINDRED DOMINION ✦ 0.1.0
+    - generic [ref=e84]: Development cards. A foundation to play, question and refine.
