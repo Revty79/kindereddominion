@@ -333,6 +333,10 @@ test("E and G: complete original match is recorded, replayed and unchanged by dr
   await page
     .getByRole("button", { name: "Local two-player", exact: true })
     .click();
+  // This replay fixture requires a legal first play; do not sample an arbitrary
+  // opening with only high-rank/replacement/evolution cards.
+  await page.getByText("Play format & battlefield options", { exact: true }).click();
+  await page.getByLabel("Match seed (optional)", { exact: true }).fill("9461");
   await page.getByRole("button", { name: "Begin match" }).click();
   const reveal = async () => {
     const button = page.getByRole("button", { name: /reveal my hand/ });
