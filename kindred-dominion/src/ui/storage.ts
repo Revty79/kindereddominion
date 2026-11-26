@@ -1,12 +1,16 @@
 import { assertInvariants } from "../engine/game";
 import { CARDS } from "../data/cards";
-import type { GameState } from "../engine/types";
+import type { GameState, CardLibrary } from "../engine/types";
+import type { MatchRecord } from "../replay/record";
 export type Session = {
   schema: 1;
   game: GameState;
   decks: [string[], string[]];
   opponent: "computer" | "local";
   deckNames: [string, string];
+  library?: CardLibrary;
+  contentVersion?: string;
+  record?: MatchRecord;
 };
 const KEY = "kindred-dominion:v1:match";
 export function readSession(): Session | null {
@@ -26,7 +30,7 @@ export function readSession(): Session | null {
       saved.game.config.battlefield.rows * saved.game.config.battlefield.cols
     )
       return null;
-    assertInvariants(saved.game, CARDS);
+    assertInvariants(saved.game, saved.library ?? CARDS);
     return saved;
   } catch {
     return null;
@@ -47,10 +51,17 @@ export function clearSession(): void {
     /* Storage may be disabled. */
   }
 }
-export function readCustomDecks(): [string[], string[]] {
+export function readCustomDecks(
+  library: CardLibrary = CARDS,
+  version = "v1.1-baseline",
+): [string[], string[]] {
   try {
     const value = JSON.parse(
-      localStorage.getItem("kindred-dominion:v1:decks") ?? "null",
+      localStorage.getItem(
+        version === "v1.1-baseline"
+          ? "kindred-dominion:v1:decks"
+          : `kindred-dominion:decks:${version}`,
+      ) ?? "null",
     );
     if (
       Array.isArray(value) &&
@@ -59,7 +70,7 @@ export function readCustomDecks(): [string[], string[]] {
         (deck) =>
           Array.isArray(deck) &&
           deck.length <= 15 &&
-          deck.every((id) => typeof id === "string" && CARDS[id]),
+          deck.every((id) => typeof id === "string" && library[id]),
       )
     )
       return [value[0], value[1]];
@@ -68,9 +79,17 @@ export function readCustomDecks(): [string[], string[]] {
   }
   return [[], []];
 }
-export function saveCustomDecks(decks: [string[], string[]]): boolean {
+export function saveCustomDecks(
+  decks: [string[], string[]],
+  version = "v1.1-baseline",
+): boolean {
   try {
-    localStorage.setItem("kindred-dominion:v1:decks", JSON.stringify(decks));
+    localStorage.setItem(
+      version === "v1.1-baseline"
+        ? "kindred-dominion:v1:decks"
+        : `kindred-dominion:decks:${version}`,
+      JSON.stringify(decks),
+    );
     return true;
   } catch {
     return false;

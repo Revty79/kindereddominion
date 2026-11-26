@@ -1,0 +1,1580 @@
+{
+  "commit": "f953daadb9e0373f153491048b1d3d35de1aba88",
+  "fixtures": [
+    {
+      "seed": 9461,
+      "scoring": "classic",
+      "initial": "c451c190",
+      "actions": [
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 0,
+            "cards": [
+              "c7",
+              "c10",
+              "c14"
+            ]
+          },
+          "signature": "e44c4011"
+        },
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 1,
+            "cards": [
+              "c29",
+              "c22"
+            ]
+          },
+          "signature": "1d0bcc45"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "4d2f7f4f"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c5",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "c16ac118"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c24",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "2d7133b3"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "a26e4a5f"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c22",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "7605c194"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c15",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "c417bec0"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c23",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "c7e4def2"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c6",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "4dcf123a"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c21",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "944b339b"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c13",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "1b1cb9d9"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c17",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "6d92dafc"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c10",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "de9477e2"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c29",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "2c492619"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 2,
+            "col": 0
+          },
+          "signature": "b5ffc7b9"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c30",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "a91589c0"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c3",
+            "row": 2,
+            "col": 2
+          },
+          "signature": "3fc4fce3"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "053be7d7"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c8",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "b87558a0"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c25",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "9b585e10"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c7",
+            "row": 2,
+            "col": 2
+          },
+          "signature": "5020b630"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c27",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "4dd46059"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c4",
+            "row": 2,
+            "col": 1
+          },
+          "signature": "b9ee9ff0"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "a8b74bf9"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c14",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "f1a39d1e"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "cbfb71d0"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "5fdf66e1"
+        }
+      ],
+      "result": {
+        "scores": [
+          15,
+          42
+        ],
+        "winner": 1,
+        "reason": "passes"
+      }
+    },
+    {
+      "seed": 456123,
+      "scoring": "classic",
+      "initial": "03f9c256",
+      "actions": [
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 0,
+            "cards": [
+              "c15",
+              "c9"
+            ]
+          },
+          "signature": "d20a2e32"
+        },
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 1,
+            "cards": [
+              "c24",
+              "c22"
+            ]
+          },
+          "signature": "a7c5a132"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c4",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "bf30c874"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "4c3f612b"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c7",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "eaa9b412"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "bb883bc7"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c8",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "d55fb1f8"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c22",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "194ff0ce"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "ff8a9e3a"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c23",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "8f059df4"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c15",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "e8d3ada5"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c30",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "e9c3832a"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c5",
+            "row": 2,
+            "col": 0
+          },
+          "signature": "00d64e11"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c21",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "53907449"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 2,
+            "col": 1
+          },
+          "signature": "3872dbee"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c24",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "1dc5ed5b"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c14",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "5c9576b0"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c28",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "d9a2098f"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "9d73c1ea"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "4365d46c"
+        }
+      ],
+      "result": {
+        "scores": [
+          19,
+          30
+        ],
+        "winner": 1,
+        "reason": "passes"
+      }
+    },
+    {
+      "seed": 991011,
+      "scoring": "classic",
+      "initial": "47d5853c",
+      "actions": [
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 0,
+            "cards": [
+              "c15",
+              "c8",
+              "c7",
+              "c9",
+              "c6"
+            ]
+          },
+          "signature": "c9d02025"
+        },
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 1,
+            "cards": [
+              "c24",
+              "c25"
+            ]
+          },
+          "signature": "6098c4ce"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c21",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "a1b612e8"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c4",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "c88ea857"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c22",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "fc976088"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "077f8e27"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "0b3d1c97"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c15",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "82f0e8bb"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c29",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "4d68aeca"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c10",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "df6b5152"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c23",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "e0582433"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 2,
+            "col": 2
+          },
+          "signature": "008c4d78"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c30",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "edf89e02"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c6",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "ae360536"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c19",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "c0a85e0e"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c13",
+            "row": 2,
+            "col": 0
+          },
+          "signature": "5d5cd112"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c20",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "5106fa24"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c5",
+            "row": 2,
+            "col": 1
+          },
+          "signature": "b1977a99"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c25",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "65e2e10e"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c8",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "b9ec1d14"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c26",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "cc0b36a4"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c7",
+            "row": 2,
+            "col": 1
+          },
+          "signature": "74148c70"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c24",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "830a0c59"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "548f16d1"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c27",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "2414a5e4"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "05cfcc83"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "cf1b6f8f"
+        }
+      ],
+      "result": {
+        "scores": [
+          31,
+          26
+        ],
+        "winner": 0,
+        "reason": "passes"
+      }
+    },
+    {
+      "seed": 9461,
+      "scoring": "domination",
+      "initial": "9d44b974",
+      "actions": [
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 0,
+            "cards": [
+              "c7",
+              "c10",
+              "c14"
+            ]
+          },
+          "signature": "b451ea1d"
+        },
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 1,
+            "cards": [
+              "c29",
+              "c22"
+            ]
+          },
+          "signature": "919340d1"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "e3054043"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c5",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "ba275e9c"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c17",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "1977a5bd"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "f45987b5"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c24",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "c13614a6"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c15",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "84578bb0"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c25",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "74f4a326"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c9",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "7874c7ad"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c22",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "f552a2a7"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c6",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "6d027fb7"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c29",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "8438e42b"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c10",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "ae0dafad"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c23",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "f13fb442"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "e0151181"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c30",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "b9a94d9f"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c7",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "e2b21554"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c21",
+            "row": 2,
+            "col": 2
+          },
+          "signature": "4ef1c390"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c3",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "f972900a"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c27",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "0f0e13ca"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c8",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "aee57d29"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "9cd954e3"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "1d450cf1"
+        }
+      ],
+      "result": {
+        "scores": [
+          44,
+          20
+        ],
+        "winner": 0,
+        "reason": "passes"
+      }
+    },
+    {
+      "seed": 456123,
+      "scoring": "domination",
+      "initial": "0d31a9da",
+      "actions": [
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 0,
+            "cards": [
+              "c15",
+              "c9"
+            ]
+          },
+          "signature": "3644874e"
+        },
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 1,
+            "cards": [
+              "c24",
+              "c22"
+            ]
+          },
+          "signature": "fd47abbe"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c4",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "96d5de58"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "5ab5bccf"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "c4c6b47e"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "0f3a09ca"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c15",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "4e75f169"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c22",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "520c876a"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c7",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "2cb98821"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c23",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "8d2ae0a5"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c8",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "afa467d7"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c21",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "7d28a992"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c9",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "c89e3342"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c20",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "fe92ebea"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c5",
+            "row": 2,
+            "col": 0
+          },
+          "signature": "5a189833"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c24",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "a2e38fd2"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 2,
+            "col": 1
+          },
+          "signature": "5f782ee2"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c29",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "174e62e8"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c2",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "dee36e74"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c30",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "75fb962c"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c6",
+            "row": 2,
+            "col": 2
+          },
+          "signature": "c622d925"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c25",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "843c077f"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "016fbe24"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "1ac40e4c"
+        }
+      ],
+      "result": {
+        "scores": [
+          29,
+          40
+        ],
+        "winner": 1,
+        "reason": "passes"
+      }
+    },
+    {
+      "seed": 991011,
+      "scoring": "domination",
+      "initial": "459b8df8",
+      "actions": [
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 0,
+            "cards": [
+              "c15",
+              "c8",
+              "c7",
+              "c9",
+              "c6"
+            ]
+          },
+          "signature": "ecff24c9"
+        },
+        {
+          "action": {
+            "type": "mulligan",
+            "player": 1,
+            "cards": [
+              "c24",
+              "c25"
+            ]
+          },
+          "signature": "b552e1d2"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c21",
+            "row": 0,
+            "col": 4
+          },
+          "signature": "edca6bbc"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c4",
+            "row": 0,
+            "col": 0
+          },
+          "signature": "0288ce5b"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c22",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "d44ca2bc"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c12",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "9dd2037b"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c18",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "681e1e33"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c15",
+            "row": 1,
+            "col": 0
+          },
+          "signature": "8256d657"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c29",
+            "row": 0,
+            "col": 2
+          },
+          "signature": "5577d39e"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c10",
+            "row": 1,
+            "col": 1
+          },
+          "signature": "b1e801ae"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c23",
+            "row": 0,
+            "col": 3
+          },
+          "signature": "23160a0f"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c11",
+            "row": 2,
+            "col": 2
+          },
+          "signature": "fac0ae54"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c30",
+            "row": 0,
+            "col": 1
+          },
+          "signature": "8fea2496"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c1",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "a93a2f91"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c25",
+            "row": 1,
+            "col": 4
+          },
+          "signature": "a0fde337"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c6",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "6e6d9df9"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c16",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "21f7252d"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c5",
+            "row": 2,
+            "col": 0
+          },
+          "signature": "376d5f06"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c24",
+            "row": 1,
+            "col": 3
+          },
+          "signature": "6cc283ae"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c14",
+            "row": 2,
+            "col": 4
+          },
+          "signature": "d41f23b3"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c26",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "0ab06ebd"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c8",
+            "row": 2,
+            "col": 3
+          },
+          "signature": "81cfa619"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 1,
+            "card": "c27",
+            "row": 1,
+            "col": 2
+          },
+          "signature": "70dfcf5d"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c7",
+            "row": 2,
+            "col": 0
+          },
+          "signature": "34d21e1f"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "3a8262ff"
+        },
+        {
+          "action": {
+            "type": "play",
+            "player": 0,
+            "card": "c9",
+            "row": 2,
+            "col": 1
+          },
+          "signature": "35cd32c9"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 1
+          },
+          "signature": "9227897e"
+        },
+        {
+          "action": {
+            "type": "pass",
+            "player": 0
+          },
+          "signature": "967e9a6f"
+        }
+      ],
+      "result": {
+        "scores": [
+          34,
+          54
+        ],
+        "winner": 1,
+        "reason": "passes"
+      }
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import type {
   Position,
   Target,
   Trigger,
+  ResolutionObserver,
 } from "./types";
 
 export const opponent = (player: Player): Player => (player === 0 ? 1 : 0);
@@ -90,7 +91,7 @@ export function validateDeck(
   }
   return [...new Set(errors)];
 }
-function validateConfig(config: GameConfig): void {
+export function validateConfig(config: GameConfig): void {
   const b = config.battlefield;
   for (const [key, value] of Object.entries({
     rows: b.rows,
@@ -389,7 +390,20 @@ class Resolver {
   constructor(
     readonly state: GameState,
     readonly library: CardLibrary,
+    readonly observer?: ResolutionObserver,
   ) {}
+  diagnostic(kind: string, message: string, details: unknown = null): void {
+    if (!this.observer) return;
+    this.observer.onStep({
+      sequence: this.steps,
+      kind,
+      message,
+      details: structuredClone(details),
+      ...(this.observer.captureStates
+        ? { state: structuredClone(this.state) }
+        : {}),
+    });
+  }
   step() {
     if (++this.steps > this.state.config.safeguards.maxResolutionSteps)
       throw new Error(
@@ -429,26 +443,69 @@ class Resolver {
       const task = this.queue.shift()!;
       const { source, ability, context } = task;
       const card = this.state.cards[source.id];
-      if (context.resurrected && !ability.allowOnResurrect) continue;
+      this.diagnostic(
+        "trigger",
+        `${ability.id}: evaluating ${ability.trigger}`,
+        { source, ability, context },
+      );
+      if (context.resurrected && !ability.allowOnResurrect) {
+        this.diagnostic(
+          "blocked",
+          "Resurrection-triggered activation is disabled.",
+          { ability: ability.id },
+        );
+        continue;
+      }
       const condition = ability.condition;
       if (
         condition?.kind === "eventFriendly" &&
         context.player !== source.player
-      )
+      ) {
+        this.diagnostic("condition", "Friendly-event condition did not pass.", {
+          condition,
+          context,
+          source,
+        });
         continue;
+      }
       if (
         condition?.kind === "friendlyCount" &&
         this.state.board.filter(
           (c) =>
             c.creature && this.state.cards[c.creature].owner === source.player,
         ).length < condition.atLeast
-      )
+      ) {
+        this.diagnostic(
+          "condition",
+          "Friendly-population condition did not pass.",
+          {
+            condition,
+            count: this.state.board.filter(
+              (c) =>
+                c.creature &&
+                this.state.cards[c.creature].owner === source.player,
+            ).length,
+          },
+        );
         continue;
+      }
       if (
         condition?.kind === "sourcePower" &&
         currentPower(this.state, this.library, source.id) < condition.atLeast
-      )
+      ) {
+        this.diagnostic("condition", "Source-power condition did not pass.", {
+          condition,
+          power: currentPower(this.state, this.library, source.id),
+        });
         continue;
+      }
+      this.diagnostic(
+        "condition",
+        condition
+          ? "Supported condition passed."
+          : "No conditional restriction.",
+        { condition },
+      );
       const counters = [
         card.activations,
         this.state.lineages[card.lineage].activations,
@@ -467,8 +524,19 @@ class Resolver {
         keys.some(([key, max]) =>
           counters.some((counts) => (counts[key] ?? 0) >= max),
         )
-      )
+      ) {
+        this.diagnostic("limit", "Activation limit reached; ability skipped.", {
+          ability: ability.id,
+          keys,
+          counters,
+        });
         continue;
+      }
+      this.diagnostic("limit", "Activation restrictions permit this ability.", {
+        ability: ability.id,
+        keys,
+        counters,
+      });
       for (const counts of counters)
         for (const [key] of keys) counts[key] = (counts[key] ?? 0) + 1;
       log(
@@ -480,7 +548,13 @@ class Resolver {
       );
       for (const effect of ability.effects) {
         this.step();
+        this.diagnostic(
+          "effect-start",
+          `Resolve ${effect.type}. Multi-target effects select one simultaneous group; effects execute in declaration order.`,
+          { effect, source },
+        );
         this.effect(effect, source, context);
+        this.diagnostic("effect-end", `${effect.type} completed.`, { effect });
       }
     }
   }
@@ -531,6 +605,7 @@ class Resolver {
       const p = relative(position, influence.x, influence.y, source.player);
       const cell = cellAt(this.state, p.row, p.col);
       if (cell) {
+        const previous = this.observer ? structuredClone(cell) : null;
         const before = `${cell.owner}/${cell.tokens}/${cell.fortification}`;
         applyInfluence(
           this.state,
@@ -538,6 +613,11 @@ class Resolver {
           source.player,
           influence.mechanic,
           influence.amount,
+        );
+        this.diagnostic(
+          "territory",
+          `${influence.mechanic} ${influence.amount} at ${coordinate(cell)}.`,
+          { source: id, influence, before: previous, after: cell },
         );
         if (before !== `${cell.owner}/${cell.tokens}/${cell.fortification}`)
           log(
@@ -586,6 +666,11 @@ class Resolver {
     ids: string[],
     cause: "destruction" | "sacrifice" | "power" | "return" | "banish",
   ): void {
+    this.diagnostic(
+      "lifecycle",
+      `${cause}: select batch before death triggers.`,
+      { instances: ids, cause },
+    );
     const watchers = this.state.board
       .filter((c) => c.creature)
       .map((c) => this.source(c.creature!));
@@ -691,6 +776,11 @@ class Resolver {
     }
     const cells = this.targets(effect.target, source, context);
     const ids = cells.flatMap((c) => (c.creature ? [c.creature] : []));
+    this.diagnostic(
+      "targets",
+      `${cells.length} eligible position(s), ${ids.length} creature(s).`,
+      { effect, cells, instances: ids },
+    );
     switch (effect.type) {
       case "power":
         for (const id of ids)
@@ -871,6 +961,16 @@ class Resolver {
         this.state.config.safeguards.maxResurrections,
       );
       if (card.resurrections >= max || lineage.resurrections >= max) {
+        this.diagnostic(
+          "limit",
+          "Resurrection limit prevents this candidate.",
+          {
+            card: id,
+            instance: card.resurrections,
+            lineage: lineage.resurrections,
+            max,
+          },
+        );
         log(
           this.state,
           "safeguard",
@@ -895,10 +995,27 @@ class Resolver {
                 !c.creature &&
                 c.tokens >= def.rank,
             );
-      if (!destination) continue;
+      if (!destination) {
+        this.diagnostic(
+          "resurrection",
+          "No destination satisfies this candidate’s rank / evolution prerequisites.",
+          { card: id, prerequisite: def.prerequisite },
+        );
+        continue;
+      }
       grave.splice(grave.indexOf(id), 1);
       card.resurrections++;
       lineage.resurrections++;
+      this.diagnostic(
+        "resurrection",
+        "Eligible destination selected; persistent resurrection counters incremented.",
+        {
+          card: id,
+          destination,
+          instance: card.resurrections,
+          lineage: lineage.resurrections,
+        },
+      );
       if (def.type === "evolution" && !effect.overrideEvolution)
         this.evolve(card.id, destination.creature!);
       else {
@@ -1029,6 +1146,7 @@ export function act(
   original: GameState,
   action: Action,
   library: CardLibrary,
+  observer?: ResolutionObserver,
 ): GameState {
   if (action.type === "mulligan") {
     if (
@@ -1061,7 +1179,21 @@ export function act(
     }
   }
   const state = structuredClone(original);
-  const resolver = new Resolver(state, library);
+  const resolver = new Resolver(state, library, observer);
+  resolver.diagnostic(
+    "action",
+    `${action.type} by Player ${action.player + 1}.`,
+    {
+      action,
+      ...(action.type === "play"
+        ? {
+            definition: library[state.cards[action.card].definitionId],
+            destination: cellAt(state, action.row, action.col),
+            requirements: "Validated through the shared placement validator.",
+          }
+        : {}),
+    },
+  );
   try {
     if (action.type === "mulligan") {
       const player = state.players[action.player];
@@ -1145,6 +1277,14 @@ export function act(
     state.fault = error instanceof Error ? error.message : String(error);
     log(state, "fault", state.fault);
   }
+  resolver.diagnostic(
+    "committed",
+    "Atomic action completed; score and resulting zones are available.",
+    {
+      scores: state.phase === "fault" ? null : scoreGame(state, library),
+      fault: state.fault,
+    },
+  );
   return state;
 }
 export function rematch(

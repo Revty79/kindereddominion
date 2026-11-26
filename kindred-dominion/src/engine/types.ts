@@ -1,10 +1,6 @@
 export type Player = 0 | 1;
-export type Kindred =
-  | "Nature"
-  | "Mythical"
-  | "Arcane"
-  | "Undead"
-  | "Constructs";
+// Collections are content identifiers. The five founding names are baseline data, not an engine limit.
+export type Kindred = string;
 export type Location =
   | "draw"
   | "hand"
@@ -191,3 +187,15 @@ export type Action =
   | { type: "play"; player: Player; card: string; row: number; col: number }
   | { type: "pass"; player: Player }
   | { type: "surrender"; player: Player };
+
+export type DiagnosticStep = {
+  sequence: number;
+  kind: string;
+  message: string;
+  details: unknown;
+  state?: GameState;
+};
+export type ResolutionObserver = {
+  captureStates?: boolean;
+  onStep: (step: DiagnosticStep) => void;
+};

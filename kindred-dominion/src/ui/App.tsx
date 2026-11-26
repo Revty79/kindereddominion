@@ -12,8 +12,11 @@ import {
 import { battlefield, DEFAULT_CONFIG } from "../engine/config";
 import { currentPower, SCORING_RULES, scoreGame } from "../engine/scoring";
 import { chooseComputerAction, computerMulligan } from "../engine/ai";
-import { CARDS, CARD_LIST, KINDREDS, KINDRED_COLORS } from "../data/cards";
-import { DECKS } from "../data/decks";
+import { KINDRED_COLORS } from "../data/cards";
+import type { ContentPack } from "../content/types";
+import { libraryOf } from "../content/validation";
+import { newRecord, appendRecord } from "../replay/record";
+import type { MatchRecord } from "../replay/record";
 import type {
   Action,
   CardDefinition,
@@ -176,17 +179,35 @@ function Modal({
     </div>
   );
 }
-export default function App() {
+export default function App({
+  content,
+  onOpenStudio,
+  onRecord,
+}: {
+  content: ContentPack;
+  onOpenStudio?: () => void;
+  onRecord?: (record: MatchRecord) => Promise<void>;
+}) {
+  const activeLibrary = useMemo(() => libraryOf(content), [content]);
+  const DECKS = useMemo(
+    () => content.decks.filter((d) => d.cards.length === 15),
+    [content],
+  );
   const [session, setSession] = useState<Session | null>(null);
+  const CARDS = session?.library ?? activeLibrary;
+  const CARD_LIST = useMemo(() => Object.values(CARDS), [CARDS]);
+  const KINDREDS = content.collections.map((c) => c.id);
   const [saved, setSaved] = useState(readSession);
   const [scoring, setScoring] = useState("classic");
   const [mode, setMode] = useState<"standard" | "free">("standard");
   const [opponent, setOpponent] = useState<"computer" | "local">("computer");
   const [deckIds, setDeckIds] = useState<[string, string]>([
     DECKS[0].id,
-    DECKS[1].id,
+    (DECKS[1] ?? DECKS[0]).id,
   ]);
-  const [custom, setCustom] = useState(readCustomDecks);
+  const [custom, setCustom] = useState(() =>
+    readCustomDecks(activeLibrary, content.id),
+  );
   const [editor, setEditor] = useState<Player | null>(null);
   const [collection, setCollection] = useState<Kindred | "mixed">("mixed");
   const [size, setSize] = useState("3x5");
@@ -310,16 +331,39 @@ export default function App() {
                 cards: computerMulligan(game, CARDS, 1),
               }
             : chooseComputerAction(game, CARDS);
-        update(act(game, action, CARDS));
+        update(act(game, action, CARDS), action);
       } catch (error) {
         setNotice(String(error));
       }
     }, 550);
     return () => window.clearTimeout(timer);
   }, [game, isComputer]);
-  function update(next: GameState) {
+  function update(next: GameState, action?: Action) {
     if (!session) return;
-    setSession({ ...session, game: next });
+    const record = action
+      ? appendRecord(
+          session.record ??
+            newRecord(
+              session.game,
+              CARDS,
+              session.decks,
+              session.contentVersion ?? "v1.1-baseline",
+              `Recovered match from turn ${session.game.turn}`,
+            ),
+          action,
+          next,
+        )
+      : newRecord(
+          next,
+          CARDS,
+          session.decks,
+          session.contentVersion ?? content.id,
+        );
+    setSession({ ...session, game: next, record });
+    if (next.phase === "finished" && onRecord)
+      void onRecord(record).catch((e) =>
+        setNotice(`Replay save failed: ${String(e)}`),
+      );
     setSelected(null);
     setPending(null);
     setHovered(null);
@@ -333,7 +377,7 @@ export default function App() {
   function dispatch(action: Action) {
     if (!game) return;
     try {
-      update(act(game, action, CARDS));
+      update(act(game, action, CARDS), action);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : String(error));
     }
@@ -356,6 +400,9 @@ export default function App() {
         decks,
         opponent,
         deckNames: [deckName(0), deckName(1)],
+        library: structuredClone(CARDS),
+        contentVersion: content.id,
+        record: newRecord(next, CARDS, decks, content.id),
       });
       setCurtain(opponent === "local");
       setNotice("");
@@ -384,7 +431,7 @@ export default function App() {
       if (i >= 0) next[p].splice(i, 1);
     }
     setCustom(next);
-    if (!saveCustomDecks(next))
+    if (!saveCustomDecks(next, content.id))
       setNotice("Custom deck could not be saved to browser storage.");
   }
   const filtered = CARD_LIST.filter(
@@ -689,6 +736,20 @@ export default function App() {
             <p className="setup-foot">
               15-card decks · 5-card opening hands · One optional mulligan
             </p>
+            {onOpenStudio && (
+              <button
+                className="start quiet"
+                style={{ marginTop: "1rem" }}
+                onClick={onOpenStudio}
+              >
+                Developer Studio
+              </button>
+            )}
+            {content.id !== "v1.1-baseline" && (
+              <p className="setup-foot">
+                Explicitly activated testing content: {content.name}
+              </p>
+            )}
           </section>
         </main>
       ) : (
@@ -1390,8 +1451,8 @@ export default function App() {
           }}
         >
           <p className="modal-intro">
-            30 provisional cards. Full access for development; every duplicate
-            remains a separate instance during play.
+            {CARD_LIST.length} provisional cards. Full access for development;
+            every duplicate remains a separate instance during play.
           </p>
           {editor !== null && (
             <div className="builder-bar">
@@ -1405,7 +1466,7 @@ export default function App() {
                   ];
                   next[editor] = getDeck(editor).slice();
                   setCustom(next);
-                  saveCustomDecks(next);
+                  saveCustomDecks(next, content.id);
                 }}
               >
                 Copy selected deck
