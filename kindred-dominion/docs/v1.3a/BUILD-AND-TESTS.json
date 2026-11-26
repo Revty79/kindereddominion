@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-26",
+  "baselineCommit": "96d85f74a0b37664c1a7cc68ab6cd465c2f33a9f",
+  "implementationCommit": "54e0b0f4e00a787b986d405760fd34e719ab984f",
+  "repository": "https://github.com/Revty79/kindereddominion.git",
+  "environment": {
+    "os": "Windows",
+    "node": "24.18.0",
+    "npm": "12.2.1",
+    "browser": "Playwright Chromium"
+  },
+  "cleanCheckout": {
+    "directory": "D:/kindred-v13a-check-20261126",
+    "installedFromGitHub": true,
+    "dependencies": {
+      "command": "npm ci",
+      "exitCode": 0
+    },
+    "units": {
+      "command": "npm test",
+      "files": 6,
+      "passed": 216,
+      "failed": 0,
+      "skipped": 0,
+      "duration": "7.20s",
+      "exitCode": 0
+    },
+    "initialAttempt": "Default parallel test run under simultaneous simulation load: 215 passed; original five-second ten-deck smoke test timed out. Single-worker full rerun passed with unchanged assertions and timeout. After removing verified stalled prior Kindred validation processes, the normal parallel npm test command also passed all 216 tests.",
+    "production": {
+      "command": "npm run build",
+      "strictTypeScript": true,
+      "exitCode": 0,
+      "scripts": [
+        {
+          "name": "index-C8_yxjZq.js",
+          "bytes": 631931,
+          "sha256": "49f4a9d35d2affee98d65e7bb3426cc6b0306c416872d1ae14b09d13471b4d8b"
+        },
+        {
+          "name": "Studio-C0cWN3NL.js",
+          "bytes": 129036,
+          "sha256": "f184c956497690ad70528d189b153ac87770322c25617bab57174aff2b36f150"
+        },
+        {
+          "name": "worker-BOyrXU5x.js",
+          "bytes": 168729,
+          "sha256": "404ec4d0d83458a9a3d38e59fd0b0cf0f0b9d5ff45a83211c150a8f43820a3c8"
+        }
+      ]
+    },
+    "artwork": {
+      "command": "node scripts/verify-build.mjs dist --tracked",
+      "registeredAssets": 3,
+      "allTracked": true,
+      "checksumsMatch": true,
+      "sourceMastersShipped": false,
+      "exitCode": 0
+    },
+    "gitStatusAfterChecks": "clean",
+    "head": "02c1fb25af2c2a5739a322e6985a9e19bf4d6938"
+  },
+  "browser": {
+    "command": "$env:KINDRED_CLEAN_URL = \"http://127.0.0.1:5174/\"; node node_modules/@playwright/test/cli.js test",
+    "workingDevelopmentUrl": "http://127.0.0.1:5173/",
+    "cleanProductionUrl": "http://127.0.0.1:5174/",
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "duration": "3.4m",
+    "exitCode": 0,
+    "newAdvancedCases": 5,
+    "screenshotsReviewed": [
+      ".local/v1.3a/browser-owner-power-and-replay.png",
+      ".local/v1.3a/browser-laboratory-score.png",
+      ".local/artwork-validation/clean-production-hand-and-field.png"
+    ],
+    "ownerBrowserStorageCleared": false,
+    "physicalMobileDeviceAcceptance": false
+  },
+  "playerOnly": {
+    "command": "$env:VITE_STUDIO = \"0\"; node node_modules/vite/bin/vite.js build --outDir .local/player-only-v1.3a",
+    "verification": "node scripts/verify-build.mjs .local/player-only-v1.3a --player --tracked",
+    "exitCode": 0,
+    "registeredAssets": 3,
+    "checksumsMatch": true,
+    "sourceMastersShipped": false,
+    "studioChunks": 0,
+    "workerChunks": 0,
+    "bundledLaboratoryFixtures": false,
+    "scripts": [
+      {
+        "name": "index-v0_gTPyk.js",
+        "bytes": 603555,
+        "sha256": "f4d11d3b4a6d5e22d36fdf9f2a3c4bea0c6b1884f279605606fa2e8f11e768a6"
+      }
+    ]
+  },
+  "compilationAdvisory": "Vite reports a main JavaScript chunk above 500 kB. The default warning threshold was not changed.",
+  "finalization": "Runtime implementation is 54e0b0f4e00a787b986d405760fd34e719ab984f. CLI isolation and README correction are 02c1fb25af2c2a5739a322e6985a9e19bf4d6938. A clean GitHub pull of that commit passed normal tests, strict compilation and both build variants; runtime JavaScript hashes remained identical. The completion commit adds validation records only.",
+  "commercialBalanceAcceptance": false,
+  "v13bAuthorized": false,
+  "cliIsolation": {
+    "concurrentCompiledImports": 4,
+    "allReturnedExpectedEngineVersion": true,
+    "concurrentAssetCommands": 2,
+    "bothPassed": true
+  }
+}

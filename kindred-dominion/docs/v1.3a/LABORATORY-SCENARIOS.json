@@ -1,0 +1,8345 @@
+[
+  {
+    "id": "lab-v1.3a-aura",
+    "name": "LAB · Continuous enhancement — remove its source",
+    "description": "Inspect the Wolf, execute Dismiss at an empty friendly position, then inspect the lost aura.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-bee",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-dismiss",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-weakening",
+    "name": "LAB · Continuous weakening — remove its source",
+    "description": "The Basilisk weakens an orthogonally adjacent enemy. Dismiss removes it and restores power.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": 0,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": 1,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-basilisk",
+          "owner": 1,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-dismiss",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-population",
+    "name": "LAB · Dynamic friendly population",
+    "description": "Play another Wolf and inspect the Alpha increasing without a permanent modifier.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-alpha",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-classification",
+    "name": "LAB · Classification-based scaling",
+    "description": "Play the Honeybee; only its Insect classification qualifies for the Swarm.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-swarm",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-bee",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-enhanced",
+    "name": "LAB · Enhanced-creature scaling",
+    "description": "The enhanced Wolf qualifies before dynamic bonuses. Play Gift and inspect each layer.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-prism",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 1,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-gift",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-weakened",
+    "name": "LAB · Weakened-enemy scaling",
+    "description": "Play Claw and compare the enemy weakening with the Gloom scaling contribution.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-gloom",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 1,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": -1,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-claw",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-react-weak",
+    "name": "LAB · Reactive weakening chain",
+    "description": "Bruise weakens other friendly creatures. Chorus reacts to real other-creature weakening once per turn.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-chorus",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-bruise",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-react-enhance",
+    "name": "LAB · First enhancement and a multi-step chain",
+    "description": "Gift enhances Firstlight; its first enhancement grants adjacent allies a permanent bonus.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-firstlight",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-gift",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-threshold",
+    "name": "LAB · False-to-true threshold",
+    "description": "Gift raises the Sentry to its power threshold, drawing and fortifying once this match.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [
+            "c3"
+          ],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-threshold",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-gift",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "draw",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-crossing",
+    "name": "LAB · Power crossing event",
+    "description": "Gift crosses the configured threshold. Inspect the structured previous/new power event.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-crossing",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-gift",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-sacrifice",
+    "name": "LAB · Captured variable sacrifice power",
+    "description": "Replace the enhanced Wolf with Flytrap; half the captured power is rounded down.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c3"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 2,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-flytrap",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-carrion",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-protection",
+    "name": "LAB · Conditional protection disappears",
+    "description": "Ward protects the neighboring Wolf while fortified. Rust removes that qualification.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 2,
+          "creature": "c1"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-ward",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-rust",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-immunity",
+    "name": "LAB · Conditional weakening immunity",
+    "description": "Selfward is immune while fortified. Rust removes its continuous protection.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2",
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 2,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-selfward",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-rust",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-bruise",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-destruction",
+    "name": "LAB · Destruction history and immutable power",
+    "description": "Reaper destroys an enemy. Scavenger scales with history while Reaper uses captured power.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-scavenger",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 1,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-reaper",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-territory",
+    "name": "LAB · Claimed territory reactions",
+    "description": "Play a Wolf to expand into neutral territory; Border reacts only to a successful claim.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-border",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-row-score",
+    "name": "LAB · Row-winning score bonus",
+    "description": "Inspect ordinary row power and the separate Herald bonus. Play another card to compare.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-herald",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 1,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-position-score",
+    "name": "LAB · Position score bonus",
+    "description": "Marker survives at row 1 / column 0. Inspect the separate card points.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-marker",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-combined",
+    "name": "LAB · Combined AND / NOT conditions",
+    "description": "A second friendly creature makes the condition true. Inspect the fortification/draw chain.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [
+            "c3"
+          ],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-combined",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "draw",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-evolution",
+    "name": "LAB · Branching and multi-stage evolution",
+    "description": "Evolve the Wolf into Star Wolf; the later Imperial form replaces its dynamic ability with a row aura.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2",
+            "c3",
+            "c4"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-star-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-imperial-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c4": {
+          "id": "c4",
+          "definitionId": "lab-dawn-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c4",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c4": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 5,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-resurrection",
+    "name": "LAB · Resurrection counter and reaction",
+    "description": "Grave restores a friendly Wolf. Keeper observes the real resurrection.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [
+            "c2"
+          ],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-keeper",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "graveyard",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-grave",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-territory-score",
+    "name": "LAB · Fortified territory and token aggregation",
+    "description": "Inspect the token-derived scaling and fortified-territory score independently.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 2,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-census",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-fortress",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-rust",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-draw-generate",
+    "name": "LAB · Draw and generation events",
+    "description": "Generator creates a Wolf and draws a card; Scribe observes both successful events.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [
+            "c3"
+          ],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-scribe",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-generator",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "draw",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-derived",
+    "name": "LAB · Explicit opt-in derived power reaction",
+    "description": "Adding a friendly creature changes derived power; this card explicitly reacts to dynamic changes.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-derived",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-power-sum",
+    "name": "LAB · Safe current-power aggregate",
+    "description": "The Sum reads eligible creatures before dynamic scaling, so it cannot recursively count its own bonus.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-power-sum",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-bee",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-first-weakened",
+    "name": "LAB · First weakening event",
+    "description": "Bruise weakens Dusk; its first successful weakening grants fortification once this match.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-dusk",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-bruise",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-return",
+    "name": "LAB · Returned creature reaction",
+    "description": "Recall returns the enemy Wolf; Keeper reacts to the successful zone change.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c3"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c2"
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-keeper",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 1,
+          "location": "battlefield",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "id": "c3",
+          "definitionId": "lab-recaller",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c3",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c3": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 4,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-incoming",
+    "name": "LAB · Incoming replacement targeting",
+    "description": "Replace Offering with Flytrap. The sacrificed creature boosts the incoming replacement through its captured identity.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-offering",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-flytrap",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-destroyed-context",
+    "name": "LAB · Destroyed context remains exact after resurrection",
+    "description": "Reaper destroys the enemy test creature, which resurrects and then targets its exact destroyed instance.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-death-context",
+          "owner": 1,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-reaper",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-sacrificed-context",
+    "name": "LAB · Sacrificed context remains exact after resurrection",
+    "description": "Replace the test creature with Flytrap. It resurrects elsewhere, then targets its original sacrificed identity.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 0,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-sacrifice-context",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-flytrap",
+          "owner": 0,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  },
+  {
+    "id": "lab-v1.3a-capture",
+    "name": "LAB · Captured and lost territory reactions",
+    "description": "Player Two places a Wolf at A5 to capture A4. Border observes the real loss and fortifies remaining friendly territory.",
+    "contentVersion": "mechanics-laboratory-v1.3a",
+    "state": {
+      "version": 1,
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "seed": 1,
+      "rng": 333695716,
+      "startingPlayer": 0,
+      "active": 1,
+      "phase": "playing",
+      "turn": 1,
+      "passes": 0,
+      "players": [
+        {
+          "draw": [],
+          "hand": [],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        },
+        {
+          "draw": [],
+          "hand": [
+            "c2"
+          ],
+          "graveyard": [],
+          "exile": [],
+          "mulliganDone": true,
+          "turns": 1
+        }
+      ],
+      "board": [
+        {
+          "row": 0,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": "c1"
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "owner": 0,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "owner": null,
+          "tokens": 0,
+          "fortification": 0,
+          "creature": null
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "owner": 1,
+          "tokens": 1,
+          "fortification": 0,
+          "creature": null
+        }
+      ],
+      "cards": {
+        "c1": {
+          "id": "c1",
+          "definitionId": "lab-border",
+          "owner": 0,
+          "location": "battlefield",
+          "lineage": "c1",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "id": "c2",
+          "definitionId": "lab-wolf",
+          "owner": 1,
+          "location": "hand",
+          "lineage": "c2",
+          "modifier": 0,
+          "statuses": [],
+          "stack": [],
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "lineages": {
+        "c1": {
+          "activations": {},
+          "resurrections": 0
+        },
+        "c2": {
+          "activations": {},
+          "resurrections": 0
+        }
+      },
+      "events": [],
+      "nextEvent": 1,
+      "nextCard": 3,
+      "generated": 0,
+      "result": null,
+      "fault": null,
+      "mechanics": {
+        "version": 2,
+        "history": [],
+        "thresholds": {},
+        "firstChanges": {}
+      }
+    }
+  }
+]

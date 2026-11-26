@@ -1,0 +1,3335 @@
+{
+  "schema": 2,
+  "engineVersion": "1.3.0",
+  "id": "mechanics-laboratory-v1.3a",
+  "name": "V1.3A · mechanics laboratory",
+  "createdAt": "2026-11-26T00:00:00Z",
+  "kind": "testing",
+  "cards": [
+    {
+      "id": "lab-wolf",
+      "name": "LAB · Test Wolf",
+      "kindred": "Nature",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Wolf",
+        "Beast"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-bee",
+      "name": "LAB · Honeybee Aura",
+      "kindred": "Nature",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Insect"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "continuous": [
+        {
+          "id": "bee-adjacent",
+          "kind": "power",
+          "amount": 1,
+          "target": {
+            "kind": "adjacent",
+            "relation": "friendly",
+            "excludeSelf": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-basilisk",
+      "name": "LAB · Basilisk Aura",
+      "kindred": "Mythical",
+      "power": 4,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Beast"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "continuous": [
+        {
+          "id": "basilisk-adjacent",
+          "kind": "power",
+          "amount": -2,
+          "target": {
+            "kind": "orthogonal",
+            "relation": "enemy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-alpha",
+      "name": "LAB · Population Alpha",
+      "kindred": "Nature",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Wolf"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "pack",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 4,
+            "value": {
+              "kind": "count",
+              "what": "creatures",
+              "target": {
+                "kind": "all",
+                "relation": "friendly",
+                "excludeSelf": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-swarm",
+      "name": "LAB · Classification Swarm",
+      "kindred": "Nature",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Insect"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "insects",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 4,
+            "value": {
+              "kind": "count",
+              "what": "creatures",
+              "target": {
+                "kind": "all",
+                "relation": "friendly",
+                "excludeSelf": true,
+                "tags": [
+                  "Insect"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-prism",
+      "name": "LAB · Enhanced Census",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "enhanced",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 6,
+            "value": {
+              "kind": "multiply",
+              "value": {
+                "kind": "count",
+                "what": "creatures",
+                "target": {
+                  "kind": "all",
+                  "status": "enhanced"
+                }
+              },
+              "constant": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-gloom",
+      "name": "LAB · Weakened Census",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "weakened",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 6,
+            "value": {
+              "kind": "multiply",
+              "value": {
+                "kind": "count",
+                "what": "creatures",
+                "target": {
+                  "kind": "all",
+                  "relation": "enemy",
+                  "status": "weakened"
+                }
+              },
+              "constant": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-chorus",
+      "name": "LAB · Reactive Weakening",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "weaken-reaction",
+          "trigger": "otherWeakened",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-firstlight",
+      "name": "LAB · First Enhancement",
+      "kindred": "Mythical",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "first-light",
+          "trigger": "firstEnhanced",
+          "effects": [
+            {
+              "type": "power",
+              "amount": 2,
+              "target": {
+                "kind": "adjacent",
+                "relation": "friendly",
+                "excludeSelf": true
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-dusk",
+      "name": "LAB · First Weakening",
+      "kindred": "Undead",
+      "power": 4,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "first-dusk",
+          "trigger": "firstWeakened",
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-threshold",
+      "name": "LAB · Threshold Sentry",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "threshold",
+          "trigger": "condition",
+          "condition": {
+            "kind": "sourcePower",
+            "atLeast": 5
+          },
+          "effects": [
+            {
+              "type": "draw",
+              "amount": 1
+            },
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-crossing",
+      "name": "LAB · Power Crossing",
+      "kindred": "Arcane",
+      "power": 4,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "crossing",
+          "trigger": "powerThreshold",
+          "threshold": {
+            "value": 5,
+            "direction": "up"
+          },
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 2,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-flytrap",
+      "name": "LAB · Variable Sacrifice",
+      "kindred": "Nature",
+      "power": 3,
+      "rank": 1,
+      "type": "replacement",
+      "tags": [
+        "Plant"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "meal",
+          "trigger": "replacement",
+          "effects": [
+            {
+              "type": "power",
+              "target": {
+                "kind": "self"
+              },
+              "amount": {
+                "kind": "divide",
+                "value": {
+                  "kind": "value",
+                  "value": "sacrificedPower"
+                },
+                "constant": 2,
+                "rounding": "floor"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-scavenger",
+      "name": "LAB · Destruction Memory",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "enemy-deaths",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 4,
+            "value": {
+              "kind": "history",
+              "event": "destroyed",
+              "filter": {
+                "relation": "enemy"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-carrion",
+      "name": "LAB · Sacrifice Memory",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "friendly-sacrifices",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 4,
+            "value": {
+              "kind": "history",
+              "event": "sacrificed",
+              "filter": {
+                "relation": "friendly"
+              }
+            }
+          }
+        }
+      ],
+      "scoring": [
+        {
+          "id": "death-bonus",
+          "when": "survives",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 3,
+            "value": {
+              "kind": "history",
+              "event": "destroyed",
+              "filter": {
+                "relation": "enemy"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-ward",
+      "name": "LAB · Conditional Allied Protection",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "continuous": [
+        {
+          "id": "adjacent-protection",
+          "kind": "protection",
+          "protection": "destruction",
+          "target": {
+            "kind": "adjacent",
+            "relation": "friendly",
+            "excludeSelf": true
+          },
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "count",
+              "what": "fortification",
+              "target": {
+                "kind": "self"
+              }
+            },
+            "operator": "gte",
+            "right": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-selfward",
+      "name": "LAB · Conditional Weakening Protection",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "continuous": [
+        {
+          "id": "fortified-immunity",
+          "kind": "protection",
+          "protection": "weakening",
+          "target": {
+            "kind": "self"
+          },
+          "condition": {
+            "kind": "compare",
+            "left": {
+              "kind": "count",
+              "what": "fortification",
+              "target": {
+                "kind": "self"
+              }
+            },
+            "operator": "gte",
+            "right": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-herald",
+      "name": "LAB · Winning Row Bonus",
+      "kindred": "Mythical",
+      "power": 4,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scoring": [
+        {
+          "id": "row-bonus",
+          "when": "rowWon",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "lab-marker",
+      "name": "LAB · Battlefield Position Bonus",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scoring": [
+        {
+          "id": "position-bonus",
+          "when": "survives",
+          "amount": 3,
+          "condition": {
+            "kind": "position",
+            "row": 1,
+            "col": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-census",
+      "name": "LAB · Territory and Population Score",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scoring": [
+        {
+          "id": "population-points",
+          "when": "survives",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 3,
+            "value": {
+              "kind": "count",
+              "what": "creatures",
+              "target": {
+                "kind": "all",
+                "relation": "friendly",
+                "excludeSelf": true
+              }
+            }
+          }
+        },
+        {
+          "id": "fortified-points",
+          "when": "survives",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 3,
+            "value": {
+              "kind": "count",
+              "what": "positions",
+              "target": {
+                "kind": "all",
+                "territory": "friendly",
+                "minFortification": 1
+              }
+            }
+          }
+        }
+      ],
+      "scaling": [
+        {
+          "id": "token-development",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 4,
+            "value": {
+              "kind": "divide",
+              "constant": 4,
+              "rounding": "floor",
+              "value": {
+                "kind": "count",
+                "what": "tokens",
+                "target": {
+                  "kind": "all",
+                  "territory": "friendly"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-echo",
+      "name": "LAB · Bounded Reactive Echo",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "echo",
+          "trigger": "otherEnhanced",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-border",
+      "name": "LAB · Territory Claim Reaction",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "border-claim",
+          "trigger": "territoryClaimed",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        },
+        {
+          "id": "lost-border",
+          "trigger": "territoryLost",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "all",
+                "territory": "friendly"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-fortress",
+      "name": "LAB · Fortification Reaction",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "fortified",
+          "trigger": "territoryFortified",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        },
+        {
+          "id": "reduced",
+          "trigger": "fortificationReduced",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "draw",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-gift",
+      "name": "LAB · Explicit Enhancement",
+      "kindred": "Mythical",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "gift",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "power",
+              "amount": 2,
+              "target": {
+                "kind": "all",
+                "relation": "friendly",
+                "excludeSelf": true,
+                "maxTargets": 1
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-bruise",
+      "name": "LAB · Explicit Friendly Weakening",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "bruise",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "power",
+              "amount": -1,
+              "target": {
+                "kind": "all",
+                "relation": "friendly",
+                "excludeSelf": true
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-claw",
+      "name": "LAB · Enemy Weakening",
+      "kindred": "Mythical",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "claw",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "power",
+              "amount": -1,
+              "target": {
+                "kind": "all",
+                "relation": "enemy",
+                "maxTargets": 2
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-bolt",
+      "name": "LAB · Seeded Random Target",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "bolt",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "power",
+              "amount": -2,
+              "target": {
+                "kind": "all",
+                "relation": "enemy",
+                "maxTargets": 1,
+                "order": "random"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-dismiss",
+      "name": "LAB · Remove Aura Sources",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "dismiss",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "banish",
+              "target": {
+                "kind": "all",
+                "definitions": [
+                  "lab-bee",
+                  "lab-basilisk",
+                  "lab-ward",
+                  "lab-selfward"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-rust",
+      "name": "LAB · Remove Friendly Fortification",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "rust",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": -2,
+              "target": {
+                "kind": "all",
+                "territory": "friendly"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-reaper",
+      "name": "LAB · Captured Destruction Power",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "reap",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "destroy",
+              "target": {
+                "kind": "all",
+                "relation": "enemy",
+                "maxTargets": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "death-growth",
+          "trigger": "otherDestruction",
+          "eventFilter": {
+            "relation": "enemy"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "power",
+              "target": {
+                "kind": "self"
+              },
+              "amount": {
+                "kind": "clamp",
+                "min": 0,
+                "max": 4,
+                "value": {
+                  "kind": "value",
+                  "value": "destroyedPower"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-grave",
+      "name": "LAB · Resurrection Test",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "restore",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "resurrect",
+              "target": "firstFriendly",
+              "limit": 1
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-keeper",
+      "name": "LAB · Resurrection and Exile Watcher",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "resurrection-watch",
+          "trigger": "resurrected",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "tokens",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        },
+        {
+          "id": "banish-watch",
+          "trigger": "banished",
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        },
+        {
+          "id": "return-watch",
+          "trigger": "returned",
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-scribe",
+      "name": "LAB · Draw and Generation Watcher",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "draw-watch",
+          "trigger": "drawn",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "tokens",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        },
+        {
+          "id": "generation-watch",
+          "trigger": "generated",
+          "eventFilter": {
+            "relation": "friendly"
+          },
+          "limit": {
+            "perTurn": 1
+          },
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-generator",
+      "name": "LAB · Generate and Draw",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "supply",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "generate",
+              "amount": 1,
+              "card": "lab-wolf"
+            },
+            {
+              "type": "draw",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-star-wolf",
+      "name": "LAB · Stack Depth Scaling",
+      "kindred": "Mythical",
+      "power": 3,
+      "rank": 1,
+      "type": "evolution",
+      "tags": [
+        "Wolf"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "prerequisite": {
+        "definitions": [
+          "lab-wolf",
+          "lab-alpha"
+        ]
+      },
+      "scaling": [
+        {
+          "id": "stages",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 6,
+            "value": {
+              "kind": "multiply",
+              "value": {
+                "kind": "subtract",
+                "left": {
+                  "kind": "value",
+                  "value": "stackDepth"
+                },
+                "right": 1
+              },
+              "constant": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-imperial-wolf",
+      "name": "LAB · Evolved Row Aura",
+      "kindred": "Mythical",
+      "power": 3,
+      "rank": 1,
+      "type": "evolution",
+      "tags": [
+        "Wolf"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "prerequisite": {
+        "definitions": [
+          "lab-star-wolf"
+        ]
+      },
+      "continuous": [
+        {
+          "id": "row-aura",
+          "kind": "power",
+          "amount": 1,
+          "target": {
+            "kind": "row",
+            "relation": "friendly",
+            "excludeSelf": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-dawn-wolf",
+      "name": "LAB · Branch and Column Score",
+      "kindred": "Mythical",
+      "power": 3,
+      "rank": 1,
+      "type": "evolution",
+      "tags": [
+        "Wolf"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "prerequisite": {
+        "tags": [
+          "Wolf"
+        ]
+      },
+      "scoring": [
+        {
+          "id": "column-bonus",
+          "when": "columnWon",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "lab-combined",
+      "name": "LAB · Combined Conditional Chain",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "combined",
+          "trigger": "condition",
+          "condition": {
+            "kind": "and",
+            "conditions": [
+              {
+                "kind": "friendlyCount",
+                "atLeast": 2
+              },
+              {
+                "kind": "not",
+                "condition": {
+                  "kind": "position",
+                  "col": 4
+                }
+              }
+            ]
+          },
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            },
+            {
+              "type": "draw",
+              "amount": 1
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-power-sum",
+      "name": "LAB · Pre-dynamic Power Aggregate",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "power-sum",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 6,
+            "value": {
+              "kind": "divide",
+              "value": {
+                "kind": "count",
+                "what": "power",
+                "target": {
+                  "kind": "all",
+                  "relation": "friendly",
+                  "excludeSelf": true
+                }
+              },
+              "constant": 3,
+              "rounding": "floor"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-space",
+      "name": "LAB · Unoccupied Position Scaling",
+      "kindred": "Constructs",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "space",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 4,
+            "value": {
+              "kind": "divide",
+              "value": {
+                "kind": "count",
+                "what": "positions",
+                "target": {
+                  "kind": "all",
+                  "territory": "friendly",
+                  "occupied": "empty"
+                }
+              },
+              "constant": 2,
+              "rounding": "floor"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-derived",
+      "name": "LAB · Opt-in Dynamic Reaction",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "derived-reaction",
+          "trigger": "enhanced",
+          "eventFilter": {
+            "powerChanges": [
+              "dynamic"
+            ]
+          },
+          "limit": {
+            "perTurn": 1,
+            "perMatch": 2
+          },
+          "effects": [
+            {
+              "type": "fortify",
+              "amount": 1,
+              "target": {
+                "kind": "self"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card.",
+      "scaling": [
+        {
+          "id": "population",
+          "amount": {
+            "kind": "clamp",
+            "min": 0,
+            "max": 3,
+            "value": {
+              "kind": "count",
+              "what": "creatures",
+              "target": {
+                "kind": "all",
+                "relation": "friendly",
+                "excludeSelf": true
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab-recaller",
+      "name": "LAB · Return Event Producer",
+      "kindred": "Arcane",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "recall",
+          "trigger": "placement",
+          "effects": [
+            {
+              "type": "return",
+              "target": {
+                "kind": "all",
+                "relation": "enemy",
+                "maxTargets": 1
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-offering",
+      "name": "LAB · Incoming Replacement Context",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "incoming-gift",
+          "trigger": "sacrifice",
+          "effects": [
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "incoming"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-death-context",
+      "name": "LAB · Destroyed Context After Resurrection",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "dead-context",
+          "trigger": "destruction",
+          "limit": {
+            "perMatch": 1
+          },
+          "effects": [
+            {
+              "type": "resurrect",
+              "target": "self",
+              "limit": 1
+            },
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "destroyed"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    },
+    {
+      "id": "lab-sacrifice-context",
+      "name": "LAB · Sacrificed Context After Resurrection",
+      "kindred": "Undead",
+      "power": 3,
+      "rank": 1,
+      "type": "standard",
+      "tags": [
+        "Laboratory"
+      ],
+      "influence": [
+        {
+          "x": 1,
+          "y": 0,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "mechanic": "expansion",
+          "amount": 1
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "mechanic": "expansion",
+          "amount": 1
+        }
+      ],
+      "abilities": [
+        {
+          "id": "sacrifice-context",
+          "trigger": "sacrifice",
+          "limit": {
+            "perMatch": 1
+          },
+          "effects": [
+            {
+              "type": "resurrect",
+              "target": "self",
+              "limit": 1
+            },
+            {
+              "type": "power",
+              "amount": 1,
+              "target": {
+                "kind": "sacrificed"
+              }
+            }
+          ]
+        }
+      ],
+      "glyph": "◇",
+      "text": "V1.3A mechanics fixture. Development only; not a commercial card."
+    }
+  ],
+  "metadata": {
+    "lab-wolf": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-bee": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-basilisk": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-alpha": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-swarm": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-prism": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-gloom": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-chorus": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-firstlight": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-dusk": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-threshold": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-crossing": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-flytrap": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-scavenger": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-carrion": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-ward": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-selfward": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-herald": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-marker": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-census": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-echo": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-border": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-fortress": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-gift": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-bruise": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-claw": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-bolt": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-dismiss": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-rust": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-reaper": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-grave": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-keeper": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-scribe": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-generator": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-star-wolf": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-imperial-wolf": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-dawn-wolf": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-combined": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-power-sum": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-space": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-derived": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-recaller": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-offering": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-death-context": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    },
+    "lab-sacrifice-context": {
+      "status": "draft",
+      "description": "",
+      "flavor": "",
+      "rarity": "",
+      "artwork": "",
+      "notes": "Development fixture, separate from both preserved Founding Kindreds libraries."
+    }
+  },
+  "collections": [
+    {
+      "id": "Nature",
+      "name": "Nature",
+      "description": "Expansion, cooperation and population",
+      "color": "#79b290",
+      "glyph": "◇",
+      "target": 30
+    },
+    {
+      "id": "Mythical",
+      "name": "Mythical",
+      "description": "Power, destruction and resilience",
+      "color": "#da9c71",
+      "glyph": "◇",
+      "target": 30
+    },
+    {
+      "id": "Arcane",
+      "name": "Arcane",
+      "description": "Manipulation, transformation and disruption",
+      "color": "#aca0db",
+      "glyph": "◇",
+      "target": 30
+    },
+    {
+      "id": "Undead",
+      "name": "Undead",
+      "description": "Sacrifice, resurrection and death",
+      "color": "#9baab1",
+      "glyph": "◇",
+      "target": 30
+    },
+    {
+      "id": "Constructs",
+      "name": "Constructs",
+      "description": "Fortification, protection and defense",
+      "color": "#c6b77d",
+      "glyph": "◇",
+      "target": 30
+    }
+  ],
+  "decks": [
+    {
+      "id": "laboratory-continuous",
+      "name": "Auras and populations",
+      "subtitle": "Development-only mechanics experiment",
+      "strategy": "Auras and populations",
+      "collection": "mixed",
+      "cards": [
+        "lab-bee",
+        "lab-basilisk",
+        "lab-alpha",
+        "lab-swarm",
+        "lab-prism",
+        "lab-gloom",
+        "lab-power-sum",
+        "lab-space",
+        "lab-wolf",
+        "lab-gift",
+        "lab-claw",
+        "lab-ward",
+        "lab-dismiss",
+        "lab-star-wolf",
+        "lab-imperial-wolf"
+      ]
+    },
+    {
+      "id": "laboratory-reactive",
+      "name": "Reactions and transitions",
+      "subtitle": "Development-only mechanics experiment",
+      "strategy": "Reactions and transitions",
+      "collection": "mixed",
+      "cards": [
+        "lab-wolf",
+        "lab-chorus",
+        "lab-firstlight",
+        "lab-dusk",
+        "lab-threshold",
+        "lab-crossing",
+        "lab-echo",
+        "lab-combined",
+        "lab-gift",
+        "lab-bruise",
+        "lab-border",
+        "lab-fortress",
+        "lab-scribe",
+        "lab-generator",
+        "lab-derived"
+      ]
+    },
+    {
+      "id": "laboratory-lifecycle",
+      "name": "Sacrifice and history",
+      "subtitle": "Development-only mechanics experiment",
+      "strategy": "Sacrifice and history",
+      "collection": "mixed",
+      "cards": [
+        "lab-wolf",
+        "lab-offering",
+        "lab-flytrap",
+        "lab-scavenger",
+        "lab-carrion",
+        "lab-reaper",
+        "lab-grave",
+        "lab-keeper",
+        "lab-recaller",
+        "lab-death-context",
+        "lab-sacrifice-context",
+        "lab-gift",
+        "lab-star-wolf",
+        "lab-dawn-wolf",
+        "lab-imperial-wolf"
+      ]
+    },
+    {
+      "id": "laboratory-scoring",
+      "name": "Protection and scoring",
+      "subtitle": "Development-only mechanics experiment",
+      "strategy": "Protection and scoring",
+      "collection": "mixed",
+      "cards": [
+        "lab-wolf",
+        "lab-ward",
+        "lab-selfward",
+        "lab-herald",
+        "lab-marker",
+        "lab-census",
+        "lab-border",
+        "lab-fortress",
+        "lab-rust",
+        "lab-gift",
+        "lab-bolt",
+        "lab-power-sum",
+        "lab-space",
+        "lab-dawn-wolf",
+        "lab-derived"
+      ]
+    }
+  ],
+  "rulesets": [
+    {
+      "id": "classic",
+      "name": "Classic",
+      "description": "Full power of winning rows; tied rows score zero.",
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "completion": "twoPasses"
+    },
+    {
+      "id": "domination",
+      "name": "Domination",
+      "description": "Classic plus one point per surviving creature.",
+      "config": {
+        "battlefield": {
+          "rows": 3,
+          "cols": 5,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 4
+                },
+                {
+                  "row": 1,
+                  "col": 4
+                },
+                {
+                  "row": 2,
+                  "col": 4
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "domination",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "completion": "twoPasses"
+    },
+    {
+      "id": "lab-wide-classic",
+      "name": "Laboratory 4×8 · Classic",
+      "description": "Full power of winning rows; tied rows score zero.",
+      "config": {
+        "battlefield": {
+          "rows": 4,
+          "cols": 8,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                },
+                {
+                  "row": 3,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 7
+                },
+                {
+                  "row": 1,
+                  "col": 7
+                },
+                {
+                  "row": 2,
+                  "col": 7
+                },
+                {
+                  "row": 3,
+                  "col": 7
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "classic",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "completion": "twoPasses"
+    },
+    {
+      "id": "lab-wide-domination",
+      "name": "Laboratory 4×8 · Domination",
+      "description": "Classic plus one point per surviving creature.",
+      "config": {
+        "battlefield": {
+          "rows": 4,
+          "cols": 8,
+          "maxTokens": 3,
+          "maxFortification": 3,
+          "starts": [
+            {
+              "player": 0,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 0
+                },
+                {
+                  "row": 3,
+                  "col": 0
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            },
+            {
+              "player": 1,
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 7
+                },
+                {
+                  "row": 1,
+                  "col": 7
+                },
+                {
+                  "row": 2,
+                  "col": 7
+                },
+                {
+                  "row": 3,
+                  "col": 7
+                }
+              ],
+              "tokens": 1,
+              "fortification": 0
+            }
+          ]
+        },
+        "scoring": "domination",
+        "mode": "standard",
+        "collection": "mixed",
+        "deckSize": 15,
+        "openingHand": 5,
+        "maxCopies": 2,
+        "safeguards": {
+          "maxResolutionSteps": 300,
+          "maxGeneratedPerMatch": 30,
+          "maxResurrections": 2,
+          "maxCards": 100
+        }
+      },
+      "completion": "twoPasses"
+    }
+  ]
+}
