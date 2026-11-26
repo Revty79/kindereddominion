@@ -5,7 +5,7 @@ import { laboratoryContent, laboratoryScenarios } from "./laboratory";
 import { ownerContent, OWNER_CONTENT_ID } from "./owner";
 import { currentOwnerContent, CURRENT_OWNER_CONTENT_ID } from "./current";
 import { ownerReadabilityScenarios } from "./owner-scenarios";
-const published = import.meta.glob("./published/*.json", {
+const published = import.meta.glob(["./published/*.json", "!./published/founding-kindreds-artwork-v1.json"], {
   eager: true,
   import: "default",
 }) as Record<string, ContentPack>;
@@ -15,6 +15,7 @@ export function bundledVersions(): ContentPack[] {
     foundingContent(baselineContent()),
     ...(import.meta.env.VITE_STUDIO === "0" ? [] : [laboratoryContent()]),
     ...Object.values(published).map((p) => structuredClone(p)),
+    currentOwnerContent(),
   ];
 }
 export function addBundledVersions(workspace: Workspace): Workspace {
