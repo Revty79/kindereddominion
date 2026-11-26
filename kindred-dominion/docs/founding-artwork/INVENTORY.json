@@ -2936,5 +2936,21 @@
       "archivedSource": "artwork-source/cards/constructs/c030-536b79b80a9cd3b0.png"
     }
   ],
-  "runtimeBytes": 44274150
+  "runtimeBytes": 44274150,
+  "visualReview": {
+    "contactSheetsReviewed": 5,
+    "illustrationsReviewed": 150,
+    "issues": [
+      {
+        "number": "A016",
+        "issue": "Visible 16 baked into the illustration; conflicts with roster no-numbers standard.",
+        "status": "awaiting-owner-decision"
+      },
+      {
+        "number": "A018",
+        "issue": "Visible 18 baked into the illustration; conflicts with roster no-numbers standard.",
+        "status": "awaiting-owner-decision"
+      }
+    ]
+  }
 }

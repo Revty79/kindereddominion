@@ -4,7 +4,7 @@
 
 All 150 founding creature illustrations are integrated in `founding-kindreds-artwork-v1`, using the existing Studio image conversion/publication code and repository importer. No permanent card identity, executable card definition, power value, ability, deck, classification or evolution relationship was changed. Engine version remains **1.3.1**.
 
-Source baseline: `e03a6410477bd4c446a65bf4fc260b288a12f788`. Release reference: `founding-artwork-integrated-v1`; the accompanying verification receipt records the implementation SHA after commit.
+Source baseline: `e03a6410477bd4c446a65bf4fc260b288a12f788`. Implementation: `a7eff9f04eca361cc61c989a4a32e1a8bbaa9c84`. [Verification receipt](founding-artwork/VERIFICATION.json). Final publication is awaiting the artwork-exception decision described below.
 
 The separate collectible-card presentation supplement is implemented only as an isolated visual study. **Its framing has not been approved or applied throughout gameplay.**
 
@@ -21,6 +21,8 @@ The owner supplied [FOUNDING-KINDREDS-ARTWORK.md](FOUNDING-KINDREDS-ARTWORK.md) 
 | Constructs | C001–C030 | 30 |
 
 Missing images, duplicate source/pixel content, mismatched names/IDs/filenames, invalid formats and corrupt decoded pixels: **zero**. All sources are PNG, under 10MB and 40 million pixels. Seventeen differ from the roster's preferred 3:4 aspect ratio; these are advisory composition differences, not invalid files. No source was cropped or stretched.
+
+A visual review of all five contact sheets found two artwork-standard exceptions: [A016 Magical Ooze](../artwork-source/cards/arcane/A016.png) contains a visible **16** on a stone, and [A018 Living Grimoire](../artwork-source/cards/arcane/A018.png) contains **18** on its cover. These conflict with the roster's no-numbers standard. The originals are preserved; the owner's decision on retaining them for local playtesting versus holding them for replacement is pending. Technical image validation is not final artistic acceptance.
 
 The originals total **449,761,648 bytes**. The optimized WebP illustrations total **44,274,150 bytes**, a **90.16% reduction**, bounded to 1024×1536 while preserving proportions. [INVENTORY.json](founding-artwork/INVENTORY.json) lists each original, dimensions, original/pixel checksums, runtime path, artwork revision and immutable source revision.
 
@@ -75,6 +77,7 @@ TEST/PROD, the Ubuntu host, unrelated applications, firewall and reverse proxy w
 - **Four persistent-account browser workflows passed** in isolation; the backup-restoration case was intentionally skipped because no new restoration workflow was required. The illustrated catalog was selected before account play. Original V1.3D restoration evidence remains committed.
 - Frontend/backend strict TypeScript, full/player/backend builds, manifest/source/runtime checksums and Git tracking passed. Player output contains 150 illustrations plus fallback/branding, excludes source masters, Studio/laboratory and unpublished test art.
 - Existing publication export/import and rejected-corruption checks passed. Full collection re-export/reimport remains bounded and idempotent.
+- Clean Git worktree installation, full/player/backend builds, all 397 tests, complete source audit and bounded-package validation passed. A final targeted browser smoke run passed after normalizing JSON import attributes. The isolated study is absent from ordinary production output.
 - Known private-value scan: zero matches in build output. Dependency audit reported zero vulnerabilities at verification time.
 
 An initial browser harness assumed a fixed port and another read the intermediate computer turn as the next human turn; both checks were corrected to follow configured origin and completed action state. These failed/interrupted runs were not counted as acceptance. No gameplay rule was changed to make tests pass.
@@ -115,5 +118,6 @@ Priorities:
 
 1. **Complete local match blockers: none found.** All five founding starters completed actual computer games.
 2. **Design rollout: awaiting explicit owner approval** of the isolated framing and scale examples.
-3. **Deployment: Docker execution and Ubuntu TEST deployment remain owner-deferred**, outside local-play acceptance.
-4. **Advisory review:** 17 non-preferred aspect ratios; no automatic cropping. Phoenix's existing M003 resurrection prerequisite is preserved as documented, not silently bypassed. Physical-device acceptance remains future validation.
+3. **Artwork exceptions: A016 and A018 contain baked-in numerals.** Owner decision is required under the supplied roster before final artwork acceptance.
+4. **Deployment: Docker execution and Ubuntu TEST deployment remain owner-deferred**, outside local-play acceptance.
+5. **Advisory review:** 17 non-preferred aspect ratios; no automatic cropping. Phoenix's existing M003 resurrection prerequisite is preserved as documented, not silently bypassed. Physical-device acceptance remains future validation.
