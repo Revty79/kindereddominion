@@ -2,7 +2,7 @@
 
 Version **0.4.0 · V1.3B/C — Owner Design V1**
 
-A local tactical card game and Developer Studio. New matches use the owner's **150-card Founding Kindreds**: Nature, Mythical, Arcane, Undead and Constructs, each with 30 permanently numbered cards and its exact supplied 15-card starter. Five mixed development decks are also included. Original V1.1, Cody's V1.2 library, temporary artwork experiment and V1.3A laboratory remain selectable development versions. Existing drafts and match snapshots are preserved.
+A tactical card game with local practice, Developer Studio and PostgreSQL-backed accounts. New matches use the owner's **150-card Founding Kindreds**: Nature, Mythical, Arcane, Undead and Constructs, each with 30 permanently numbered cards and its exact supplied 15-card starter. Five mixed development decks are also included. Original V1.1, Cody's V1.2 library, temporary artwork experiment and V1.3A laboratory remain selectable development versions. Existing drafts and match snapshots are preserved.
 
 ## Start on Windows
 
@@ -11,10 +11,12 @@ Double-click **Start Kindred Dominion.cmd**, or open PowerShell:
 ```powershell
 cd D:\kindereddominion\kindred-dominion
 npm ci
-npm run dev
+npm run dev:all
 ```
 
-Open **http://127.0.0.1:5173/**. Keep the terminal open; stop with Ctrl+C. Install Node.js 22.12+ (24 recommended) first. `npm ci` needs internet; subsequent local play does not. Use the same browser and address for local saves. Port 5173 is fixed; stop another instance before starting.
+Open **http://127.0.0.1:5173/**. Keep the terminal open; stop with Ctrl+C. Use Node.js 24+ and dedicated PostgreSQL DEV. Private configuration on this owner computer is initialized. Follow the [V1.3D owner guide](docs/V1.3D-OWNER-GUIDE.md) on another computer. `npm ci` needs internet; subsequent local play does not. Use the same browser and address for local saves. Port 5173 is fixed; stop another instance before starting.
+
+Choose **Player account** for permanent collections, owned decks and server-validated matches across browsers. The initial screen remains unrestricted local practice; `npm run dev` starts practice alone.
 
 ## First test
 
@@ -70,13 +72,25 @@ npm run test:browser
 
 See [validation](docs/V1.3BC-VALIDATION.md) and [preliminary balance findings](docs/v1.3bc/PRELIMINARY-BALANCE.md). Reproduce owner runs with `npm run validate:owner -- --scoring=classic` and `npm run validate:owner -- --scoring=domination`; summarize saved evidence with `node scripts/summarize-owner.mjs`. Simulations never automatically rebalance cards.
 
-## Server preparation and future storage
+## Permanent storage and deployment preparation
 
-Docker/Compose files serve only the player build through digest-pinned unprivileged NGINX, with an explicit unused host port and loopback default. Follow [deployment preparation](docs/V1.3BC-DEPLOYMENT.md) for clean GitHub checkout, startup, health, update, shutdown, rollback and the acceptance script. **Docker execution remains pending owner validation by explicit instruction.** Actual home-server installation requires separate authorization.
+V1.3D adds Fastify/TypeScript, PostgreSQL, four migrations, persistent sessions/roles, atomic inventory, owned decks, authoritative single-player matches, verified history/statistics and private revisioned Studio. Existing local data remains; imports require preview/backup. Official content and approved artwork remain portable through Git.
 
-The [PostgreSQL proposal](docs/V1.3BC-STORAGE.md) covers a dedicated database, restricted roles, atomic inventory transactions, migrations, backups and independent restoration. No database or migration is created.
+- [Windows owner guide](docs/V1.3D-OWNER-GUIDE.md): configuration, accounts/roles, pgAdmin, publication, backup/restoration.
+- [Architecture/schema](docs/V1.3D-ARCHITECTURE.md), [security/limits](docs/V1.3D-SECURITY.md), [validation](docs/V1.3D-VALIDATION.md), [baseline](docs/V1.3D-BASELINE.md), [brief](docs/V1.3D-BRIEF.md).
+- [Future Ubuntu preparation](docs/V1.3D-DEPLOYMENT.md): separate frontend/backend, existing PostgreSQL, private configuration, update/rollback and backups.
 
-Browser saves remain specific to device, browser and origin. Cross-device progression, server accounts, online multiplayer, purchases and final artwork are not implemented. Send feedback to the owner externally with version, mode, decks, seed, action/position and expected/observed result. Read the owner guide before sharing a developer replay containing both private hands.
+**Docker execution remains pending owner validation. TEST/PROD and Ubuntu were not accessed or changed.** No remote multiplayer, commerce, economy or final artwork generation is included. Incoming owner/Ember art is preserved for separate review/publication.
+
+Run real PostgreSQL integration only in the owned disposable instance:
+
+```powershell
+npm run db:create-test
+$env:KINDRED_ENV_FILE = '.local/v1.3d/integration.env'
+npm run test:database
+```
+
+Use `node scripts/pg-isolate.mjs resume` for an existing instance, or `create-db` for a fresh registered empty test database. The returned private env file identifies its target. Stop only this postmaster with `node scripts/pg-isolate.mjs stop`. Remove KINDRED_ENV_FILE from your terminal before returning to DEV.
 
 ## Development references
 

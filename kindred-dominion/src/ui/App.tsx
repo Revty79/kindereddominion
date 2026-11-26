@@ -53,7 +53,7 @@ function Crest() {
     </svg>
   );
 }
-function CardFace({
+export function CardFace({
   card,
   compact = false,
   artwork,
@@ -502,7 +502,7 @@ export default function App({
           <span className="version">
             {content.id === "v1.1-baseline"
               ? "V1.1 · PLAYABLE FOUNDATION"
-              : "V1.3B/C · EARLY TESTING"}
+              : "V1.3D · EARLY TESTING"}
           </span>
           <button className="quiet" onClick={() => setLibrary(true)}>
             Card library
@@ -510,8 +510,10 @@ export default function App({
           <button className="quiet" onClick={() => setHelp(true)}>
             How to play
           </button>
+          <button className="quiet" onClick={() => window.dispatchEvent(new Event("kindred-open-account"))}>Player account</button>
         </div>
       </header>
+      {!session&&<p className="practice-boundary">Local practice · unrestricted test cards and browser-local saves. Open Player account for your permanent collection, saved decks and server-validated matches.</p>}
       {notice && (
         <div className="notice" role="alert">
           {notice}
@@ -1418,7 +1420,7 @@ export default function App({
       )}
       <footer className="app-footer">
         <span>
-          KINDRED DOMINION <b>✦</b> 0.4.0
+          KINDRED DOMINION <b>✦</b> 0.5.0
         </span>
         <span>
           Development cards. A foundation to play, question and refine.
@@ -1687,7 +1689,7 @@ export default function App({
         <Modal title="How to play" close={() => setHelp(false)}>
           <div className="help-copy">
             <h3>Early tester notes</h3>
-            <p>All 150 owner-designed cards are freely available for testing. Statistics and names are provisional, and final artwork is pending. Browser saves belong to this device, browser and address. Cross-device progression, accounts, purchases and online player-versus-player matches are not available.</p>
+            <p>Local practice makes all 150 owner-designed cards freely available for testing. Its browser saves belong to this device, browser and address. Player account stores your owned collection, decks and validated computer matches on the configured server across browsers. Statistics and names remain provisional, and final artwork is pending. Purchases and online human-versus-human play are not enabled.</p>
             <p>To report feedback, send the owner the match seed, scoring mode, card numbers, a screenshot, and what you expected compared with what happened, using your usual external communication channel.</p>
             <p>
               Build from your edge of the field. Jade faces right; Amber faces

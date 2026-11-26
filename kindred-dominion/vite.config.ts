@@ -8,7 +8,8 @@ const root = process.cwd();
 export default defineConfig({
   base: "./",
   publicDir: playerOnly ? false : "public",
-  server: { watch: { ignored: ["**/.local/**", "**/test-results/**", "**/playwright-report/**"] } },
+  server: { fs:{deny:["**/.env","**/.env.*","**/*.{crt,pem,key}","**/.git/**","**/.local/**","**/server/**","**/server-dist/**","**/backups/**","**/*.{dump,backup,private}"]}, proxy: {"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}, watch: { ignored: ["**/.local/**", "**/artwork-source/**", "**/docs/**", "**/server-dist/**", "**/dist/**", "**/dist-player/**", "**/test-results/**", "**/playwright-report/**"] } },
+  preview:{proxy:{"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}},
   plugins: [
     react(),
     {

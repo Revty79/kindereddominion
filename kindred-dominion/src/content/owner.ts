@@ -163,7 +163,7 @@ const decks: [string, string, string, string, string][] = [
 export function ownerContent(): ContentPack {
   const rules = implementedRules();
   const cards: CardDefinition[] = input.map(row => {
-    if (!registry.entries.some(entry => entry.gameplayId === row.id && entry.number === row.number && !entry.retired)) throw new Error(`Permanent collectible registry mismatch: ${row.id}`);
+    if (!registry.entries.some(entry => entry.gameplayId === row.id && entry.number === row.number)) throw new Error(`Permanent collectible registry mismatch: ${row.id}`);
     const serial = Number(row.number.slice(1));
     const type = row.type === "R" ? "replacement" : row.type === "Evo" ? "evolution" : "standard";
     const card: CardDefinition = {

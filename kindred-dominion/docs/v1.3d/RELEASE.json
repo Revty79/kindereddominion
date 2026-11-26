@@ -1,0 +1,10 @@
+{
+  "stage": "V1.3D",
+  "version": "0.5.0",
+  "baseline": "51890e877d23cdc3d216878cc417af9eb2f3f54b",
+  "implementationReference": "v1.3d-implementation",
+  "acceptanceReference": "v1.3d-permanent-storage",
+  "status": "Final isolated checkout and paired restoration verification in progress",
+  "dockerExecution": "owner-deferred",
+  "hostedDatabasesTouched": false
+}

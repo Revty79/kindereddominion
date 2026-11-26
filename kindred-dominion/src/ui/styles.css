@@ -2270,3 +2270,4 @@ dd {
   .app-shell .cell { min-height: 165px; }
   .app-shell .hand-card { min-width: 155px; }
 }
+.practice-boundary { margin: 0; padding: .7rem 3%; background: #172b2b; border-bottom: 1px solid #344b4b; color: #b9ceca; font-size: .875rem; line-height: 1.6; }

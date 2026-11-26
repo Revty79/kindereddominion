@@ -20,3 +20,55 @@ services:
       - no-new-privileges:true
     pids_limit: 128
     stop_grace_period: 10s
+    depends_on:
+      backend:
+        condition: service_healthy
+  backend:
+    image: "kindred-dominion-backend:${KINDRED_REVISION:?Set KINDRED_REVISION}"
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      target: runtime
+      args:
+        VCS_REF: "${KINDRED_REVISION:?Set KINDRED_REVISION}"
+    env_file:
+      - "${KINDRED_BACKEND_ENV_FILE:?Set the private backend environment-file path}"
+    environment:
+      API_HOST: 0.0.0.0
+      API_PORT: 3001
+    expose:
+      - "3001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    init: true
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 768m
+    stop_grace_period: 20s
+  maintenance:
+    profiles: [maintenance]
+    image: "kindred-dominion-maintenance:${KINDRED_REVISION:?Set KINDRED_REVISION}"
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      target: maintenance
+      args:
+        VCS_REF: "${KINDRED_REVISION:?Set KINDRED_REVISION}"
+    env_file:
+      - "${KINDRED_MIGRATION_ENV_FILE:?Set the private migration-role environment-file path}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

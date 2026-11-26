@@ -1,6 +1,9 @@
 node_modules/
 dist/
 dist-player/
+server-dist/
+backups/
+*.private
 test-results/
 playwright-report/
 .local/

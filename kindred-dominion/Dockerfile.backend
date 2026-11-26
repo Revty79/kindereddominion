@@ -1,0 +1,28 @@
+ARG NODE_IMAGE=node:24.22.3-bookworm-slim@sha256:873f586f3794f52281bd039bf02c048a0be08fde619338f9941bad1eb6b34530
+FROM ${NODE_IMAGE} AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --include=dev
+COPY . .
+RUN npm run backend:build
+
+# Explicit, private one-off migrations/content synchronization. Not an HTTP service.
+FROM build AS maintenance
+ARG VCS_REF=unknown
+LABEL org.opencontainers.image.revision=${VCS_REF}
+USER 1000:1000
+ENTRYPOINT ["node", "server-dist/cli.mjs"]
+CMD ["status"]
+
+FROM ${NODE_IMAGE} AS runtime
+ARG VCS_REF=unknown
+LABEL org.opencontainers.image.revision=${VCS_REF}
+WORKDIR /app
+ENV NODE_ENV=production
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
+COPY --from=build /app/server-dist ./server-dist
+USER 1000:1000
+EXPOSE 3001
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD node -e "fetch('http://127.0.0.1:'+(process.env.API_PORT||3001)+'/readyz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+CMD ["node", "server-dist/index.mjs"]
