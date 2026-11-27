@@ -32,8 +32,10 @@ import {startTradingMaintenance} from "./trading-maintenance";
 import {registerCommercePublication} from "./commerce-publication";
 import {commerceRoutes} from "./commerce-routes";
 import {stripeWebhookRoutes,startCommerceMaintenance} from "./commerce-events";
+import {registerStarters,starterRoutes} from "./starters";
+import {inventoryTransaction} from "./inventory";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
-  registerShopPublication();registerShopRewards();registerTradingPublication();registerCommercePublication();
+  registerShopPublication();registerShopRewards();registerTradingPublication();registerCommercePublication();registerStarters();
   const pool=suppliedPool??database(config),app=Fastify({logger:false,bodyLimit:256*1024,trustProxy:false,requestTimeout:30000,connectionTimeout:10000});
   await app.register(cookie);await app.register(cors,{origin:config.origin,credentials:true,methods:["GET","POST","PUT","PATCH","DELETE"],allowedHeaders:["Content-Type","X-CSRF-Token"]});
   app.addHook("onRequest",async(req,reply)=>{
@@ -58,6 +60,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   if(["test","prod"].includes(config.environment)&&!root)throw Error("Hosted backend requires the protected control application build.");
   const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   notificationRoutes(app,pool,auth);
+  starterRoutes(app,pool,config,auth,inventoryTransaction);
   tradingSafetyRoutes(app,pool,config,auth);
   commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);
   await stripeWebhookRoutes(app,pool,config);

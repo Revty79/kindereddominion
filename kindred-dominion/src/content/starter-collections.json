@@ -1,0 +1,537 @@
+[
+  {
+    "kindred": "Nature",
+    "additional": [
+      {
+        "cardId": "n001",
+        "quantity": 1
+      },
+      {
+        "cardId": "n002",
+        "quantity": 1
+      },
+      {
+        "cardId": "n003",
+        "quantity": 1
+      },
+      {
+        "cardId": "n004",
+        "quantity": 1
+      },
+      {
+        "cardId": "n005",
+        "quantity": 1
+      },
+      {
+        "cardId": "n006",
+        "quantity": 1
+      },
+      {
+        "cardId": "n009",
+        "quantity": 1
+      },
+      {
+        "cardId": "n010",
+        "quantity": 1
+      },
+      {
+        "cardId": "n013",
+        "quantity": 1
+      },
+      {
+        "cardId": "n027",
+        "quantity": 1
+      }
+    ],
+    "recommended": {
+      "name": "Wildwood development",
+      "cards": [
+        "n001",
+        "n001",
+        "n002",
+        "n002",
+        "n003",
+        "n004",
+        "n005",
+        "n005",
+        "n009",
+        "n010",
+        "n013",
+        "n013",
+        "n027",
+        "n028",
+        "n029"
+      ]
+    },
+    "alternatives": [
+      {
+        "name": "Pack and canopy",
+        "cards": [
+          "n001",
+          "n002",
+          "n003",
+          "n004",
+          "n005",
+          "n006",
+          "n007",
+          "n010",
+          "n011",
+          "n013",
+          "n014",
+          "n016",
+          "n020",
+          "n027",
+          "n028"
+        ]
+      },
+      {
+        "name": "Scavenger metamorphosis",
+        "cards": [
+          "n001",
+          "n003",
+          "n004",
+          "n005",
+          "n006",
+          "n008",
+          "n009",
+          "n009",
+          "n010",
+          "n012",
+          "n015",
+          "n023",
+          "n024",
+          "n029",
+          "n030"
+        ]
+      }
+    ]
+  },
+  {
+    "kindred": "Mythical",
+    "additional": [
+      {
+        "cardId": "m001",
+        "quantity": 1
+      },
+      {
+        "cardId": "m002",
+        "quantity": 1
+      },
+      {
+        "cardId": "m003",
+        "quantity": 1
+      },
+      {
+        "cardId": "m004",
+        "quantity": 1
+      },
+      {
+        "cardId": "m005",
+        "quantity": 1
+      },
+      {
+        "cardId": "m007",
+        "quantity": 1
+      },
+      {
+        "cardId": "m009",
+        "quantity": 1
+      },
+      {
+        "cardId": "m010",
+        "quantity": 1
+      },
+      {
+        "cardId": "m013",
+        "quantity": 1
+      },
+      {
+        "cardId": "m015",
+        "quantity": 1
+      }
+    ],
+    "recommended": {
+      "name": "Young sovereigns",
+      "cards": [
+        "m001",
+        "m001",
+        "m002",
+        "m002",
+        "m003",
+        "m004",
+        "m005",
+        "m007",
+        "m010",
+        "m013",
+        "m014",
+        "m015",
+        "m028",
+        "m029",
+        "m030"
+      ]
+    },
+    "alternatives": [
+      {
+        "name": "Phoenix renewal",
+        "cards": [
+          "m001",
+          "m002",
+          "m003",
+          "m003",
+          "m004",
+          "m005",
+          "m007",
+          "m008",
+          "m009",
+          "m011",
+          "m013",
+          "m017",
+          "m020",
+          "m027",
+          "m029"
+        ]
+      },
+      {
+        "name": "Guile and scoring",
+        "cards": [
+          "m001",
+          "m002",
+          "m004",
+          "m005",
+          "m005",
+          "m007",
+          "m009",
+          "m010",
+          "m010",
+          "m012",
+          "m013",
+          "m016",
+          "m018",
+          "m025",
+          "m030"
+        ]
+      }
+    ]
+  },
+  {
+    "kindred": "Arcane",
+    "additional": [
+      {
+        "cardId": "a001",
+        "quantity": 1
+      },
+      {
+        "cardId": "a002",
+        "quantity": 1
+      },
+      {
+        "cardId": "a003",
+        "quantity": 1
+      },
+      {
+        "cardId": "a004",
+        "quantity": 1
+      },
+      {
+        "cardId": "a005",
+        "quantity": 1
+      },
+      {
+        "cardId": "a006",
+        "quantity": 1
+      },
+      {
+        "cardId": "a007",
+        "quantity": 1
+      },
+      {
+        "cardId": "a009",
+        "quantity": 1
+      },
+      {
+        "cardId": "a014",
+        "quantity": 1
+      },
+      {
+        "cardId": "a015",
+        "quantity": 1
+      }
+    ],
+    "recommended": {
+      "name": "Elemental formation",
+      "cards": [
+        "a001",
+        "a001",
+        "a002",
+        "a002",
+        "a004",
+        "a004",
+        "a005",
+        "a006",
+        "a014",
+        "a015",
+        "a015",
+        "a021",
+        "a027",
+        "a028",
+        "a029"
+      ]
+    },
+    "alternatives": [
+      {
+        "name": "Four elements",
+        "cards": [
+          "a001",
+          "a002",
+          "a003",
+          "a004",
+          "a005",
+          "a006",
+          "a007",
+          "a007",
+          "a009",
+          "a012",
+          "a014",
+          "a015",
+          "a027",
+          "a029",
+          "a030"
+        ]
+      },
+      {
+        "name": "Enhancement formation",
+        "cards": [
+          "a001",
+          "a002",
+          "a003",
+          "a004",
+          "a006",
+          "a008",
+          "a009",
+          "a010",
+          "a011",
+          "a012",
+          "a015",
+          "a018",
+          "a019",
+          "a022",
+          "a029"
+        ]
+      }
+    ]
+  },
+  {
+    "kindred": "Undead",
+    "additional": [
+      {
+        "cardId": "u001",
+        "quantity": 1
+      },
+      {
+        "cardId": "u002",
+        "quantity": 1
+      },
+      {
+        "cardId": "u003",
+        "quantity": 1
+      },
+      {
+        "cardId": "u004",
+        "quantity": 1
+      },
+      {
+        "cardId": "u005",
+        "quantity": 1
+      },
+      {
+        "cardId": "u007",
+        "quantity": 1
+      },
+      {
+        "cardId": "u009",
+        "quantity": 1
+      },
+      {
+        "cardId": "u011",
+        "quantity": 1
+      },
+      {
+        "cardId": "u015",
+        "quantity": 1
+      },
+      {
+        "cardId": "u027",
+        "quantity": 1
+      }
+    ],
+    "recommended": {
+      "name": "Bone and phantom",
+      "cards": [
+        "u001",
+        "u001",
+        "u002",
+        "u003",
+        "u003",
+        "u004",
+        "u005",
+        "u007",
+        "u009",
+        "u011",
+        "u015",
+        "u017",
+        "u027",
+        "u028",
+        "u030"
+      ]
+    },
+    "alternatives": [
+      {
+        "name": "Sacrifice and return",
+        "cards": [
+          "u001",
+          "u001",
+          "u002",
+          "u004",
+          "u004",
+          "u005",
+          "u007",
+          "u009",
+          "u010",
+          "u011",
+          "u013",
+          "u014",
+          "u018",
+          "u024",
+          "u026"
+        ]
+      },
+      {
+        "name": "Predators of the grave",
+        "cards": [
+          "u001",
+          "u002",
+          "u003",
+          "u005",
+          "u006",
+          "u007",
+          "u008",
+          "u009",
+          "u011",
+          "u012",
+          "u015",
+          "u017",
+          "u027",
+          "u029",
+          "u030"
+        ]
+      }
+    ]
+  },
+  {
+    "kindred": "Constructs",
+    "additional": [
+      {
+        "cardId": "c001",
+        "quantity": 1
+      },
+      {
+        "cardId": "c002",
+        "quantity": 1
+      },
+      {
+        "cardId": "c003",
+        "quantity": 1
+      },
+      {
+        "cardId": "c004",
+        "quantity": 1
+      },
+      {
+        "cardId": "c005",
+        "quantity": 1
+      },
+      {
+        "cardId": "c006",
+        "quantity": 1
+      },
+      {
+        "cardId": "c009",
+        "quantity": 1
+      },
+      {
+        "cardId": "c011",
+        "quantity": 1
+      },
+      {
+        "cardId": "c013",
+        "quantity": 1
+      },
+      {
+        "cardId": "c027",
+        "quantity": 1
+      }
+    ],
+    "recommended": {
+      "name": "Forged advance",
+      "cards": [
+        "c001",
+        "c001",
+        "c002",
+        "c002",
+        "c003",
+        "c003",
+        "c004",
+        "c005",
+        "c009",
+        "c013",
+        "c013",
+        "c015",
+        "c019",
+        "c027",
+        "c029"
+      ]
+    },
+    "alternatives": [
+      {
+        "name": "Bastion formation",
+        "cards": [
+          "c001",
+          "c002",
+          "c003",
+          "c004",
+          "c005",
+          "c006",
+          "c007",
+          "c009",
+          "c010",
+          "c012",
+          "c013",
+          "c016",
+          "c020",
+          "c027",
+          "c030"
+        ]
+      },
+      {
+        "name": "Salvage battery",
+        "cards": [
+          "c001",
+          "c002",
+          "c003",
+          "c004",
+          "c005",
+          "c006",
+          "c006",
+          "c008",
+          "c009",
+          "c011",
+          "c014",
+          "c015",
+          "c018",
+          "c024",
+          "c026"
+        ]
+      }
+    ]
+  }
+]

@@ -12,6 +12,9 @@ import {reject} from "./errors";
 import type {Actor} from "./auth";
 import {applyOwnershipLots,lockPlayer,type Provenance} from "./economy-assets";
 import {ownerContent} from "../src/content/owner";
+import type {BackendConfig} from "./config";
+import {selectedStarters,grantStarterUpgrade} from "./starters";
+import {deckFormat} from "./shop-formats";
 export async function owned(db:DB|PoolClient,playerId:string){
   const {rows}=await db.query("SELECT e.card_id, e.id AS edition_id,e.edition,i.quantity,i.acquired_at FROM kd.inventory i JOIN kd.edition e ON e.id=i.edition_id WHERE player_id=$1 ORDER BY e.card_id,e.edition",[playerId]);return rows;
 }
@@ -65,8 +68,10 @@ export async function validateOwnedDeck(c:DB|PoolClient,actor:Actor,cards:string
   const report=await ownedDeckLegality(c,actor,cards,pack,config,testing),errors=draft?report.blockingDraftErrors:report.errors;
   if(errors.length)reject(400,"illegal_deck",errors.join(" "));
 }
-export async function startingCollection(pool:DB,actor:Actor,kindred:string,key:string,onAcquired?:(c:PoolClient,cards:string[])=>Promise<void>){
+export async function startingCollection(pool:DB,actor:Actor,kindred:string,key:string,onAcquired?:(c:PoolClient,cards:string[])=>Promise<void>,serverConfig?:BackendConfig){
   return transaction(pool,async c=>{
+    // Match configuration publication lock order before locking its player FK.
+    await c.query("SELECT pg_advisory_xact_lock(hashtext($1))",["kindred-configuration:starters"]);
     const {rows:[player]}=await c.query("SELECT * FROM kd.player WHERE id=$1 FOR UPDATE",[actor.id]);
     if(player.starting_kindred){
       const {rows:[prior]}=await c.query("SELECT result FROM kd.acquisition WHERE player_id=$1 AND idempotency_key=$2 AND source=$3",[actor.id,key,`starting:${kindred}`]);
@@ -74,16 +79,20 @@ export async function startingCollection(pool:DB,actor:Actor,kindred:string,key:
       reject(409,"starting_collection_chosen","A permanent starting collection has already been selected.");
     }
     const founding=new Set(ownerContent().cards.filter(x=>x.kindred===kindred).map(x=>x.collectible!.gameplayId));
-    const pack=await activeContent(c),cards=pack.cards.filter(x=>founding.has(x.collectible?.gameplayId??x.id)),starter=pack.decks.find(x=>x.collection===kindred);
-    if(cards.length!==30||!starter)reject(400,"invalid_starting_kindred","Choose one of the five Founding Kindreds.");
+    const pack=await activeContent(c),cards=pack.cards.filter(x=>founding.has(x.collectible?.gameplayId??x.id));const originalStarter=pack.decks.find(x=>x.collection===kindred);
+    if(cards.length!==30||!originalStarter)reject(400,"invalid_starting_kindred","Choose one of the five Founding Kindreds.");
+    let starter=originalStarter!;
     const result=await inventoryTransaction(c,actor.id,key,`starting:${kindred}`,cards.map(x=>({editionId:`${x.collectible!.gameplayId}:${x.collectible!.edition}`,quantity:1})),actor.id,{origin:"starter",tradeable:false});
+    const policy=await selectedStarters(c,serverConfig);let upgrade:unknown=null;
+    if(policy?.rules.newPlayersEnabled){upgrade=await grantStarterUpgrade(c,{...player,starting_kindred:kindred},policy,pack,"new_player",actor.id,inventoryTransaction);const recommended=policy.rules.definitions.find(d=>d.kindred===kindred)!.recommended;starter={...starter,...recommended};}
     const config=structuredClone(DEFAULT_CONFIG);
     await validateOwnedDeck(c,actor,starter.cards,pack,config);
+    const format=await deckFormat(c,starter.cards,pack,config);if(format.errors.length)reject(400,"starter_format_changed",format.errors.join(" "));
     const deckId=crypto.randomUUID();await c.query("INSERT INTO kd.deck(id,player_id,name,version_id,config) VALUES($1,$2,$3,$4,$5)",[deckId,actor.id,starter.name,pack.id,config]);
     for(let i=0;i<starter.cards.length;i++)await c.query("INSERT INTO kd.deck_card(deck_id,slot,card_id) VALUES($1,$2,$3)",[deckId,i,starter.cards[i]]);
     await c.query("INSERT INTO kd.deck_history(deck_id,revision,snapshot) VALUES($1,1,$2)",[deckId,{name:starter.name,cards:starter.cards,config,version:pack.id}]);
     await c.query("UPDATE kd.player SET starting_kindred=$2,default_deck_id=$3 WHERE id=$1",[actor.id,kindred,deckId]);
     if(onAcquired)await onAcquired(c,cards.map(card=>card.id));
-    return {...result,deckId,kindred};
+    return {...result,deckId,kindred,upgrade};
   });
 }

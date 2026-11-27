@@ -11,6 +11,7 @@ import {reject} from "./errors";
 import type {BackendConfig} from "./config";
 import {collectionAppearance,deckFormat} from "./shop-formats";
 import {activityEconomy,currentEconomy,economyEvent} from "./economy";
+import {starterOffer} from "./starters";
 export const configInput=z.object({scoring:z.enum(["classic","domination"]).default("classic"),mode:z.enum(["standard","free"]).default("standard"),collection:z.enum(["mixed","Nature","Mythical","Arcane","Undead","Constructs"]).default("mixed")}).strict();
 const deckInput=z.object({name:z.string().trim().min(1).max(80),cards:z.array(z.string().min(1).max(80)).max(15),config:configInput,draft:z.boolean().default(false),testingAccess:z.boolean().default(false),formatId:z.string().regex(/^[a-z0-9][a-z0-9_-]{0,79}$/).nullable().optional(),revision:z.number().int().positive().optional()}).strict();
 export async function getDeck(db:any,id:string,playerId:string,lock=false){
@@ -26,9 +27,9 @@ export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication,ser
     const quantities=new Map<string,number>();for(const row of inventory)quantities.set(row.card_id,(quantities.get(row.card_id)??0)+row.quantity);
     const completion=content.collections.map(k=>{const cards=content.cards.filter(c=>c.kindred===k.id),missing=cards.filter(c=>!quantities.get(c.collectible!.gameplayId));return {kindred:k.id,unique:cards.length-missing.length,available:cards.length,copies:cards.reduce((n,c)=>n+(quantities.get(c.collectible!.gameplayId)??0),0),missing:missing.map(c=>c.collectible!.number)};});
     const editions=(await pool.query("SELECT id,card_id,edition FROM kd.edition WHERE card_id=ANY($1) ORDER BY card_id,edition",[content.cards.map(c=>c.collectible!.gameplayId)])).rows;
-    return {...await collectionAppearance(pool,actor.id),content,inventory,completion,editions,ownership:"permanent",practiceAccess:"Local practice grants unrestricted testing access separately from permanent ownership."};
+    return {starter:await starterOffer(pool,serverConfig),...await collectionAppearance(pool,actor.id),content,inventory,completion,editions,ownership:"permanent",practiceAccess:"Local practice grants unrestricted testing access separately from permanent ownership."};
   });
-  app.post("/api/starting-collection",async req=>{const a=await auth.actor(req),b=z.object({kindred:z.enum(["Nature","Mythical","Arcane","Undead","Constructs"]),idempotencyKey:operationKey}).strict().parse(req.body);return startingCollection(pool,a,b.kindred,b.idempotencyKey,async(c,cards)=>{const active=await currentEconomy(c,serverConfig);if(active)await economyEvent(c,a.id,"unique_card",`starter:${b.kindred}`,cards.length,{kindreds:[b.kindred]},active);});});
+  app.post("/api/starting-collection",async req=>{const a=await auth.actor(req),b=z.object({kindred:z.enum(["Nature","Mythical","Arcane","Undead","Constructs"]),idempotencyKey:operationKey}).strict().parse(req.body);return startingCollection(pool,a,b.kindred,b.idempotencyKey,async(c,cards)=>{const active=await currentEconomy(c,serverConfig);if(active)await economyEvent(c,a.id,"unique_card",`starter:${b.kindred}`,cards.length,{kindreds:[b.kindred]},active);},serverConfig);});
   app.post("/api/admin/inventory",async req=>{
     const a=await auth.actor(req,["administrator"]),b=z.object({playerId:uuid,idempotencyKey:operationKey,source:z.string().trim().min(3).max(100),changes:z.array(z.object({editionId:z.string().min(1).max(180),quantity:z.number().int().min(-1000).max(1000).refine(n=>n!==0)}).strict()).min(1).max(150)}).strict().parse(req.body);
     return grant(pool,b.playerId,b.idempotencyKey,b.source,b.changes,a);

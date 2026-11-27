@@ -1,0 +1,576 @@
+{
+  "aiOnly": true,
+  "seed": 160120261,
+  "matchesPerPairing": 40,
+  "description": "Unchanged original official decks against each other, including mirrors, to distinguish inherited signals from proposed starter composition.",
+  "reports": [
+    {
+      "scoring": "classic",
+      "attempted": 600,
+      "completed": 600,
+      "draws": 7,
+      "first": {
+        "games": 600,
+        "wins": 331
+      },
+      "decks": {
+        "owner-nature-wildwood": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 121,
+          "losses": 114,
+          "draws": 5,
+          "firstWins": 70,
+          "firstGames": 120,
+          "secondWins": 51,
+          "secondGames": 120,
+          "score": 3045
+        },
+        "owner-mythical-host": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 165,
+          "losses": 74,
+          "draws": 1,
+          "firstWins": 94,
+          "firstGames": 120,
+          "secondWins": 71,
+          "secondGames": 120,
+          "score": 4232
+        },
+        "owner-arcane-conclave": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 122,
+          "losses": 115,
+          "draws": 3,
+          "firstWins": 66,
+          "firstGames": 120,
+          "secondWins": 56,
+          "secondGames": 120,
+          "score": 2705
+        },
+        "owner-undead-legion": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 113,
+          "losses": 126,
+          "draws": 1,
+          "firstWins": 65,
+          "firstGames": 120,
+          "secondWins": 48,
+          "secondGames": 120,
+          "score": 3296
+        },
+        "owner-constructs-bastion": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 72,
+          "losses": 164,
+          "draws": 4,
+          "firstWins": 36,
+          "firstGames": 120,
+          "secondWins": 36,
+          "secondGames": 120,
+          "score": 1775
+        }
+      },
+      "matchups": {
+        "owner-nature-wildwood vs owner-nature-wildwood": {
+          "completed": 40,
+          "wins": [
+            22,
+            16
+          ],
+          "draws": 2
+        },
+        "owner-nature-wildwood vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            3,
+            17
+          ],
+          "draws": 0
+        },
+        "owner-mythical-host vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            12,
+            8
+          ],
+          "draws": 0
+        },
+        "owner-nature-wildwood vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            8,
+            12
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            7,
+            12
+          ],
+          "draws": 1
+        },
+        "owner-nature-wildwood vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            11,
+            9
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            9,
+            11
+          ],
+          "draws": 0
+        },
+        "owner-nature-wildwood vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            17,
+            3
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            7,
+            13
+          ],
+          "draws": 0
+        },
+        "owner-mythical-host vs owner-mythical-host": {
+          "completed": 40,
+          "wins": [
+            18,
+            22
+          ],
+          "draws": 0
+        },
+        "owner-mythical-host vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            14,
+            6
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            8,
+            11
+          ],
+          "draws": 1
+        },
+        "owner-mythical-host vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            16,
+            4
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            3,
+            17
+          ],
+          "draws": 0
+        },
+        "owner-mythical-host vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            19,
+            1
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            1,
+            19
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-arcane-conclave": {
+          "completed": 40,
+          "wins": [
+            22,
+            18
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            9,
+            11
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            5,
+            14
+          ],
+          "draws": 1
+        },
+        "owner-arcane-conclave vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            13,
+            7
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            7,
+            13
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-undead-legion": {
+          "completed": 40,
+          "wins": [
+            25,
+            15
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            15,
+            5
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            3,
+            17
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-constructs-bastion": {
+          "completed": 40,
+          "wins": [
+            21,
+            17
+          ],
+          "draws": 2
+        }
+      },
+      "actions": {
+        "sum": 12296,
+        "min": 8,
+        "max": 32
+      },
+      "digest": "17add47e",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "domination",
+      "attempted": 600,
+      "completed": 600,
+      "draws": 12,
+      "first": {
+        "games": 600,
+        "wins": 326
+      },
+      "decks": {
+        "owner-nature-wildwood": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 122,
+          "losses": 109,
+          "draws": 9,
+          "firstWins": 68,
+          "firstGames": 120,
+          "secondWins": 54,
+          "secondGames": 120,
+          "score": 4682
+        },
+        "owner-mythical-host": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 162,
+          "losses": 76,
+          "draws": 2,
+          "firstWins": 93,
+          "firstGames": 120,
+          "secondWins": 69,
+          "secondGames": 120,
+          "score": 5669
+        },
+        "owner-arcane-conclave": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 118,
+          "losses": 116,
+          "draws": 6,
+          "firstWins": 65,
+          "firstGames": 120,
+          "secondWins": 53,
+          "secondGames": 120,
+          "score": 4244
+        },
+        "owner-undead-legion": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 115,
+          "losses": 123,
+          "draws": 2,
+          "firstWins": 64,
+          "firstGames": 120,
+          "secondWins": 51,
+          "secondGames": 120,
+          "score": 4851
+        },
+        "owner-constructs-bastion": {
+          "attempted": 240,
+          "completed": 240,
+          "wins": 71,
+          "losses": 164,
+          "draws": 5,
+          "firstWins": 36,
+          "firstGames": 120,
+          "secondWins": 35,
+          "secondGames": 120,
+          "score": 3190
+        }
+      },
+      "matchups": {
+        "owner-nature-wildwood vs owner-nature-wildwood": {
+          "completed": 40,
+          "wins": [
+            18,
+            20
+          ],
+          "draws": 2
+        },
+        "owner-nature-wildwood vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            4,
+            15
+          ],
+          "draws": 1
+        },
+        "owner-mythical-host vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            12,
+            8
+          ],
+          "draws": 0
+        },
+        "owner-nature-wildwood vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            9,
+            11
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            7,
+            12
+          ],
+          "draws": 1
+        },
+        "owner-nature-wildwood vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            9,
+            10
+          ],
+          "draws": 1
+        },
+        "owner-undead-legion vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            8,
+            11
+          ],
+          "draws": 1
+        },
+        "owner-nature-wildwood vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            18,
+            2
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-nature-wildwood": {
+          "completed": 20,
+          "wins": [
+            6,
+            13
+          ],
+          "draws": 1
+        },
+        "owner-mythical-host vs owner-mythical-host": {
+          "completed": 40,
+          "wins": [
+            17,
+            23
+          ],
+          "draws": 0
+        },
+        "owner-mythical-host vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            15,
+            5
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            8,
+            11
+          ],
+          "draws": 1
+        },
+        "owner-mythical-host vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            16,
+            4
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            5,
+            15
+          ],
+          "draws": 0
+        },
+        "owner-mythical-host vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            19,
+            1
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-mythical-host": {
+          "completed": 20,
+          "wins": [
+            1,
+            19
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-arcane-conclave": {
+          "completed": 40,
+          "wins": [
+            20,
+            18
+          ],
+          "draws": 2
+        },
+        "owner-arcane-conclave vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            10,
+            10
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            7,
+            13
+          ],
+          "draws": 0
+        },
+        "owner-arcane-conclave vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            13,
+            7
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-arcane-conclave": {
+          "completed": 20,
+          "wins": [
+            7,
+            13
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-undead-legion": {
+          "completed": 40,
+          "wins": [
+            21,
+            19
+          ],
+          "draws": 0
+        },
+        "owner-undead-legion vs owner-constructs-bastion": {
+          "completed": 20,
+          "wins": [
+            15,
+            5
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-undead-legion": {
+          "completed": 20,
+          "wins": [
+            4,
+            16
+          ],
+          "draws": 0
+        },
+        "owner-constructs-bastion vs owner-constructs-bastion": {
+          "completed": 40,
+          "wins": [
+            20,
+            18
+          ],
+          "draws": 2
+        }
+      },
+      "actions": {
+        "sum": 12292,
+        "min": 8,
+        "max": 32
+      },
+      "digest": "fd8a500f",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    }
+  ]
+}

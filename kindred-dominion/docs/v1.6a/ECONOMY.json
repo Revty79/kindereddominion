@@ -1,0 +1,133 @@
+{
+  "proposalOnly": true,
+  "runtimeActivationAutomatic": false,
+  "startingUnique": 30,
+  "startingPlayableCopies": 40,
+  "boundAdditional": 10,
+  "remainingUnique": 120,
+  "maximumFiveNewBoosters": 24,
+  "firstCopy": {
+    "starter": 30,
+    "startingPlayableCopies": 40,
+    "startingBoundAdditionalCopies": 10,
+    "remaining": 120,
+    "packSize": 5,
+    "maximumRemainingPacks": 24,
+    "tutorialGiftIncluded": 1,
+    "maximumPaidPacksWithGift": 23,
+    "goldAt250": 5750
+  },
+  "profiles": [
+    {
+      "id": "casual-free",
+      "legacyOwnedCopies": 151,
+      "expandedOwnedCopies": 161,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 32,
+      "goldRemaining": 20202,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "average-free",
+      "legacyOwnedCopies": 177,
+      "expandedOwnedCopies": 187,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52895,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "highly-active-free",
+      "legacyOwnedCopies": 177,
+      "expandedOwnedCopies": 187,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 6,
+      "goldRemaining": 106589,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "competitive-normal-ai-proxy",
+      "legacyOwnedCopies": 177,
+      "expandedOwnedCopies": 187,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 6,
+      "goldRemaining": 97817,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "rapid-surrender-attempt",
+      "legacyOwnedCopies": 30,
+      "expandedOwnedCopies": 40,
+      "uniqueCards": 30,
+      "paidPacks": 0,
+      "giftPacks": 0,
+      "completionDay": null,
+      "goldRemaining": 100,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "occasional-paying",
+      "legacyOwnedCopies": 327,
+      "expandedOwnedCopies": 337,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52895,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "regular-paying",
+      "legacyOwnedCopies": 552,
+      "expandedOwnedCopies": 562,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52895,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "collection-focused",
+      "legacyOwnedCopies": 677,
+      "expandedOwnedCopies": 687,
+      "uniqueCards": 150,
+      "paidPacks": 0,
+      "giftPacks": 1,
+      "completionDay": 1,
+      "goldRemaining": 112339,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "active-trader",
+      "legacyOwnedCopies": 176,
+      "expandedOwnedCopies": 186,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52945,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    }
+  ],
+  "tradingSupplyUnchanged": true,
+  "actualRevenue": 0,
+  "assumptions": "The legacy default remains available while starter activation is pending. V1.6A explicitly models the forty-copy proposal. Only subsequently earned/tradeable lots enter the trading model; these ten bound copies supply no tradable inventory."
+}

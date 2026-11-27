@@ -1,0 +1,202 @@
+{
+  "n001": {
+    "reason": "Fan-shaped expansion develops several lanes before expensive creatures arrive.",
+    "concern": "Power one is vulnerable; extra reach can outpace the power needed to retain it."
+  },
+  "n002": {
+    "reason": "A second accessible predecessor makes the Grey Wolf and Dire Wolf chain less draw-dependent.",
+    "concern": "An evolution still needs its predecessor in play; owning two does not bypass that condition."
+  },
+  "n003": {
+    "reason": "Forward, lateral and backward influence gives flexible opening development.",
+    "concern": "Two efficient rank-one bodies may encourage pure tempo over later evolutions."
+  },
+  "n004": {
+    "reason": "Two-step forward reach offers a different route toward contested columns.",
+    "concern": "Low power and spread tokens can leave distant positions difficult to defend."
+  },
+  "n005": {
+    "reason": "A second printed continuous support source makes formation-based play available.",
+    "concern": "Overlapping support can stack; loss of the supporting creature can reverse the apparent advantage."
+  },
+  "n006": {
+    "reason": "Accessible one-shot weakening offers an early tactical response rather than only raw power.",
+    "concern": "Two separate placement effects can combine against small enemies; original activation limits remain."
+  },
+  "n009": {
+    "reason": "Another low-requirement Caterpillar supports the Butterfly alternative.",
+    "concern": "A low-power predecessor and its evolution can be awkward when drawn in the wrong order."
+  },
+  "n010": {
+    "reason": "Forward and vertical influence develops neighboring lanes with a simple body.",
+    "concern": "Broad coverage needs placement planning; duplicate bodies do not supply a finisher."
+  },
+  "n013": {
+    "reason": "The rank-two Boar converts developed tokens into solid power and further expansion.",
+    "concern": "Two rank-two copies can be stranded if opening influence is badly positioned."
+  },
+  "n027": {
+    "reason": "An additional intermediate evolution supports multiple Cub lineages and the later Dire Wolf.",
+    "concern": "It cannot enter an empty tile and must not be treated as an opening card."
+  },
+  "m001": {
+    "reason": "A second rank-one predecessor supports the high-requirement Elder Dragon route.",
+    "concern": "The powerful evolution remains conditional and may be held until enough development exists."
+  },
+  "m002": {
+    "reason": "Another accessible predecessor gives the Royal Griffin route a reliable foundation.",
+    "concern": "The evolution support bonus can compound with a dense formation; it is not a free placement."
+  },
+  "m003": {
+    "reason": "A second Firebird enables the Phoenix alternative without adding another resurrection card.",
+    "concern": "Self-return still obeys evolution conditions, lineage limits and the existing resurrection safeguard."
+  },
+  "m004": {
+    "reason": "Rapid low-requirement expansion opens a route for the larger mythical creatures.",
+    "concern": "Power one trades durability for reach; duplicate openings can overextend."
+  },
+  "m005": {
+    "reason": "Its explicit rear-facing enhancement rewards understandable sequencing.",
+    "concern": "Repeated placement buffs can accumulate, but targets and per-instance limits remain unchanged."
+  },
+  "m007": {
+    "reason": "Weakening immunity provides a sturdy alternative to fragile expansion openers.",
+    "concern": "Defensive bodies can slow token development; immunity is not universal protection."
+  },
+  "m009": {
+    "reason": "A second forward weakening option gives beginners a readable contesting tool.",
+    "concern": "Stacked small reductions are efficient against low-power enemies but do not solve every defense."
+  },
+  "m010": {
+    "reason": "Another predecessor supports the Nine-Tailed Fox control alternative.",
+    "concern": "Return-to-hand effects require correct orientation and a legal evolution; they can help an opponent replay a placement ability."
+  },
+  "m013": {
+    "reason": "A useful rank-two body with an explicit enhancement links opening development to formation strength.",
+    "concern": "Needs developed tokens; repeated enhancement can concentrate too much investment in one lane."
+  },
+  "m015": {
+    "reason": "Rank-two long-range influence and an alternate Royal Griffin predecessor widen construction choices.",
+    "concern": "Drawing several higher-requirement bodies before an opener remains a risk."
+  },
+  "a001": {
+    "reason": "A second Wisp supports the low printed power of Arcane through efficient expansion.",
+    "concern": "It supplies access rather than combat power and is vulnerable if unsupported."
+  },
+  "a002": {
+    "reason": "Another placement-draw Familiar makes elemental dependencies easier to assemble.",
+    "concern": "Cycling can be efficient; each physical instance retains its existing single placement trigger and the deck remains fifteen cards."
+  },
+  "a003": {
+    "reason": "An accessible conditional body rewards having an established friendly formation.",
+    "concern": "Its condition includes itself but is not satisfied merely by owning more copies."
+  },
+  "a004": {
+    "reason": "A second Frost Sprite combines early weakening with the Ice Elemental prerequisite.",
+    "concern": "Power one is fragile and repeated weakening must meet actual target geometry."
+  },
+  "a005": {
+    "reason": "Another lateral weakening source also supports the Fire Elemental route.",
+    "concern": "The lateral target is easy to misread; it is not unrestricted removal."
+  },
+  "a006": {
+    "reason": "A second simple predecessor helps assemble the Water Elemental support formation.",
+    "concern": "The base body is weak and evolution timing can temporarily reduce available formation options."
+  },
+  "a007": {
+    "reason": "Another Earth Sprite supports the defensive Earth Elemental alternative.",
+    "concern": "The evolved immunity has a fortification condition; the extra copy does not supply that condition automatically."
+  },
+  "a009": {
+    "reason": "A second continuous forward weakening source expresses Arcane control.",
+    "concern": "Overlapping auras can be strong and disappear with their actual sources; immunity and targeting rules still apply."
+  },
+  "a014": {
+    "reason": "An extra rank-two placement reduction gives a useful developed-position payoff.",
+    "concern": "Several targets can be weakened at once; token requirements prevent it being a universal opener."
+  },
+  "a015": {
+    "reason": "A second Crystal Elemental supports deliberate adjacent formations rather than stronger printed statistics.",
+    "concern": "Overlapping continuous enhancement is a principal duplicate balance concern and must be checked in human play."
+  },
+  "u001": {
+    "reason": "Another Skeleton supplies the complete Warrior-to-Champion chain.",
+    "concern": "The chain consumes occupied predecessors; an evolution-heavy opening can still stall."
+  },
+  "u002": {
+    "reason": "An accessible resilient body supports steady development before death-related payoffs.",
+    "concern": "Its exact printed resilience is conditional; duplicate ownership is not an unconditional combat bonus."
+  },
+  "u003": {
+    "reason": "Another accessible spirit supports the Phantom route and an alternative to skeletal development.",
+    "concern": "The later overthrow effect needs its actual predecessor and legal orientation."
+  },
+  "u004": {
+    "reason": "A second death-trigger body supports sacrifice sequencing with existing replacement cards.",
+    "concern": "Repeated death effects can combine; no new resurrection or trigger allowance is granted."
+  },
+  "u005": {
+    "reason": "Another low-requirement body gives the death/sacrifice strategy early material.",
+    "concern": "Death payoffs require actual events; adding expendable creatures can reduce surviving board power."
+  },
+  "u007": {
+    "reason": "An additional spirit predecessor supports Phantom construction without relying on one identity.",
+    "concern": "It is still a low-tier body and does not bypass the evolution requirement."
+  },
+  "u009": {
+    "reason": "A second destruction-trigger weakening source provides a tactical sacrifice option.",
+    "concern": "Two death effects can combine against neighbors; careless sacrifices may lose board control."
+  },
+  "u011": {
+    "reason": "Another destruction-draw source helps recover cards while using replacement strategies.",
+    "concern": "Drawing is not automatic value if the available board cannot play the resulting hand."
+  },
+  "u015": {
+    "reason": "An extra Wight makes a developed-position payoff for actual friendly destruction available.",
+    "concern": "Its history-based bonus is bounded and can be weak without earlier losses."
+  },
+  "u027": {
+    "reason": "An extra intermediate Skeleton evolution supports more than one lineage.",
+    "concern": "Generated Skeletons and later evolution remain subject to their existing limits and board-space requirements."
+  },
+  "c001": {
+    "reason": "Another simple expansion/fortification opener starts the defensive formation.",
+    "concern": "Fortifying too early can leave insufficient forward development."
+  },
+  "c002": {
+    "reason": "A second diagonal expansion body supports both reach and the Scorpion evolution.",
+    "concern": "Its two forward diagonals reward careful placement and can leave the center undeveloped."
+  },
+  "c003": {
+    "reason": "Another direct expansion/fortification opener supports Iron Soldier construction.",
+    "concern": "Efficient repeated foundations can snowball a lane; printed values and copy limits remain unchanged."
+  },
+  "c004": {
+    "reason": "A second multi-direction opening body offsets the Kindred's more static defenders.",
+    "concern": "Low power means reach must be defended by later creatures."
+  },
+  "c005": {
+    "reason": "Another opening body can fortify an existing rear friendly position on placement.",
+    "concern": "The rear target must exist; it is not unrestricted reinforcement."
+  },
+  "c006": {
+    "reason": "A second death-trigger token source supports the salvage/replacement alternative.",
+    "concern": "The token gift requires an actual destruction event and legal friendly targets."
+  },
+  "c009": {
+    "reason": "Another mixed forward-development/vertical-fortification body reinforces formation choices.",
+    "concern": "Duplicated defensive patterns may stall progress if used without expansion support."
+  },
+  "c011": {
+    "reason": "Another placement repair option helps recover an explicitly weakened friendly formation.",
+    "concern": "The printed target condition matters; without a weakened ally it is mainly a weak body."
+  },
+  "c013": {
+    "reason": "An extra rank-two high-power foundation gives a clear midgame objective and Guardian predecessor.",
+    "concern": "Five printed power at rank two is an existing efficiency concern; duplicates may amplify it."
+  },
+  "c027": {
+    "reason": "A second intermediate evolution supports two Soldier lineages without duplicating a top-tier finisher.",
+    "concern": "It still needs Tin Soldier in play and does not keep all predecessor passives active."
+  }
+}
