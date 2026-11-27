@@ -62,7 +62,7 @@ export async function claimObjective(c:Client,playerId:string,id:string,referenc
   if(!row.completed_at)reject(409,"objective_incomplete","Complete the objective before claiming its reward.");
   const now=(await c.query("SELECT now() AS value")).rows[0].value;if(row.claim_until&&new Date(row.claim_until)<now)reject(409,"claim_expired","This objective's disclosed claim window has ended.");
   const active=await version(c,row.config_version),mastery=row.definition.reward.mastery?{[row.definition.kindred]:row.definition.reward.mastery}:{};
-  const result=await grantReward(c,playerId,"objective",`${row.objective_id}:${row.period_key}`,row.definition.reward,active,{mastery,referenceId,cardOrigin:row.definition.period==="permanent"?"achievement":"first_copy"});
+  const result=await grantReward(c,playerId,"objective",`${row.objective_id}:${row.period_key}`,row.definition.reward,active,{mastery,referenceId});
   await c.query("UPDATE kd.objective_progress SET claimed_at=now(),reward_id=$2 WHERE id=$1",[id,result.id]);return result;
 }
 export async function objectiveWindows(c:DB|Client,playerId:string,active:EconomyVersion,now:Date){
