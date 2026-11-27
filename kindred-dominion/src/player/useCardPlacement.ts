@@ -1,10 +1,10 @@
-import {useEffect,useRef,useState,type RefObject,type PointerEvent as ReactPointerEvent,type KeyboardEvent as ReactKeyboardEvent} from "react";
+import {useEffect,useLayoutEffect,useRef,useState,type RefObject,type PointerEvent as ReactPointerEvent,type KeyboardEvent as ReactKeyboardEvent} from "react";
 import {adjacentTile,floatingPosition,placementRequest,type Placement,type PlacementSource,type Point} from "./placement-input";
 
 type View = PlacementSource & {hand:{id:string;definitionId:string}[];configuration:{battlefield:{rows:number;cols:number}}};
 type Target = {row:number;col:number};
 type Visual = {card:string;definition:string;phase:"held"|"returning"|"placing"};
-type Options = {value:View;root:RefObject<HTMLElement|null>;blocked:boolean;onChoose:(placement:Placement)=>void;onCancel:()=>void;avoid?:RefObject<Target[]>};
+type Options = {value:View;root:RefObject<HTMLElement|null>;blocked:boolean;onChoose:(placement:Placement)=>void;onCancel:()=>void;avoid?:RefObject<Target[]>;motion?:{movement:boolean;multiplier:number}};
 
 export function useCardPlacement(options:Options){
   const latest=useRef(options);latest.current=options;
@@ -37,7 +37,8 @@ export function useCardPlacement(options:Options){
     show({...previous,phase});
     const element=destination?tile(destination.row,destination.col)?.querySelector<HTMLElement>(".player-tile-card-space"):hand(previous.card),rect=element?.getBoundingClientRect();
     if(rect&&floating.current){const width=Math.min(rect.width,rect.height*.75),x=rect.left+(rect.width-width)/2,y=rect.top+(rect.height-width*4/3)/2;floating.current.style.visibility="visible";floating.current.dataset.phase=phase;floating.current.style.transform=`translate3d(${x}px,${y}px,0) scale(${width/position.current.width})`;}
-    timer.current=setTimeout(()=>{show(null);timer.current=null;},matchMedia("(prefers-reduced-motion: reduce)").matches?0:220);
+    const motion=latest.current.motion;
+    timer.current=setTimeout(()=>{show(null);timer.current=null;},motion?motion.movement?220*motion.multiplier:0:matchMedia("(prefers-reduced-motion: reduce)").matches?0:220);
   }
   function cancel(announce=true){latest.current.onCancel();animateEnd("returning");if(announce)setMessage("Selection cancelled. Your hand and saved match are unchanged.");else setMessage("");}
   function select(card:string,at?:Point){
@@ -56,7 +57,7 @@ export function useCardPlacement(options:Options){
   }
   function hit(at:Point){const element=document.elementFromPoint(at.x,at.y)?.closest<HTMLElement>("[data-placement-row]");return element&&latest.current.root.current?.contains(element)?{row:Number(element.dataset.placementRow),col:Number(element.dataset.placementCol)}:null;}
   useEffect(()=>{schedule();},[visual?.card,visual?.phase]);
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     // Changed snapshots cannot inherit an uncommitted gesture. An accepted
     // placement may finish its short presentation animation over the new board.
     if(visualRef.current?.phase!=="placing")cancel(false);

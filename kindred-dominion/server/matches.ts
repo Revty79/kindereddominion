@@ -6,6 +6,7 @@ import type {ContentPack} from "../src/content/types";
 import {act,createMatch,legalPlays,validateDeck,placementIssue} from "../src/engine/game";
 import {placementDestinations,tacticalPreview} from "../src/ui/tactical-preview";
 import {PreviewCache} from "./preview-cache";
+import {readRecent,saveRecent} from "./presentation";
 import {resolutionBatch,resolutionCapture,visiblePosition,type AcceptedResolution,type ResolutionBatch} from "../src/ui/resolution-presentation";
 import {chooseComputerAction,computerMulligan} from "../src/engine/ai";
 import {powerTable} from "../src/engine/evaluation";
@@ -84,6 +85,10 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
   });
   app.get("/api/matches",async req=>{const a=await auth.actor(req),{rows}=await pool.query("SELECT id,status,version_id,engine_version,config,revision,result,testing_access,created_at,completed_at FROM kd.match WHERE player_id=$1 ORDER BY created_at DESC LIMIT 200",[a.id]);return {matches:rows};});
   app.get<{Params:{id:string}}>("/api/matches/:id",async req=>{const a=await auth.actor(req),row=await own(pool,uuid.parse(req.params.id),a.id);return {...publicMatch(row,await contentVersion(pool,row.version_id)),rewardSummary:(await pool.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[row.id,a.id])).rows[0]??null};});
+  app.get<{Params:{id:string}}>("/api/matches/:id/recent-presentation",async req=>{
+    const a=await auth.actor(req),query=z.object({revision:z.coerce.number().int().min(0).optional()}).strict().parse(req.query);
+    return readRecent(pool,uuid.parse(req.params.id),a.id,query.revision);
+  });
   app.post<{Params:{id:string}}>("/api/matches/:id/placement-options",async req=>{
     const a=await auth.actor(req),b=z.object({revision:z.number().int().min(0),card:z.string().min(1).max(80)}).strict().parse(req.body);
     await rateLimit(pool,"placement-preview:"+keyed(a.id,serverConfig),120,60);
@@ -126,7 +131,8 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
       const view=publicMatch({...row,state,revision},pack);
       const frames=presentationFrames(before,state,steps,library).filter(f=>f.changes.length).map(f=>{const view=publicMatch({...row,state:f.state,revision},pack,f.state,false);return {caption:f.caption,changes:f.changes,board:view.board,score:view.score};});
       let resolution:ResolutionBatch;try{resolution=resolutionBatch(id,row.revision,revision,resolutions,library,presentationTruncated);}catch{resolution={schema:1,id:`${id}:${revision}`,matchId:id,fromRevision:row.revision,toRevision:revision,events:[],truncated:true};}
-      return {...view,presentation:frames,resolution,rewardSummary:(await c.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[id,actor.id])).rows[0]??null};
+      const recentPresentation=await saveRecent(c,id,revision,resolution,resolutions);
+      return {...view,presentation:frames,resolution,recentPresentation,rewardSummary:(await c.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[id,actor.id])).rows[0]??null};
     });
   });
   app.get<{Params:{id:string}}>("/api/matches/:id/replay",async req=>{
