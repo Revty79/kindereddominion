@@ -412,6 +412,9 @@
         "modelOnly": true,
         "payers": 1,
         "grossSales": 15,
+        "netSales": 14.67,
+        "disputedSales": 0.03,
+        "disputeFees": 0.06,
         "processing": 1.035,
         "refunds": 0.3,
         "disputes": 0.09,
@@ -420,8 +423,8 @@
         "contributionAfterModeledCosts": -316.425,
         "breakEvenPayers": 25,
         "breakEvenMAU": 1216,
-        "illustrativeRecognizedRevenue": 10.9575,
-        "illustrativeDeferredConsideration": 3.6525
+        "illustrativeRecognizedRevenue": 11.0025,
+        "illustrativeDeferredConsideration": 3.6675
       }
     },
     {
@@ -444,6 +447,9 @@
         "modelOnly": true,
         "payers": 2.5,
         "grossSales": 37.5,
+        "netSales": 36.675,
+        "disputedSales": 0.075,
+        "disputeFees": 0.15,
         "processing": 2.5875000000000004,
         "refunds": 0.75,
         "disputes": 0.22499999999999998,
@@ -452,8 +458,8 @@
         "contributionAfterModeledCosts": -296.0625,
         "breakEvenPayers": 25,
         "breakEvenMAU": 487,
-        "illustrativeRecognizedRevenue": 27.393749999999997,
-        "illustrativeDeferredConsideration": 9.13125
+        "illustrativeRecognizedRevenue": 27.506249999999998,
+        "illustrativeDeferredConsideration": 9.16875
       }
     },
     {
@@ -476,6 +482,9 @@
         "modelOnly": true,
         "payers": 5,
         "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
         "processing": 5.175000000000001,
         "refunds": 1.5,
         "disputes": 0.44999999999999996,
@@ -484,8 +493,8 @@
         "contributionAfterModeledCosts": -262.125,
         "breakEvenPayers": 25,
         "breakEvenMAU": 244,
-        "illustrativeRecognizedRevenue": 54.787499999999994,
-        "illustrativeDeferredConsideration": 18.2625
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
       }
     },
     {
@@ -508,6 +517,9 @@
         "modelOnly": true,
         "payers": 2,
         "grossSales": 30,
+        "netSales": 29.34,
+        "disputedSales": 0.06,
+        "disputeFees": 0.12,
         "processing": 2.07,
         "refunds": 0.6,
         "disputes": 0.18,
@@ -516,8 +528,8 @@
         "contributionAfterModeledCosts": -302.85,
         "breakEvenPayers": 25,
         "breakEvenMAU": 1216,
-        "illustrativeRecognizedRevenue": 21.915,
-        "illustrativeDeferredConsideration": 7.305
+        "illustrativeRecognizedRevenue": 22.005,
+        "illustrativeDeferredConsideration": 7.335
       }
     },
     {
@@ -540,6 +552,9 @@
         "modelOnly": true,
         "payers": 5,
         "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
         "processing": 5.175000000000001,
         "refunds": 1.5,
         "disputes": 0.44999999999999996,
@@ -548,8 +563,8 @@
         "contributionAfterModeledCosts": -262.125,
         "breakEvenPayers": 25,
         "breakEvenMAU": 487,
-        "illustrativeRecognizedRevenue": 54.787499999999994,
-        "illustrativeDeferredConsideration": 18.2625
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
       }
     },
     {
@@ -572,6 +587,9 @@
         "modelOnly": true,
         "payers": 10,
         "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.6,
         "processing": 10.350000000000001,
         "refunds": 3,
         "disputes": 0.8999999999999999,
@@ -580,8 +598,8 @@
         "contributionAfterModeledCosts": -194.25,
         "breakEvenPayers": 25,
         "breakEvenMAU": 244,
-        "illustrativeRecognizedRevenue": 109.57499999999999,
-        "illustrativeDeferredConsideration": 36.525
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
       }
     },
     {
@@ -604,6 +622,9 @@
         "modelOnly": true,
         "payers": 10,
         "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.6,
         "processing": 10.350000000000001,
         "refunds": 3,
         "disputes": 0.8999999999999999,
@@ -612,8 +633,8 @@
         "contributionAfterModeledCosts": -194.25,
         "breakEvenPayers": 25,
         "breakEvenMAU": 1216,
-        "illustrativeRecognizedRevenue": 109.57499999999999,
-        "illustrativeDeferredConsideration": 36.525
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
       }
     },
     {
@@ -636,6 +657,9 @@
         "modelOnly": true,
         "payers": 25,
         "grossSales": 375,
+        "netSales": 366.75,
+        "disputedSales": 0.75,
+        "disputeFees": 1.5,
         "processing": 25.875,
         "refunds": 7.5,
         "disputes": 2.25,
@@ -644,8 +668,8 @@
         "contributionAfterModeledCosts": 9.375,
         "breakEvenPayers": 25,
         "breakEvenMAU": 487,
-        "illustrativeRecognizedRevenue": 273.9375,
-        "illustrativeDeferredConsideration": 91.3125
+        "illustrativeRecognizedRevenue": 275.0625,
+        "illustrativeDeferredConsideration": 91.6875
       }
     },
     {
@@ -668,6 +692,9 @@
         "modelOnly": true,
         "payers": 50,
         "grossSales": 750,
+        "netSales": 733.5,
+        "disputedSales": 1.5,
+        "disputeFees": 3,
         "processing": 51.75,
         "refunds": 15,
         "disputes": 4.5,
@@ -676,8 +703,8 @@
         "contributionAfterModeledCosts": 348.75,
         "breakEvenPayers": 25,
         "breakEvenMAU": 244,
-        "illustrativeRecognizedRevenue": 547.875,
-        "illustrativeDeferredConsideration": 182.625
+        "illustrativeRecognizedRevenue": 550.125,
+        "illustrativeDeferredConsideration": 183.375
       }
     },
     {
@@ -700,6 +727,9 @@
         "modelOnly": true,
         "payers": 40,
         "grossSales": 600,
+        "netSales": 586.8,
+        "disputedSales": 1.2,
+        "disputeFees": 2.4,
         "processing": 41.400000000000006,
         "refunds": 12,
         "disputes": 3.5999999999999996,
@@ -708,8 +738,8 @@
         "contributionAfterModeledCosts": 213,
         "breakEvenPayers": 25,
         "breakEvenMAU": 1216,
-        "illustrativeRecognizedRevenue": 438.29999999999995,
-        "illustrativeDeferredConsideration": 146.1
+        "illustrativeRecognizedRevenue": 440.09999999999997,
+        "illustrativeDeferredConsideration": 146.7
       }
     },
     {
@@ -732,6 +762,9 @@
         "modelOnly": true,
         "payers": 100,
         "grossSales": 1500,
+        "netSales": 1467,
+        "disputedSales": 3,
+        "disputeFees": 6,
         "processing": 103.5,
         "refunds": 30,
         "disputes": 9,
@@ -740,8 +773,8 @@
         "contributionAfterModeledCosts": 1027.5,
         "breakEvenPayers": 25,
         "breakEvenMAU": 487,
-        "illustrativeRecognizedRevenue": 1095.75,
-        "illustrativeDeferredConsideration": 365.25
+        "illustrativeRecognizedRevenue": 1100.25,
+        "illustrativeDeferredConsideration": 366.75
       }
     },
     {
@@ -764,6 +797,9 @@
         "modelOnly": true,
         "payers": 200,
         "grossSales": 3000,
+        "netSales": 2934,
+        "disputedSales": 6,
+        "disputeFees": 12,
         "processing": 207,
         "refunds": 60,
         "disputes": 18,
@@ -772,8 +808,8 @@
         "contributionAfterModeledCosts": 2385,
         "breakEvenPayers": 25,
         "breakEvenMAU": 244,
-        "illustrativeRecognizedRevenue": 2191.5,
-        "illustrativeDeferredConsideration": 730.5
+        "illustrativeRecognizedRevenue": 2200.5,
+        "illustrativeDeferredConsideration": 733.5
       }
     }
   ],

@@ -1,0 +1,730 @@
+{
+  "schema": 1,
+  "modelOnly": true,
+  "actualSales": 0,
+  "actualRevenue": 0,
+  "approvedPermanentPolicy": false,
+  "projectionCurrency": "USD",
+  "packages": [
+    {
+      "id": "aether-500",
+      "usdCents": 499,
+      "aether": 500,
+      "centsPerAether": 0.998
+    },
+    {
+      "id": "aether-1000",
+      "usdCents": 999,
+      "aether": 1000,
+      "centsPerAether": 0.999
+    },
+    {
+      "id": "aether-2100",
+      "usdCents": 1999,
+      "aether": 2100,
+      "centsPerAether": 0.9519047619047619
+    },
+    {
+      "id": "aether-5500",
+      "usdCents": 4999,
+      "aether": 5500,
+      "centsPerAether": 0.9089090909090909
+    },
+    {
+      "id": "aether-11500",
+      "usdCents": 9999,
+      "aether": 11500,
+      "centsPerAether": 0.8694782608695653
+    }
+  ],
+  "additionalProducts": [
+    {
+      "id": "founding-additional",
+      "aether": 199,
+      "quantity": 1,
+      "type": "booster",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-all-extra-set",
+      "aether": 2999,
+      "quantity": 1,
+      "type": "bundle",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-nature-additional",
+      "aether": 249,
+      "quantity": 1,
+      "type": "booster",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-nature-extra-set",
+      "aether": 999,
+      "quantity": 1,
+      "type": "bundle",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-mythical-additional",
+      "aether": 249,
+      "quantity": 1,
+      "type": "booster",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-mythical-extra-set",
+      "aether": 999,
+      "quantity": 1,
+      "type": "bundle",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-arcane-additional",
+      "aether": 249,
+      "quantity": 1,
+      "type": "booster",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-arcane-extra-set",
+      "aether": 999,
+      "quantity": 1,
+      "type": "bundle",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-undead-additional",
+      "aether": 249,
+      "quantity": 1,
+      "type": "booster",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-undead-extra-set",
+      "aether": 999,
+      "quantity": 1,
+      "type": "bundle",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-constructs-additional",
+      "aether": 249,
+      "quantity": 1,
+      "type": "booster",
+      "mode": "additional"
+    },
+    {
+      "id": "founding-constructs-extra-set",
+      "aether": 999,
+      "quantity": 1,
+      "type": "bundle",
+      "mode": "additional"
+    }
+  ],
+  "additionalSingles": {
+    "common": 20,
+    "uncommon": 40,
+    "rare": 80,
+    "epic": 160,
+    "legendary": 320
+  },
+  "packageOutlays": [
+    {
+      "requiredAether": 199,
+      "minimumInitialTestPackageCents": 499,
+      "deliveredAether": 500,
+      "remainingAether": 301,
+      "packages": {
+        "aether-500": 1
+      },
+      "note": "Initial package outlay differs from proportional units consumed. Earned/promotional Aether has no purchase-price assumption or cash-out value."
+    },
+    {
+      "requiredAether": 249,
+      "minimumInitialTestPackageCents": 499,
+      "deliveredAether": 500,
+      "remainingAether": 251,
+      "packages": {
+        "aether-500": 1
+      },
+      "note": "Initial package outlay differs from proportional units consumed. Earned/promotional Aether has no purchase-price assumption or cash-out value."
+    },
+    {
+      "requiredAether": 999,
+      "minimumInitialTestPackageCents": 998,
+      "deliveredAether": 1000,
+      "remainingAether": 1,
+      "packages": {
+        "aether-500": 2
+      },
+      "note": "Initial package outlay differs from proportional units consumed. Earned/promotional Aether has no purchase-price assumption or cash-out value."
+    },
+    {
+      "requiredAether": 2999,
+      "minimumInitialTestPackageCents": 2994,
+      "deliveredAether": 3000,
+      "remainingAether": 1,
+      "packages": {
+        "aether-500": 6
+      },
+      "note": "Initial package outlay differs from proportional units consumed. Earned/promotional Aether has no purchase-price assumption or cash-out value."
+    },
+    {
+      "requiredAether": 5998,
+      "minimumInitialTestPackageCents": 5498,
+      "deliveredAether": 6000,
+      "remainingAether": 2,
+      "packages": {
+        "aether-5500": 1,
+        "aether-500": 1
+      },
+      "note": "Initial package outlay differs from proportional units consumed. Earned/promotional Aether has no purchase-price assumption or cash-out value."
+    }
+  ],
+  "cashFixedProducts": [
+    {
+      "id": "cash-founding-all-extra-set",
+      "usdCents": 2999,
+      "components": [
+        "founding-all-extra-set"
+      ]
+    },
+    {
+      "id": "cash-founding-nature-extra-set",
+      "usdCents": 999,
+      "components": [
+        "founding-nature-extra-set"
+      ]
+    },
+    {
+      "id": "cash-founding-mythical-extra-set",
+      "usdCents": 999,
+      "components": [
+        "founding-mythical-extra-set"
+      ]
+    },
+    {
+      "id": "cash-founding-arcane-extra-set",
+      "usdCents": 999,
+      "components": [
+        "founding-arcane-extra-set"
+      ]
+    },
+    {
+      "id": "cash-founding-undead-extra-set",
+      "usdCents": 999,
+      "components": [
+        "founding-undead-extra-set"
+      ]
+    },
+    {
+      "id": "cash-founding-constructs-extra-set",
+      "usdCents": 999,
+      "components": [
+        "founding-constructs-extra-set"
+      ]
+    }
+  ],
+  "finance": {
+    "assumptions": {
+      "mau": 100,
+      "conversion": 0.05,
+      "spend": 15,
+      "ordersPerPayer": 2,
+      "feeRate": 0.029,
+      "feePerOrder": 0.3,
+      "refundRate": 0.02,
+      "disputeRate": 0.002,
+      "disputeCost": 15,
+      "hosting": 30,
+      "content": 200,
+      "operations": 100,
+      "redemptionRate": 0.75
+    },
+    "baseline": {
+      "modelOnly": true,
+      "payers": 5,
+      "grossSales": 75,
+      "netSales": 73.35,
+      "disputedSales": 0.15,
+      "disputeFees": 0.3,
+      "processing": 5.175000000000001,
+      "refunds": 1.5,
+      "disputes": 0.44999999999999996,
+      "cashReceipts": 67.875,
+      "fixedCosts": 330,
+      "contributionAfterModeledCosts": -262.125,
+      "breakEvenPayers": 25,
+      "breakEvenMAU": 487,
+      "illustrativeRecognizedRevenue": 55.012499999999996,
+      "illustrativeDeferredConsideration": 18.3375
+    },
+    "smallCommunities": [
+      {
+        "mau": 25,
+        "conversion": 0.02,
+        "modelOnly": true,
+        "payers": 0.5,
+        "grossSales": 7.5,
+        "netSales": 7.335,
+        "disputedSales": 0.015,
+        "disputeFees": 0.03,
+        "processing": 0.5175,
+        "refunds": 0.15,
+        "disputes": 0.045,
+        "cashReceipts": 6.7875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -323.2125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 1216,
+        "illustrativeRecognizedRevenue": 5.50125,
+        "illustrativeDeferredConsideration": 1.83375
+      },
+      {
+        "mau": 25,
+        "conversion": 0.05,
+        "modelOnly": true,
+        "payers": 1.25,
+        "grossSales": 18.75,
+        "netSales": 18.3375,
+        "disputedSales": 0.0375,
+        "disputeFees": 0.075,
+        "processing": 1.2937500000000002,
+        "refunds": 0.375,
+        "disputes": 0.11249999999999999,
+        "cashReceipts": 16.96875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -313.03125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 13.753124999999999,
+        "illustrativeDeferredConsideration": 4.584375
+      },
+      {
+        "mau": 25,
+        "conversion": 0.1,
+        "modelOnly": true,
+        "payers": 2.5,
+        "grossSales": 37.5,
+        "netSales": 36.675,
+        "disputedSales": 0.075,
+        "disputeFees": 0.15,
+        "processing": 2.5875000000000004,
+        "refunds": 0.75,
+        "disputes": 0.22499999999999998,
+        "cashReceipts": 33.9375,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -296.0625,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 244,
+        "illustrativeRecognizedRevenue": 27.506249999999998,
+        "illustrativeDeferredConsideration": 9.16875
+      },
+      {
+        "mau": 50,
+        "conversion": 0.02,
+        "modelOnly": true,
+        "payers": 1,
+        "grossSales": 15,
+        "netSales": 14.67,
+        "disputedSales": 0.03,
+        "disputeFees": 0.06,
+        "processing": 1.035,
+        "refunds": 0.3,
+        "disputes": 0.09,
+        "cashReceipts": 13.575,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -316.425,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 1216,
+        "illustrativeRecognizedRevenue": 11.0025,
+        "illustrativeDeferredConsideration": 3.6675
+      },
+      {
+        "mau": 50,
+        "conversion": 0.05,
+        "modelOnly": true,
+        "payers": 2.5,
+        "grossSales": 37.5,
+        "netSales": 36.675,
+        "disputedSales": 0.075,
+        "disputeFees": 0.15,
+        "processing": 2.5875000000000004,
+        "refunds": 0.75,
+        "disputes": 0.22499999999999998,
+        "cashReceipts": 33.9375,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -296.0625,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 27.506249999999998,
+        "illustrativeDeferredConsideration": 9.16875
+      },
+      {
+        "mau": 50,
+        "conversion": 0.1,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 244,
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
+      },
+      {
+        "mau": 100,
+        "conversion": 0.02,
+        "modelOnly": true,
+        "payers": 2,
+        "grossSales": 30,
+        "netSales": 29.34,
+        "disputedSales": 0.06,
+        "disputeFees": 0.12,
+        "processing": 2.07,
+        "refunds": 0.6,
+        "disputes": 0.18,
+        "cashReceipts": 27.15,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -302.85,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 1216,
+        "illustrativeRecognizedRevenue": 22.005,
+        "illustrativeDeferredConsideration": 7.335
+      },
+      {
+        "mau": 100,
+        "conversion": 0.05,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
+      },
+      {
+        "mau": 100,
+        "conversion": 0.1,
+        "modelOnly": true,
+        "payers": 10,
+        "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.6,
+        "processing": 10.350000000000001,
+        "refunds": 3,
+        "disputes": 0.8999999999999999,
+        "cashReceipts": 135.75,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -194.25,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 244,
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
+      },
+      {
+        "mau": 500,
+        "conversion": 0.02,
+        "modelOnly": true,
+        "payers": 10,
+        "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.6,
+        "processing": 10.350000000000001,
+        "refunds": 3,
+        "disputes": 0.8999999999999999,
+        "cashReceipts": 135.75,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -194.25,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 1216,
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
+      },
+      {
+        "mau": 500,
+        "conversion": 0.05,
+        "modelOnly": true,
+        "payers": 25,
+        "grossSales": 375,
+        "netSales": 366.75,
+        "disputedSales": 0.75,
+        "disputeFees": 1.5,
+        "processing": 25.875,
+        "refunds": 7.5,
+        "disputes": 2.25,
+        "cashReceipts": 339.375,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 9.375,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 275.0625,
+        "illustrativeDeferredConsideration": 91.6875
+      },
+      {
+        "mau": 500,
+        "conversion": 0.1,
+        "modelOnly": true,
+        "payers": 50,
+        "grossSales": 750,
+        "netSales": 733.5,
+        "disputedSales": 1.5,
+        "disputeFees": 3,
+        "processing": 51.75,
+        "refunds": 15,
+        "disputes": 4.5,
+        "cashReceipts": 678.75,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 348.75,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 244,
+        "illustrativeRecognizedRevenue": 550.125,
+        "illustrativeDeferredConsideration": 183.375
+      },
+      {
+        "mau": 2000,
+        "conversion": 0.02,
+        "modelOnly": true,
+        "payers": 40,
+        "grossSales": 600,
+        "netSales": 586.8,
+        "disputedSales": 1.2,
+        "disputeFees": 2.4,
+        "processing": 41.400000000000006,
+        "refunds": 12,
+        "disputes": 3.5999999999999996,
+        "cashReceipts": 543,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 213,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 1216,
+        "illustrativeRecognizedRevenue": 440.09999999999997,
+        "illustrativeDeferredConsideration": 146.7
+      },
+      {
+        "mau": 2000,
+        "conversion": 0.05,
+        "modelOnly": true,
+        "payers": 100,
+        "grossSales": 1500,
+        "netSales": 1467,
+        "disputedSales": 3,
+        "disputeFees": 6,
+        "processing": 103.5,
+        "refunds": 30,
+        "disputes": 9,
+        "cashReceipts": 1357.5,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 1027.5,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 1100.25,
+        "illustrativeDeferredConsideration": 366.75
+      },
+      {
+        "mau": 2000,
+        "conversion": 0.1,
+        "modelOnly": true,
+        "payers": 200,
+        "grossSales": 3000,
+        "netSales": 2934,
+        "disputedSales": 6,
+        "disputeFees": 12,
+        "processing": 207,
+        "refunds": 60,
+        "disputes": 18,
+        "cashReceipts": 2715,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 2385,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 244,
+        "illustrativeRecognizedRevenue": 2200.5,
+        "illustrativeDeferredConsideration": 733.5
+      }
+    ],
+    "spendSensitivity": [
+      {
+        "spend": 5,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 25,
+        "netSales": 24.45,
+        "disputedSales": 0.05,
+        "disputeFees": 0.3,
+        "processing": 3.725,
+        "refunds": 0.5,
+        "disputes": 0.35,
+        "cashReceipts": 20.424999999999997,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -309.575,
+        "breakEvenPayers": 81,
+        "breakEvenMAU": 1616,
+        "illustrativeRecognizedRevenue": 18.3375,
+        "illustrativeDeferredConsideration": 6.1125
+      },
+      {
+        "spend": 15,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
+      },
+      {
+        "spend": 30,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.3,
+        "processing": 7.3500000000000005,
+        "refunds": 3,
+        "disputes": 0.6,
+        "cashReceipts": 139.05,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -190.95,
+        "breakEvenPayers": 12,
+        "breakEvenMAU": 238,
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
+      }
+    ],
+    "engagementSensitivity": [
+      {
+        "redemptionRate": 0.25,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 18.3375,
+        "illustrativeDeferredConsideration": 55.012499999999996
+      },
+      {
+        "redemptionRate": 0.5,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 36.675,
+        "illustrativeDeferredConsideration": 36.675
+      },
+      {
+        "redemptionRate": 0.75,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
+      },
+      {
+        "redemptionRate": 1,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 73.35,
+        "illustrativeDeferredConsideration": 0
+      }
+    ],
+    "pricingRelationship": "Each Aether package discloses its own cents-per-unit rate. Cash singles are not generated from conflicting provisional cash/Aether targets.",
+    "actualRevenue": 0,
+    "modelOnly": true,
+    "approvedPermanentPolicy": false,
+    "limitations": [
+      "No simulated transaction is actual revenue or cash receipts.",
+      "Processing/dispute costs are configurable estimates, not a current fee quote.",
+      "Redemption allocation is illustrative; final accounting revenue recognition requires an approved policy.",
+      "Player conversion, purchase frequency and spending are hypothetical and may be zero.",
+      "Hosting, artwork/content and operations are independent owner-supplied assumptions."
+    ]
+  },
+  "firstCopyBoundary": {
+    "starter": 30,
+    "remaining": 120,
+    "guaranteedNewBoosterSize": 5,
+    "totalRemainingPacks": 24,
+    "tutorialGiftIncluded": 1,
+    "paidPacksWithGift": 23,
+    "goldAt250WithGift": 5750
+  },
+  "unresolvedPolicy": [
+    "Earlier provisional cash singles and Aether singles differ. No cash singles were silently added to the provider catalog.",
+    "Randomized sandbox products remain ineligible for live sale.",
+    "Package rates and bundle relationships are provisional; financial outputs do not approve permanent pricing or accounting policy.",
+    "Two additional founding sets provide 300 extra copies after the first 150, subject to the established format's copy limits. They do not change card statistics."
+  ]
+}

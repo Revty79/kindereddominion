@@ -9,7 +9,7 @@ const privateFiles=tracked.filter(file=>/(^|\/)(\.local|backups)(\/|$)|\.(dump|b
 if(privateFiles.length)throw Error("Private configuration or backup files are tracked by Git.");
 const values=[];
 for(const file of ["server/.env.local",process.env.KINDRED_ENV_FILE].filter(Boolean)){
-  try{const env=parseEnv(await fs.readFile(file,"utf8"));for(const key of ["PGPASSWORD","SESSION_SECRET"])if(env[key]?.length>=8&&!env[key].startsWith("replace-"))values.push(env[key]);}
+  try{const env=parseEnv(await fs.readFile(file,"utf8"));for(const key of ["PGPASSWORD","SESSION_SECRET","STRIPE_SECRET_KEY","STRIPE_WEBHOOK_SECRET","STRIPE_CATALOG_SECRET_KEY"])if(env[key]?.length>=8&&!env[key].startsWith("replace-"))values.push(env[key]);}
   catch(error){if(error.code!=="ENOENT")throw error;}
 }
 async function files(dir){const result=[];for(const entry of await fs.readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())result.push(...await files(file));else result.push(file);}return result;}

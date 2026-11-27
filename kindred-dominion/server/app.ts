@@ -1,3 +1,4 @@
+import {commerceAdministration} from "./commerce-administration";
 import {commercialFinancialRoutes} from "./commerce-financial-routes";
 import Fastify from "fastify";
 import cookie from "@fastify/cookie";
@@ -58,7 +59,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   notificationRoutes(app,pool,auth);
   tradingSafetyRoutes(app,pool,config,auth);
-  commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);
+  commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);
   await stripeWebhookRoutes(app,pool,config);
   let stopMaintenance:undefined|(()=>Promise<void>);
   let stopCommerce:undefined|(()=>Promise<void>);

@@ -1,0 +1,7 @@
+import {describe,it,expect} from "vitest";
+import {DEFAULT_FINANCE,financialSensitivity,projectFinance} from "../server/commercial-model";
+describe("Coherent commercial projections",()=>{
+ it("separates returned sales from dispute expenses and hypothetical recognition",()=>{const base=projectFinance(DEFAULT_FINANCE),costly=projectFinance({...DEFAULT_FINANCE,disputeCost:100});expect(base.netSales).toBe(base.grossSales-base.refunds-base.disputedSales);expect(costly.netSales).toBe(base.netSales);expect(costly.illustrativeRecognizedRevenue).toBe(base.illustrativeRecognizedRevenue);expect(costly.cashReceipts).toBeLessThan(base.cashReceipts);expect(base.illustrativeRecognizedRevenue+base.illustrativeDeferredConsideration).toBeCloseTo(base.netSales);expect(base.cashReceipts).toBeCloseTo(base.netSales-base.processing-base.disputeFees);});
+ it("includes small communities, zero conversion and configurable break-even without claiming actual revenue",()=>{const model=financialSensitivity({...DEFAULT_FINANCE,conversion:0});expect(model.baseline.grossSales).toBe(0);expect(model.baseline.breakEvenMAU).toBeNull();expect(model.actualRevenue).toBe(0);expect(model.approvedPermanentPolicy).toBe(false);expect(model.smallCommunities.some(s=>s.mau===25)).toBe(true);expect(model.smallCommunities.some(s=>s.mau===50)).toBe(true);});
+ it("rejects invalid money, rates and nonfinite modeling inputs",()=>{for(const change of [{feeRate:2},{conversion:-1},{mau:1.5},{spend:Infinity},{hosting:-1}])expect(()=>projectFinance({...DEFAULT_FINANCE,...change})).toThrow();});
+});

@@ -2,13 +2,9 @@ import {scenarios,simulateEconomy,type EconomyScenario} from "./economy-model";
 import {DEFAULT_SHOP,rarities} from "../server/shop-rules";
 import {ownerContent} from "../src/content/owner";
 import {drawPack,seededRandom} from "../server/shop-draw";
-export type Finance={mau:number;conversion:number;spend:number;ordersPerPayer:number;feeRate:number;feePerOrder:number;refundRate:number;disputeRate:number;disputeCost:number;hosting:number;content:number;operations:number;redemptionRate:number};
-export function projectFinance(a:Finance){
- for(const [key,value]of Object.entries(a))if(!Number.isFinite(value)||value<0)throw Error("Invalid financial assumption: "+key);
- for(const key of ["conversion","feeRate","refundRate","disputeRate","redemptionRate"] as const)if(a[key]>1)throw Error("Rates must be between zero and one.");
- const payers=a.mau*a.conversion,grossSales=payers*a.spend,orders=payers*a.ordersPerPayer,processing=grossSales*a.feeRate+orders*a.feePerOrder,refunds=grossSales*a.refundRate,disputes=grossSales*a.disputeRate+orders*a.disputeRate*a.disputeCost,cashReceipts=grossSales-processing-refunds-disputes,fixed=a.hosting+a.content+a.operations,perPayer=a.spend*(1-a.feeRate-a.refundRate-a.disputeRate)-a.ordersPerPayer*(a.feePerOrder+a.disputeRate*a.disputeCost);
- return {modelOnly:true,payers,grossSales,processing,refunds,disputes,cashReceipts,fixedCosts:fixed,contributionAfterModeledCosts:cashReceipts-fixed,breakEvenPayers:perPayer>0?Math.ceil(fixed/perPayer):null,breakEvenMAU:perPayer>0&&a.conversion>0?Math.ceil(fixed/perPayer/a.conversion):null,illustrativeRecognizedRevenue:(grossSales-refunds-disputes)*a.redemptionRate,illustrativeDeferredConsideration:(grossSales-refunds-disputes)*(1-a.redemptionRate)};
-}
+import {projectFinance,type Finance} from "../server/commercial-model";
+export {projectFinance};
+export type {Finance};
 const paying:EconomyScenario[]=[{...scenarios[1],id:"occasional-paying"},{...scenarios[1],id:"regular-paying"},{...scenarios[2],id:"collection-focused-paying"}];
 export function shopSimulation(){
  const rules=DEFAULT_SHOP,pack=ownerContent(),first=rules.products.find(p=>p.id==="founding-first")!,additional=rules.products.find(p=>p.id==="founding-additional")!,counts=Object.fromEntries(rarities.map(r=>[r,0])),random=seededRandom(1504),firstCopyTrials=[];
