@@ -1,3 +1,4 @@
+import {lockPlayer} from "./economy-assets";
 import crypto from "node:crypto";
 import {z} from "zod";
 import type {FastifyInstance} from "fastify";
@@ -9,7 +10,7 @@ import {reject} from "./errors";
 import {projectCommerceNotifications} from "./commerce-fulfillment";
 // trade_event is the durable outbox. Projection never participates in asset settlement.
 export async function projectNotifications(pool:DB,playerId:string){return transaction(pool,async c=>{
- await c.query("SET LOCAL lock_timeout='500ms'");
+ await c.query("SET LOCAL lock_timeout='500ms'");await lockPlayer(c,playerId);
  const events=(await c.query(`SELECT e.*,v.sequence FROM kd.trade_event e JOIN kd.trade_offer_version v ON v.id=e.version_id
  WHERE (v.author_id=$1 OR v.recipient_id=$1) AND(v.consented_at IS NOT NULL OR v.author_id=$1)
  AND ((e.type IN('submitted','countered','cancelled') AND v.recipient_id=$1 AND v.consented_at IS NOT NULL)

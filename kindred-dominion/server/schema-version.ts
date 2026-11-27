@@ -1,1 +1,1 @@
-export const REQUIRED_MIGRATION="1796900000000_commerce_settlement.cjs";
+export const REQUIRED_MIGRATION="1797100000000_financial_observation_versions.cjs";

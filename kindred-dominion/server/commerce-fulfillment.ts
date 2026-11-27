@@ -1,3 +1,4 @@
+import {retainedAssetsApproved,explicitCommercialHold} from "./commerce-financial";
 import crypto from "node:crypto";
 import type {DB} from "./db";
 import {transaction} from "./db";
@@ -24,7 +25,7 @@ async function pinnedState(c:Client,order:any):Promise<ShopState>{const economy=
 export async function fulfillCommercialOrder(pool:DB,id:string,eventId:string,config:BackendConfig,afterComponent?:(index:number)=>Promise<void>){if(config.environment==="prod"||!config.economyEnabled)reject(403,"commercial_fulfillment_disabled","Sandbox fulfillment is disabled in this environment.");const identity=await commercialOrder(pool,id);return transaction(pool,async c=>{
  await lockPlayer(c,identity.player_id);const order=await commercialOrder(c,id);await c.query("SELECT id FROM kd.commerce_order WHERE id=$1 FOR UPDATE",[id]);const prior=(await c.query("SELECT result FROM kd.commerce_fulfillment WHERE order_id=$1",[id])).rows[0];if(prior)return {...prior.result,replayed:true};await commerceAccount(c,order.player_id);
  if(order.environment!==await assetEnvironment(c)||!order.sandbox||order.payment_state!=="paid"||!(await c.query("SELECT order_id FROM kd.commerce_payment WHERE order_id=$1 AND payment_id=$2",[id,order.payment_id])).rowCount)reject(409,"payment_verification_required","The original sandbox payment must be independently verified before delivery.");
- if(order.refunded_minor>0||order.dispute_state!=="none") {await c.query("UPDATE kd.commerce_order SET fulfillment_state='needs_review',error_code='commercial_review_required',updated_at=now() WHERE id=$1",[id]);return {orderId:id,needsReview:true};}
+ const pendingRefund=(await c.query("SELECT id FROM kd.commerce_refund_request WHERE order_id=$1 AND state IN('requested','pending','ambiguous') LIMIT 1",[id])).rowCount;if(await explicitCommercialHold(c,id)||pendingRefund||((order.refunded_minor>0||order.dispute_state!=="none")&&!await retainedAssetsApproved(c,order))) {await c.query("UPDATE kd.commerce_order SET fulfillment_state='needs_review',error_code='commercial_review_required',updated_at=now() WHERE id=$1",[id]);return {orderId:id,needsReview:true};}
  const economy=(await c.query("SELECT document,digest FROM kd.configuration_version WHERE id=$1",[order.economy_version])).rows[0];if(!economy||economyDigest(economy.document)!==economy.digest)reject(503,"commercial_economy_integrity","The pinned economy requires investigation.");
  const money=await moveCurrency(c,order.player_id,"commercial-credit:"+id,order.snapshot.product.aether?{aether:order.snapshot.product.aether}:{},{type:"commercial-sandbox",reason:order.snapshot.product.name,origin:"sandbox",configVersion:order.economy_version,referenceId:id},economySchema.parse(economy.document)),components:any[]=[];
  for(let index=0;index<order.snapshot.components.length;index++){const component=order.snapshot.components[index],state=await pinnedState(c,order),product=productSchema.parse(component.definition),eligible=component.cardIds.map((cardId:string)=>state.pack.cards.find(card=>card.id===cardId));if(eligible.some((card:any)=>!card))reject(409,"commercial_component_missing","An originally promised card definition is unavailable; no partial grant was accepted.");
@@ -38,7 +39,7 @@ export async function fulfillCommercialOrder(pool:DB,id:string,eventId:string,co
  });}
 
 // The immutable fulfillment receipt is the outbox; notification failure cannot undo assets.
-export async function projectCommerceNotifications(pool:DB,playerId:string){return pool.query(`INSERT INTO kd.commerce_notification(id,player_id,order_id,event_id,kind,title,body,created_at)
+export async function projectCommerceNotifications(pool:DB,playerId:string){return transaction(pool,async c=>{await lockPlayer(c,playerId);return c.query(`INSERT INTO kd.commerce_notification(id,player_id,order_id,event_id,kind,title,body,created_at)
  SELECT gen_random_uuid(),o.player_id,o.id,f.event_id,'commercial-delivery','Sandbox purchase delivered','Your verified sandbox purchase is available. Open the permanent order receipt.',f.created_at
  FROM kd.commerce_fulfillment f JOIN kd.commerce_order o ON o.id=f.order_id WHERE o.player_id=$1
- AND NOT EXISTS(SELECT 1 FROM kd.commerce_notification n WHERE n.player_id=$1 AND n.order_id=o.id AND n.kind='commercial-delivery') ORDER BY f.created_at,o.id LIMIT 100 ON CONFLICT DO NOTHING`,[playerId]);}
+ AND NOT EXISTS(SELECT 1 FROM kd.commerce_notification n WHERE n.player_id=$1 AND n.order_id=o.id AND n.kind='commercial-delivery') ORDER BY f.created_at,o.id LIMIT 100 ON CONFLICT DO NOTHING`,[playerId]);});}
