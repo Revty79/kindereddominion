@@ -45,7 +45,7 @@ def choose(host, approvals, requested=None, resume=False):
 
 
 def main(argv, *, library, state, trust, current, host_factory=Host, approvals_factory=Approvals):
-    parser = argparse.ArgumentParser(description="One-command approved Kindred Dominion updates")
+    parser = argparse.ArgumentParser(description="One-command approved Kindred Dominion updates", add_help=False)
     parser.add_argument("command", choices=("update", "status", "backup", "rollback", "start", "stop", "restart"))
     # Only parse update flags here; recovery/status arguments retain existing CLI.
     args, rest = parser.parse_known_args(argv)

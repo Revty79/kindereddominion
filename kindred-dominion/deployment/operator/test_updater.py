@@ -92,6 +92,17 @@ class ApprovalTests(unittest.TestCase):
     def test_redirects_are_not_followed(self):
         with self.assertRaises(OperatorError): release.NoRedirect().redirect_request(None, None, None, None, None, None)
 
+    def test_explicit_old_release_checks_exact_sha_outside_discovery_window(self):
+        normal_get = self.get
+        class OldReleaseAPI:
+            def get(inner, suffix):
+                if "/workflows/" in suffix and "head_sha=" + NEW not in suffix:
+                    return {"workflow_runs": []}
+                return normal_get(suffix)
+        self.verifier.api = OldReleaseAPI()
+        with self.assertRaises(OperatorError): self.verifier.select([NEW])
+        self.assertEqual(self.verifier.verify(NEW)["revision"], NEW)
+
 
 class InstallationTests(unittest.TestCase):
     @classmethod

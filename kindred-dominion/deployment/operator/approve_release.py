@@ -25,7 +25,7 @@ def main():
     if subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip() != sha:
         raise OperatorError("Approval checkout does not match the immutable dispatch revision.")
     approvals = Approvals(policy, lambda commit, path: git_blob(repo, commit, path))
-    ci = approvals.runs("kindred-ci.yml").get(sha)
+    ci = approvals.runs("kindred-ci.yml", sha).get(sha)
     if not approvals.successful(ci, sha, "kindred-ci.yml", "push", "validate"):
         raise OperatorError("Exact source CI is missing, pending or unsuccessful. Wait for Validate Kindred source to succeed, then rerun this approval workflow.")
     print(json.dumps({"approvedRevision": sha, "sourceCiRun": ci["id"], "sourceCiAttempt": ci.get("run_attempt", 1), "deploymentPerformed": False}))

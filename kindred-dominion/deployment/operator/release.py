@@ -46,12 +46,13 @@ class Approvals:
     def __init__(self, policy, blob, api=None):
         self.policy, self.blob, self.api = policy, blob, api or GitHub()
 
-    def runs(self, workflow):
+    def runs(self, workflow, sha=None):
         # Bound lookup; older releases require a new owner approval, never an
         # unbounded API scan or an unsigned fallback.
         runs = []
         for page in (1, 2):
-            batch = self.api.get("actions/workflows/" + workflow + "/runs?branch=main&per_page=100&page=" + str(page)).get("workflow_runs", [])
+            suffix = "&head_sha=" + revision(sha) if sha else ""
+            batch = self.api.get("actions/workflows/" + workflow + "/runs?branch=main&per_page=100&page=" + str(page) + suffix).get("workflow_runs", [])
             runs.extend(batch)
             if len(batch) < 100:
                 break
@@ -75,8 +76,8 @@ class Approvals:
 
     def verify(self, sha, approval=None, ci=None):
         revision(sha)
-        approval = approval if approval is not None else self.runs("kindred-release.yml").get(sha)
-        ci = ci if ci is not None else self.runs("kindred-ci.yml").get(sha)
+        approval = approval if approval is not None else self.runs("kindred-release.yml", sha).get(sha)
+        ci = ci if ci is not None else self.runs("kindred-ci.yml", sha).get(sha)
         if not self.successful(approval, sha, "kindred-release.yml", "workflow_dispatch", "approve", True) or not self.successful(ci, sha, "kindred-ci.yml", "push", "validate"):
             raise OperatorError(NO_RELEASE)
         return {"revision": sha, "repositoryId": self.policy["repositoryId"], "approvalRun": approval["id"], "approvalAttempt": approval.get("run_attempt", 1), "ciRun": ci["id"], "ciAttempt": ci.get("run_attempt", 1), "approverId": approval["actor"]["id"], "policy": "owner-dispatch-and-source-ci-v1"}
