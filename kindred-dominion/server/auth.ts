@@ -5,13 +5,14 @@ import {transaction,type DB} from "./db";
 import type {BackendConfig} from "./config";
 import {keyed,token,equal,passwordHash,verifyPassword,rateLimit} from "./security";
 import {reject} from "./errors";
-export type Actor={id:string;username:string;displayName:string;role:"player"|"developer"|"administrator";startingKindred:string|null;defaultDeckId:string|null;createdAt:string};
+export type Actor={id:string;username:string;displayName:string;email:string|null;role:"player"|"developer"|"administrator";startingKindred:string|null;defaultDeckId:string|null;createdAt:string};
 type Session={token_hash:string;csrf:string;expires_at:string;player_id:string|null;actor:Actor|null};
 const username=z.string().min(3).max(32).regex(/^[a-zA-Z0-9_-]+$/).transform(x=>x.toLowerCase());
-const password=z.string().min(12).max(128).refine(x=>Buffer.byteLength(x)<=256);
+export const password=z.string().min(15).max(128).refine(x=>Buffer.byteLength(x)<=256);
+export const email=z.string().trim().max(254).email().transform(x=>x.toLowerCase());
 export const uuid=z.string().uuid();
 export const operationKey=z.string().min(8).max(100).regex(/^[a-zA-Z0-9:_-]+$/);
-export const profile=(r:any):Actor=>({id:r.id,username:r.username,displayName:r.display_name,role:r.role,startingKindred:r.starting_kindred,defaultDeckId:r.default_deck_id,createdAt:r.created_at});
+export const profile=(r:any):Actor=>({id:r.id,username:r.username,displayName:r.display_name,email:r.email??null,role:r.role,startingKindred:r.starting_kindred,defaultDeckId:r.default_deck_id,createdAt:r.created_at});
 export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig){
   const cache=new WeakMap<FastifyRequest,Session|null>();
   const cookie="kindred_session",options={httpOnly:true,secure:config.secure,sameSite:"lax" as const,path:"/api",maxAge:config.sessionHours*3600};
@@ -19,7 +20,7 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
     if(cache.has(req))return cache.get(req)!;
     const bearer=req.cookies[cookie];let value:Session|null=null;
     if(bearer&&/^[a-zA-Z0-9_-]{43}$/.test(bearer)){
-      const {rows:[row]}=await pool.query(`SELECT s.*,p.id,p.username,p.display_name,p.role,p.status,p.starting_kindred,p.default_deck_id,p.created_at AS player_created_at
+      const {rows:[row]}=await pool.query(`SELECT s.*,p.id,p.username,p.display_name,p.email,p.role,p.status,p.starting_kindred,p.default_deck_id,p.created_at AS player_created_at
         FROM kd.session s LEFT JOIN kd.player p ON p.id=s.player_id WHERE s.token_hash=$1 AND s.expires_at>now()`,[keyed(bearer,config)]);
       if(row&&(!row.player_id||row.status==="active"))value={...row,actor:row.player_id?profile({...row,created_at:row.player_created_at}):null};
     }
@@ -42,10 +43,11 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
   });
   app.get("/api/session",async(req,reply)=>{
     let s=await session(req);
-    if(!s){await rateLimit(pool,"session:"+keyed(req.ip,config),60,3600);const csrf=await issue(reply,null);return {player:null,csrf,registration:config.registration};}
-    return {player:s.actor,csrf:s.csrf,registration:config.registration};
+    const capabilities={recovery:["dev","integration"].includes(config.environment)?"local-operator":"operator-assisted",emailDelivery:false};
+    if(!s){await rateLimit(pool,"session:"+keyed(req.ip,config),60,3600);const csrf=await issue(reply,null);return {player:null,csrf,registration:config.registration,capabilities};}
+    return {player:s.actor,csrf:s.csrf,registration:config.registration,capabilities};
   });
-  const signup=z.object({username,password,displayName:z.string().trim().min(1).max(60),invite:z.string().max(100).optional()}).strict();
+  const signup=z.object({username,email,password,displayName:z.string().trim().min(1).max(60),invite:z.string().max(100).optional()}).strict();
   app.post("/api/accounts",async(req,reply)=>{
     const b=signup.parse(req.body);await rateLimit(pool,"register:"+keyed(req.ip,config),config.registrationLimit,3600);
     if(config.registration==="closed")reject(403,"registration_closed","Account registration is closed.");
@@ -56,7 +58,7 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
         if(!invite||invite.uses>=invite.max_uses||new Date(invite.expires_at).getTime()<=Date.now())reject(403,"invalid_invite","A valid unused invitation is required.");
         await c.query("UPDATE kd.invite SET uses=uses+1 WHERE token_hash=$1",[invite.token_hash]);
       }
-      const id=crypto.randomUUID();const {rows:[p]}=await c.query("INSERT INTO kd.player(id,username,display_name,password_hash) VALUES($1,$2,$3,$4) RETURNING *",[id,b.username,b.displayName,hash]);
+      const id=crypto.randomUUID();const {rows:[p]}=await c.query("INSERT INTO kd.player(id,username,display_name,password_hash,email) VALUES($1,$2,$3,$4,$5) RETURNING *",[id,b.username,b.displayName,hash,b.email]);
       await c.query("INSERT INTO kd.progression_extension(player_id) VALUES($1)",[id]);
       const csrf=await issue(reply,id,old?.token_hash,c);reply.code(201);return {player:profile(p),csrf};
     });

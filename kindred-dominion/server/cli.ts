@@ -10,6 +10,7 @@ import {seedRepository,publishContent} from "./catalog";
 import {keyed,token,passwordHash,digest} from "./security";
 import {validateRecord} from "../src/replay/record";
 import {validateWorkspace} from "../src/content/transfer";
+import {issueLocalRecovery} from "./identity";
 const config=readConfig(),pool=database(config),command=process.argv[2]??"status",args=process.argv.slice(3);
 process.umask(0o077);
 const value=(key:string)=>args.find(x=>x.startsWith(`--${key}=`))?.slice(key.length+3);
@@ -90,12 +91,17 @@ try{
   }
   else if(command==="account-status"){
     const username=value("username"),status=value("status");if(!username||value("confirm-user")!==username||!["active","disabled"].includes(status??""))throw Error("Provide --username=... --status=active|disabled --confirm-user=<same username>");
-    await target(pool,config);await transaction(pool,async c=>{const {rows:[p]}=await c.query("UPDATE kd.player SET status=$2 WHERE username=$1 RETURNING id",[username.toLowerCase(),status]);if(!p)throw Error("Account not found");if(status==="disabled")await c.query("DELETE FROM kd.session WHERE player_id=$1",[p.id]);await c.query("INSERT INTO kd.audit_event(operation,target_id,details) VALUES('operator-account-status',$1,$2)",[p.id,{status}]);});console.log(JSON.stringify({username,status,updated:true}));
+    await target(pool,config);await transaction(pool,async c=>{const {rows:[p]}=await c.query("UPDATE kd.player SET status=$2 WHERE username=$1 RETURNING id",[username.toLowerCase(),status]);if(!p)throw Error("Account not found");if(status==="disabled"){await c.query("DELETE FROM kd.session WHERE player_id=$1",[p.id]);await c.query("UPDATE kd.password_recovery SET used_at=now() WHERE player_id=$1 AND used_at IS NULL",[p.id]);}await c.query("INSERT INTO kd.audit_event(operation,target_id,details) VALUES('operator-account-status',$1,$2)",[p.id,{status}]);});console.log(JSON.stringify({username,status,updated:true}));
+  }
+  else if(command==="recovery-code"){
+    const username=value("username");if(!username||value("confirm-user")!==username)throw Error("Provide --username and an identical --confirm-user for the intended local account.");
+    await target(pool,config);const code=await issueLocalRecovery(pool,config,username),directory=".local/v1.4/recovery";await fs.mkdir(directory,{recursive:true,mode:0o700});
+    const file=path.join(directory,crypto.randomUUID()+".private");await fs.writeFile(file,code,{mode:0o600});console.log(JSON.stringify({username,recoveryFile:file,expiresInMinutes:15,oneTime:true,emailSent:false}));
   }
   else if(command==="password-reset"){
     const username=value("username"),privateFile=value("private-file");if(!username||value("confirm-user")!==username||!privateFile)throw Error("Provide exact username confirmation and a private file containing the new password.");
-    const pass=(await fs.readFile(privateFile,"utf8")).trim();if(pass.length<12||pass.length>128)throw Error("New password requires 12–128 characters");
-    const hash=await passwordHash(pass);await transaction(pool,async c=>{const {rows:[p]}=await c.query("UPDATE kd.player SET password_hash=$2 WHERE username=$1 RETURNING id",[username.toLowerCase(),hash]);if(!p)throw Error("Account not found");await c.query("DELETE FROM kd.session WHERE player_id=$1",[p.id]);await c.query("INSERT INTO kd.audit_event(operation,target_id) VALUES('operator-password-reset',$1)",[p.id]);});console.log("Password reset and sessions revoked.");
+    const pass=(await fs.readFile(privateFile,"utf8")).trim();if(pass.length<15||pass.length>128||Buffer.byteLength(pass)>256)throw Error("New password requires 15–128 characters");
+    const hash=await passwordHash(pass);await transaction(pool,async c=>{const {rows:[p]}=await c.query("UPDATE kd.player SET password_hash=$2 WHERE username=$1 RETURNING id",[username.toLowerCase(),hash]);if(!p)throw Error("Account not found");await c.query("DELETE FROM kd.session WHERE player_id=$1",[p.id]);await c.query("UPDATE kd.password_recovery SET used_at=now() WHERE player_id=$1 AND used_at IS NULL",[p.id]);await c.query("INSERT INTO kd.audit_event(operation,target_id) VALUES('operator-password-reset',$1)",[p.id]);});console.log("Password reset and sessions revoked.");
   }
   else throw Error("Unknown backend CLI command");
 }catch(e){console.error(JSON.stringify({operation:command,error:e instanceof Error&&!("code" in e)?e.message:"Database operation failed. No credentials or raw database error details printed."}));process.exitCode=1;}finally{await pool.end();}

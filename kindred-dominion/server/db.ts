@@ -20,5 +20,5 @@ export async function readiness(pool:DB,config:BackendConfig){
   const {rows:[guard]}=await pool.query("SELECT environment,instance_id FROM kd.environment_guard WHERE singleton");
   if(!guard||guard.environment!==config.environment||(config.environment==="integration"&&guard.instance_id!==config.isolationToken))throw Error("Database environment guard does not match backend configuration.");
   const {rows}=await pool.query("SELECT version_id FROM kd.content_selection WHERE singleton");if(!rows.length)throw Error("Official catalog is not seeded.");
-  const {rows:migrations}=await pool.query("SELECT name FROM kd.migration_checksum WHERE name='1795724000000_exact_studio_snapshots.cjs'");if(!migrations.length)throw Error("Backend migrations are pending.");
+  const {rows:migrations}=await pool.query("SELECT name FROM kd.migration_checksum WHERE name='1795725000000_player_identity.cjs'");if(!migrations.length)throw Error("Backend migrations are pending.");
 }

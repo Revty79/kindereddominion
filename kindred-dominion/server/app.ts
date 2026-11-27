@@ -8,6 +8,7 @@ import {authentication} from "./auth";
 import {playerRoutes} from "./player-routes";
 import {matchRoutes} from "./matches";
 import {studioRoutes} from "./studio-routes";
+import {identityRoutes} from "./identity";
 import {ApiError} from "./errors";
 import {keyed,rateLimit} from "./security";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
@@ -31,6 +32,6 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   });
   app.get("/healthz",async()=>({status:"alive"}));
   app.get("/readyz",async(_,reply)=>{try{await readiness(pool,config);return {status:"ready",database:"connected",catalog:"available"};}catch{return reply.code(503).send({status:"not-ready"});}});
-  const auth=authentication(app,pool,config);playerRoutes(app,pool,auth);matchRoutes(app,pool,auth);studioRoutes(app,pool,auth);
+  const auth=authentication(app,pool,config);identityRoutes(app,pool,config,auth);playerRoutes(app,pool,auth);matchRoutes(app,pool,auth);studioRoutes(app,pool,auth);
   if(!suppliedPool)app.addHook("onClose",()=>pool.end());return app;
 }
