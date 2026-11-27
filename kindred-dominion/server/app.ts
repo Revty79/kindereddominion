@@ -19,6 +19,7 @@ import {economyRoutes} from "./economy-routes";
 import {registerShopPublication} from "./shop-publication";
 import {registerShopRewards} from "./shop-purchases";
 import {cosmeticRoutes} from "./shop-appearance";
+import {tradingHallRoutes} from "./trading-hall-routes";
 import {tradeRoutes} from "./trade-routes";
 import {tradingInventoryRoutes} from "./trading-inventory-routes";
 import {registerTradingPublication} from "./trading-publication";
@@ -47,6 +48,6 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   app.get("/readyz",async(_,reply)=>{try{await readiness(pool,config);return {status:"ready",database:"connected",catalog:"available"};}catch{return reply.code(503).send({status:"not-ready"});}});
   const root=await controlRoot(config.controlDirectory);
   if(["test","prod"].includes(config.environment)&&!root)throw Error("Hosted backend requires the protected control application build.");
-  const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
+  const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   if(!suppliedPool)app.addHook("onClose",()=>pool.end());return app;
 }
