@@ -42,3 +42,19 @@ Set `COMMERCE_MODE=stripe_sandbox` only in the isolated acceptance environment a
 Back up the private environment separately in secure owner-controlled storage; never add it to a source bundle, Git, report, screenshot or support transcript. Rotate compromised keys in Stripe, update the private file and restart only the authorized isolated service. Database recovery uses the existing paired backup/isolated restore procedures; credentials are restored separately. Hosted TEST acceptance and `sudo kindred-update` remain owner operations. No production or real-money activation is authorized.
 
 Primary references: [restricted keys](https://docs.stripe.com/keys/restricted-api-keys), [key handling](https://docs.stripe.com/keys-best-practices), [CLI forwarding](https://docs.stripe.com/cli/listen), [Checkout fulfillment](https://docs.stripe.com/checkout/fulfillment?ui=full-page), [webhook signatures](https://docs.stripe.com/webhooks), [official CLI installation](https://github.com/stripe/stripe-cli#installation). Genuine verification remains pending until credentials are supplied privately and the complete acceptance sequence is executed.
+
+## Compiled and hosted tooling
+
+The runtime image includes `server-dist/commerce-tools.mjs`; it does not need tsx or development dependencies. Locally the compiled equivalents are:
+
+```powershell
+node server-dist/commerce-tools.mjs verify --pin-account
+node server-dist/commerce-tools.mjs catalog
+node server-dist/commerce-tools.mjs catalog --apply
+```
+
+For optional hosted TEST sandbox acceptance, the owner edits `/etc/kindred-dominion/test/backend.env` privately with `sudoedit`, preserving every existing setting. Use the same `STRIPE_SECRET_KEY`, `STRIPE_ACCOUNT_ID`, `STRIPE_WEBHOOK_SECRET`, optional `STRIPE_PUBLISHABLE_KEY` and temporary `STRIPE_CATALOG_SECRET_KEY` names. Keep `COMMERCE_MODE=disabled` until verification is ready. Never put Stripe credentials in `migrations.env`, source CI, build arguments or isolated updater rehearsal containers. Routine application updates remain only `sudo kindred-update`; no operator reinstall is required.
+
+Use `sudo kindred-restart` after an explicitly reviewed private runtime change. The compiled command can be executed in the **already running** backend by exact container identity, obtained from `docker ps --filter label=com.docker.compose.project=kindred-dominion --filter label=com.docker.compose.service=backend --format '{{.ID}}'`. There must be exactly one match; otherwise stop and investigate. Then run `sudo docker exec <BACKEND_CONTAINER_ID> node server-dist/commerce-tools.mjs verify` and the same command with `catalog`, then `catalog --apply` after reviewing the dry run. Do not use `--pin-account` in a container: it cannot rewrite the private host file. Privately enter the verified non-secret account ID in that file instead. Container arguments contain no keys. Remove the catalog write key after setup and restart the authorized runtime again.
+
+CLI forwarding is a local acceptance tool. Hosted webhook registration requires a stable owner-approved public HTTPS webhook URL, the listed supported events and a signing secret entered privately in `backend.env`. A temporary tunnel address is not a durable registration. Never replace its secret with a local CLI secret. Saved orders remain recoverable through verified reconciliation; a changing browser return URL cannot authorize a grant. This hosted configuration remains an owner task and was not performed on homeserver.

@@ -1,0 +1,21 @@
+import crypto from "node:crypto";
+import type {Client} from "./economy-assets";
+import type {ProviderRefund} from "./commerce-rules";
+import {reject} from "./errors";
+export const effectiveRefund=(o:any)=>o.effective_refunded_minor??o.refunded_minor;
+export const financialRisk=(o:any)=>effectiveRefund(o)>0||(o.pending_refund_minor??0)>0||o.refunded_minor!==effectiveRefund(o)||o.dispute_state!=="none";
+// The card-refund state lattice rejects a stale pending/success response after
+// verified failure. Immutable observations still retain every fetched fact.
+export async function recordVerifiedRefunds(c:Client,order:any,eventId:string,refunds:ProviderRefund[],paymentId:string,complete=false){
+ if(new Set(refunds.map(r=>r.id)).size!==refunds.length)reject(400,"refund_history_identity","The provider returned duplicate refund identities.");
+ if(complete){const known=(await c.query("SELECT provider_refund_id FROM kd.commerce_refund_state WHERE order_id=$1",[order.id])).rows;if(known.some(r=>!refunds.some(v=>v.id===r.provider_refund_id)))reject(409,"refund_history_incomplete","The provider refund history no longer includes a retained identity. Investigate before changing assets.");}
+ for(const r of refunds){if(r.livemode!==false||r.account!==order.provider_account||r.paymentId!==paymentId||r.currency!==order.currency||!Number.isSafeInteger(r.amountMinor)||r.amountMinor<1||r.amountMinor>order.amount_minor)reject(400,"commercial_financial_association","The current refund does not match the exact sandbox payment.");const previous=(await c.query("SELECT * FROM kd.commerce_refund_state WHERE order_id=$1 AND provider_refund_id=$2",[order.id,r.id])).rows[0];if(previous&&(previous.amount_minor!==r.amountMinor||previous.payment_id!==r.paymentId||previous.currency!==r.currency))reject(409,"refund_identity_changed","A retained provider refund changed immutable terms.");const request=(await c.query("SELECT amount_minor FROM kd.commerce_refund_request WHERE order_id=$1 AND provider_refund_id=$2",[order.id,r.id])).rows[0];if(request&&request.amount_minor!==r.amountMinor)reject(400,"refund_request_amount_mismatch","The current refund amount differs from its saved request.");
+  await c.query("INSERT INTO kd.commerce_refund_observation(id,order_id,event_id,provider_refund_id,payment_id,amount_minor,currency,status) VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT(event_id,provider_refund_id,status) DO NOTHING",[crypto.randomUUID(),order.id,eventId,r.id,r.paymentId,r.amountMinor,r.currency,r.status]);
+  await c.query(`INSERT INTO kd.commerce_refund_state(order_id,provider_refund_id,payment_id,amount_minor,currency,status,event_id) VALUES($1,$2,$3,$4,$5,$6,$7)
+   ON CONFLICT(order_id,provider_refund_id) DO UPDATE SET status=EXCLUDED.status,event_id=EXCLUDED.event_id,revision=kd.commerce_refund_state.revision+1,observed_at=now()
+   WHERE kd.commerce_refund_state.status<>EXCLUDED.status AND kd.commerce_refund_state.status NOT IN('failed','cancelled') AND NOT(kd.commerce_refund_state.status='succeeded' AND EXCLUDED.status='pending')`,[order.id,r.id,r.paymentId,r.amountMinor,r.currency,r.status,eventId]);
+ }
+ const totals=(await c.query("SELECT coalesce(sum(amount_minor) FILTER(WHERE status='succeeded'),0)::int AS effective,coalesce(sum(amount_minor) FILTER(WHERE status='pending'),0)::int AS pending FROM kd.commerce_refund_state WHERE order_id=$1",[order.id])).rows[0];if(totals.effective+totals.pending>order.amount_minor)reject(409,"refund_total_integrity","Current successful and pending refunds exceed the original payment.");
+ await c.query("UPDATE kd.commerce_refund_request r SET state=CASE WHEN s.status='cancelled' THEN 'failed' ELSE s.status END,lease=NULL,lease_until=NULL,error_code=NULL,updated_at=now() FROM kd.commerce_refund_state s WHERE r.order_id=$1 AND s.order_id=r.order_id AND s.provider_refund_id=r.provider_refund_id AND(r.state NOT IN('succeeded','failed') OR(r.state='succeeded' AND s.status IN('failed','cancelled')))",[order.id]);
+ await c.query("UPDATE kd.commerce_order SET effective_refunded_minor=$2,pending_refund_minor=$3,refunded_minor=greatest(refunded_minor,$2),financial_verified_at=now() WHERE id=$1",[order.id,totals.effective,totals.pending]);return totals;
+}

@@ -1,13 +1,13 @@
 import fs from "node:fs";
 import {parseEnv} from "node:util";
 import {spawn,execFileSync} from "node:child_process";
+import {frontendEnvironment} from "./frontend-environment.mjs";
 if(Number(process.versions.node.split(".")[0])<24)throw Error("The backend requires Node.js 24 or newer.");
 const file=process.env.KINDRED_ENV_FILE??"server/.env.local";
 if(!fs.existsSync(file))throw Error("Configure the private backend environment first with npm run backend:configure. Local practice alone remains npm run dev.");
 const config=parseEnv(fs.readFileSync(file,"utf8")),port=Number(config.API_PORT??3001);
 if((config.API_HOST??"127.0.0.1")!=="127.0.0.1"||!Number.isInteger(port)||port<1||port>65535)throw Error("The Windows/local launcher requires an explicit loopback backend address and valid port.");
-const frontendEnv={...process.env,KINDRED_API_TARGET:`http://127.0.0.1:${port}`};
-for(const key of Object.keys(frontendEnv))if(/^(PG|DATABASE_|SESSION_|AUTH_|KINDRED_ENV_FILE|VITE_PG|VITE_DATABASE_|VITE_SESSION_)/.test(key))delete frontendEnv[key];
+const frontendEnv=frontendEnvironment(process.env,`http://127.0.0.1:${port}`);
 const children=[];let stopping=false;
 function stop(code=0){if(stopping)return;stopping=true;for(const child of children)if(child.pid)try{if(process.platform==="win32")execFileSync("taskkill",["/PID",String(child.pid),"/T","/F"],{windowsHide:true,stdio:"ignore"});else process.kill(-child.pid,"SIGTERM");}catch{}process.exit(code);}
 for(const [args,env] of [
