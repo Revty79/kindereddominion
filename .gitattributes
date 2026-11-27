@@ -5,3 +5,4 @@ kindred-dominion/tests/fixtures/artwork/** -text
 .github/workflows/*.yml text eol=lf
 kindred-dominion/deployment/operator/*.py text eol=lf
 kindred-dominion/deployment/operator/*.json text eol=lf
+kindred-dominion/server/migrations/*.cjs text eol=lf

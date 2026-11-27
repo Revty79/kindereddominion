@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
+import {migrationSourceHash} from "./migration-source";
 import {runner} from "node-pg-migrate";
 import {transaction,target,type DB} from "./db";
 import type {BackendConfig} from "./config";
@@ -12,7 +13,7 @@ export async function migrationStatus(pool:DB,config:BackendConfig){
   const guardExists=await pool.query("SELECT to_regclass('kd.environment_guard') AS table");
   if(guardExists.rows[0].table){const {rows:[guard]}=await pool.query("SELECT environment,instance_id FROM kd.environment_guard WHERE singleton");if(guard&&(guard.environment!==config.environment||config.environment==="integration"&&guard.instance_id!==config.isolationToken))throw Error("Database environment guard mismatch; migrations refused before writes.");}
   const rows=exists.rows[0].table?(await pool.query("SELECT name,sha256 FROM kd.migration_checksum ORDER BY name")).rows:[];
-  const sources=await Promise.all(files.map(async name=>({name,sha256:crypto.createHash("sha256").update(await fs.readFile(path.join(dir,name))).digest("hex")})));
+  const sources=await Promise.all(files.map(async name=>({name,sha256:migrationSourceHash(await fs.readFile(path.join(dir,name)))})));
   for(const row of rows)if(!sources.some(s=>s.name===row.name&&s.sha256===row.sha256))throw Error("Applied migration checksum mismatch or missing source. Restore/review; do not rewrite applied migrations.");
   return {target:identity,applied:rows.length,pending:sources.filter(s=>!rows.some(r=>r.name===s.name)),sources};
 }
