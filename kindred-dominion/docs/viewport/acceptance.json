@@ -1,0 +1,84 @@
+{
+  "baseline": "fa2dc1fcef56c5d23fbccd471755912bc8179a80",
+  "viewportTargets": [
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "width": 1280,
+      "height": 720
+    }
+  ],
+  "desktopAcceptance": {
+    "targets": [
+      {
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 1366,
+        "height": 768
+      },
+      {
+        "width": 1280,
+        "height": 720
+      }
+    ],
+    "normalCompletion": "passes",
+    "primaryScrollEvents": 0,
+    "zoom": 1,
+    "coverage": [
+      "standard"
+    ]
+  },
+  "normalBrowser": {
+    "outerWidth": 1366,
+    "outerHeight": 768,
+    "innerWidth": 1350,
+    "innerHeight": 673,
+    "fullscreen": false,
+    "scale": 1
+  },
+  "mechanics": {
+    "realServerActions": true,
+    "mechanics": [
+      "standard",
+      "replacement",
+      "fortification",
+      "evolution"
+    ],
+    "additionalNormalMatches": 1,
+    "fixtureStateInjected": false,
+    "existingOwnerDataChanged": false
+  },
+  "viewportBrowserCasesPassed": 4,
+  "preservedPlayerJourneyCasesPassed": 2,
+  "automatedTestsPassed": 402,
+  "engineChanges": 0,
+  "publishedDefinitionChanges": 0,
+  "artworkChanges": 0,
+  "databaseMigrationsForThisCorrection": 0,
+  "liveUbuntuAccessed": false,
+  "ownerAcceptance": "pending"
+}

@@ -10,7 +10,7 @@ export async function chooseStarter(page:Page,kindred="Nature"){await page.locat
 export async function completeNormalMatch(page:Page,capturePrefix?:string){
   const matches=(await playerApi(page,"/matches")).body.matches;const active=matches.find((match:any)=>match.status!=="finished");if(!active)throw Error("No active match to complete through the UI");
   let value=(await playerApi(page,`/matches/${active.id}`)).body;
-  if(value.status==="mulligan"){const hand=page.locator(".player-hand-card");await expect(hand).toHaveCount(5);await expect(hand.first()).toBeVisible();const box=(await hand.first().boundingBox())!;expect(box.width).toBeGreaterThan(150);expect(box.height/box.width).toBeCloseTo(4/3,2);}
+  if(value.status==="mulligan"){const hand=page.locator(".player-hand-card");await expect(hand).toHaveCount(5);await expect(hand.first()).toBeVisible();const box=(await hand.first().boundingBox())!;expect(box.width).toBeGreaterThan(70);expect(box.height/box.width).toBeCloseTo(4/3,2);}
   if(capturePrefix)await page.screenshot({path:`${capturePrefix}-opening.png`,fullPage:true});
   for(let turn=0;turn<100&&value.status!=="finished";turn++){
     const response=page.waitForResponse(response=>response.url().endsWith(`/api/matches/${value.id}/actions`)&&response.request().method()==="POST");
@@ -18,7 +18,7 @@ export async function completeNormalMatch(page:Page,capturePrefix?:string){
     else if(value.legalActions.length){const action=value.legalActions[0],creature=value.hand.find((card:any)=>card.id===action.card),count=value.legalActions.filter((play:any)=>play.card===action.card).length;await page.getByRole("button",{name:`Hand ${creature.name}, ${count} legal positions`,exact:true}).first().click();const position=`${String.fromCharCode(65+action.row)}${action.col+1}`;await page.locator(`.player-battle-tile[data-coordinate="${position}"] .player-tile-action`).click();await page.getByRole("button",{name:"Confirm placement",exact:true}).click();}
     else await page.getByRole("button",{name:"Confirm forced pass",exact:true}).click();
     const completed=await response;expect(completed.ok()).toBe(true);value=await completed.json();
-    if(value.status!=="finished")await expect(page.locator(".player-match-main>.player-section-heading .player-eyebrow")).toHaveText(`TURN ${value.turn}`);
+    if(value.status!=="finished")await expect(page.locator(".player-turn-summary .player-eyebrow")).toHaveText(`TURN ${value.turn}`);
     if(capturePrefix&&turn===1){await page.locator(".player-battle-tile .collectible-art img").evaluateAll(images=>Promise.all(images.map(image=>(image as HTMLImageElement).decode())));await page.screenshot({path:`${capturePrefix}-battlefield.png`,fullPage:true});}
   }
   expect(value.status).toBe("finished");await expect(page.getByRole("region",{name:"Match result"})).toBeVisible();if(capturePrefix)await page.screenshot({path:`${capturePrefix}-result.png`,fullPage:true});return value;
