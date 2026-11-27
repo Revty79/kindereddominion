@@ -4,18 +4,27 @@ import {initialWorkspace} from "../content/baseline";
 import {addBundledVersions} from "../content/bundled";
 import {loadWorkspace} from "../content/persistence";
 import {exportTransfer} from "../content/transfer";
-import type {Workspace} from "../content/types";
+import type {ContentPack,Workspace} from "../content/types";
+import {restoreDraft} from "../content/operations";
 import {api,downloadJson} from "./api";
-export default function PrivateStudio({onError}:{onError:(message:string)=>void}){
+export default function PrivateStudio({onError,content}:{onError:(message:string)=>void;content?:ContentPack}){
   const [saved,setSaved]=useState<{revision:number;workspace:Workspace|null}|null>(null),[open,setOpen]=useState(false),[candidate,setCandidate]=useState<Workspace|null>(null),[preview,setPreview]=useState<any>(null),[backup,setBackup]=useState(false),[conflicts,setConflicts]=useState(false),[message,setMessage]=useState("");
   const current=useRef(saved),tail=useRef(Promise.resolve());
   useEffect(()=>{let live=true;api("/developer/workspace").then(s=>{if(live){current.current=s;setSaved(s);}}).catch(e=>onError(e.message));return()=>{live=false;};},[]);
   function change(fn:(w:Workspace)=>Workspace){const operation=tail.current.catch(()=>{}).then(async()=>{if(!current.current?.workspace)throw Error("Initialize a private workspace first.");const next=fn(current.current.workspace),result=await api("/developer/workspace","PUT",{revision:current.current.revision,workspace:next});current.current=result;setSaved(result);});tail.current=operation;return operation;}
   async function recovery(workspace:Workspace){const result=await api("/developer/workspace","PUT",{revision:current.current!.revision,workspace});current.current=result;setSaved(result);}
   const run=(fn:()=>Promise<void>)=>void fn().catch(e=>onError(e.message));
+  function freshWorkspace(){
+    let workspace=addBundledVersions(initialWorkspace());
+    if(content){
+      workspace={...workspace,versions:[...workspace.versions.filter(version=>version.id!==content.id),structuredClone(content)],activeVersion:content.id};
+      workspace=restoreDraft(workspace,content.id);
+    }
+    return workspace;
+  }
   if(open&&saved?.workspace)return <Studio workspace={saved.workspace} onChange={change} onRecovery={recovery} onExit={()=>setOpen(false)}/>;
   return <section className="private-studio"><h2>Private developer workspace</h2><p>This account’s drafts, scenarios, reports and replays are private and have no effect on permanent ownership or verified progression. Repository publication remains a separate reviewed command. Experimental images here are private draft data; official artwork still belongs in the repository.</p>{message&&<p role="status">{message}</p>}
-    {!saved?<p>Loading private workspace…</p>:saved.workspace?<><p>Server workspace revision {saved.revision}</p><button className="primary" onClick={()=>setOpen(true)}>Open saved private Studio</button><button onClick={()=>downloadJson("kindred-private-studio-backup.json",exportTransfer(saved.workspace!,"backup"))}>Download private Studio backup</button></>:<button className="primary" onClick={()=>run(async()=>{const result=await api("/developer/workspace","PUT",{revision:-1,workspace:addBundledVersions(initialWorkspace())});current.current=result;setSaved(result);setMessage("Private workspace initialized and saved.");})}>Initialize private Studio from bundled content</button>}
+    {!saved?<p>Loading private workspace…</p>:saved.workspace?<><p>Server workspace revision {saved.revision}</p><button className="primary" onClick={()=>setOpen(true)}>Open saved private Studio</button><button onClick={()=>downloadJson("kindred-private-studio-backup.json",exportTransfer(saved.workspace!,"backup"))}>Download private Studio backup</button></>:<button className="primary" onClick={()=>run(async()=>{const result=await api("/developer/workspace","PUT",{revision:-1,workspace:freshWorkspace()});current.current=result;setSaved(result);setMessage("Private workspace initialized and saved.");})}>Initialize private Studio from bundled content</button>}
     <h3>Import existing local Studio explicitly</h3><p>Preview and download a recoverable backup before replacing this account’s private workspace. Original browser-local data is retained. Local matches/replays remain untrusted development records.</p>
     <button onClick={()=>run(async()=>{const local=await loadWorkspace();const result=await api("/developer/import/preview","POST",{workspace:local});setCandidate(local);setPreview(result);setBackup(false);setConflicts(false);})}>Preview local Studio import</button>
     <label>Or inspect a complete Studio backup<input type="file" accept=".json,application/json" onChange={e=>{const file=e.target.files?.[0];if(file)run(async()=>{const value=JSON.parse(await file.text());const workspace=value.format==="kindred-dominion-studio"?value.data:value;const result=await api("/developer/import/preview","POST",{workspace});setCandidate(workspace);setPreview(result);setBackup(false);setConflicts(false);});}}/></label>
