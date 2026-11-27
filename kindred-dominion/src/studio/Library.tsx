@@ -5,7 +5,7 @@ import { EFFECTS, MECHANICS, TRIGGERS } from "../engine/registry";
 import { CardPreview, EvolutionGraph, Field, NumberField } from "./components";
 import { evolutionEdges } from "../content/validation";
 import { cardArtwork } from "../assets/references";
-import Artwork from "../ui/Artwork";
+import CollectibleCard from "../ui/cards/CollectibleCard";
 export default function Library({
   content,
   onEdit,
@@ -253,13 +253,7 @@ export default function Library({
             {filtered.map((c) => (
               <tr key={c.id}>
                 <td>
-                  {cardArtwork(content, c.id) && (
-                    <Artwork
-                      className="studio-art-thumbnail"
-                      src={cardArtwork(content, c.id)!}
-                      alt={`${c.name} artwork`}
-                    />
-                  )}
+                  <div className="studio-library-card"><CollectibleCard card={c} library={Object.fromEntries(content.cards.map(card=>[card.id,card]))} artwork={cardArtwork(content,c.id)} scale="battlefield"/></div>
                   <button
                     className="text-button"
                     onClick={() => setInspect(c.id)}

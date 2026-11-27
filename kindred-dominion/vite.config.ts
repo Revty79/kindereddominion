@@ -12,6 +12,7 @@ function denyPrivatePaths(request:IncomingMessage,response:ServerResponse,next:(
 }
 export default defineConfig({
   base: "./",
+  build:{rollupOptions:{input:{main:path.resolve(root,"index.html"),practice:path.resolve(root,"practice.html")}}},
   publicDir: playerOnly ? false : "public",
   server: { fs:{deny:["**/.env","**/.env.*","**/*.{crt,pem,key}","**/.git/**","**/.local/**","**/server/**","**/server-dist/**","**/backups/**","**/*.{dump,backup,private}"]}, proxy: {"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}, watch: { ignored: ["**/.local/**", "**/artwork-source/**", "**/docs/**", "**/server-dist/**", "**/dist/**", "**/dist-player/**", "**/test-results/**", "**/playwright-report/**"] } },
   preview:{proxy:{"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}},

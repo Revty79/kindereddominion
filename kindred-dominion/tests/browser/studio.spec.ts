@@ -1,6 +1,6 @@
 import { prepareHistoricalContent } from "./historical-setup";
 import { readFileSync } from "node:fs";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "./practice-fixture";
 import type { Workspace } from "../../src/content/types";
 const nav = (page: Page, name: string) =>
   page
@@ -29,7 +29,7 @@ async function workspace(page: Page): Promise<Workspace> {
   );
 }
 async function openStudio(page: Page) {
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Developer Studio", exact: true })
     .click();
@@ -329,7 +329,7 @@ test("E and G: complete original match is recorded, replayed and unchanged by dr
   page,
 }) => {
   test.setTimeout(90000);
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Local two-player", exact: true })
     .click();

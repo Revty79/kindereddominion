@@ -1,5 +1,5 @@
 import { prepareHistoricalContent } from "./historical-setup";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "./practice-fixture";
 import { execFileSync } from "node:child_process";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -10,7 +10,7 @@ const nav = (page: Page, name: string) =>
     .getByRole("button", { name, exact: true })
     .click();
 async function open(page: Page) {
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Developer Studio", exact: true })
     .click();

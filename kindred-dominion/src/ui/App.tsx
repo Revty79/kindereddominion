@@ -17,7 +17,8 @@ import type { ContentPack } from "../content/types";
 import { libraryOf } from "../content/validation";
 import { newRecord, appendRecord } from "../replay/record";
 import type { MatchRecord } from "../replay/record";
-import Artwork from "./Artwork";
+import CollectibleCard from "./cards/CollectibleCard";
+import type {CardLibrary} from "../engine/types";
 import PowerDetails, { ScoreDetails } from "./PowerDetails";
 import ExecutableRules from "./ExecutableRules";
 import CollectionFilters from "./CollectionFilters";
@@ -53,53 +54,8 @@ function Crest() {
     </svg>
   );
 }
-export function CardFace({
-  card,
-  compact = false,
-  artwork,
-}: {
-  card: CardDefinition;
-  compact?: boolean;
-  artwork?: string;
-}) {
-  return (
-    <div
-      className={`card-face ${compact ? "compact" : ""}`}
-      style={
-        { "--kindred": KINDRED_COLORS[card.kindred] } as React.CSSProperties
-      }
-    >
-      <div className="card-top">
-        {card.collectible && <span className="collectible-number">{card.collectible.number}</span>}
-        <span>
-          {card.type === "standard"
-            ? `RANK ${rank(card.rank)}`
-            : card.type.toUpperCase()}
-        </span>
-        <strong>
-          {card.power}
-          <small>PWR</small>
-        </strong>
-      </div>
-      {artwork ? (
-        <Artwork
-          className="card-artwork"
-          src={artwork}
-          alt={`${card.name} artwork`}
-        />
-      ) : (
-        <div className="sigil" aria-hidden="true">
-          <span>{card.glyph}</span>
-          {card.collectible && <small>Artwork pending</small>}
-        </div>
-      )}
-      <div className="card-caption">
-        <small>{card.kindred}</small>
-        <strong>{card.name}</strong>
-      </div>
-      {!compact && <p>{card.text}</p>}
-    </div>
-  );
+export function CardFace({card,compact=false,artwork,library={}}:{card:CardDefinition;compact?:boolean;artwork?:string;library?:CardLibrary}) {
+  return <div className="card-face fullbleed-face"><CollectibleCard card={card} library={library} artwork={artwork} scale={compact?"hand":"inspection"}/></div>;
 }
 function Pattern({
   card,
@@ -992,29 +948,7 @@ export default function App({
                                     </span>
                                     {definition ? (
                                       <>
-                                        {artwork[definition.id] ? (
-                                          <Artwork
-                                            className="creature-artwork"
-                                            src={artwork[definition.id]}
-                                            alt={`${definition.name} artwork`}
-                                          />
-                                        ) : (
-                                          <span
-                                            className="creature-glyph"
-                                            style={{
-                                              color:
-                                                KINDRED_COLORS[
-                                                  definition.kindred
-                                                ],
-                                            }}
-                                            aria-hidden="true"
-                                          >
-                                            {definition.glyph}
-                                          </span>
-                                        )}
-                                        <span className="creature-name">
-                                          {definition.name}
-                                        </span>
+                                        <div className="played-card-object"><CollectibleCard card={definition} library={CARDS} artwork={artwork[definition.id]} scale="battlefield"/></div>
                                         <span className="power">
                                           {currentPower(field, CARDS, id!)}
                                           <small>effective · printed {definition.power}</small>
@@ -1186,6 +1120,7 @@ export default function App({
                             }}
                           >
                             <CardFace
+                              library={CARDS}
                               card={c}
                               compact
                               artwork={artwork[c.id]}
@@ -1240,7 +1175,7 @@ export default function App({
                 </div>
                 {cardDef && !hidden ? (
                   <>
-                    <CardFace card={cardDef} artwork={artwork[cardDef.id]} />
+                    <CardFace library={CARDS} card={cardDef} artwork={artwork[cardDef.id]} />
                     <Pattern card={cardDef} player={game.active} />
                     <button
                       className="quiet inspect-button"
@@ -1433,7 +1368,7 @@ export default function App({
             const c = CARDS[instance?.definitionId ?? inspect];
             return c ? (
               <div className="detail-layout">
-                <CardFace card={c} artwork={artwork[c.id]} />
+                <CardFace library={CARDS} card={c} artwork={artwork[c.id]} />
                 <div>
                   <Pattern card={c} player={instance?.owner ?? 0} />
                   <p>{c.text}</p>
@@ -1604,7 +1539,7 @@ export default function App({
           <div className="library-grid">
             {filtered.map((c) => (
               <article key={c.id}>
-                <CardFace card={c} artwork={artwork[c.id]} />
+                <CardFace library={CARDS} card={c} artwork={artwork[c.id]} />
                 <Pattern card={c} />
                 <div className="catalog-details">
                   <strong>{c.collectible?.number ?? "Historical unnumbered card"} · {c.type} · rank {rank(c.rank)} · printed {c.power}</strong>

@@ -1,5 +1,5 @@
 import { prepareHistoricalContent } from "./historical-setup";
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./practice-fixture";
 import { mkdir } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import { unzipSync } from "fflate";
@@ -13,7 +13,7 @@ test("temporary artwork travels from Studio approval to a validated portable pac
       .getByRole("navigation", { name: "Developer Studio sections" })
       .getByRole("button", { name, exact: true })
       .click();
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Developer Studio", exact: true })
     .click();
@@ -147,7 +147,7 @@ test("temporary artwork travels from Studio approval to a validated portable pac
 test("published artwork and a new local illustration can be exported together with original source masters", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Developer Studio", exact: true })
     .click();

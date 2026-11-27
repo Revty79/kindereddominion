@@ -5,7 +5,7 @@ test("full-bleed portrait cards remain separate from tiles and live gameplay sta
   const errors:string[]=[];page.on("pageerror",error=>errors.push(error.message));
   await page.goto("/battlefield-design.html");
   const tiles=page.locator(".battle-study-tile");await expect(tiles).toHaveCount(5);
-  await expect(page.getByText("AWAITING OWNER APPROVAL",{exact:true})).toBeVisible();
+  await expect(page.getByText("APPROVED FOR V1.4",{exact:true})).toBeVisible();
   for(let i=0;i<5;i++){
     const tile=tiles.nth(i),card=tile.locator(".collectible-card"),image=card.locator("img");
     await expect.poll(()=>image.evaluate((element:HTMLImageElement)=>element.complete&&element.naturalWidth>0)).toBe(true);
@@ -52,7 +52,7 @@ test("mobile row scrolls locally and supports full-size card inspection",async({
   await page.getByRole("button",{name:"Close card inspection"}).click();
 });
 
-test("the shared face fills its card at hand and collection scales and remains approval gated",async({page})=>{
+test("the shared face fills its card at hand and collection scales and is shared with the player application",async({page})=>{
   await page.setViewportSize({width:1600,height:1050});await page.goto("/card-design.html");
   for(const name of ["Collection / inspection","Player hand"]){
     await page.getByRole("button",{name,exact:true}).click();
@@ -61,5 +61,5 @@ test("the shared face fills its card at hand and collection scales and remains a
       expect(geometry.ratio).toBeCloseTo(.75,2);expect(geometry.filled).toBe(true);expect(geometry.overflow).toBeLessThanOrEqual(1);
     }
   }
-  await page.goto("/");await expect(page.locator(".collectible-card")).toHaveCount(0);
+  await page.goto("/");await expect(page.getByRole("heading",{name:/Claim your ground/})).toBeVisible();
 });

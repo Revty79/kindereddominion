@@ -1,5 +1,5 @@
 import { prepareHistoricalContent } from "./historical-setup";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "./practice-fixture";
 import {
   act,
   assertInvariants,
@@ -23,7 +23,7 @@ async function reveal(page: Page) {
   if (await button.count()) await button.click();
 }
 async function startLocal(page: Page, scoring = "classic") {
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Local two-player", exact: true })
     .click();
@@ -121,7 +121,7 @@ test("complete human versus computer match using real UI placements", async ({
     )
       external.push(req.url());
   });
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByText("Play format & battlefield options", { exact: true })
     .click();
@@ -152,11 +152,11 @@ test("complete human versus computer match using real UI placements", async ({
 test("library search, custom Free Play deck, legal 15 duplicate instances", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page.getByRole("button", { name: "Card library", exact: true }).click();
-  await expect(page.locator(".library-grid article")).toHaveCount(30);
+  await expect(page.locator(".library-grid > article")).toHaveCount(30);
   await page.getByLabel("Search cards").pressSequentially("resurrect");
-  await expect(page.locator(".library-grid article")).toHaveCount(3);
+  await expect(page.locator(".library-grid > article")).toHaveCount(3);
   await page.keyboard.press("Escape");
   await page
     .getByText("Play format & battlefield options", { exact: true })
@@ -285,7 +285,7 @@ test("full battlefield permits replacement, evolution, death and graveyard inspe
     s.players[0].hand.push(card.id);
   }
   assertInvariants(s, CARDS);
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page.evaluate(
     ({ key, s, decks }) =>
       localStorage.setItem(
@@ -389,7 +389,7 @@ test("simultaneous destruction and limited resurrection resolve visibly in the b
       .click();
     await reveal(page);
   };
-  await page.goto("/");
+  await page.goto("/practice.html");
   let s = make();
   const jade = move(s, "bone-thrall", 0, 0, 0);
   const amber = move(s, "bone-thrall", 1, 0, 4);
@@ -435,7 +435,7 @@ test("configurable 4 by 8 field and save storage failure remain playable", async
       throw new DOMException("Disabled", "QuotaExceededError");
     };
   });
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByText("Play format & battlefield options", { exact: true })
     .click();

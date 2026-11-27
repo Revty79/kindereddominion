@@ -3,7 +3,9 @@ import { expect, type Page } from "@playwright/test";
 // Inherited cases still exercise their original historical libraries. New owner
 // and playback acceptance cases deliberately do not use this fixture.
 export async function prepareHistoricalContent(page: Page) {
-  await page.goto("/");
+  // Explicit UI-only developer fixture for cases that create a fresh touch context.
+  await page.route("**/api/session",route=>route.fulfill({json:{player:{role:"developer"},csrf:"historical-ui-only",registration:"closed"}}));
+  await page.goto("/practice.html");
   await page.getByRole("button", { name: "Developer Studio", exact: true }).click();
   await page.getByRole("navigation", { name: "Developer Studio sections" }).getByRole("button", { name: "Content Versions and Backups", exact: true }).click();
   const founding = page.getByRole("row").filter({ has: page.getByText("founding-kindreds-150-v1", { exact: true }) });

@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "./practice-fixture";
 import { signature } from "../../src/replay/record";
 import { ownerContent } from "../../src/content/owner";
 import type { GameState } from "../../src/engine/types";
@@ -11,10 +11,10 @@ async function speed(page: Page, value: string) { await page.getByText("Learning
 
 test("a clean owner installation exposes all 150 numbered cards, useful filters and preserved development versions", async ({ page, context }) => {
   expect((await context.storageState()).origins).toEqual([]);
-  await page.goto("/");
+  await page.goto("/practice.html");
   await expect(page.getByText(/The Founding Kindreds — Owner Design V1/)).toBeVisible();
   await page.getByRole("button", { name: "Card library", exact: true }).click();
-  const rows = page.locator(".library-grid article");
+  const rows = page.locator(".library-grid > article");
   await expect(rows).toHaveCount(150);
   expect(await rows.locator(".collectible-number").allTextContents()).toEqual(pack.cards.map(c => c.collectible!.number));
   for (const [kindred, prefix] of [["Nature", "N"], ["Mythical", "M"], ["Arcane", "A"], ["Undead", "U"], ["Constructs", "C"]]) {
@@ -40,7 +40,7 @@ test("a clean owner installation exposes all 150 numbered cards, useful filters 
 
 for (const scoring of ["classic", "domination"] as const) test(`owner ${scoring} gameplay previews consequences, steps through actual states and records a completed match`, async ({ page }) => {
   test.setTimeout(90000);
-  await page.goto("/"); await speed(page, "step");
+  await page.goto("/practice.html"); await speed(page, "step");
   for (const deck of pack.decks.slice(0, 5)) { await page.getByLabel("Jade deck", { exact: true }).selectOption(deck.id); await expect(page.getByRole("button", { name: "Begin match" })).toBeEnabled(); }
   await page.getByLabel("Jade deck", { exact: true }).selectOption(scoring === "classic" ? pack.decks[0].id : pack.decks[3].id);
   await page.getByLabel("Amber deck", { exact: true }).selectOption(scoring === "classic" ? pack.decks[1].id : pack.decks[4].id);
@@ -76,7 +76,7 @@ for (const scoring of ["classic", "domination"] as const) test(`owner ${scoring}
 
 test("prepared owner scenarios visibly explain Honeybee aura loss, sacrifice gifts, score bonuses and Phoenix requirements", async ({ page }) => {
   test.setTimeout(120000);
-  await page.goto("/"); await page.getByRole("button", { name: "Developer Studio", exact: true }).click(); await nav(page, "Battlefield Sandbox");
+  await page.goto("/practice.html"); await page.getByRole("button", { name: "Developer Studio", exact: true }).click(); await nav(page, "Battlefield Sandbox");
   const scenarios = page.getByLabel("Load saved scenario", { exact: true });
   await scenarios.selectOption("owner-demo-honeybee"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click();
   const hand = page.getByLabel("Sandbox active hand card", { exact: true });
@@ -108,8 +108,8 @@ for (const mobile of [false, true]) test(`invited player build ${mobile ? "touch
   const context = await browser.newContext({ baseURL: process.env.KINDRED_PLAYER_URL, ...(mobile ? { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true } : {}) });
   const page = await context.newPage(), errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
   expect((await context.storageState()).origins).toEqual([]);
-  await page.goto("/"); await expect(page.getByRole("button", { name: "Developer Studio", exact: true })).toHaveCount(0);
-  await page.getByRole("button", { name: "Card library", exact: true }).click(); await expect(page.locator(".library-grid article")).toHaveCount(150); await page.getByLabel("Search cards", { exact: true }).fill("C020"); await expect(page.locator(".library-grid article")).toContainText("Iron Golem"); await page.getByRole("button", { name: "Close The Founding Kindreds", exact: true }).click();
+  await page.goto("/practice.html"); await expect(page.getByRole("button", { name: "Developer Studio", exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Card library", exact: true }).click(); await expect(page.locator(".library-grid > article")).toHaveCount(150); await page.getByLabel("Search cards", { exact: true }).fill("C020"); await expect(page.locator(".library-grid > article")).toContainText("Iron Golem"); await page.getByRole("button", { name: "Close The Founding Kindreds", exact: true }).click();
   await speed(page, "fast"); await page.getByLabel("Jade deck", { exact: true }).selectOption(mobile ? pack.decks[4].id : pack.decks[2].id);
   await page.getByText("Play format & battlefield options", { exact: true }).click(); await page.getByLabel("Match seed (optional)", { exact: true }).fill("9461"); await page.getByRole("button", { name: "Begin match" }).click(); await page.getByRole("button", { name: "Keep hand", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Jade to command.", exact: true })).toBeVisible();

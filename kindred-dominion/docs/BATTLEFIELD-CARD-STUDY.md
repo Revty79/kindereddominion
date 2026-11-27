@@ -1,5 +1,7 @@
 # Artwork-first card and battlefield approval study
 
+**Subsequent owner decision:** the [V1.4 directive](V1.4-BRIEF.md) explicitly approves this renderer. Production integration is tracked in [V1.4 progress](V1.4-PROGRESS.md). The original approval-study record below remains historical evidence; individual artwork exceptions remain separate.
+
 November 26, 2026. **Awaiting owner visual approval.** This is an isolated prototype, excluded from ordinary production builds. The [latest direction](ARTWORK-FIRST-CARD-DIRECTION.md) supersedes the former inset-picture design. The [battlefield supplement](BATTLEFIELD-CARD-PRESENTATION-SUPPLEMENT.md) still governs the relationship between card and tile.
 
 ## Open the prototype

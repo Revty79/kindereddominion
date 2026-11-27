@@ -20,7 +20,7 @@ import {
 } from "../engine/registry";
 import { ScoreDetails } from "../ui/PowerDetails";
 import { cardArtwork } from "../assets/references";
-import Artwork from "../ui/Artwork";
+import CollectibleCard from "../ui/cards/CollectibleCard";
 export const split = (s: string) => [
   ...new Set(
     s
@@ -327,39 +327,7 @@ export function CardPreview({
   );
   return (
     <section className="studio-card-preview" style={{ borderColor: color }}>
-      <div className="studio-card-heading">
-        <span>
-          {content.collections.find((c) => c.id === card.kindred)?.name ??
-            card.kindred}
-        </span>
-        <b>{card.power} power</b>
-      </div>
-      {illustration ? (
-        <Artwork src={illustration} alt={`${card.name} artwork`} />
-      ) : (
-        <div className="studio-glyph" style={{ color }}>
-          {card.glyph}
-        </div>
-      )}
-      <h3>{card.name || "Untitled card"}</h3>
-      <p>
-        {card.type} · Rank {card.rank} ·{" "}
-        {card.tags.join(", ") || "No classifications"}
-      </p>
-      {card.prerequisite && (
-        <p>
-          <b>Prerequisite:</b>{" "}
-          {card.prerequisite.definitions
-            ?.map((id) => content.cards.find((c) => c.id === id)?.name ?? id)
-            .join(" or ")}
-          {card.prerequisite.tags?.length
-            ? ` classification ${card.prerequisite.tags.join(" or ")}`
-            : ""}
-          {card.prerequisite.minPower !== undefined
-            ? ` at least ${card.prerequisite.minPower} power`
-            : ""}
-        </p>
-      )}
+      <CollectibleCard card={card} library={libraryOf(content)} artwork={illustration} scale="inspection"/>
       <details open>
         <summary>Executable influence · both orientations</summary>
         {([0, 1] as const).map((player) => (
@@ -475,14 +443,7 @@ export function BoardView({
               </span>
               {def ? (
                 <>
-                  {(artwork?.[def.id] || cardArtwork(content, def.id)) && (
-                    <Artwork
-                      className="sandbox-artwork"
-                      src={(artwork?.[def.id] || cardArtwork(content, def.id))!}
-                      alt={`${def.name} artwork`}
-                    />
-                  )}
-                  <strong>{def.name}</strong>
+                  <div className="sandbox-played-card"><CollectibleCard card={def} library={lib} artwork={artwork?.[def.id] || cardArtwork(content,def.id)} scale="battlefield"/></div>
                   <span>
                     {currentPower(state, lib, card!.id)} power ·{" "}
                     {card!.stack.length + 1} form(s)

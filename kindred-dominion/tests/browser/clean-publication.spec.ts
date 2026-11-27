@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./practice-fixture";
 test("clean production checkout provides all 150 packaged cards and repository artwork with empty browser storage", async ({
   page,
   context,
@@ -9,7 +9,7 @@ test("clean production checkout provides all 150 packaged cards and repository a
   );
   test.setTimeout(90000);
   expect((await context.storageState()).origins).toEqual([]);
-  await page.goto(process.env.KINDRED_CLEAN_URL!);
+  await page.goto(new URL("practice.html",process.env.KINDRED_CLEAN_URL!+"/" ).href);
   const pageErrors: string[] = [];
   page.on("pageerror", (e) => pageErrors.push(e.message));
   await page
@@ -60,7 +60,7 @@ test("clean production checkout provides all 150 packaged cards and repository a
     .getByRole("button", { name: "Return to game", exact: true })
     .click();
   await page.getByRole("button", { name: "Card library", exact: true }).click();
-  await expect(page.locator(".library-grid article")).toHaveCount(150);
+  await expect(page.locator(".library-grid > article")).toHaveCount(150);
   await page
     .getByRole("button", { name: "Close The Founding Kindreds", exact: true })
     .click();

@@ -1,9 +1,9 @@
 import { prepareHistoricalContent } from "./historical-setup";
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./practice-fixture";
 test("safe SVG imports as optimized artwork and unsafe SVG is rejected without replacing it", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/practice.html");
   await page
     .getByRole("button", { name: "Developer Studio", exact: true })
     .click();

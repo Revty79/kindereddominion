@@ -1,5 +1,7 @@
 # Kindred Dominion
 
+**V1.4 implementation is underway.** The owner has approved the full-bleed 3:4 card renderer, now integrated into the main player application. The root page opens the player menu; preserved offline practice is at `practice.html`. See the [V1.4 brief](docs/V1.4-BRIEF.md) and [validated milestone ledger](docs/V1.4-PROGRESS.md). The historical V1.3 instructions below are being superseded by the completed player journey and release guide.
+
 Version **0.4.0 · V1.3B/C — Owner Design V1**
 
 A tactical card game with local practice, Developer Studio and PostgreSQL-backed accounts. New matches use the owner's **150-card Founding Kindreds**: Nature, Mythical, Arcane, Undead and Constructs, each with 30 permanently numbered cards and its exact supplied 15-card starter. Five mixed development decks are also included. Original V1.1, Cody's V1.2 library, temporary artwork experiment and V1.3A laboratory remain selectable development versions. Existing drafts and match snapshots are preserved.

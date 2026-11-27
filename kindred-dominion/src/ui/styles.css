@@ -1445,7 +1445,7 @@ svg {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
-.library-grid article {
+.library-grid > article {
   border: 1px solid #425849;
   border-radius: 5px;
   background: #1c2e32;

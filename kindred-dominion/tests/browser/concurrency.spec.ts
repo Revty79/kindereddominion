@@ -1,10 +1,10 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./practice-fixture";
 test("bundled content initializes once under StrictMode and stale tabs cannot overwrite newer drafts", async ({
   page,
   context,
 }) => {
   const other = await context.newPage();
-  await Promise.all([page.goto("/"), other.goto("/")]);
+  await Promise.all([page.goto("/practice.html"), other.goto("/practice.html")]);
   for (const p of [page, other]) {
     await p
       .getByRole("button", { name: "Developer Studio", exact: true })
