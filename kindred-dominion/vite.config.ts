@@ -5,14 +5,15 @@ import path from "node:path";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { selectedPlayerContent, selectedPlayerAssets } from "./scripts/player-content";
 const playerOnly = process.env.VITE_STUDIO === "0";
+const controlOnly = process.env.VITE_CONTROL === "1";
 const root = process.cwd();
 function denyPrivatePaths(request:IncomingMessage,response:ServerResponse,next:()=>void){
   let pathname:string;try{pathname=decodeURIComponent(new URL(request.url??"/","http://localhost").pathname);}catch{response.statusCode=400;response.end();return;}
   if(/^\/(?:server|server-dist|\.local|backups|\.git)(?:\/|$)|(?:^|\/)\.env(?:\.|\/|$)/i.test(pathname)){response.statusCode=404;response.end("Unavailable.");return;}next();
 }
 export default defineConfig({
-  base: "./",
-  build:{rollupOptions:{input:{main:path.resolve(root,"index.html"),practice:path.resolve(root,"practice.html")}}},
+  base: controlOnly ? "/api/control/" : "./",
+  build:{rollupOptions:{input:controlOnly?{control:path.resolve(root,"control.html")}:{main:path.resolve(root,"index.html"),practice:path.resolve(root,"practice.html")}}},
   publicDir: playerOnly ? false : "public",
   server: { fs:{deny:["**/.env","**/.env.*","**/*.{crt,pem,key}","**/.git/**","**/.local/**","**/server/**","**/server-dist/**","**/backups/**","**/*.{dump,backup,private}"]}, proxy: {"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}, watch: { ignored: ["**/.local/**", "**/artwork-source/**", "**/docs/**", "**/server-dist/**", "**/dist/**", "**/dist-player/**", "**/test-results/**", "**/playwright-report/**"] } },
   preview:{proxy:{"/api":{target:process.env.KINDRED_API_TARGET??"http://127.0.0.1:3001",changeOrigin:false}}},

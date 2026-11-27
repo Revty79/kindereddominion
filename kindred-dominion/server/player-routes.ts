@@ -26,7 +26,7 @@ export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
   });
   app.post("/api/starting-collection",async req=>{const a=await auth.actor(req),b=z.object({kindred:z.enum(["Nature","Mythical","Arcane","Undead","Constructs"]),idempotencyKey:operationKey}).strict().parse(req.body);return startingCollection(pool,a,b.kindred,b.idempotencyKey);});
   app.post("/api/admin/inventory",async req=>{
-    const a=await auth.actor(req,["developer","administrator"]),b=z.object({playerId:uuid,idempotencyKey:operationKey,source:z.string().trim().min(3).max(100),changes:z.array(z.object({editionId:z.string().min(1).max(180),quantity:z.number().int().min(-1000).max(1000).refine(n=>n!==0)}).strict()).min(1).max(150)}).strict().parse(req.body);
+    const a=await auth.actor(req,["administrator"]),b=z.object({playerId:uuid,idempotencyKey:operationKey,source:z.string().trim().min(3).max(100),changes:z.array(z.object({editionId:z.string().min(1).max(180),quantity:z.number().int().min(-1000).max(1000).refine(n=>n!==0)}).strict()).min(1).max(150)}).strict().parse(req.body);
     return grant(pool,b.playerId,b.idempotencyKey,b.source,b.changes,a);
   });
   app.get("/api/decks",async req=>{const a=await auth.actor(req),pack=await activeContent(pool),{rows}=await pool.query("SELECT id FROM kd.deck WHERE player_id=$1 AND deleted_at IS NULL ORDER BY created_at,id",[a.id]);const decks=[];for(const row of rows){const deck=await getDeck(pool,row.id,a.id),report=await ownedDeckLegality(pool,a,deck.cards,pack,deck.config,deck.testingAccess);decks.push({...deck,legal:!deck.draft&&!deck.testingAccess&&report.errors.length===0,legality:report.errors});}return {decks,defaultDeckId:a.defaultDeckId};});

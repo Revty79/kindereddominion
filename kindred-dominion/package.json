@@ -1,6 +1,6 @@
 {
   "name": "kindred-dominion",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -37,7 +37,8 @@
     "test:accounts:browser": "playwright test --config server/playwright.config.ts",
     "account:password-reset": "tsx server/cli.ts password-reset",
     "account:status": "tsx server/cli.ts account-status",
-    "validate:backend-isolation": "node scripts/verify-backend-isolation.mjs"
+    "validate:backend-isolation": "node scripts/verify-backend-isolation.mjs",
+    "build:control": "node scripts/build-control.mjs"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.5",

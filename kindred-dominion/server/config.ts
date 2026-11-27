@@ -30,5 +30,5 @@ export function readConfig() {
   return {environment,host,port,database,user,password:required("PGPASSWORD"),sessionSecret,origin,secure,registration,
     localTestingAcquisition,testingPackCards,
     sessionHours:integer("SESSION_HOURS",168,1,720),registrationLimit:integer("REGISTRATION_PER_HOUR",10,1,100),apiHost:env.API_HOST??"127.0.0.1",apiPort:integer("API_PORT",3001,1,65535),
-    logLevel:env.LOG_LEVEL??"info",isolationToken:env.ISOLATION_TOKEN??"",root:path.resolve(process.env.KINDRED_ROOT??".")};
+    controlDirectory:path.resolve(env.CONTROL_APP_DIR??"dist-control"),logLevel:env.LOG_LEVEL??"info",isolationToken:env.ISOLATION_TOKEN??"",root:path.resolve(process.env.KINDRED_ROOT??".")};
 }

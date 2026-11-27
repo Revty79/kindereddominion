@@ -13,7 +13,7 @@ export const email=z.string().trim().max(254).email().transform(x=>x.toLowerCase
 export const uuid=z.string().uuid();
 export const operationKey=z.string().min(8).max(100).regex(/^[a-zA-Z0-9:_-]+$/);
 export const profile=(r:any):Actor=>({id:r.id,username:r.username,displayName:r.display_name,email:r.email??null,role:r.role,startingKindred:r.starting_kindred,defaultDeckId:r.default_deck_id,createdAt:r.created_at});
-export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig){
+export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig,controlAvailable=false){
   const cache=new WeakMap<FastifyRequest,Session|null>();
   const cookie="kindred_session",options={httpOnly:true,secure:config.secure,sameSite:"lax" as const,path:"/api",maxAge:config.sessionHours*3600};
   async function session(req:FastifyRequest){
@@ -43,7 +43,7 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
   });
   app.get("/api/session",async(req,reply)=>{
     let s=await session(req);
-    const capabilities={recovery:["dev","integration"].includes(config.environment)?"local-operator":"operator-assisted",emailDelivery:false,localTestingAcquisition:config.localTestingAcquisition};
+    const capabilities={recovery:["dev","integration"].includes(config.environment)?"local-operator":"operator-assisted",emailDelivery:false,localTestingAcquisition:config.localTestingAcquisition,controlApp:controlAvailable&&s?.actor&&s.actor.role!=="player"?"/api/control/":null};
     if(!s){await rateLimit(pool,"session:"+keyed(req.ip,config),60,3600);const csrf=await issue(reply,null);return {player:null,csrf,registration:config.registration,capabilities};}
     return {player:s.actor,csrf:s.csrf,registration:config.registration,capabilities};
   });
@@ -55,7 +55,7 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
     return transaction(pool,async c=>{
       if(config.registration==="invite"){
         const {rows:[invite]}=await c.query("SELECT * FROM kd.invite WHERE token_hash=$1 FOR UPDATE",[keyed(b.invite??"",config)]);
-        if(!invite||invite.uses>=invite.max_uses||new Date(invite.expires_at).getTime()<=Date.now())reject(403,"invalid_invite","A valid unused invitation is required.");
+        if(!invite||invite.revoked_at||invite.uses>=invite.max_uses||new Date(invite.expires_at).getTime()<=Date.now())reject(403,"invalid_invite","A valid unused invitation is required.");
         await c.query("UPDATE kd.invite SET uses=uses+1 WHERE token_hash=$1",[invite.token_hash]);
       }
       const id=crypto.randomUUID();const {rows:[p]}=await c.query("INSERT INTO kd.player(id,username,display_name,password_hash,email) VALUES($1,$2,$3,$4,$5) RETURNING *",[id,b.username,b.displayName,hash,b.email]);
@@ -74,10 +74,6 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
   app.post("/api/logout",async(req,reply)=>{const s=await session(req);if(s)await pool.query("DELETE FROM kd.session WHERE token_hash=$1",[s.token_hash]);reply.clearCookie(cookie,{path:"/api"});return {ok:true};});
   app.get("/api/profile",async req=>({player:await actor(req)}));
   app.patch("/api/profile",async req=>{const a=await actor(req),b=z.object({displayName:z.string().trim().min(1).max(60)}).strict().parse(req.body);const {rows:[p]}=await pool.query("UPDATE kd.player SET display_name=$2 WHERE id=$1 RETURNING *",[a.id,b.displayName]);return {player:profile(p)};});
-  app.post("/api/admin/invites",async req=>{
-    const a=await actor(req,["administrator"]),b=z.object({uses:z.number().int().min(1).max(100).default(1),hours:z.number().int().min(1).max(720).default(168)}).strict().parse(req.body??{}),invite=token();
-    await pool.query("INSERT INTO kd.invite(token_hash,max_uses,expires_at,created_by) VALUES($1,$2,now()+make_interval(hours=>$3),$4)",[keyed(invite,config),b.uses,b.hours,a.id]);return {invite};
-  });
   return {actor,session,issue};
 }
 export type Authentication=ReturnType<typeof authentication>;

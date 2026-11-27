@@ -28,7 +28,7 @@ describe.sequential("persistent player identity completion",()=>{
     expect((await other.request("POST","/api/accounts",{...body,email:"invalid"})).status).toBe(400);
     expect((await other.request("POST","/api/accounts",{...body,email:`unique_${run}@example.test`,role:"administrator"})).status).toBe(400);
     expect((await other.request("POST","/api/accounts",{...body,username:first.player.username.toUpperCase(),email:`unique_${run}@example.test`})).status).toBe(409);
-    expect((await migrationStatus(pool,config)).applied).toBe(6);
+    expect((await migrationStatus(pool,config)).applied).toBe(7);
   });
   it("preserves older accounts with no email and requires the current password to update it",async()=>{
     const client=await new Client().register("legacy");await pool.query("UPDATE kd.player SET email=NULL WHERE id=$1",[client.player.id]);

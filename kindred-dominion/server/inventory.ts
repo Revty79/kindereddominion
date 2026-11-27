@@ -31,7 +31,7 @@ export async function inventoryTransaction(c:PoolClient,playerId:string,key:stri
   return {...result,replayed:false};
 }
 export async function grant(pool:DB,targetId:string,key:string,source:string,changes:{editionId:string;quantity:number}[],actor:Actor){
-  if(actor.role!=="administrator"&&!(actor.role==="developer"&&actor.id===targetId))reject(403,"grant_forbidden","Only authorized administrative/development grants are permitted.");
+  if(actor.role!=="administrator")reject(403,"grant_forbidden","Permanent inventory grants require an administrator.");
   return transaction(pool,async c=>{
     const {rowCount}=await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[targetId]);if(!rowCount)reject(404,"player_missing","Player was not found.");
     const result=await inventoryTransaction(c,targetId,key,source,changes,actor.id);

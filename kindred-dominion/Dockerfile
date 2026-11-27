@@ -6,14 +6,15 @@ COPY package.json package-lock.json ./
 RUN npm ci --include=dev
 COPY . .
 ARG PLAYER_CONTENT_ID=founding-kindreds-artwork-v1
+ARG VCS_REF=unrecorded
 ENV VITE_PLAYER_CONTENT_ID=${PLAYER_CONTENT_ID}
 # Git tracking is verified in the source checkout. Archives intentionally contain no .git.
-RUN node scripts/build-player.mjs --source-archive
+RUN node scripts/build-player.mjs --source-archive && node scripts/release-marker.mjs dist-player "${VCS_REF}"
 
 FROM ${WEB_IMAGE} AS runtime
 ARG VCS_REF=unrecorded
 LABEL org.opencontainers.image.title="Kindred Dominion (working title)" \
-      org.opencontainers.image.version="0.5.0" \
+      org.opencontainers.image.version="0.7.0" \
       org.opencontainers.image.revision="${VCS_REF}"
 COPY deployment/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist-player /usr/share/nginx/html

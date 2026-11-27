@@ -20,7 +20,7 @@ for(const file of tracked){
   const bytes=await fs.readFile(file);trackedFilesChecked++;
   for(const value of values)if(bytes.includes(Buffer.from(value)))throw Error("A private value was found in a tracked repository file.");
 }
-for(const directory of ["dist","dist-player","server-dist"]){
+for(const directory of ["dist","dist-player","dist-control","server-dist"]){
   for(const file of await files(path.join(buildRoot,directory))){const bytes=await fs.readFile(file);checked++;for(const value of values)if(bytes.includes(Buffer.from(value)))throw Error("A private value was found in build output.");}
 }
 console.log(JSON.stringify({trackedPrivateFiles:0,trackedFilesChecked,privateValuesChecked:new Set(values).size,buildFilesChecked:checked,secretMatches:0}));

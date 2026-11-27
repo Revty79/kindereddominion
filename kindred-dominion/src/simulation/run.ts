@@ -4,7 +4,7 @@ import { scoreGame } from "../engine/scoring";
 import { libraryOf, validatePack, validateRules } from "../content/validation";
 import { ENGINE_VERSION } from "../content/types";
 import { appendRecord, newRecord, signature } from "../replay/record";
-import { artworkMap } from "../assets/references";
+import { recordArtworkMap } from "../assets/references";
 import type { GameState, Player } from "../engine/types";
 import type {
   CardStatistics,
@@ -134,7 +134,7 @@ export function runOne(
   try {
     state = createMatch(decks, lib, request.config, seed, starter);
     record = newRecord(state, lib, decks, request.content.id);
-    record.artwork = artworkMap(request.content);
+    record.artwork = recordArtworkMap(request.content);
     for (const p of state.players)
       for (const id of p.hand) count(state.cards[id].definitionId).drawn++;
     while (
