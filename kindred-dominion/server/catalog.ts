@@ -1,3 +1,4 @@
+import {hasRegisteredPlayerIdentities} from "../src/content/founding-identities";
 import fs from "node:fs/promises";
 import path from "node:path";
 import type {PoolClient} from "pg";
@@ -61,11 +62,11 @@ export async function publishContent(pool:DB,pack:ContentPack,channel:"official"
     return {version:pack.id,imported:!previous,cards:pack.cards.length,digest:checksum};
   });
 }
-export async function seedRepository(pool:DB,root=process.cwd()){
+export async function seedRepository(pool:DB,root=process.cwd(),registry=collectibleRegistry()){
   const results=[];
-  for(const pack of [baselineContent(),foundingContent(baselineContent()),laboratoryContent()])results.push(await publishContent(pool,pack,"archived",false,root));
-  for(const name of await fs.readdir(path.join(root,"src/content/published")))if(name.endsWith(".json")){const pack=JSON.parse(await fs.readFile(path.join(root,"src/content/published",name),"utf8"));results.push(await publishContent(pool,pack,pack.id===CURRENT_OWNER_CONTENT_ID?"official":"archived",false,root));}
-  results.push(await publishContent(pool,ownerContent(),"official",false,root));
-  const {rows}=await pool.query("SELECT 1 FROM kd.content_selection");if(!rows.length)await publishContent(pool,currentOwnerContent(),"official",true,root);
+  for(const pack of [baselineContent(),foundingContent(baselineContent()),laboratoryContent()])results.push(await publishContent(pool,pack,"archived",false,root,registry));
+  for(const name of await fs.readdir(path.join(root,"src/content/published")))if(name.endsWith(".json")){const pack=JSON.parse(await fs.readFile(path.join(root,"src/content/published",name),"utf8"));const previous=(await pool.query("SELECT channel FROM kd.content_version WHERE id=$1",[pack.id])).rows[0];const channel=previous?.channel??(pack.id===CURRENT_OWNER_CONTENT_ID||hasRegisteredPlayerIdentities(pack,registry)?"official":"archived");results.push(await publishContent(pool,pack,channel,false,root,registry));}
+  results.push(await publishContent(pool,ownerContent(),"official",false,root,registry));
+  const {rows}=await pool.query("SELECT 1 FROM kd.content_selection");if(!rows.length)await publishContent(pool,currentOwnerContent(),"official",true,root,registry);
   return results;
 }

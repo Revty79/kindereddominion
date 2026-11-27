@@ -5,6 +5,7 @@ import { currentOwnerContent } from "../src/content/current";
 import { validatePack } from "../src/content/validation";
 import type { ContentPack } from "../src/content/types";
 import type { OfficialAsset } from "../src/assets/types";
+import {assertFoundingIdentityCoverage,assertRegisteredPlayerIdentities} from "../src/content/founding-identities";
 
 export async function selectedPlayerContent(root: string): Promise<ContentPack> {
   let content = currentOwnerContent();
@@ -18,8 +19,9 @@ export async function selectedPlayerContent(root: string): Promise<ContentPack> 
   const errors = validatePack(content).filter(i => i.severity === "error");
   if (errors.length) throw new Error(errors.map(i => i.message).join("\n"));
   const founding = ownerContent();
-  if (content.cards.length !== 150 || content.cards.some(c => !founding.cards.some(f => f.id === c.id && f.collectible!.number === c.collectible?.number)))
-    throw new Error("This tester build requires the 150 stable owner-designed collectible identities.");
+  assertFoundingIdentityCoverage(content,founding);
+  const registry=JSON.parse(await readFile(path.join(root,"src/content/collectible-registry.json"),"utf8"));
+  assertRegisteredPlayerIdentities(content,registry.entries);
   for (const card of content.cards) {
     const metadata = content.metadata[card.id];
     if (metadata.artwork || metadata.sourceArtwork) throw new Error(`${card.id}: local artwork cannot be shipped in a tester build. Publish an approved repository reference first.`);

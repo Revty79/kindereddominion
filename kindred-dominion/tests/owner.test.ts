@@ -29,7 +29,7 @@ it("keeps collectible numbering numeric beyond 999 and independent of names, edi
   expect(saveCard(pack, { ...pack.cards[0], power: 2 }, pack.metadata.n001, "n001").cards[0].collectible!.definitionRevision).toBe(2);
   expect(() => saveCard(pack, { ...pack.cards[0], collectible: { ...pack.cards[0].collectible!, number: "N031" } }, pack.metadata.n001, "n001")).toThrow(/Permanent collectible/);
   expect(duplicateCard(pack, "n001", "new-mouse").card.collectible).toBeUndefined();
-  expect(collectibleRegistry()).toHaveLength(150);
+  const registry=collectibleRegistry();expect(registry.filter(r=>r.setId===pack.cards[0].collectible!.setId)).toHaveLength(150);expect(new Set(registry.map(r=>r.number)).size).toBe(registry.length);expect(new Set(registry.map(r=>r.gameplayId)).size).toBe(registry.length);
 });
 it("enforces shared competitive copy limits across alternative editions and validates their identical rules", () => {
   const foil = { ...structuredClone(library.n001), id: "n001-foil", collectible: { ...library.n001.collectible!, edition: "foil" } };

@@ -1,8 +1,9 @@
 import {reconcileCommercialRecovery} from "./commerce-recovery-integrity";
+import {commercialSourceGraph} from "./commerce-source-graph";
 import type {DB} from "./db";
 import type {Client} from "./economy-assets";
 import {economyDigest} from "./economy-hash";
-import {hasCommercialHolds,traceCommercialSources} from "./commerce-holds";
+import {hasCommercialHolds} from "./commerce-holds";
 export async function reconcileCommerce(c:DB|Client){const invalid=new Set<string>();const currentRefunds=!!(await c.query("SELECT to_regclass('kd.commerce_refund_state') AS relation")).rows[0].relation;let reviewRequired:string[]=[];const rows=(await c.query(`SELECT o.id,o.snapshot,o.digest,p.snapshot AS publication,p.digest AS publication_digest
  FROM kd.commerce_order o JOIN kd.commerce_product_snapshot p ON p.config_version=o.config_version AND p.product_id=o.product_id`)).rows;
  for(const row of rows)if(economyDigest(row.snapshot)!==row.digest||economyDigest(row.publication)!==row.publication_digest||row.digest!==row.publication_digest)invalid.add(row.id);
@@ -43,7 +44,7 @@ export async function reconcileCommerce(c:DB|Client){const invalid=new Set<strin
    OR EXISTS(SELECT 1 FROM kd.commerce_review r LEFT JOIN kd.economy_transaction t ON t.id=r.transaction_id WHERE r.order_id=o.id AND r.reversed_aether>0 AND(t.id IS NULL OR t.player_id<>o.player_id OR t.reference_id IS DISTINCT FROM o.id::text OR t.type<>'commercial-refund-reversal' OR coalesce((SELECT -sum(delta) FROM kd.currency_entry WHERE transaction_id=t.id AND currency_id='aether'),0)<>r.reversed_aether))
    ${currentRefunds?"":`OR(SELECT coalesce(sum(reversed_aether),0) FROM kd.commerce_review WHERE order_id=o.id)>((o.snapshot->'product'->>'aether')::bigint*o.refunded_minor/o.amount_minor)`}
    OR EXISTS(SELECT 1 FROM kd.commerce_source_hold h JOIN kd.currency_lot l ON l.id=h.currency_lot WHERE h.order_id=o.id AND h.released_at IS NULL AND(l.player_id<>o.player_id OR h.quantity>l.held OR h.quantity>l.remaining))`)).rows;for(const row of financial)invalid.add(row.id);
-  for(const row of(await c.query("SELECT DISTINCT order_id FROM kd.commerce_source_hold")).rows){const sources=await traceCommercialSources(c,row.order_id),allowed={currency_lot:new Set(sources.currency.map((l:any)=>l.id)),ownership_lot:new Set(sources.roots.map((l:any)=>l.id)),cosmetic_acquisition:new Set(sources.cosmetics.map((l:any)=>l.id))};for(const h of(await c.query("SELECT * FROM kd.commerce_source_hold WHERE order_id=$1",[row.order_id])).rows)for(const field of ["currency_lot","ownership_lot","cosmetic_acquisition"] as const)if(h[field]&&!allowed[field].has(h[field]))invalid.add(row.order_id);}
+  const graph=await commercialSourceGraph(c);for(const row of(await c.query(`${graph} SELECT DISTINCT h.order_id AS id FROM kd.commerce_source_hold h WHERE(h.currency_lot IS NOT NULL AND NOT EXISTS(SELECT 1 FROM money m WHERE m.order_id=h.order_id AND m.id=h.currency_lot)) OR(h.ownership_lot IS NOT NULL AND NOT EXISTS(SELECT 1 FROM roots r WHERE r.order_id=h.order_id AND r.id=h.ownership_lot)) OR(h.cosmetic_acquisition IS NOT NULL AND NOT EXISTS(SELECT 1 FROM cosmetics x WHERE x.order_id=h.order_id AND x.id=h.cosmetic_acquisition))`)).rows)invalid.add(row.id);
  }
  if(currentRefunds){const result=await reconcileCommercialRecovery(c);for(const id of result.invalid)invalid.add(id);reviewRequired=result.reviewRequired;}
  return {ok:!invalid.size,orders:[...invalid].sort(),reviewRequired};}

@@ -30,6 +30,7 @@ export default function Simulator({
     [mirrored, setMirrored] = useState(true),
     [free, setFree] = useState(false),
     [running, setRunning] = useState(false),
+    [saving,setSaving]=useState(false),[saveFailed,setSaveFailed]=useState(false),
     [report, setReport] = useState<SimulationReport | null>(null),
     [total, setTotal] = useState(0),
     [error, setError] = useState("");
@@ -44,6 +45,7 @@ export default function Simulator({
     },
     [],
   );
+  async function saveFinal(value:SimulationReport){setSaving(true);setSaveFailed(false);try{await saveRef.current(value);setError("");}catch(e){setSaveFailed(true);setError(`Final report save failed: ${String(e)}. Keep this page open, retry saving or export the current results.`);}finally{setSaving(false);setRunning(false);onBusy(false);worker.current?.terminate();}}
   function run() {
     try {
       const selectedRule =
@@ -65,7 +67,7 @@ export default function Simulator({
         },
       };
       validateSimulation(request);
-      setError("");
+      setError("");setSaving(false);setSaveFailed(false);
       setTotal(pairings(request).length * matches);
       setRunning(true);
       onBusy(true);
@@ -85,22 +87,9 @@ export default function Simulator({
         }
         if (data.report) {
           setReport(data.report);
-          if (
-            data.type === "done" ||
-            performance.now() - lastSaved.current > 2000
-          ) {
-            lastSaved.current = performance.now();
-            void saveRef
-              .current(data.report)
-              .catch((e) =>
-                setError(`Partial report save failed: ${String(e)}`),
-              );
-          }
-        }
-        if (data.type === "done") {
-          setRunning(false);
-          onBusy(false);
-          worker.current?.terminate();
+          if(data.type==="done"){void saveFinal(data.report);return;}
+          if(performance.now()-lastSaved.current>2000){lastSaved.current=performance.now();void saveRef.current(data.report).catch(e=>setError(`Partial report save failed: ${String(e)}`));}
+
         }
       };
       worker.current.onerror = (event) => {
@@ -117,7 +106,7 @@ export default function Simulator({
   function selectReport(id: string) {
     const r = workspace.reports.find((r) => r.id === id);
     if (r) {
-      setReport(r);
+      setReport(r);setSaveFailed(false);
       setTotal(pairings(r.request).length * r.request.matches);
     }
   }
@@ -251,7 +240,7 @@ export default function Simulator({
           Run headless matches
         </button>
         <button
-          disabled={!running}
+          disabled={!running||saving}
           onClick={() => worker.current?.postMessage({ type: "cancel" })}
         >
           Cancel simulation and preserve results
@@ -276,6 +265,7 @@ export default function Simulator({
           {error}
         </p>
       )}
+      {saveFailed&&report&&<button onClick={()=>void saveFinal(report)} disabled={saving}>Retry saving report</button>}
       {report && (
         <>
           <div className="simulation-progress" role="status">
@@ -284,7 +274,7 @@ export default function Simulator({
               {report.attempted.toLocaleString()} / {total.toLocaleString()}{" "}
               attempted · {report.completed} completed ·{" "}
               {(report.elapsedMs / 1000).toFixed(1)} seconds ·{" "}
-              {report.cancelled
+              {saving?"Saving completed results":saveFailed?"Report save failed":report.cancelled
                 ? "Cancelled; partial results retained"
                 : running
                   ? "Running in a Web Worker"

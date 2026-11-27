@@ -1,10 +1,12 @@
 ﻿# Kindred Dominion
 
-Version **0.7.0 - V1.5A/B: Hosted Administration and Release Operations**
+Version **0.7.0 - V1.5: Economy Integration and Sandbox Foundation**
 
 A persistent tactical card game with 150 illustrated Founding Kindreds cards, custom decks and server-run computer battles. The main application is the player game. Card ownership, saved decks, account permissions, results and acquisition history live in PostgreSQL. The approved full-bleed 3:4 card renderer is shared across the catalog, collection, deck builder, hand, battlefield, inspection, pack opening and authorized Studio.
 
-On the owner's configured Windows machine:
+For the first C-G upgrade, follow the [owner startup, backup and acceptance checklist](docs/V1.5-OWNER-ACCEPTANCE.md) before launching. The [integrated validation report](docs/V1.5G-VALIDATION.md) records implementation, tests, preservation, simulations and remaining owner-dependent acceptance. Genuine Stripe testing remains separate from simulations; live payments remain disabled.
+
+On the owner's configured and upgraded Windows machine:
 
 ```powershell
 cd D:\kindereddominion\kindred-dominion
@@ -20,7 +22,7 @@ Hosted administrators open **Administration** at `/api/control/` using their exi
 
 After the [one-time automatic updater installation](docs/V1.5-OPERATIONS.md#install-the-automatic-updater-once), normal hosted updates require only **`sudo kindred-update`**. For this private TEST environment it selects the latest main revision with successful exact-commit CI, verifies and updates its operator runtime, then performs the existing candidate validation, backups, restored-copy migration rehearsal, deployment and health checks. No routine SHA, fetch, checkout, reinstallation, GitHub login or manual approval is required. The [TEST policy](docs/V1.5A-TEST-RELEASE-POLICY.md) is bound to the TEST database; production still requires explicit approval and remains disabled.
 
-Authorized developers use the same account and the restricted **Developer Studio** navigation in the full application. The separate player release excludes Studio, laboratory, simulation workers and unpublished artwork. Existing local practice remains at `practice.html`; practice/sandbox does not award permanent cards or results.
+Authorized developers use the same account and the restricted **Developer Studio** navigation in the full application. The separate player release excludes Studio, laboratory, simulation workers and unpublished artwork. Existing local practice remains at `practice.html`; browser-local practice and Studio simulations do not award ordinary player cards or verified results. Commercial sandbox accounts/assets remain explicitly isolated.
 
 Build and check:
 

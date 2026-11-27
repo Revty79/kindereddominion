@@ -15,7 +15,7 @@ const scoring = process.argv.find(a => a.startsWith("--scoring="))?.split("=")[1
 if (!["classic", "domination"].includes(scoring)) throw new Error("Use --scoring=classic or --scoring=domination.");
 const smoke = process.argv.includes("--smoke"), content = ownerContent(), library = libraryOf(content);
 const sourceCommit = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-const directory = smoke ? ".local/v1.3bc-smoke" : "docs/v1.3bc";
+const directory = process.argv.find(a=>a.startsWith("--output="))?.slice(9) ?? (smoke ? ".local/v1.3bc-smoke" : "docs/v1.3bc");
 await mkdir(directory, { recursive: true }); await mkdir(".local/v1.3bc", { recursive: true });
 const write = (name: string, value: unknown) => writeFile(`${directory}/${name}`, JSON.stringify(value, null, 2) + "\n");
 
