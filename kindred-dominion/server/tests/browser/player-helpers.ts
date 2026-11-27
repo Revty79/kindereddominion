@@ -19,7 +19,7 @@ export async function completeNormalMatch(page:Page,capturePrefix?:string){
     else await page.getByRole("button",{name:"Confirm forced pass",exact:true}).click();
     const completed=await response;expect(completed.ok()).toBe(true);value=await completed.json();
     if(value.status!=="finished")await expect(page.locator(".player-match-main>.player-section-heading .player-eyebrow")).toHaveText(`TURN ${value.turn}`);
-    if(capturePrefix&&turn===1)await page.screenshot({path:`${capturePrefix}-battlefield.png`,fullPage:true});
+    if(capturePrefix&&turn===1){await page.locator(".player-battle-tile .collectible-art img").evaluateAll(images=>Promise.all(images.map(image=>(image as HTMLImageElement).decode())));await page.screenshot({path:`${capturePrefix}-battlefield.png`,fullPage:true});}
   }
   expect(value.status).toBe("finished");await expect(page.getByRole("region",{name:"Match result"})).toBeVisible();if(capturePrefix)await page.screenshot({path:`${capturePrefix}-result.png`,fullPage:true});return value;
 }

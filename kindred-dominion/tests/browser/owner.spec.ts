@@ -58,7 +58,7 @@ for (const scoring of ["classic", "domination"] as const) test(`owner ${scoring}
   const committed = signature(await readGame(page));
   await page.getByRole("button", { name: "Next resolution step", exact: true }).click();
   expect(signature(await readGame(page))).toBe(committed);
-  await page.locator(".cell .creature-name").first().click();
+  await page.locator(".cell .played-card-object").first().click();
   await expect(page.locator('[role="dialog"] [data-testid="power-breakdown"]')).toBeVisible();
   await page.getByRole("button", { name: "Close Card details", exact: true }).click();
   await expect(page.locator(".hand-card")).toHaveCount(0);

@@ -10,7 +10,7 @@ try{
   const identity=await target(pool,config);
   const expected=command==="verify"?JSON.parse(await fs.readFile(file,"utf8")):null;
   if(expected&&["host","port","database","username"].some(key=>expected.target[key]!==identity[key]))throw Error("Preservation receipt belongs to a different database target.");
-  const tables=expected?.tables??(await pool.query("SELECT table_name FROM information_schema.tables WHERE table_schema='kd' AND table_type='BASE TABLE' AND table_name NOT IN ('migration_checksum','pgmigrations') ORDER BY table_name")).rows.map(row=>({name:row.table_name}));
+  const tables=expected?.tables??(await pool.query("SELECT table_name FROM information_schema.tables WHERE table_schema='kd' AND table_type='BASE TABLE' AND table_name NOT IN ('migration_checksum','schema_migrations') ORDER BY table_name")).rows.map(row=>({name:row.table_name}));
   const results=[];
   for(const table of tables){
     const columns=table.columns??(await pool.query("SELECT column_name FROM information_schema.columns WHERE table_schema='kd' AND table_name=$1 ORDER BY ordinal_position",[table.name])).rows.map(row=>row.column_name);

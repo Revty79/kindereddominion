@@ -50,7 +50,7 @@ test("temporary artwork travels from Studio approval to a validated portable pac
   ).toBe(true);
   await nav("Card Library");
   await page.getByLabel("Search name or identifier").fill("Briar Sprout");
-  await expect(page.locator(".studio-art-thumbnail")).toBeVisible();
+  await expect(page.locator(".studio-library-card .collectible-art img")).toBeVisible();
   await nav("Content Versions and Backups");
   await page
     .getByLabel("Checkpoint name", { exact: true })
@@ -132,11 +132,11 @@ test("temporary artwork travels from Studio approval to a validated portable pac
   await page.locator(".cell.legal").first().click();
   await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
   await expect(
-    page.locator('.cell img[alt="Briar Sprout artwork"]'),
+    page.locator('.cell img[alt="Briar Sprout illustration"]'),
   ).toBeVisible();
   expect(
     await page
-      .locator('.cell img[alt="Briar Sprout artwork"]')
+      .locator('.cell img[alt="Briar Sprout illustration"]')
       .evaluate((img: HTMLImageElement) => img.naturalWidth > 0),
   ).toBe(true);
   await page.screenshot({

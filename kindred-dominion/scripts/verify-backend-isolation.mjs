@@ -14,12 +14,13 @@ for(const file of ["server/.env.local",process.env.KINDRED_ENV_FILE].filter(Bool
 }
 async function files(dir){const result=[];for(const entry of await fs.readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())result.push(...await files(file));else result.push(file);}return result;}
 let checked=0;
+const buildRoot=path.resolve(process.env.KINDRED_BUILD_ROOT??".");
 let trackedFilesChecked=0;
 for(const file of tracked){
   const bytes=await fs.readFile(file);trackedFilesChecked++;
   for(const value of values)if(bytes.includes(Buffer.from(value)))throw Error("A private value was found in a tracked repository file.");
 }
 for(const directory of ["dist","dist-player","server-dist"]){
-  for(const file of await files(directory)){const bytes=await fs.readFile(file);checked++;for(const value of values)if(bytes.includes(Buffer.from(value)))throw Error("A private value was found in build output.");}
+  for(const file of await files(path.join(buildRoot,directory))){const bytes=await fs.readFile(file);checked++;for(const value of values)if(bytes.includes(Buffer.from(value)))throw Error("A private value was found in build output.");}
 }
 console.log(JSON.stringify({trackedPrivateFiles:0,trackedFilesChecked,privateValuesChecked:new Set(values).size,buildFilesChecked:checked,secretMatches:0}));

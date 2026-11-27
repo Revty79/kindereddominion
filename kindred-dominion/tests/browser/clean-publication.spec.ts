@@ -38,21 +38,21 @@ test("clean production checkout provides all 150 packaged cards and repository a
     .click();
   await nav("Card Library");
   await page.getByLabel("Search name or identifier").fill("Briar Sprout");
-  await expect(page.locator(".studio-art-thumbnail")).toBeVisible();
+  await expect(page.locator(".studio-library-card .collectible-art img")).toBeVisible();
   await expect
     .poll(() =>
       page
-        .locator(".studio-art-thumbnail")
+        .locator(".studio-library-card .collectible-art img")
         .evaluate(
           (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
         ),
     )
     .toBe(true);
   expect(
-    await page.locator(".studio-art-thumbnail").getAttribute("src"),
+    await page.locator(".studio-library-card .collectible-art img").getAttribute("src"),
   ).toContain("assets/cards/nature/");
   expect(
-    await page.locator(".studio-art-thumbnail").getAttribute("src"),
+    await page.locator(".studio-library-card .collectible-art img").getAttribute("src"),
   ).not.toContain("data:");
   await page.getByRole("button", { name: "Briar Sprout", exact: true }).click();
   await expect(page.locator(".studio-card-preview img")).toBeVisible();
@@ -94,12 +94,12 @@ test("clean production checkout provides all 150 packaged cards and repository a
   await page.locator(".cell.legal").first().click();
   await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
   await expect(
-    page.locator('.cell img[alt="Briar Sprout artwork"]'),
+    page.locator('.cell img[alt="Briar Sprout illustration"]'),
   ).toBeVisible();
   await expect
     .poll(() =>
       page
-        .locator('.cell img[alt="Briar Sprout artwork"]')
+        .locator('.cell img[alt="Briar Sprout illustration"]')
         .evaluate((img: HTMLImageElement) => img.naturalWidth),
     )
     .toBeGreaterThan(0);
@@ -118,12 +118,12 @@ test("clean production checkout provides all 150 packaged cards and repository a
   await nav("Card Library");
   await page.getByLabel("Search name or identifier").fill("Briar Sprout");
   await expect
-    .poll(() => page.locator(".studio-art-thumbnail").getAttribute("src"))
+    .poll(() => page.locator(".studio-library-card .collectible-art img").getAttribute("src"))
     .toContain("fallback.svg");
   await expect
     .poll(() =>
       page
-        .locator(".studio-art-thumbnail")
+        .locator(".studio-library-card .collectible-art img")
         .evaluate(
           (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
         ),

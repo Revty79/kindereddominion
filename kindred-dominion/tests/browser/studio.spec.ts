@@ -1,6 +1,6 @@
 import { prepareHistoricalContent } from "./historical-setup";
 import { readFileSync } from "node:fs";
-import { expect, test, type Page } from "./practice-fixture";
+import { expect, test, authorizeLocalWorkspace, type Page } from "./practice-fixture";
 import type { Workspace } from "../../src/content/types";
 const nav = (page: Page, name: string) =>
   page
@@ -432,6 +432,7 @@ test("F: checkpoint and complete backup restore authored relationships and artwo
       baseURL: String(test.info().project.use.baseURL),
     }),
     isolated = await context.newPage();
+  await authorizeLocalWorkspace(context);
   await openStudio(isolated);
   await nav(isolated, "Content Versions and Backups");
   await isolated

@@ -1,5 +1,7 @@
 # Founding artwork integration and V1.3 verification
 
+**Historical checkpoint.** The later V1.4 assignment explicitly approves the shared full-bleed renderer and authorizes its game-wide integration. See [V1.4 acceptance](V1.4-VALIDATION.md) for current playable/release status. A016/A018 artwork exceptions remain separate; the older pending-design wording below records the original checkpoint.
+
 ## Outcome
 
 All 150 founding creature illustrations are integrated in `founding-kindreds-artwork-v1`, using the existing Studio image conversion/publication code and repository importer. No permanent card identity, executable card definition, power value, ability, deck, classification or evolution relationship was changed. Engine version remains **1.3.1**.

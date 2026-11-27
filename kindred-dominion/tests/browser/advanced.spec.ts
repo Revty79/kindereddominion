@@ -1,5 +1,5 @@
 import { prepareHistoricalContent } from "./historical-setup";
-import { expect, test, type Page } from "./practice-fixture";
+import { expect, test, authorizeLocalWorkspace, type Page } from "./practice-fixture";
 import { execFileSync } from "node:child_process";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -400,6 +400,7 @@ test("owner authors all eight advanced card families, tests real power changes, 
       baseURL: String(test.info().project.use.baseURL),
     }),
     restored = await context.newPage();
+  await authorizeLocalWorkspace(context);
   await open(restored);
   await nav(restored, "Content Versions and Backups");
   await restored

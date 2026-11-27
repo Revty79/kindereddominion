@@ -1,0 +1,79 @@
+{
+  "ownerLocalDate": "2026-11-26",
+  "version": "0.6.0",
+  "testedCleanSource": "484ce0fda79402297fa04f3a33aca7d11ff832f1",
+  "automated": {
+    "passed": 402,
+    "failed": 0
+  },
+  "freshPostgreSQL": {
+    "passed": 30,
+    "failed": 0
+  },
+  "compiledAccountBrowserCases": 8,
+  "compiledPlayerRestartCases": 1,
+  "restoredDatabaseBrowserCases": 1,
+  "frontend": {
+    "uniqueCases": 41,
+    "initialPassed": 35,
+    "initialFixtureFailures": 6,
+    "correctedRerunsPassed": 6,
+    "unresolved": 0
+  },
+  "restart": {
+    "compiled": true,
+    "frontendRestarted": true,
+    "apiRestarted": true,
+    "emptyBrowserLogin": true,
+    "normalCompletion": "passes",
+    "uniqueCards": 32,
+    "copies": 33,
+    "matches": 1,
+    "playerBuildStudioNavigation": false
+  },
+  "dev": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "database": "kindred_dominion_dev",
+    "role": "kindred_dev",
+    "appliedMigrations": 6,
+    "pendingMigrations": 0,
+    "oldDataTables": 25,
+    "oldRows": 1905,
+    "allExistingColumnsPreserved": true,
+    "syntheticAcceptanceAccountsAdded": 0,
+    "localRegistration": true,
+    "localTestingSampler": true
+  },
+  "artwork": {
+    "foundingIllustrations": 150,
+    "perKindred": 30,
+    "repositoryAssets": 153,
+    "playerAssets": 152,
+    "modifiedOriginalImages": 0,
+    "modifiedRuntimeImages": 0,
+    "manifestSha256": "abb73c0d380f2f0b27ce98eb8328e01cfa0aecc7ed78dd684b2a7cb4a8bde42f",
+    "historicalAspectAdvisories": 17,
+    "outstandingArtisticExceptions": [
+      "A016",
+      "A018"
+    ]
+  },
+  "deployment": {
+    "dockerExecution": "owner-pending",
+    "ubuntuDeployment": "not-performed",
+    "testProdAccess": false,
+    "physicalDeviceAcceptance": false
+  },
+  "secretIsolation": {
+    "trackedFilesChecked": 778,
+    "configuredPrivateValuesChecked": 4,
+    "filesCheckedPerBuildRoot": 356,
+    "buildRoots": [
+      "main",
+      "independent-clean-checkout"
+    ],
+    "privateFilesTracked": 0,
+    "secretMatches": 0
+  }
+}
