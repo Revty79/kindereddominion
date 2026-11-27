@@ -1,0 +1,672 @@
+{
+  "modelOnly": true,
+  "approvedPermanentPolicy": false,
+  "startingCards": 30,
+  "remainingFirstCopies": 120,
+  "guaranteedNewPackUpperBound": 24,
+  "tutorialGiftCountsWithin24": true,
+  "baselineEconomy": [
+    {
+      "scenario": "casual-free",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 52,
+      "matches": 416,
+      "earnedGold": 25952,
+      "remainingGold": 20202,
+      "accountXP": 18490,
+      "accountLevel": 12,
+      "masteryXP": 12480,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.125,
+      "completionHour": 10,
+      "completionDay": 32,
+      "packs": 23,
+      "freePacks": 1,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 128.4,
+      "baseBoosterMinutes": 116.82242990654206
+    },
+    {
+      "scenario": "average-free",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 130,
+      "matches": 1300,
+      "earnedGold": 58645,
+      "remainingGold": 52895,
+      "accountXP": 61750,
+      "accountLevel": 12,
+      "masteryXP": 39000,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 9.99999999999998,
+      "completionDay": 12,
+      "packs": 23,
+      "freePacks": 1,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 177.50000000000003,
+      "baseBoosterMinutes": 84.5070422535211
+    },
+    {
+      "scenario": "highly-active-free",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 465,
+      "matches": 4650,
+      "earnedGold": 112339,
+      "remainingGold": 106589,
+      "accountXP": 189930,
+      "accountLevel": 12,
+      "masteryXP": 116250,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 15.69999999999996,
+      "completionDay": 6,
+      "packs": 23,
+      "freePacks": 1,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 186,
+      "baseBoosterMinutes": 80.64516129032258
+    },
+    {
+      "scenario": "competitive-normal-ai-proxy",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 310,
+      "matches": 3100,
+      "earnedGold": 103567,
+      "remainingGold": 97817,
+      "accountXP": 161130,
+      "accountLevel": 12,
+      "masteryXP": 93000,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 11.899999999999974,
+      "completionDay": 6,
+      "packs": 23,
+      "freePacks": 1,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 203,
+      "baseBoosterMinutes": 73.89162561576354
+    },
+    {
+      "scenario": "rapid-surrender-attempt",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 720,
+      "matches": 0,
+      "earnedGold": 100,
+      "remainingGold": 100,
+      "accountXP": 0,
+      "accountLevel": 1,
+      "masteryXP": 0,
+      "masteryLevel": 1,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": null,
+      "completionHour": null,
+      "completionDay": null,
+      "packs": 0,
+      "freePacks": 0,
+      "uniqueCards": 30,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 0,
+      "baseBoosterMinutes": null
+    }
+  ],
+  "markets": {
+    "balanced": {
+      "modelOnly": true,
+      "options": {
+        "population": [
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "weeks": 12,
+        "matchesPerWeek": 50
+      },
+      "players": 100,
+      "trades": 182,
+      "earnedCopies": 1300,
+      "remainingCopies": 1300,
+      "conserved": true,
+      "tradeGeneratedGold": 0,
+      "tradeGeneratedXP": 0,
+      "sourceIdentities": [
+        "n013",
+        "m014",
+        "a014",
+        "u014",
+        "c014",
+        "n001"
+      ],
+      "weekly": [
+        {
+          "week": 1,
+          "trades": 100,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 32
+        },
+        {
+          "week": 2,
+          "trades": 171,
+          "earnedCopies": 300,
+          "meanLifetimeCards": 34.22
+        },
+        {
+          "week": 3,
+          "trades": 182,
+          "earnedCopies": 400,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 4,
+          "trades": 182,
+          "earnedCopies": 500,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 5,
+          "trades": 182,
+          "earnedCopies": 600,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 6,
+          "trades": 182,
+          "earnedCopies": 700,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 7,
+          "trades": 182,
+          "earnedCopies": 800,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 8,
+          "trades": 182,
+          "earnedCopies": 900,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 9,
+          "trades": 182,
+          "earnedCopies": 1000,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 10,
+          "trades": 182,
+          "earnedCopies": 1100,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 11,
+          "trades": 182,
+          "earnedCopies": 1200,
+          "meanLifetimeCards": 34.44
+        },
+        {
+          "week": 12,
+          "trades": 182,
+          "earnedCopies": 1300,
+          "meanLifetimeCards": 34.44
+        }
+      ],
+      "playersByKindred": [
+        {
+          "kindred": "Nature",
+          "players": 20,
+          "meanLifetimeCards": 34
+        },
+        {
+          "kindred": "Mythical",
+          "players": 20,
+          "meanLifetimeCards": 34.35
+        },
+        {
+          "kindred": "Arcane",
+          "players": 20,
+          "meanLifetimeCards": 34.5
+        },
+        {
+          "kindred": "Undead",
+          "players": 20,
+          "meanLifetimeCards": 34.65
+        },
+        {
+          "kindred": "Constructs",
+          "players": 20,
+          "meanLifetimeCards": 34.7
+        }
+      ],
+      "maximumNewRewardIdentitiesPerPlayer": 5,
+      "maximumRequiredNewPacksAfterModeledTrades": 24
+    },
+    "imbalanced": {
+      "modelOnly": true,
+      "options": {
+        "population": [
+          90,
+          5,
+          3,
+          1,
+          1
+        ],
+        "weeks": 12,
+        "matchesPerWeek": 50
+      },
+      "players": 100,
+      "trades": 24,
+      "earnedCopies": 1300,
+      "remainingCopies": 1300,
+      "conserved": true,
+      "tradeGeneratedGold": 0,
+      "tradeGeneratedXP": 0,
+      "sourceIdentities": [
+        "n013",
+        "m014",
+        "a014",
+        "u014",
+        "c014",
+        "n001"
+      ],
+      "weekly": [
+        {
+          "week": 1,
+          "trades": 10,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.2
+        },
+        {
+          "week": 2,
+          "trades": 20,
+          "earnedCopies": 300,
+          "meanLifetimeCards": 30.5
+        },
+        {
+          "week": 3,
+          "trades": 24,
+          "earnedCopies": 400,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 4,
+          "trades": 24,
+          "earnedCopies": 500,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 5,
+          "trades": 24,
+          "earnedCopies": 600,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 6,
+          "trades": 24,
+          "earnedCopies": 700,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 7,
+          "trades": 24,
+          "earnedCopies": 800,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 8,
+          "trades": 24,
+          "earnedCopies": 900,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 9,
+          "trades": 24,
+          "earnedCopies": 1000,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 10,
+          "trades": 24,
+          "earnedCopies": 1100,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 11,
+          "trades": 24,
+          "earnedCopies": 1200,
+          "meanLifetimeCards": 30.58
+        },
+        {
+          "week": 12,
+          "trades": 24,
+          "earnedCopies": 1300,
+          "meanLifetimeCards": 30.58
+        }
+      ],
+      "playersByKindred": [
+        {
+          "kindred": "Nature",
+          "players": 90,
+          "meanLifetimeCards": 30.233333333333334
+        },
+        {
+          "kindred": "Mythical",
+          "players": 5,
+          "meanLifetimeCards": 33
+        },
+        {
+          "kindred": "Arcane",
+          "players": 3,
+          "meanLifetimeCards": 34.333333333333336
+        },
+        {
+          "kindred": "Undead",
+          "players": 1,
+          "meanLifetimeCards": 35
+        },
+        {
+          "kindred": "Constructs",
+          "players": 1,
+          "meanLifetimeCards": 34
+        }
+      ],
+      "maximumNewRewardIdentitiesPerPlayer": 5,
+      "maximumRequiredNewPacksAfterModeledTrades": 24
+    },
+    "casual": {
+      "modelOnly": true,
+      "options": {
+        "population": [
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "weeks": 12,
+        "matchesPerWeek": 16
+      },
+      "players": 100,
+      "trades": 0,
+      "earnedCopies": 100,
+      "remainingCopies": 100,
+      "conserved": true,
+      "tradeGeneratedGold": 0,
+      "tradeGeneratedXP": 0,
+      "sourceIdentities": [
+        "n013",
+        "m014",
+        "a014",
+        "u014",
+        "c014",
+        "n001"
+      ],
+      "weekly": [
+        {
+          "week": 1,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 2,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 3,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 4,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 5,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 6,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 7,
+          "trades": 0,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.8
+        },
+        {
+          "week": 8,
+          "trades": 0,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.8
+        },
+        {
+          "week": 9,
+          "trades": 0,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.8
+        },
+        {
+          "week": 10,
+          "trades": 0,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.8
+        },
+        {
+          "week": 11,
+          "trades": 0,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.8
+        },
+        {
+          "week": 12,
+          "trades": 0,
+          "earnedCopies": 100,
+          "meanLifetimeCards": 30.8
+        }
+      ],
+      "playersByKindred": [
+        {
+          "kindred": "Nature",
+          "players": 20,
+          "meanLifetimeCards": 30
+        },
+        {
+          "kindred": "Mythical",
+          "players": 20,
+          "meanLifetimeCards": 31
+        },
+        {
+          "kindred": "Arcane",
+          "players": 20,
+          "meanLifetimeCards": 31
+        },
+        {
+          "kindred": "Undead",
+          "players": 20,
+          "meanLifetimeCards": 31
+        },
+        {
+          "kindred": "Constructs",
+          "players": 20,
+          "meanLifetimeCards": 31
+        }
+      ],
+      "maximumNewRewardIdentitiesPerPlayer": 1,
+      "maximumRequiredNewPacksAfterModeledTrades": 24
+    },
+    "farming": {
+      "modelOnly": true,
+      "options": {
+        "population": [
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "weeks": 12,
+        "matchesPerWeek": 700,
+        "eligible": false
+      },
+      "players": 100,
+      "trades": 0,
+      "earnedCopies": 0,
+      "remainingCopies": 0,
+      "conserved": true,
+      "tradeGeneratedGold": 0,
+      "tradeGeneratedXP": 0,
+      "sourceIdentities": [
+        "n013",
+        "m014",
+        "a014",
+        "u014",
+        "c014",
+        "n001"
+      ],
+      "weekly": [
+        {
+          "week": 1,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 2,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 3,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 4,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 5,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 6,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 7,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 8,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 9,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 10,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 11,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        },
+        {
+          "week": 12,
+          "trades": 0,
+          "earnedCopies": 0,
+          "meanLifetimeCards": 30
+        }
+      ],
+      "playersByKindred": [
+        {
+          "kindred": "Nature",
+          "players": 20,
+          "meanLifetimeCards": 30
+        },
+        {
+          "kindred": "Mythical",
+          "players": 20,
+          "meanLifetimeCards": 30
+        },
+        {
+          "kindred": "Arcane",
+          "players": 20,
+          "meanLifetimeCards": 30
+        },
+        {
+          "kindred": "Undead",
+          "players": 20,
+          "meanLifetimeCards": 30
+        },
+        {
+          "kindred": "Constructs",
+          "players": 20,
+          "meanLifetimeCards": 30
+        }
+      ],
+      "maximumNewRewardIdentitiesPerPlayer": 0,
+      "maximumRequiredNewPacksAfterModeledTrades": 24
+    }
+  },
+  "assumptions": [
+    "Hypothetical configured active Trading Hall; repository DEV proposal is paused by default.",
+    "Each modeled match has one primary participating Kindred. Actual verified multi-Kindred participation can progress multiple relevant objectives; this model does not assume it.",
+    "Every eligible weekly objective is claimed within its window; each simulated account clears age/level gates before modeled trading. No signup/starter/first-copy/administrator/sandbox assets enter supply.",
+    "The Veteran additional Kindred reward uses the current deterministic first sorted Nature card, N001. Weekly rewards use the five explicit published proposal card IDs. Mastery currently awards Gold, not additional tradeable cards.",
+    "The market isolates trading contribution and scarcity; it omits concurrent Gold pack acquisition. It is a liquidity stress scenario, not a claim that players remain at 30 cards for twelve weeks.",
+    "Players voluntarily consent to reciprocal one-copy trades to acquire unseen identities. No auction, currency fee, marketplace price or automatic matching policy is introduced.",
+    "Lifetime acquisition survives transfer; guaranteed-new pack requirements can decrease after trading, never increase beyond the original 24 packs for 120 missing cards."
+  ],
+  "findings": [
+    "Only six identities have current repeatable/one-time free tradeable proposal sources. This limits variety even when quantities accumulate.",
+    "Casual schedules below twenty eligible battles per week miss the weekly additional-copy quest and first gain the one-time Veteran source at 100 completed battles.",
+    "Uneven Kindred populations create scarcity. More demand does not create supply, currency or cards.",
+    "Recommend owner review of rotating/varied free additional-copy reward pools through existing configuration before treating the proposed market as mature. Do not silently change permanent commercial policy.",
+    "No modeled purchase is actual revenue. Premium acquisition/holding/refund behavior is verified separately in F/G."
+  ]
+}

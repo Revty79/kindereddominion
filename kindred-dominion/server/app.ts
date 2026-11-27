@@ -26,6 +26,7 @@ import {registerTradingPublication} from "./trading-publication";
 import {shopRoutes} from "./shop-routes";
 import {notificationRoutes} from "./notifications";
 import {tradingSafetyRoutes} from "./trading-safety";
+import {startTradingMaintenance} from "./trading-maintenance";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
   registerShopPublication();registerShopRewards();registerTradingPublication();
   const pool=suppliedPool??database(config),app=Fastify({logger:false,bodyLimit:256*1024,trustProxy:false,requestTimeout:30000,connectionTimeout:10000});
@@ -53,5 +54,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   notificationRoutes(app,pool,auth);
   tradingSafetyRoutes(app,pool,config,auth);
-  if(!suppliedPool)app.addHook("onClose",()=>pool.end());return app;
+  let stopMaintenance:undefined|(()=>Promise<void>);
+  if(!suppliedPool&&config.economyEnabled)app.addHook("onReady",async()=>{stopMaintenance=startTradingMaintenance(pool);});
+  app.addHook("onClose",async()=>{await stopMaintenance?.();if(!suppliedPool)await pool.end();});return app;
 }

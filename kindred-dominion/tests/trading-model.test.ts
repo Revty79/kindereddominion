@@ -1,0 +1,7 @@
+import {describe,it,expect} from "vitest";
+import {simulateTradingMarket,tradingSimulation} from "../scripts/trading-model";
+describe("Trading economy conservation",()=>{
+ it("conserves every earned source through balanced and imbalanced voluntary exchanges",()=>{const result=tradingSimulation();for(const market of Object.values(result.markets)){expect(market.conserved).toBe(true);expect(market.remainingCopies).toBe(market.earnedCopies);expect(market.tradeGeneratedGold).toBe(0);expect(market.tradeGeneratedXP).toBe(0);expect(market.maximumRequiredNewPacksAfterModeledTrades).toBeLessThanOrEqual(24);}expect(result.markets.balanced.trades).toBeGreaterThan(0);expect(result.markets.balanced.sourceIdentities).toHaveLength(6);});
+ it("keeps ineligible farming empty and models the casual weekly threshold honestly",()=>{const result=tradingSimulation();expect(result.markets.farming.earnedCopies).toBe(0);expect(result.markets.farming.trades).toBe(0);expect(result.markets.casual.earnedCopies).toBe(100);expect(result.markets.casual.trades).toBe(0);expect(result.guaranteedNewPackUpperBound).toBe(24);});
+ it("rejects unbounded inputs and repeats a seeded market deterministically",()=>{const input={population:[4,4,4,4,4],weeks:4,matchesPerWeek:50,seed:8};expect(simulateTradingMarket(input)).toEqual(simulateTradingMarket(input));expect(()=>simulateTradingMarket({...input,population:[100000,0,0,0,0]})).toThrow();expect(()=>simulateTradingMarket({...input,weeks:0})).toThrow();});
+});
