@@ -674,6 +674,9 @@ class Host:
             raise OperatorError("The manually selected recovery database does not match its source/schema receipt.")
         self.recheck_private_configuration()
         self.grants()
+        latest_file = self.state_dir / "latest.json"
+        latest = json.loads(latest_file.read_text()) if latest_file.exists() else {}
+        self.resume_context = latest if latest.get("databaseMayHaveChanged") and latest.get("phase") != "completed" else None
         previous = self.current()
         target = selected["previousApplication"]
         target["database"] = state

@@ -1,0 +1,61 @@
+{
+  "version": "0.7.0",
+  "milestones": {
+    "viewport": "4d46870911e27975e71da632df8d1a2b570cc443",
+    "control": "7ea0f2a0b46308288f50183da7b290a5dcd6d770",
+    "operator": "7df27ae12d7eb5f26279aaebe9ad0a827c008c8b"
+  },
+  "tests": {
+    "unitPassed": 403,
+    "postgresIntegrationPassed": 37,
+    "protectedCompiledBrowserPassed": 2,
+    "compiledPlayerRestartBrowserPassed": 1,
+    "priorViewportCompiledV14BrowserPassed": 6,
+    "operatorAdapterPassed": 20
+  },
+  "nativePostgresRehearsal": {
+    "port": 57555,
+    "existingTables": 29,
+    "existingRows": 6439,
+    "successfulMigrationCount": 7,
+    "intentionalFailureMigrationCount": 6,
+    "oldColumnsPreserved": true,
+    "sourceDatabaseUntouched": true,
+    "dockerExecuted": false
+  },
+  "dev": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "database": "kindred_dominion_dev",
+    "role": "kindred_dev",
+    "migrationsApplied": 7,
+    "pending": 0,
+    "existingTablesVerified": 27,
+    "existingRowsVerified": 1996,
+    "originalColumnsIdentical": true,
+    "backupSourceBundleVerified": true,
+    "restoreRehearsalVerified": true,
+    "ready": true,
+    "catalogCards": 150,
+    "ownerFrontendPreserved": 5173
+  },
+  "assets": {
+    "repositoryAssets": 153,
+    "approvedPlayerAssets": 152,
+    "playerChecksumsMatch": true,
+    "playerSourceMastersIncluded": false,
+    "playerDevelopmentChunks": 0
+  },
+  "isolation": {
+    "privateValuesChecked": 4,
+    "secretMatches": 0,
+    "trackedPrivateFiles": 0
+  },
+  "pending": [
+    "Owner and Ember Ubuntu/Docker updater rehearsal and installation",
+    "Actual NGINX protected-route worker CSP and external HTTPS health",
+    "Hosted owner and physical-device acceptance"
+  ],
+  "hostedServerAccessed": false,
+  "economyPolicyInvented": false
+}

@@ -180,6 +180,30 @@ class Adapter(unittest.TestCase):
             events = []; host.stop = lambda release: events.append("stop")
             with self.assertRaises(OperatorError): host.rollback(identifier)
             self.assertEqual(events, [])
+    def test_explicit_recovery_recognizes_stopped_candidate_images_from_failed_update(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory); selected = folder / "selected"; safety = folder / "safety"
+            selected.mkdir(); safety.mkdir()
+            state = {"migrations": [6], "content": ["old-approved"]}
+            write_json(selected / "receipt.json", {"directory": str(selected), "database": state, "previousApplication": {"revision": OLD}})
+            write_json(safety / "receipt.json", {"directory": str(safety)})
+            for item in (selected, safety): write_json(item / "database.snapshot.json", [])
+            host = Host.__new__(Host); host.state_dir = folder; host.resume_context = None
+            identifier = "20261127T000000Z-abcdefabcdef"
+            write_json(folder / ("recovery-" + identifier + ".json"), {"selectedBackup": str(selected), "safetyBackup": str(safety)})
+            write_json(folder / "latest.json", {"databaseMayHaveChanged": True, "phase": "failed-after-migration", "candidate": {"revision": NEW}})
+            host.pg = type("PG", (), {"copy": lambda self, name: self, "compare": lambda self, rows: True})()
+            host.no_other_writers = lambda: None; host.database_state = lambda: state
+            host.recheck_private_configuration = lambda: None; host.grants = lambda: None
+            def current():
+                self.assertEqual(host.resume_context["candidate"]["revision"], NEW)
+                return {"revision": OLD}
+            host.current = current
+            events = []; host.start = lambda release: events.append(release["revision"])
+            host.verify_healthy = lambda release: None; host.journal = lambda *args: {}
+            host.complete = lambda *args: None; host.phase = lambda *args: None
+            result = host.complete_recovery(identifier, "kindred_dominion_test_preserved_20261127000000")
+            self.assertEqual(events, [OLD]); self.assertFalse(result["databaseDeleted"])
 
 
 if __name__ == "__main__": unittest.main()
