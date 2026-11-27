@@ -26,9 +26,10 @@ const actionInput=z.discriminatedUnion("type",[
 // activation/history blobs, private decks or full-state signatures to a player.
 export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,includeContent=true){
   const library=libraryOf(pack),powers=powerTable(state,library),score=scoreGame(state,library);
-  const card=(id:string)=>({id,definitionId:state.cards[id].definitionId,name:library[state.cards[id].definitionId].name,number:library[state.cards[id].definitionId].collectible?.number??"",placementType:library[state.cards[id].definitionId].type,rank:library[state.cards[id].definitionId].rank,printedPower:library[state.cards[id].definitionId].power,power:powers[id]?.effective??library[state.cards[id].definitionId].power,text:library[state.cards[id].definitionId].text,layers:{permanent:state.cards[id].modifier,aura:powers[id]?.auras.reduce((n,a)=>n+a.amount,0)??0,dynamic:powers[id]?.dynamic??0},protections:powers[id]?[...powers[id].permanentProtections,...powers[id].continuousProtections.map(p=>p.protection)]:[]});
+  const opponent=pack.decks.find(deck=>deck.cards.length===row.decks[1].length&&deck.cards.every((id,index)=>id===row.decks[1][index]));
+  const card=(id:string)=>({id,owner:state.cards[id].owner,definitionId:state.cards[id].definitionId,name:library[state.cards[id].definitionId].name,number:library[state.cards[id].definitionId].collectible?.number??"",placementType:library[state.cards[id].definitionId].type,rank:library[state.cards[id].definitionId].rank,printedPower:library[state.cards[id].definitionId].power,power:powers[id]?.effective??library[state.cards[id].definitionId].power,text:library[state.cards[id].definitionId].text,layers:{permanent:state.cards[id].modifier,aura:powers[id]?.auras.reduce((n,a)=>n+a.amount,0)??0,dynamic:powers[id]?.dynamic??0},protections:powers[id]?[...powers[id].permanentProtections,...powers[id].continuousProtections.map(p=>p.protection)]:[]});
   return {id:row.id,revision:row.revision,status:state.phase,contentVersion:row.version_id,engineVersion:row.engine_version,createdAt:row.created_at,completedAt:row.completed_at,
-    ...(includeContent?{content:pack}:{}),configuration:state.config,active:state.active,turn:state.turn,testingAccess:row.testing_access,
+    ...(includeContent?{content:pack}:{}),opponent:{type:"computer",name:opponent?.name??"Computer opponent",kindred:opponent?.collection??"mixed"},configuration:state.config,active:state.active,turn:state.turn,testingAccess:row.testing_access,
     board:state.board.map(c=>({row:c.row,col:c.col,owner:c.owner,tokens:c.tokens,fortification:c.fortification,creature:c.creature?card(c.creature):null})),
     hand:state.players[0].hand.map(card),players:state.players.map(p=>({handCount:p.hand.length,drawCount:p.draw.length,graveyard:p.graveyard.map(card),exile:p.exile.map(card),mulliganDone:p.mulliganDone})),
     legalActions:state.phase==="playing"&&state.active===0?legalPlays(state,library,0).map(a=>a.type==="play"?{type:a.type,card:a.card,row:a.row,col:a.col}:null):[],
@@ -36,21 +37,30 @@ export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,i
     log:state.events.slice(-50).map(e=>({turn:e.turn,type:e.type,text:publicEventText(e)})),result:state.result};
 }
 export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
+  const opponents=(pack:ContentPack,config:GameState["config"])=>pack.decks.filter(deck=>validateDeck(deck.cards,libraryOf(pack),config).length===0);
   async function own(db:any,id:string,playerId:string,lock=false){const {rows:[r]}=await db.query(`SELECT * FROM kd.match WHERE id=$1 AND player_id=$2 ${lock?"FOR UPDATE":""}`,[id,playerId]);if(!r)reject(404,"match_missing","Match was not found.");return r;}
   async function complete(c:any,row:any,state:GameState){if(state.phase!=="finished"||row.testing_access)return;
     const kinds=[...new Set((row.decks[0] as string[]).map(id=>row.record.library[id].kindred))];
     await c.query("INSERT INTO kd.match_completion(match_id,player_id,scoring,kindreds,outcome) VALUES($1,$2,$3,$4,$5) ON CONFLICT(match_id) DO NOTHING",[row.id,row.player_id,state.config.scoring,JSON.stringify(kinds),state.result!.winner===0?"win":state.result!.winner===null?"draw":"loss"]);
   }
+  app.get("/api/match-options",async req=>{
+    const actor=await auth.actor(req),query=z.object({deckId:uuid}).strict().parse(req.query),deck=await getDeck(pool,query.deckId,actor.id),pack=await activeContent(pool);
+    if(deck.draft||deck.testingAccess)reject(400,"deck_not_ready","Choose a legal ordinary playing deck.");
+    await validateOwnedDeck(pool,actor,deck.cards,pack,deck.config);
+    return {contentVersion:pack.id,configuration:deck.config,opponents:opponents(pack,deck.config).map(deck=>({id:deck.id,name:deck.name,kindred:deck.collection,count:deck.cards.length}))};
+  });
   app.post("/api/matches",async req=>{
-    const actor=await auth.actor(req),b=z.object({deckId:uuid,scoring:z.enum(["classic","domination"]).optional()}).strict().parse(req.body);
+    const actor=await auth.actor(req),b=z.object({deckId:uuid,scoring:z.enum(["classic","domination"]).optional(),opponentDeckId:z.string().min(1).max(100).optional()}).strict().parse(req.body);
     return transaction(pool,async c=>{
       await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[actor.id]);
       const deck=await getDeck(c,b.deckId,actor.id),pack=await activeContent(c),library=libraryOf(pack),config={...deck.config,...(b.scoring?{scoring:b.scoring}:{})};
       if(deck.draft)reject(400,"draft_deck","Finish and save a legal playing deck before entering a match.");
       await validateOwnedDeck(c,actor,deck.cards,pack,config,deck.testingAccess);
-      const candidates=pack.decks.filter(d=>validateDeck(d.cards,library,config).length===0);
+      const candidates=opponents(pack,config);
       if(!candidates.length)reject(400,"opponent_deck_unavailable","No computer deck is legal under this selected configuration.");
-      const seed=crypto.randomBytes(4).readUInt32LE(),startingPlayer=crypto.randomInt(2) as 0|1,opponent=candidates[crypto.randomInt(candidates.length)];
+      const selected=b.opponentDeckId?candidates.find(deck=>deck.id===b.opponentDeckId):null;
+      if(b.opponentDeckId&&!selected)reject(400,"opponent_deck_unavailable","Choose a published computer formation allowed by this deck's rules.");
+      const seed=crypto.randomBytes(4).readUInt32LE(),startingPlayer=crypto.randomInt(2) as 0|1,opponent=selected??candidates[crypto.randomInt(candidates.length)];
       const decks:[string[],string[]]=[deck.cards,opponent.cards];let state=createMatch(decks,library,config,seed,startingPlayer),record=newRecord(state,library,decks,pack.id,"Server-authoritative computer match");
       const ai:Action={type:"mulligan",player:1,cards:computerMulligan(state,library,1)};state=act(state,ai,library);record=appendRecord(record,ai,state);
       const id=crypto.randomUUID(),{rows:[row]}=await c.query("INSERT INTO kd.match(id,player_id,opponent_type,version_id,engine_version,config,decks,seed,starting_player,state,record,status,testing_access) VALUES($1,$2,'computer',$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",[id,actor.id,pack.id,record.engineVersion,config,JSON.stringify(decks),seed,startingPlayer,state,record,state.phase,deck.testingAccess]);

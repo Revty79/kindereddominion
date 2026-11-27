@@ -443,7 +443,7 @@ export function BoardView({
               </span>
               {def ? (
                 <>
-                  <div className="sandbox-played-card"><CollectibleCard card={def} library={lib} artwork={artwork?.[def.id] || cardArtwork(content,def.id)} scale="battlefield"/></div>
+                  <div className="sandbox-played-card"><CollectibleCard card={def} library={lib} artwork={artwork?.[def.id] || cardArtwork(content,def.id)} scale="battlefield" player={card!.owner}/></div>
                   <span>
                     {currentPower(state, lib, card!.id)} power ·{" "}
                     {card!.stack.length + 1} form(s)

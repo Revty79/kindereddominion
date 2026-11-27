@@ -948,7 +948,7 @@ export default function App({
                                     </span>
                                     {definition ? (
                                       <>
-                                        <div className="played-card-object"><CollectibleCard card={definition} library={CARDS} artwork={artwork[definition.id]} scale="battlefield"/></div>
+                                        <div className="played-card-object"><CollectibleCard card={definition} library={CARDS} artwork={artwork[definition.id]} scale="battlefield" player={field.cards[id!].owner}/></div>
                                         <span className="power">
                                           {currentPower(field, CARDS, id!)}
                                           <small>effective · printed {definition.power}</small>
