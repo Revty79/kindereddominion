@@ -6,6 +6,7 @@ import type {ContentPack} from "../src/content/types";
 import {act,createMatch,legalPlays,validateDeck,placementIssue} from "../src/engine/game";
 import {placementDestinations,tacticalPreview} from "../src/ui/tactical-preview";
 import {PreviewCache} from "./preview-cache";
+import {resolutionBatch,resolutionCapture,visiblePosition,type AcceptedResolution,type ResolutionBatch} from "../src/ui/resolution-presentation";
 import {chooseComputerAction,computerMulligan} from "../src/engine/ai";
 import {powerTable} from "../src/engine/evaluation";
 import {scoreGame} from "../src/engine/scoring";
@@ -35,7 +36,7 @@ export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,i
   const card=(id:string)=>({id,owner:state.cards[id].owner,definitionId:state.cards[id].definitionId,name:library[state.cards[id].definitionId].name,number:library[state.cards[id].definitionId].collectible?.number??"",placementType:library[state.cards[id].definitionId].type,rank:library[state.cards[id].definitionId].rank,printedPower:library[state.cards[id].definitionId].power,power:powers[id]?.effective??library[state.cards[id].definitionId].power,text:library[state.cards[id].definitionId].text,layers:{permanent:state.cards[id].modifier,aura:powers[id]?.auras.reduce((n,a)=>n+a.amount,0)??0,dynamic:powers[id]?.dynamic??0},protections:powers[id]?[...powers[id].permanentProtections,...powers[id].continuousProtections.map(p=>p.protection)]:[]});
   return {id:row.id,revision:row.revision,status:state.phase,contentVersion:row.version_id,engineVersion:row.engine_version,createdAt:row.created_at,completedAt:row.completed_at,
     ...(includeContent?{content:pack}:{}),opponent:{type:"computer",name:opponent?.name??"Computer opponent",kindred:opponent?.collection??"mixed"},configuration:state.config,active:state.active,turn:state.turn,testingAccess:row.testing_access,cosmetics:row.cosmetics??{},rarities:row.rarities??{},
-    board:state.board.map(c=>({row:c.row,col:c.col,owner:c.owner,tokens:c.tokens,fortification:c.fortification,creature:c.creature?card(c.creature):null})),
+    board:visiblePosition(state,library).board,
     hand:state.players[0].hand.map(card),players:state.players.map(p=>({handCount:p.hand.length,drawCount:p.draw.length,graveyard:p.graveyard.map(card),exile:p.exile.map(card),mulliganDone:p.mulliganDone})),
     legalActions:state.phase==="playing"&&state.active===0?legalPlays(state,library,0).map(a=>a.type==="play"?{type:a.type,card:a.card,row:a.row,col:a.col}:null):[],
     score:{totals:score.totals,rows:score.rows,columns:score.columns,creatures:score.creatures,bonuses:score.breakdown?.bonuses??[0,0]},
@@ -108,11 +109,13 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
       if(prior)reject(409,"duplicate_action","This action request was already committed.");if(row.revision!==b.revision)reject(409,"stale_match","Match changed in another session. Reload before acting.");
       if(row.status==="finished")reject(409,"match_finished","The match is already complete.");
       const pack=await contentVersion(c,row.version_id),library=libraryOf(pack);let state:GameState=row.state,record:MatchRecord=row.record;
-      const before=state,steps:DiagnosticStep[]=[];
+      const before=state,steps:DiagnosticStep[]=[],resolutions:AcceptedResolution[]=[];let presentationTruncated=false;
       const apply=async(action:Action)=>{
-        let next:GameState;try{next=act(state,action,library,{captureStates:true,onStep:s=>steps.push(s)});}catch{reject(400,"illegal_action","The submitted action is not legal for this match state.");}
+        const previous=state,capture=resolutionCapture(state);
+        let next:GameState;try{next=act(state,action,library,capture.observer);}catch{reject(400,"illegal_action","The submitted action is not legal for this match state.");}
         if(next.fault)reject(422,"resolution_fault","The action was rolled back because resolution could not complete safely.");
         state=next;record=appendRecord(record,action,next);
+        steps.push(...capture.steps);presentationTruncated||=capture.truncated;resolutions.push({action,sequence:record.actions.length,before:previous,after:next,steps:capture.steps});
         await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,$2,$3,$4,$5)",[id,record.actions.length,b.requestId,action,record.actions.at(-1)!.signature]);
       };
       await apply({...b.action,player:0});
@@ -122,7 +125,8 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
       row.record=record;await complete(c,row,state);
       const view=publicMatch({...row,state,revision},pack);
       const frames=presentationFrames(before,state,steps,library).filter(f=>f.changes.length).map(f=>{const view=publicMatch({...row,state:f.state,revision},pack,f.state,false);return {caption:f.caption,changes:f.changes,board:view.board,score:view.score};});
-      return {...view,presentation:frames,rewardSummary:(await c.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[id,actor.id])).rows[0]??null};
+      let resolution:ResolutionBatch;try{resolution=resolutionBatch(id,row.revision,revision,resolutions,library,presentationTruncated);}catch{resolution={schema:1,id:`${id}:${revision}`,matchId:id,fromRevision:row.revision,toRevision:revision,events:[],truncated:true};}
+      return {...view,presentation:frames,resolution,rewardSummary:(await c.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[id,actor.id])).rows[0]??null};
     });
   });
   app.get<{Params:{id:string}}>("/api/matches/:id/replay",async req=>{

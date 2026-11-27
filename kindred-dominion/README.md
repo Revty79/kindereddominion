@@ -4,7 +4,9 @@ Version **0.7.0 - V1.5: Economy Integration and Sandbox Foundation**
 
 A persistent tactical card game with 150 illustrated Founding Kindreds cards, custom decks and server-run computer battles. The main application is the player game. Card ownership, saved decks, account permissions, results and acquisition history live in PostgreSQL. The approved full-bleed 3:4 card renderer is shared across the catalog, collection, deck builder, hand, battlefield, inspection, pack opening and authorized Studio.
 
-V1.6D adds [authoritative tactical placement previews](docs/V1.6D-VALIDATION.md), affected-tile numbers, ability/evolution explanations and explicit hidden/random uncertainty. Follow the [current startup and owner checklist](docs/V1.6D-OWNER-ACCEPTANCE.md). [Representative examples and screenshots](docs/V1.6D-VALIDATION.md#representative-examples-and-screenshots) show the original founding mechanics without changing card balance or artwork.
+V1.6E adds [accepted player/opponent action presentation](docs/V1.6E-VALIDATION.md): opponent card flight, actual influence and ability effects, score changes and interruption-safe reconciliation. Follow the [current startup and owner checklist](docs/V1.6E-OWNER-ACCEPTANCE.md). Animation never controls persistent gameplay or reward settlement.
+
+V1.6D adds [authoritative tactical placement previews](docs/V1.6D-VALIDATION.md), affected-tile numbers, ability/evolution explanations and explicit hidden/random uncertainty. [Representative examples and screenshots](docs/V1.6D-VALIDATION.md#representative-examples-and-screenshots) show the original founding mechanics without changing card balance or artwork.
 
 V1.6C adds [interactive player card pickup, dragging and battlefield placement](docs/V1.6C-VALIDATION.md), keyboard/touch controls, review/direct confirmation modes and larger tile numbers. Its [testing guide](docs/V1.6C-OWNER-ACCEPTANCE.md) includes the disclosed local DEV migration incident. [Visual evidence](docs/V1.6C-VALIDATION.md#visual-evidence) covers desktop, pending placement, tablet and touch layouts.
 

@@ -1312,6 +1312,7 @@ export class Resolver {
     cell.creature = id;
     for (const stage of incoming.stack)
       this.state.cards[stage].lineage = incoming.lineage;
+    this.diagnostic("placement-arrival", "Evolution occupies its destination before influence resolves.", {card:id});
   }
   turnEffects(trigger: "turnStart" | "turnEnd"): void {
     const context = {
@@ -1481,6 +1482,7 @@ export function act(
           if (cell.creature) resolver.remove([cell.creature], "sacrifice");
           cell.creature = card.id;
           card.location = "battlefield";
+          resolver.diagnostic("placement-arrival", "Accepted creature occupies its destination before influence resolves.", {card:card.id});
           // The replacement is already present when sacrifice/death abilities resolve.
           if (!resolver.advanced || def.type !== "standard") resolver.drain();
         }

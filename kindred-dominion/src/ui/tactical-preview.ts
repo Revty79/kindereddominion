@@ -13,7 +13,7 @@ export type TacticalTile=Position & {before:TileValues;after:TileValues;effects:
 export type PlacementDestination=Position & {legal:boolean;code:string;reason:string;kind:string};
 export type TacticalPreview={schema:1;card:string;target:Position;complete:boolean;uncertainty:string|null;uncertaintyCode:string|null;fault:boolean;tiles:TacticalTile[];abilities:{source:string;ability:string;conditional:boolean;description:string;conditions:string[]}[];changes:PublicChange[];scoreBefore:[number,number];scoreAfter:[number,number];privateConsequencesOmitted:boolean};
 const signed=(n:number)=>n>0?`+${n}`:String(n);
-const category=(change:PublicChange):EffectCategory=>change.kind==="departure"?({DEST:"destruction",SAC:"sacrifice",RETURN:"return",BANISH:"banish",EVO:"evolution"} as const)[change.label as "DEST"]??"destruction":change.kind==="arrival"?({EVO:"evolution",REPLACE:"replacement",REVIVE:"resurrection"} as const)[change.label as "EVO"]??"placement":change.kind;
+export const effectCategory=(change:PublicChange):EffectCategory=>change.kind==="departure"?({DEST:"destruction",SAC:"sacrifice",RETURN:"return",BANISH:"banish",EVO:"evolution"} as const)[change.label as "DEST"]??"destruction":change.kind==="arrival"?({EVO:"evolution",REPLACE:"replacement",REVIVE:"resurrection"} as const)[change.label as "EVO"]??"placement":change.kind;
 
 export function placementDestinations(state:GameState,library:CardLibrary,player:Player,card:string):PlacementDestination[]{
   const definition=library[state.cards[card]?.definitionId];
@@ -47,7 +47,7 @@ export function tacticalPreview(before:GameState,library:CardLibrary,player:Play
     if(a.owner!==b.owner)add("territory","CAP",`Preview territory ${a.owner===null?"neutral":a.owner===0?"Jade":"Amber"} to ${b.owner===0?"Jade":"Amber"}.`);
     const oldId=cell.creature,newId=cellAt(after,cell.row,cell.col)!.creature;
     if(a.creature&&b.creature&&oldId===newId&&a.creature.power!==b.creature.power)add("power",`P${signed(b.creature.power-a.creature.power)}`,`Preview ${b.creature.name} power ${a.creature.power} to ${b.creature.power}.`);
-    for(const change of local){const kind=category(change);if(["tokens","fortification","territory","power"].includes(kind))continue;if(!effects.some(e=>e.category===kind))add(kind,EFFECT_SYMBOLS[kind],change.text);}
+    for(const change of local){const kind=effectCategory(change);if(["tokens","fortification","territory","power"].includes(kind))continue;if(!effects.some(e=>e.category===kind))add(kind,EFFECT_SYMBOLS[kind],change.text);}
     if(newId&&newId!==oldId&&b.creature){const printed=library[after.cards[newId].definitionId].power;add("power",printed===b.creature.power?`P${b.creature.power}`:`P${printed}→${b.creature.power}`,`Preview arrival: ${b.creature.name} at power ${b.creature.power}; printed ${printed}, change ${signed(b.creature.power-printed)}.`);if(b.creature.protections.length)add("protection","SH",`Preview ${b.creature.name}: protected from ${b.creature.protections.join(" and ")}.`);}
     if(!local.length&&!influence.length&&!(cell.row===row&&cell.col===col))return [];
     return [{row:cell.row,col:cell.col,before:a,after:b,effects,affected:local.length>0,pattern:influence.length>0,influence}];
