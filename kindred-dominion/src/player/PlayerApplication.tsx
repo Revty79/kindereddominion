@@ -62,7 +62,7 @@ export default function PlayerApplication(){
       {screen==="recover"&&<RecoveryForm local={session?.capabilities?.recovery==="local-operator"} busy={busy} run={run} onRecovered={async()=>{clear();await refresh();go("login");setNotice("Password reset. Log in with your new password. All previous sessions are signed out.");}}/>}
       {screen==="commerce"&&player&&<Commerce key={player.id} playerId={player.id} content={content} initialOrder={orderTarget} onOpenOrder={openCommerce} onSaved={refresh} onBrowse={()=>go("commerce")} onShop={()=>go("shop")}/>}
       {screen==="trading"&&player&&<TradingHall key={player.id} playerId={player.id} content={content} initialOffer={offerTarget} onSaved={refresh} onProgression={()=>go("progression")}/>}
-      {screen==="notifications"&&player&&<Notifications key={player.id} onTrade={openTrade}/>}
+      {screen==="notifications"&&player&&<Notifications key={player.id} onTrade={openTrade} onCommerce={openCommerce}/>}
       {screen==="studio"&&player&&(player.role!=="player"&&Developer?<Suspense fallback={<p>Opening private workspace…</p>}><Developer key={player.id} onError={setError} content={content}/></Suspense>:<section className="player-panel"><h1>Developer access required</h1><p>This workspace requires a privileged account and the development application.</p></section>)}
     </main><footer className="player-footer"><span>KINDRED DOMINION · FOUNDING KINDREDS</span><a href="practice.html">Practice offline</a><span>Collection and progress save automatically.</span></footer>
   </div></CardPresentation>;

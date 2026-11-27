@@ -1,7 +1,8 @@
+import {stripeEventTypes} from "../server/commerce-event-types";
 import fs from "node:fs";
 import path from "node:path";
 import {createRequire} from "node:module";
 export function stripeCliPath(){if(process.env.STRIPE_CLI_PATH){const file=path.resolve(process.env.STRIPE_CLI_PATH);if(!fs.existsSync(file))throw Error("Configured Stripe CLI binary is unavailable.");return file;}const file=path.resolve(".local/stripe-cli/node_modules/@stripe/cli/package.json");if(!fs.existsSync(file))throw Error("Install the documented local official Stripe CLI package first.");const require=createRequire(file),platform=require("./platforms.json")[process.platform+"-"+process.arch];if(!platform)throw Error("This Stripe CLI platform is unsupported.");let root:string;try{root=path.dirname(require.resolve(platform.pkg+"/package.json"));}catch{root=path.dirname(file)+"/vendor";}const binary=path.join(root,"bin",platform.bin);if(!fs.existsSync(binary))throw Error("Stripe CLI binary installation is incomplete.");return binary;}
-export const stripeEvents=["checkout.session.completed","checkout.session.async_payment_succeeded","checkout.session.async_payment_failed","checkout.session.expired","payment_intent.payment_failed","charge.refunded","refund.created","refund.updated","refund.failed","charge.dispute.created","charge.dispute.updated","charge.dispute.closed"];
+export const stripeEvents=stripeEventTypes;
 // Raw CLI streams can contain signing secrets or unrelated provider data. Output only known status facts.
 export function sanitizedStripeOutput(chunk:string){const lines:string[]=[];if(/\bReady[!:]/i.test(chunk))lines.push("Stripe sandbox listener ready.");for(const type of stripeEvents)if(chunk.includes(type))lines.push("Sandbox event: "+type);const status=chunk.match(/\[(\d{3})\]/)?.[1];if(status)lines.push("Webhook HTTP status: "+status);return [...new Set(lines)];}

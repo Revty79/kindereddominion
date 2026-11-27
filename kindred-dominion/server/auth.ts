@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import type {} from "@fastify/cookie";
 import type {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
 import {z} from "zod";
 import {transaction,type DB} from "./db";
@@ -38,6 +39,8 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig,
   }
   app.addHook("preHandler",async req=>{
     if(!req.url.startsWith("/api/")||["GET","HEAD","OPTIONS"].includes(req.method))return;
+    // This single route verifies the raw-body Stripe signature instead of a browser session.
+    if(req.method==="POST"&&req.routeOptions.url==="/api/commerce/stripe/webhook")return;
     if(req.headers.origin!==config.origin)reject(403,"origin_rejected","Request origin is not permitted.");
     const s=await session(req),csrf=req.headers["x-csrf-token"];
     if(!s||typeof csrf!=="string"||!equal(s.csrf,csrf))reject(403,"csrf_rejected","Refresh the account page before retrying this request.");

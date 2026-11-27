@@ -29,6 +29,7 @@ import {tradingSafetyRoutes} from "./trading-safety";
 import {startTradingMaintenance} from "./trading-maintenance";
 import {registerCommercePublication} from "./commerce-publication";
 import {commerceRoutes} from "./commerce-routes";
+import {stripeWebhookRoutes,startCommerceMaintenance} from "./commerce-events";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
   registerShopPublication();registerShopRewards();registerTradingPublication();registerCommercePublication();
   const pool=suppliedPool??database(config),app=Fastify({logger:false,bodyLimit:256*1024,trustProxy:false,requestTimeout:30000,connectionTimeout:10000});
@@ -57,7 +58,10 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   notificationRoutes(app,pool,auth);
   tradingSafetyRoutes(app,pool,config,auth);
   commerceRoutes(app,pool,config,auth);
+  await stripeWebhookRoutes(app,pool,config);
   let stopMaintenance:undefined|(()=>Promise<void>);
+  let stopCommerce:undefined|(()=>Promise<void>);
   if(!suppliedPool&&config.economyEnabled)app.addHook("onReady",async()=>{stopMaintenance=startTradingMaintenance(pool);});
-  app.addHook("onClose",async()=>{await stopMaintenance?.();if(!suppliedPool)await pool.end();});return app;
+  if(!suppliedPool&&config.economyEnabled&&config.commerceMode!=="disabled")app.addHook("onReady",async()=>{stopCommerce=startCommerceMaintenance(pool,config);});
+  app.addHook("onClose",async()=>{await stopMaintenance?.();await stopCommerce?.();if(!suppliedPool)await pool.end();});return app;
 }
