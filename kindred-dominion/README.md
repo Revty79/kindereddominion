@@ -4,7 +4,9 @@ Version **0.7.0 - V1.5: Economy Integration and Sandbox Foundation**
 
 A persistent tactical card game with 150 illustrated Founding Kindreds cards, custom decks and server-run computer battles. The main application is the player game. Card ownership, saved decks, account permissions, results and acquisition history live in PostgreSQL. The approved full-bleed 3:4 card renderer is shared across the catalog, collection, deck builder, hand, battlefield, inspection, pack opening and authorized Studio.
 
-V1.6B completes [persistent player deck construction and battle selection](docs/V1.6B-VALIDATION.md), including recoverable working edits, legal duplicate copies, repair and responsive collection controls. Follow the [current local startup and owner checklist](docs/V1.6B-OWNER-ACCEPTANCE.md) before testing. [Interface screenshots](docs/V1.6B-VALIDATION.md#player-interface-and-screenshots) show the compiled desktop, tablet, mobile and custom-match journeys.
+V1.6C adds [interactive player card pickup, dragging and battlefield placement](docs/V1.6C-VALIDATION.md), keyboard/touch controls, review/direct confirmation modes and larger tile numbers. Follow the [current startup and owner checklist](docs/V1.6C-OWNER-ACCEPTANCE.md), including the disclosed local DEV migration incident, before testing. [Visual evidence](docs/V1.6C-VALIDATION.md#visual-evidence) covers desktop, pending placement, tablet and touch layouts.
+
+V1.6B completes [persistent player deck construction and battle selection](docs/V1.6B-VALIDATION.md), including recoverable working edits, legal duplicate copies, repair and responsive collection controls. [Interface screenshots](docs/V1.6B-VALIDATION.md#player-interface-and-screenshots) show the compiled desktop, tablet, mobile and custom-match journeys.
 
 V1.6A prepares [forty-copy starter proposals](docs/V1.6A-STARTER-PROPOSALS.md), [balance evidence](docs/v1.6a/BALANCE.md), and a versioned, account-bound upgrade path. Read the [owner review and local acceptance checklist](docs/V1.6A-OWNER-ACCEPTANCE.md) before activation. Both starter grant flags default off; updating the application does not automatically backfill accounts.
 
