@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """One-time reviewed trust installation; never deploy or replace credentials."""
 import argparse
+import hashlib
 import importlib.util
 import json
 import os
@@ -17,6 +18,8 @@ sys.modules[spec.name] = package
 spec.loader.exec_module(package)
 from kindred_installer.bundle import activate, git_blob, secure, stage
 from kindred_installer.core import OperatorError, revision
+from kindred_installer.host import write_json
+from kindred_installer.release import validate_policy
 
 MARKER = "# Kindred Dominion managed operator wrapper"
 ACTIONS = ("update", "status", "backup", "rollback", "start", "stop", "restart")
@@ -56,17 +59,37 @@ def install_at(repo, selected, library, private, state, commands):
         if wrapper.is_symlink() or wrapper.exists() and (MARKER not in wrapper.read_text() or os.name == "posix" and (wrapper.stat().st_uid != 0 or wrapper.stat().st_mode & 0o022)):
             raise OperatorError("Refusing unsafe/unrelated existing command: " + str(wrapper))
     trust_data = blob(selected, "kindred-dominion/deployment/operator/release-trust.json")
+    new_policy = json.loads(trust_data)
+    validate_policy(new_policy, "test")
+    validate_policy(new_policy, "production")
     trust = private / "release-trust.json"
+    previous_trust = None
     if trust.exists() or trust.is_symlink():
         secure(trust, private=True)
-        if json.loads(trust.read_bytes()) != json.loads(trust_data):
-            raise OperatorError("Existing root release trust differs. Explicitly review a trust rotation; it was not silently replaced.")
+        previous_trust = trust.read_bytes()
+        old_policy = json.loads(previous_trust)
+        legacy_policy = {key: new_policy[key] for key in ("repositoryId", "approverIds", "workflowSha256")}
+        legacy_policy["format"] = 1
+        if old_policy != new_policy and old_policy != legacy_policy:
+            raise OperatorError("Existing root release trust is neither the recognized legacy policy nor the current scoped policy. Review an explicit trust rotation; nothing was replaced.")
     record = stage(library, selected, blob, {"policy": "initial-explicit-owner-install", "revision": selected})
     launcher = library / "launcher.py"
     if launcher.exists() or launcher.is_symlink():
         secure(launcher)
     launcher_data = blob(selected, "kindred-dominion/deployment/operator/launcher.py")
     compile(launcher_data, "launcher.py", "exec")
+    policy_upgraded = previous_trust is not None and json.loads(previous_trust) != new_policy
+    if policy_upgraded:
+        previous_hash = hashlib.sha256(previous_trust).hexdigest()
+        preserved = private / ("release-trust.previous-" + previous_hash + ".json")
+        if preserved.exists() or preserved.is_symlink():
+            secure(preserved, private=True)
+            if preserved.read_bytes() != previous_trust:
+                raise OperatorError("Preserved legacy policy differs; it was not overwritten.")
+        else:
+            atomic_file(preserved, previous_trust, 0o600)
+        write_json(state / "release-policy-upgrade.json", {"revision": selected, "fromSha256": previous_hash, "toSha256": hashlib.sha256(trust_data).hexdigest(), "legacyPolicyBackup": str(preserved), "testEligibility": new_policy["environments"]["test"]["eligibility"], "productionDeploymentEnabled": False})
+        atomic_file(trust, trust_data, 0o600)
     for name, data in (("operator.json", blob(selected, "kindred-dominion/deployment/operator/operator.example.json")), ("release-trust.json", trust_data)):
         target = private / name
         if not target.exists():
@@ -82,7 +105,7 @@ def install_at(repo, selected, library, private, state, commands):
     for action in ACTIONS:
         wrapper = commands / ("kindred-" + action)
         atomic_file(wrapper, ('#!/bin/sh\n' + MARKER + '\nexec /usr/bin/python3 -E -s -B "' + str(launcher) + '" ' + action + ' "$@"\n').encode(), 0o755)
-    return {"installedOperatorRevision": selected, "commands": ["kindred-" + action for action in ACTIONS], "privateCredentialsReplaced": False, "applicationDeployed": False, "routineUpdate": "sudo kindred-update"}
+    return {"installedOperatorRevision": selected, "commands": ["kindred-" + action for action in ACTIONS], "privateCredentialsReplaced": False, "applicationDeployed": False, "releasePolicyUpgraded": policy_upgraded, "environment": "test", "productionDeploymentEnabled": False, "routineUpdate": "sudo kindred-update"}
 
 
 def main():

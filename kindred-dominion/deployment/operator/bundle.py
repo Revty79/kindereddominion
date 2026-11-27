@@ -11,10 +11,12 @@ import sys
 import uuid
 from .core import OperatorError, revision
 from .host import write_json
+from .release import TEST_POLICY, PRODUCTION_POLICY
 
 FILES = ("__init__.py", "bootstrap.py", "bundle.py", "release.py", "core.py", "host.py", "kindred.py", "operator.example.json", "operator-runtime.json")
 PREFIX = "kindred-dominion/deployment/operator/"
 MAX_FILE = 512 * 1024
+METADATA = {"protocol": 1, "files": list(FILES), "releasePolicies": [TEST_POLICY, PRODUCTION_POLICY]}
 
 
 def secure(path, *, private=False):
@@ -56,7 +58,7 @@ def validate_record(library, record):
         if target.stat().st_size > MAX_FILE or hashlib.sha256(target.read_bytes()).hexdigest() != expected:
             raise OperatorError("Installed operator integrity failed; application was not changed. Restore the previous verified operator pointer using the documented operator recovery command.")
     metadata = json.loads((directory / "operator-runtime.json").read_text())
-    if metadata != {"protocol": 1, "files": list(FILES)}:
+    if metadata != METADATA:
         raise OperatorError("Unsupported operator protocol; a reviewed one-time trust upgrade is required.")
     return directory
 
@@ -80,7 +82,7 @@ def stage(library, sha, blob, approval):
     secure(releases)
     # Read and validate ALL bytes before creating any executable installation.
     data = {name: blob(sha, PREFIX + name) for name in FILES}
-    if any(len(value) > MAX_FILE for value in data.values()) or json.loads(data["operator-runtime.json"]) != {"protocol": 1, "files": list(FILES)}:
+    if any(len(value) > MAX_FILE for value in data.values()) or json.loads(data["operator-runtime.json"]) != METADATA:
         raise OperatorError("Candidate operator protocol/file bounds are incompatible; existing operator retained.")
     for name in FILES:
         if name.endswith(".py"):

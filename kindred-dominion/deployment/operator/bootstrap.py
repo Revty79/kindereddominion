@@ -40,7 +40,7 @@ def choose(host, approvals, requested=None, resume=False):
         if sha == current["revision"]:
             break
     else:
-        raise OperatorError("Running release is outside the bounded main history. Keep the app running and ask the maintainer to review its ancestry; use an explicitly approved forward revision after review.")
+        raise OperatorError("Running release is outside the bounded main history. Keep the app running and ask the maintainer to review its ancestry; use an explicit forward revision with successful exact-commit CI after review.")
     return approvals.select(forward)
 
 
@@ -51,9 +51,9 @@ def main(argv, *, library, state, trust, current, host_factory=Host, approvals_f
     args, rest = parser.parse_known_args(argv)
     if args.command != "update":
         return importlib.import_module(__package__ + ".kindred").main(argv)
-    update_parser = argparse.ArgumentParser(prog="kindred-update", description="Automatically select and deploy the latest owner-approved main release.")
-    update_parser.add_argument("revision", nargs="?", help="Optional approved full SHA for advanced operations")
-    update_parser.add_argument("--reviewed", action="store_true", help="Legacy acknowledgement; never bypasses approval")
+    update_parser = argparse.ArgumentParser(prog="kindred-update", description="Automatically deploy the latest exact-CI-validated main release to the fixed TEST environment.")
+    update_parser.add_argument("revision", nargs="?", help="Optional eligible full SHA for advanced operations")
+    update_parser.add_argument("--reviewed", action="store_true", help="Legacy acknowledgement; never bypasses CI or environment safeguards")
     update_parser.add_argument("--rehearse-only", action="store_true")
     update_parser.add_argument("--resume", action="store_true")
     selected = update_parser.parse_args(rest)
@@ -66,10 +66,12 @@ def main(argv, *, library, state, trust, current, host_factory=Host, approvals_f
         host.preflight()
         secure(trust, private=True)
         policy = json.loads(trust.read_text())
-        approvals = approvals_factory(policy, lambda sha, path: git_blob(host.repo, sha, path))
+        target = host.release_target()
+        approvals = approvals_factory(policy, lambda sha, path: git_blob(host.repo, sha, path), environment=target["environment"], target=target)
+        approvals.require_deployment_allowed()
         approval = choose(host, approvals, selected.revision, selected.resume)
         sha = approval["revision"]
-        print("Verified approved release " + sha + ". Preparing operator and candidate validation.", flush=True)
+        print("Verified exact-commit TEST CI for release " + sha + ". Preparing operator and candidate validation.", flush=True)
         record = stage(library, sha, lambda commit, path: git_blob(host.repo, commit, path), approval)
         # Revalidate latest run attempts immediately before code activation.
         approval = approvals.verify(sha)

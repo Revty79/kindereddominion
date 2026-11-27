@@ -1,1 +1,1 @@
-{"protocol":1,"files":["__init__.py","bootstrap.py","bundle.py","release.py","core.py","host.py","kindred.py","operator.example.json","operator-runtime.json"]}
+{"protocol":1,"files":["__init__.py","bootstrap.py","bundle.py","release.py","core.py","host.py","kindred.py","operator.example.json","operator-runtime.json"],"releasePolicies":["test-exact-main-ci-v1","owner-dispatch-and-source-ci-v1"]}

@@ -18,8 +18,10 @@ import urllib.parse
 import uuid
 if __package__:
     from .core import OperatorError, revision
+    from .release import TEST_TARGET, require_test_scope
 else:
     from core import OperatorError, revision
+    from release import TEST_TARGET, require_test_scope
 
 Path = pathlib.Path
 TABLE = re.compile(r"[a-z_][a-z0-9_]{0,62}")
@@ -312,13 +314,26 @@ class Host:
             if shutil.disk_usage(directory).free < minimum:
                 raise OperatorError("Insufficient free storage for images, source bundle, dump and isolated restore: " + str(directory))
         self.private_hashes = {str(file): sha(file) for file in self.private_files()}
+        if getattr(self, "release_approval", None):
+            require_test_scope(self.release_approval, self.release_target())
+
+    def release_target(self):
+        """Derive policy scope from checked configuration AND the actual server."""
+        self.recheck_private_configuration()
+        target = {**TEST_TARGET, "hostname": self.config["hostname"], "privateDirectory": self.config["privateDirectory"], "database": self.config["database"], "migrationRole": self.config["migrationRole"], "runtimeRole": self.config["runtimeRole"]}
+        if target != TEST_TARGET or any(env.get("APP_ENV") != "test" or env.get("PGDATABASE") != TEST_TARGET["database"] for env in (self.backend_env, self.migration_env)):
+            raise OperatorError("TEST release policy cannot be used against production configuration or databases.")
+        return target
 
     def recheck_private_configuration(self):
         if any(sha(file) != value for file, value in self.private_hashes.items()):
             raise OperatorError("Private configuration changed during the operation; no live migration may proceed.")
         current = self.pg.identity()
-        if current["database"] != self.config["database"] or current["username"] != self.config["migrationRole"] or current["superuser"]:
+        if current["database"] != TEST_TARGET["database"] or current["username"] != TEST_TARGET["migrationRole"] or current["port"] != TEST_TARGET["databasePort"] or current["superuser"] or current["version"] // 10000 != 18:
             raise OperatorError("Database target changed before migration.")
+        guards = self.pg.rows("SELECT environment,disposable FROM kd.environment_guard WHERE singleton")
+        if guards != [TEST_TARGET["databaseGuard"]]:
+            raise OperatorError("Database environment guard changed or identifies production. TEST operations are blocked.")
 
     def composition(self, release, *, images=True):
         env = {"KINDRED_REVISION": release["revision"], "KINDRED_PORT": str(self.config["frontendPort"]), "KINDRED_BIND": "127.0.0.1", "KINDRED_BACKEND_ENV_FILE": str(self.private / "backend.env"), "KINDRED_MIGRATION_ENV_FILE": str(self.private / "migrations.env"), "KINDRED_CONTENT_ID": self.config["publishedContent"]}

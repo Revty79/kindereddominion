@@ -41,7 +41,7 @@ def main(argv=None, *, lock_lease=None, approval=None):
         host = Host(args.config, lock_lease=lock_lease)
         if args.command == "update":
             if not approval or approval.get("revision") != args.revision or lock_lease is None:
-                raise OperatorError("Use the installed sudo kindred-update command so release approval and operator integrity are verified automatically.")
+                raise OperatorError("Use the installed sudo kindred-update command so environment-scoped CI eligibility and operator integrity are verified automatically.")
             host.release_approval = approval
             result = update(host, args.revision, reviewed=True, rehearse_only=args.rehearse_only, resume=args.resume)
             result["message"] = "Kindred Dominion is up to date." if result.get("unchanged") else "Kindred Dominion rehearsal completed." if result.get("rehearsed") else "Kindred Dominion update completed."

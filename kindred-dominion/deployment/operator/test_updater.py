@@ -32,7 +32,8 @@ OLD, NEW = "a" * 40, "b" * 40
 
 class ApprovalTests(unittest.TestCase):
     def setUp(self):
-        self.policy = {"repositoryId": 42, "approverIds": [7], "workflowSha256": {name: hashlib.sha256(name.encode()).hexdigest() for name in ("kindred-ci.yml", "kindred-release.yml")}}
+        self.policy = json.loads((SOURCE / "release-trust.json").read_bytes())
+        self.policy.update(repositoryId=42, approverIds=[7], workflowSha256={name: hashlib.sha256(name.encode()).hexdigest() for name in ("kindred-ci.yml", "kindred-release.yml")})
         self.approval = self.run_record(2, "kindred-release.yml", "workflow_dispatch")
         self.ci = self.run_record(1, "kindred-ci.yml", "push")
         self.jobs = {1: self.job("validate"), 2: self.job("approve")}
@@ -102,6 +103,115 @@ class ApprovalTests(unittest.TestCase):
         self.verifier.api = OldReleaseAPI()
         with self.assertRaises(OperatorError): self.verifier.select([NEW])
         self.assertEqual(self.verifier.verify(NEW)["revision"], NEW)
+
+    def test_production_requires_approval_but_cannot_deploy_even_after_approval(self):
+        self.approval["conclusion"] = "failure"
+        with self.assertRaises(OperatorError): self.verifier.verify(NEW)
+        self.approval["conclusion"] = "success"
+        receipt = self.verifier.verify(NEW)
+        self.assertEqual(receipt["environment"], "production")
+        self.assertFalse(receipt["deploymentEnabled"])
+        with self.assertRaisesRegex(OperatorError, "disabled"):
+            self.verifier.require_deployment_allowed()
+
+
+class TestReleasePolicy(unittest.TestCase):
+    run_record = ApprovalTests.run_record
+    job = ApprovalTests.job
+    get = ApprovalTests.get
+
+    def setUp(self):
+        ApprovalTests.setUp(self)
+        def blob(sha, path):
+            return json.dumps(bundle.METADATA).encode() if path.endswith("operator-runtime.json") else path.rsplit("/", 1)[-1].encode()
+        self.verifier = release.Approvals(self.policy, blob, self, environment="test", target=copy.deepcopy(release.TEST_TARGET))
+
+    def test_test_never_queries_manual_approval_or_requires_api_credentials(self):
+        normal_get = self.get
+        class PublicCIOnly:
+            def get(inner, suffix):
+                if "kindred-release.yml" in suffix:
+                    raise AssertionError("TEST must never request owner approval")
+                return normal_get(suffix)
+        self.verifier.api = PublicCIOnly()
+        self.approval["conclusion"] = "failure"
+        self.verifier.require_deployment_allowed()
+        receipt = self.verifier.select([NEW])
+        self.assertEqual(receipt["policy"], release.TEST_POLICY)
+        self.assertEqual(receipt["environment"], "test")
+        self.assertNotIn("approvalRun", receipt)
+        self.assertNotIn("approverId", receipt)
+        release.require_test_scope(receipt, release.TEST_TARGET)
+
+    def test_failed_pending_skipped_forked_and_wrong_sha_ci_cannot_qualify(self):
+        for key, value in (("status", "in_progress"), ("conclusion", "failure"), ("conclusion", "cancelled"), ("conclusion", "skipped"), ("head_sha", OLD), ("event", "pull_request"), ("head_repository", {"id": 43})):
+            with self.subTest(key=key, value=value), patch.dict(self.ci, {key: value}):
+                with self.assertRaisesRegex(OperatorError, "No eligible TEST"):
+                    self.verifier.select([NEW])
+        with patch.dict(self.jobs[1]["jobs"][0]["steps"][0], {"conclusion": "skipped"}):
+            with self.assertRaises(OperatorError): self.verifier.verify(NEW)
+        self.policy["workflowSha256"]["kindred-ci.yml"] = "0" * 64
+        with self.assertRaises(OperatorError): self.verifier.verify(NEW)
+
+    def test_new_failed_main_is_skipped_for_newest_green_forward_revision(self):
+        old_ci = self.run_record(3, "kindred-ci.yml", "push"); old_ci["head_sha"] = OLD
+        self.jobs[3] = self.job("validate"); self.jobs[3]["jobs"][0]["head_sha"] = OLD
+        self.ci["conclusion"] = "failure"
+        normal_get = self.get
+        class MultipleCI:
+            def get(inner, suffix):
+                return {"workflow_runs": [self.ci, old_ci]} if "/workflows/" in suffix else normal_get(suffix)
+        self.verifier.api = MultipleCI()
+        self.assertEqual(self.verifier.select([NEW, OLD])["revision"], OLD)
+
+    def test_latest_failed_ci_attempt_invalidates_old_success(self):
+        older = copy.deepcopy(self.ci)
+        failed = dict(older, run_attempt=2, conclusion="failure")
+        normal_get = self.get
+        class RerunCI:
+            def get(inner, suffix):
+                return {"workflow_runs": [failed, older]} if "/workflows/" in suffix else normal_get(suffix)
+        self.verifier.api = RerunCI()
+        with self.assertRaises(OperatorError): self.verifier.verify(NEW)
+
+    def test_legacy_owner_login_operator_is_not_a_test_self_update_candidate(self):
+        real_blob = self.verifier.blob
+        self.verifier.blob = lambda sha, path: b'{"protocol":1,"files":[]}' if path.endswith("operator-runtime.json") else real_blob(sha, path)
+        with self.assertRaises(OperatorError): self.verifier.verify(NEW)
+
+    def test_test_target_and_production_enable_overrides_are_rejected(self):
+        self.verifier.target["database"] = "kindred_dominion_production"
+        with self.assertRaises(OperatorError): self.verifier.require_deployment_allowed()
+        self.policy["environments"]["test"]["target"]["database"] = "kindred_dominion_production"
+        with self.assertRaises(OperatorError): release.Approvals(self.policy, lambda *args: b"", environment="test", target=release.TEST_TARGET)
+        self.policy["environments"]["production"]["deploymentEnabled"] = True
+        with self.assertRaises(OperatorError): release.Approvals(self.policy, lambda *args: b"")
+
+    def test_production_receipt_or_target_cannot_borrow_test_scope(self):
+        receipt = self.verifier.verify(NEW)
+        for key, value in (("environment", "production"), ("deploymentEnabled", False), ("policy", release.PRODUCTION_POLICY), ("target", {"database": "kindred_dominion_production"})):
+            with patch.dict(receipt, {key: value}):
+                with self.assertRaises(OperatorError): release.require_test_scope(receipt, release.TEST_TARGET)
+
+    def test_actual_database_guard_and_identity_are_rechecked_before_test_operations(self):
+        host = Host.__new__(Host)
+        host.config = {key: release.TEST_TARGET[key] for key in ("hostname", "privateDirectory", "database", "migrationRole", "runtimeRole")}
+        host.private_hashes = {}
+        host.backend_env = host.migration_env = {"APP_ENV": "test", "PGDATABASE": release.TEST_TARGET["database"]}
+        identity = {"database": release.TEST_TARGET["database"], "username": release.TEST_TARGET["migrationRole"], "port": 5432, "superuser": False, "version": 180000}
+        guard = {"environment": "test", "disposable": False}
+        class Database:
+            def identity(inner): return identity
+            def rows(inner, query): return [guard]
+        host.pg = Database()
+        self.assertEqual(host.release_target(), release.TEST_TARGET)
+        for key, value in (("database", "kindred_dominion_production"), ("username", "kindred_production_migrator"), ("port", 5433), ("superuser", True)):
+            with patch.dict(identity, {key: value}):
+                with self.assertRaises(OperatorError): host.recheck_private_configuration()
+        with patch.dict(guard, {"environment": "production"}):
+            with self.assertRaises(OperatorError): host.release_target()
+        with patch.dict(host.backend_env, {"APP_ENV": "production"}):
+            with self.assertRaises(OperatorError): host.release_target()
 
 
 class InstallationTests(unittest.TestCase):
@@ -177,6 +287,25 @@ class InstallationTests(unittest.TestCase):
         with self.assertRaises(RuntimeError): self.install(self.new)
         self.assertEqual(self.record()["revision"], self.old)
 
+    def test_recognized_legacy_policy_upgrade_is_backed_up_and_idempotent(self):
+        self.install()
+        trust = self.private / "release-trust.json"
+        current = json.loads(trust.read_bytes())
+        legacy = {key: current[key] for key in ("repositoryId", "approverIds", "workflowSha256")}
+        legacy["format"] = 1
+        original = (json.dumps(legacy, indent=2) + "\n").encode()
+        trust.write_bytes(original)
+        config = (self.private / "operator.json").read_bytes()
+        result = self.install()
+        self.assertTrue(result["releasePolicyUpgraded"])
+        self.assertEqual(json.loads(trust.read_bytes()), current)
+        backups = list(self.private.glob("release-trust.previous-*.json"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].read_bytes(), original)
+        self.assertEqual((self.private / "operator.json").read_bytes(), config)
+        self.assertFalse(self.install()["releasePolicyUpgraded"])
+        self.assertFalse(json.loads((self.state / "release-policy-upgrade.json").read_text())["productionDeploymentEnabled"])
+
     def test_missing_protocol_corrupt_bundle_and_failed_import_leave_pointer_unchanged(self):
         self.install()
         before = (self.state / "operator-current.json").read_bytes()
@@ -231,7 +360,10 @@ class InstallationTests(unittest.TestCase):
         host = DiscoveryHost(self.state, self.repo, self.old, self.new)
         approved = {"revision": self.new, "policy": "test-only"}
         class ApprovalsFixture:
-            def __init__(self, *args): pass
+            def __init__(inner, *args, **kwargs):
+                self.assertEqual(kwargs["environment"], "test")
+                self.assertEqual(kwargs["target"], release.TEST_TARGET)
+            def require_deployment_allowed(self): pass
             def select(self, *args): return approved
             def verify(self, *args): return approved
         events = []
@@ -277,7 +409,8 @@ class InstallationTests(unittest.TestCase):
         self.install(); before = self.record()
         host = DiscoveryHost(self.state, self.repo, self.old, self.new)
         class Unavailable:
-            def __init__(self, *args): pass
+            def __init__(self, *args, **kwargs): pass
+            def require_deployment_allowed(self): pass
             def select(self, *args): raise OperatorError("Approval API unavailable")
         class Revoked(Unavailable):
             def select(inner, *args): return {"revision": self.new}
@@ -304,6 +437,7 @@ class DiscoveryHost:
     @contextlib.contextmanager
     def lock(self): yield self.lease
     def preflight(self): pass
+    def release_target(self): return copy.deepcopy(release.TEST_TARGET)
     def current(self): return {"revision": self.old}
     def require_recoverable(self, sha, resume): self.requests.append((sha, resume))
     def git(self, args):

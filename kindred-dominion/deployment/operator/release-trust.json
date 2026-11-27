@@ -1,5 +1,5 @@
 {
-  "format": 1,
+  "format": 2,
   "repositoryId": 1472796260,
   "approverIds": [
     132003666
@@ -7,5 +7,29 @@
   "workflowSha256": {
     "kindred-ci.yml": "c32aeaf4bfc76d6cd91d6ae97751fb157d8bf62b68586cf836023c85f24e2205",
     "kindred-release.yml": "34a313c1dfff38dde156bd62dc001083e98e785ff971e4a749ea8f71df889868"
+  },
+  "environments": {
+    "test": {
+      "eligibility": "test-exact-main-ci-v1",
+      "deploymentEnabled": true,
+      "target": {
+        "environment": "test",
+        "hostname": "homeserver",
+        "privateDirectory": "/etc/kindred-dominion/test",
+        "database": "kindred_dominion_test",
+        "migrationRole": "kindred_test_migrator",
+        "runtimeRole": "kindred_test_runtime",
+        "databaseHost": "127.0.0.1",
+        "databasePort": 5432,
+        "databaseGuard": {
+          "environment": "test",
+          "disposable": false
+        }
+      }
+    },
+    "production": {
+      "eligibility": "owner-dispatch-and-source-ci-v1",
+      "deploymentEnabled": false
+    }
   }
 }
