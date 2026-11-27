@@ -1191,7 +1191,7 @@ export default function App({
                         <p className="preview-score">Immediate points: Jade {prospective.scoreBefore.totals[0]} → {prospective.scoreAfter.totals[0]} · Amber {prospective.scoreBefore.totals[1]} → {prospective.scoreAfter.totals[1]}</p>
                         <p>Immediate resolution, in order:</p>
                         <ol className="public-consequences">{previewChanges.map((change, i) => <li key={i}><b>{change.label}</b> {change.text}</li>)}</ol>
-                        {preferences.beginner && <p>{prospective.privateConsequencesOmitted ? "This preview stops before a private draw. Remaining effects resolve after confirmation." : "This shows immediate battlefield effects. Turn-end, turn-start and private draws resolve after confirmation."}</p>}
+                        {preferences.beginner && <p>{prospective.privateConsequencesOmitted ? (prospective.boundary==="before-random"?"Random targets and dependent effects resolve after confirmation.":prospective.boundary==="before-private-generate"?"Hand generation and dependent effects resolve after confirmation.":"This preview stops before a private draw. Remaining effects resolve after confirmation.") : "This shows immediate battlefield effects. Turn-end, turn-start and private draws resolve after confirmation."}</p>}
                         {prospective.fault ? (
                           <p className="error-text">{prospective.fault}</p>
                         ) : (

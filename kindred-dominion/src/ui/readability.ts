@@ -1,3 +1,4 @@
+import {ResolutionPause} from "../engine/observation";
 import { act, coordinate } from "../engine/game";
 import { powerTable } from "../engine/evaluation";
 import { currentPower, scoreGame } from "../engine/scoring";
@@ -40,13 +41,18 @@ export function publicChanges(before: GameState, after: GameState, library: Card
   return result;
 }
 
-export function actionPreview(before: GameState, action: Action, library: CardLibrary) {
-  const steps: DiagnosticStep[] = [];
-  const committed = act(before, action, library, { captureStates: true, onStep: s => steps.push(s) });
-  const boundary = steps.find(s => s.kind === "before-private-draw" || s.kind === "action-effects-complete");
-  // A real recorded snapshot, before the first private draw or automatic turn transfer.
-  const visible = boundary?.state ?? committed;
-  const included = boundary ? steps.slice(0, steps.indexOf(boundary) + 1) : steps;
+export function actionPreview(before: GameState, action: Action, library: CardLibrary, options:{automatic?:boolean;bounded?:boolean}={}) {
+  const steps: DiagnosticStep[] = [];let boundary:DiagnosticStep|undefined,committed:GameState|undefined,reason:string|null=null,snapshots=0;const snapshotLimit=options.bounded?Math.max(1,Math.min(48,Math.floor(4_000_000/Math.max(1,JSON.stringify(before).length)))):Infinity;
+  const pause=(kind:string)=>{reason=kind;throw new ResolutionPause(kind);};
+  try{committed=act(before,action,library,{captureStates:kind=>{
+    const capture=!options.bounded||!["condition","limit","targets","effect-start","safeguard"].includes(kind);
+    if(capture&&options.bounded&&++snapshots>snapshotLimit)pause("budget");return capture;
+  },onStep:step=>{
+    steps.push(step);if(options.bounded&&steps.length>192)pause("budget");
+    if(["before-private-draw","before-private-generate","before-random"].includes(step.kind)||step.kind===(options.automatic?"before-next-player-decision":"action-effects-complete")){boundary=step;pause(step.kind);}
+  }});}catch(error){if(!(error instanceof ResolutionPause))throw error;}
+  const visible=boundary?.state??[...steps].reverse().find(s=>s.state)?.state??committed??before;
+  const included=steps;
   // Include real intermediate arrivals/removals, even when the same creature
   // returns or an incoming creature dies before the immediate action ends.
   const changes = presentationFrames(before, visible, included, library).flatMap(frame => frame.changes);
@@ -59,7 +65,7 @@ export function actionPreview(before: GameState, action: Action, library: CardLi
   };
   for (const step of included) if (step.kind === "protection" && step.details && typeof step.details === "object" && "card" in step.details && typeof step.details.card === "string") protectedTarget(step.details.card, "Weakening protection prevents the attempted reduction.");
   for (const event of visible.events.slice(before.events.length)) if (event.type === "protection" && event.card) protectedTarget(event.card, "Direct-destruction protection prevents the attempted destruction.");
-  return { state: visible, fault: committed.fault, changes, scoreBefore: scoreGame(before, library), scoreAfter: scoreGame(visible, library), privateConsequencesOmitted: boundary?.kind === "before-private-draw" };
+  return { state: visible, fault: committed?.fault??null, changes, scoreBefore: scoreGame(before, library), scoreAfter: scoreGame(visible, library), privateConsequencesOmitted: ["before-private-draw","before-private-generate","before-random"].includes(reason??""), boundary:reason, steps:included };
 }
 
 export type PresentationFrame = { state: GameState; changes: PublicChange[]; caption: string };

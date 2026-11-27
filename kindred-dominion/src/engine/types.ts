@@ -283,6 +283,6 @@ export type DiagnosticStep = {
   state?: GameState;
 };
 export type ResolutionObserver = {
-  captureStates?: boolean;
+  captureStates?: boolean | ((kind: string) => boolean);
   onStep: (step: DiagnosticStep) => void;
 };

@@ -1,0 +1,1012 @@
+{
+  "contentVersion": "founding-kindreds-artwork-v1",
+  "officialDefinitionsChanged": false,
+  "fixtureSetup": "tests/helpers/owner-scenarios.ts supplies declared board positions, public historical counters and temporary instance modifiers. These are test setup values, not changes to printed card definitions. Non-draw examples empty the opposing draw pile; Living Shield begins with two fortification.",
+  "examples": [
+    {
+      "permanentId": "C010",
+      "definitionId": "c010",
+      "name": "Clockwork Rat",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": true,
+      "uncertainty": null,
+      "scoreBefore": [
+        2,
+        9
+      ],
+      "scoreAfter": [
+        3,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": null
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Clockwork Rat",
+              "number": "C010",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "placement",
+              "symbol": "PLAY",
+              "label": "PLAY",
+              "text": "B2 · Clockwork Rat enters play at 1 effective power."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P1",
+              "text": "Preview arrival: Clockwork Rat at power 1; printed 1, change 0."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "before": {
+            "owner": null,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": null
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 1,
+            "fortification": 0,
+            "creature": null
+          },
+          "effects": [
+            {
+              "category": "tokens",
+              "symbol": "T",
+              "label": "T+1",
+              "text": "Preview tokens 0 to 1 (+1)."
+            },
+            {
+              "category": "territory",
+              "symbol": "CAP",
+              "label": "CAP",
+              "text": "Preview territory neutral to Jade."
+            }
+          ],
+          "affected": true,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        }
+      ],
+      "abilities": []
+    },
+    {
+      "permanentId": "A003",
+      "definitionId": "a003",
+      "name": "Spark Sprite",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": true,
+      "uncertainty": null,
+      "scoreBefore": [
+        2,
+        9
+      ],
+      "scoreAfter": [
+        5,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": null
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Spark Sprite",
+              "number": "A003",
+              "power": 3,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "placement",
+              "symbol": "PLAY",
+              "label": "PLAY",
+              "text": "B2 · Spark Sprite enters play at 2 effective power."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P2→3",
+              "text": "Preview arrival: Spark Sprite at power 3; printed 2, change +1."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        }
+      ],
+      "abilities": [
+        {
+          "source": "Spark Sprite",
+          "ability": "a003-ability",
+          "conditional": true,
+          "description": "On placement. If you control at least 3 creatures. Enhance / weaken power +1: Source creature. Limits: 1/event, 1/match. Suppressed for resurrection placement events.",
+          "conditions": [
+            "Supported condition passed. friendly population ≥ 3",
+            "Activation restrictions permit this ability."
+          ]
+        }
+      ]
+    },
+    {
+      "permanentId": "N027",
+      "definitionId": "n027",
+      "name": "Grey Wolf",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": true,
+      "uncertainty": null,
+      "scoreBefore": [
+        4,
+        9
+      ],
+      "scoreAfter": [
+        7,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 0,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Griffin",
+              "number": "M015",
+              "power": 4,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Griffin",
+              "number": "M015",
+              "power": 4,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Wolf Cub",
+              "number": "N002",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Grey Wolf",
+              "number": "N027",
+              "power": 5,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "evolution",
+              "symbol": "EV",
+              "label": "EV",
+              "text": "B2 · Wolf Cub: becomes a prior evolution stage."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P4→5",
+              "text": "Preview arrival: Grey Wolf at power 5; printed 4, change +1."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Cyclops",
+              "number": "M019",
+              "power": 5,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Cyclops",
+              "number": "M019",
+              "power": 5,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        }
+      ],
+      "abilities": []
+    },
+    {
+      "permanentId": "M026",
+      "definitionId": "m026",
+      "name": "Cerberus",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": true,
+      "uncertainty": null,
+      "scoreBefore": [
+        8,
+        9
+      ],
+      "scoreAfter": [
+        7,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Wolf Cub",
+              "number": "N002",
+              "power": 6,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Cerberus",
+              "number": "M026",
+              "power": 5,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "sacrifice",
+              "symbol": "SAC",
+              "label": "SAC",
+              "text": "B2 · Wolf Cub: is sacrificed."
+            },
+            {
+              "category": "replacement",
+              "symbol": "R",
+              "label": "R",
+              "text": "B2 · Cerberus replaces the sacrificed creature at 5 effective power."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P5",
+              "text": "Preview arrival: Cerberus at power 5; printed 5, change 0."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": null
+          },
+          "effects": [
+            {
+              "category": "destruction",
+              "symbol": "X",
+              "label": "X",
+              "text": "B3 · Dragon Whelp: is destroyed."
+            }
+          ],
+          "affected": true,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        }
+      ],
+      "abilities": [
+        {
+          "source": "Cerberus",
+          "ability": "m026-ability",
+          "conditional": false,
+          "description": "On replacement. Direct destruction: enemy Relative position pattern (1 forward, 0 down); power [any, 4]. Limits: 1/event, 1/match. Suppressed for resurrection placement events.",
+          "conditions": [
+            "No conditional restriction.",
+            "Activation restrictions permit this ability."
+          ]
+        }
+      ]
+    },
+    {
+      "permanentId": "C007",
+      "definitionId": "c007",
+      "name": "Living Shield",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": true,
+      "uncertainty": null,
+      "scoreBefore": [
+        2,
+        9
+      ],
+      "scoreAfter": [
+        4,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 0,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Wolf Cub",
+              "number": "N002",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 1,
+            "creature": {
+              "name": "Wolf Cub",
+              "number": "N002",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "fortification",
+              "symbol": "F",
+              "label": "F+1",
+              "text": "Preview fortification 0 to 1."
+            }
+          ],
+          "affected": true,
+          "pattern": true,
+          "influence": [
+            "fortification 1"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 2,
+            "creature": null
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 3,
+            "creature": {
+              "name": "Living Shield",
+              "number": "C007",
+              "power": 2,
+              "protections": [
+                "destruction"
+              ]
+            }
+          },
+          "effects": [
+            {
+              "category": "fortification",
+              "symbol": "F",
+              "label": "F+1",
+              "text": "Preview fortification 2 to 3."
+            },
+            {
+              "category": "placement",
+              "symbol": "PLAY",
+              "label": "PLAY",
+              "text": "B2 · Living Shield enters play at 2 effective power."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P2",
+              "text": "Preview arrival: Living Shield at power 2; printed 2, change 0."
+            },
+            {
+              "category": "protection",
+              "symbol": "SH",
+              "label": "SH",
+              "text": "Preview Living Shield: protected from destruction."
+            }
+          ],
+          "affected": true,
+          "pattern": true,
+          "influence": [
+            "fortification 1"
+          ]
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "River Otter",
+              "number": "N010",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 1,
+            "creature": {
+              "name": "River Otter",
+              "number": "N010",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "fortification",
+              "symbol": "F",
+              "label": "F+1",
+              "text": "Preview fortification 0 to 1."
+            }
+          ],
+          "affected": true,
+          "pattern": true,
+          "influence": [
+            "fortification 1"
+          ]
+        }
+      ],
+      "abilities": []
+    },
+    {
+      "permanentId": "A002",
+      "definitionId": "a002",
+      "name": "Arcane Familiar",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": false,
+      "uncertainty": "A private draw and any resulting abilities resolve after placement. No drawn card or later outcome is predicted.",
+      "scoreBefore": [
+        2,
+        9
+      ],
+      "scoreAfter": [
+        3,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 1,
+          "col": 0,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Red Fox",
+              "number": "N003",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Red Fox",
+              "number": "N003",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": null
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Arcane Familiar",
+              "number": "A002",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "placement",
+              "symbol": "PLAY",
+              "label": "PLAY",
+              "text": "B2 · Arcane Familiar enters play at 1 effective power."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P1",
+              "text": "Preview arrival: Arcane Familiar at power 1; printed 1, change 0."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        }
+      ],
+      "abilities": [
+        {
+          "source": "Arcane Familiar",
+          "ability": "a002-ability",
+          "conditional": false,
+          "description": "On placement. Draw cards +1: your hand. Limits: 1/event, 1/match. Suppressed for resurrection placement events.",
+          "conditions": [
+            "No conditional restriction.",
+            "Activation restrictions permit this ability."
+          ]
+        }
+      ]
+    },
+    {
+      "permanentId": "N005",
+      "definitionId": "n005",
+      "name": "Honeybee",
+      "fixture": "Declared isolated owner-card scenario; not an official match or publication. Living Shield begins with two fortification; non-draw examples have an empty opponent draw pile.",
+      "target": "B2",
+      "complete": true,
+      "uncertainty": null,
+      "scoreBefore": [
+        2,
+        9
+      ],
+      "scoreAfter": [
+        4,
+        9
+      ],
+      "tiles": [
+        {
+          "row": 0,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Wolf Cub",
+              "number": "N002",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Wolf Cub",
+              "number": "N002",
+              "power": 3,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P+1",
+              "text": "Preview Wolf Cub power 2 to 3."
+            },
+            {
+              "category": "aura",
+              "symbol": "A",
+              "label": "A",
+              "text": "A2 · Honeybee continuously strengthens Wolf Cub by 1 while its grant remains active."
+            }
+          ],
+          "affected": true,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Red Fox",
+              "number": "N003",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Red Fox",
+              "number": "N003",
+              "power": 3,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P+1",
+              "text": "Preview Red Fox power 2 to 3."
+            },
+            {
+              "category": "aura",
+              "symbol": "A",
+              "label": "A",
+              "text": "B1 · Honeybee continuously strengthens Red Fox by 1 while its grant remains active."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": null
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "Honeybee",
+              "number": "N005",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "placement",
+              "symbol": "PLAY",
+              "label": "PLAY",
+              "text": "B2 · Honeybee enters play at 1 effective power."
+            },
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P1",
+              "text": "Preview arrival: Honeybee at power 1; printed 1, change 0."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "before": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 1,
+            "tokens": 0,
+            "fortification": 0,
+            "creature": {
+              "name": "Dragon Whelp",
+              "number": "M001",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "effects": [],
+          "affected": false,
+          "pattern": true,
+          "influence": [
+            "expansion 1"
+          ]
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "before": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "River Otter",
+              "number": "N010",
+              "power": 1,
+              "protections": []
+            }
+          },
+          "after": {
+            "owner": 0,
+            "tokens": 3,
+            "fortification": 0,
+            "creature": {
+              "name": "River Otter",
+              "number": "N010",
+              "power": 2,
+              "protections": []
+            }
+          },
+          "effects": [
+            {
+              "category": "power",
+              "symbol": "P",
+              "label": "P+1",
+              "text": "Preview River Otter power 1 to 2."
+            },
+            {
+              "category": "aura",
+              "symbol": "A",
+              "label": "A",
+              "text": "C2 · Honeybee continuously strengthens River Otter by 1 while its grant remains active."
+            }
+          ],
+          "affected": true,
+          "pattern": false,
+          "influence": []
+        }
+      ],
+      "abilities": []
+    }
+  ]
+}

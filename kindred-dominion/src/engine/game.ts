@@ -1,4 +1,5 @@
 import { gameplayId, matchesDefinition } from "./identity";
+import {ResolutionPause} from "./observation";
 import { DEFAULT_CONFIG } from "./config";
 import { currentPower, SCORING_RULES, scoreGame } from "./scoring";
 import { AdvancedRuntime } from "./advanced-runtime";
@@ -303,37 +304,39 @@ function eligible(
       currentPower(state, library, previous) >= req.minPower)
   );
 }
-export function placementError(
+export type PlacementIssue = {code:"turn"|"hand"|"territory"|"opponent"|"occupied"|"tokens"|"host"|"prerequisite";message:string};
+export function placementIssue(
   state: GameState,
   library: CardLibrary,
   player: Player,
   cardId: string,
   row: number,
   col: number,
-): string | null {
+): PlacementIssue | null {
   if (state.phase !== "playing" || state.active !== player)
-    return "It is not your placement turn.";
+    return {code:"turn",message:"It is not your placement turn."};
   const card = state.cards[cardId];
   if (
     !card ||
     card.owner !== player ||
     !state.players[player].hand.includes(cardId)
   )
-    return "Choose a card from your hand.";
+    return {code:"hand",message:"Choose a card from your hand."};
   const cell = cellAt(state, row, col);
   const def = library[card.definitionId];
-  if (!cell || cell.owner !== player) return "You must control this territory.";
+  if (!cell || cell.owner !== player) return {code:cell?.owner!==null&&cell?.owner!==undefined?"opponent":"territory",message:"You must control this territory."};
   if (def.type === "standard") {
-    if (cell.creature) return "This position is occupied.";
-    if (cell.tokens < def.rank) return `Requires Rank ${def.rank} territory.`;
+    if (cell.creature) return {code:"occupied",message:"This position is occupied."};
+    if (cell.tokens < def.rank) return {code:"tokens",message:`Requires Rank ${def.rank} territory.`};
   } else {
     if (!cell.creature || state.cards[cell.creature].owner !== player)
-      return `Requires a friendly creature to ${def.type === "evolution" ? "evolve" : "replace"}.`;
+      return {code:"host",message:`Requires a friendly creature to ${def.type === "evolution" ? "evolve" : "replace"}.`};
     if (!eligible(state, library, def.id, cell.creature))
-      return "The predecessor does not meet this card’s prerequisites.";
+      return {code:"prerequisite",message:"The predecessor does not meet this card’s prerequisites."};
   }
   return null;
 }
+export function placementError(state:GameState,library:CardLibrary,player:Player,cardId:string,row:number,col:number):string|null{return placementIssue(state,library,player,cardId,row,col)?.message??null;}
 export function legalPlays(
   state: GameState,
   library: CardLibrary,
@@ -463,7 +466,7 @@ export class Resolver {
       kind,
       message,
       details: structuredClone(details),
-      ...(this.observer.captureStates
+      ...((typeof this.observer.captureStates==="function"?this.observer.captureStates(kind):this.observer.captureStates)
         ? { state: structuredClone(this.state) }
         : {}),
     });
@@ -670,7 +673,7 @@ export class Resolver {
         source: source.id,
         context,
         origin: source.position,
-        random: () => random(this.state),
+        random: () => {this.diagnostic("before-random","Random target selection resolves after confirmation.");return random(this.state);},
       });
     let cells: Cell[];
     if (target.kind === "self") {
@@ -899,6 +902,7 @@ export class Resolver {
     if (effect.type === "generate") {
       if (!this.library[effect.card])
         throw new Error(`Unknown generated card ${effect.card}.`);
+      if(amount>0)this.diagnostic("before-private-generate","Hand generation resolves after confirmation.");
       for (let i = 0; i < amount; i++) {
         if (
           this.state.generated >=
@@ -1342,6 +1346,7 @@ export class Resolver {
       this.advanced.settle("turnStart");
       this.drain();
     }
+    this.diagnostic("before-next-player-decision","Automatic visible effects complete; the next player's private choice follows.");
     const forced = legalPlays(this.state, this.library).length === 0;
     log(
       this.state,
@@ -1518,6 +1523,7 @@ export function act(
     }
     assertInvariants(state, library);
   } catch (error) {
+    if(error instanceof ResolutionPause)throw error;
     if (recovery) {
       for (const key of Object.keys(state)) delete (state as any)[key];
       Object.assign(state, structuredClone(recovery));

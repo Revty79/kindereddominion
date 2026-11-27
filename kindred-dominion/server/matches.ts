@@ -3,12 +3,14 @@ import {z} from "zod";
 import type {FastifyInstance} from "fastify";
 import type {GameState,Action,DiagnosticStep} from "../src/engine/types";
 import type {ContentPack} from "../src/content/types";
-import {act,createMatch,legalPlays,validateDeck} from "../src/engine/game";
+import {act,createMatch,legalPlays,validateDeck,placementIssue} from "../src/engine/game";
+import {placementDestinations,tacticalPreview} from "../src/ui/tactical-preview";
+import {PreviewCache} from "./preview-cache";
 import {chooseComputerAction,computerMulligan} from "../src/engine/ai";
 import {powerTable} from "../src/engine/evaluation";
 import {scoreGame} from "../src/engine/scoring";
 import {newRecord,appendRecord,replayAt,validateRecord,type MatchRecord} from "../src/replay/record";
-import {actionPreview,publicEventText,presentationFrames} from "../src/ui/readability";
+import {publicEventText,presentationFrames} from "../src/ui/readability";
 import {libraryOf} from "../src/content/validation";
 import {transaction,type DB} from "./db";
 import {activeContent,contentVersion} from "./catalog";
@@ -16,7 +18,7 @@ import {validateOwnedDeck,deckUsesSandbox} from "./inventory";
 import {captureMatchShop,decorateMatch,deckFormat} from "./shop-formats";
 import {getDeck} from "./player-routes";
 import {uuid,operationKey,type Authentication} from "./auth";
-import {digest} from "./security";
+import {digest,keyed,rateLimit} from "./security";
 import {reject} from "./errors";
 import type {BackendConfig} from "./config";
 import {enrollEconomyMatch,settleMatchReward} from "./economy";
@@ -40,6 +42,7 @@ export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,i
     log:state.events.slice(-50).map(e=>({turn:e.turn,type:e.type,text:publicEventText(e)})),result:state.result};
 }
 export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serverConfig:BackendConfig){
+  const previews=new PreviewCache();
   const opponents=(pack:ContentPack,config:GameState["config"])=>pack.decks.filter(deck=>validateDeck(deck.cards,libraryOf(pack),config).length===0);
   async function own(db:any,id:string,playerId:string,lock=false){const {rows:[r]}=await db.query(`SELECT * FROM kd.match WHERE id=$1 AND player_id=$2 ${lock?"FOR UPDATE":""}`,[id,playerId]);if(!r)reject(404,"match_missing","Match was not found.");return decorateMatch(db,r);}
   async function complete(c:any,row:any,state:GameState){if(state.phase!=="finished")return;
@@ -80,12 +83,23 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
   });
   app.get("/api/matches",async req=>{const a=await auth.actor(req),{rows}=await pool.query("SELECT id,status,version_id,engine_version,config,revision,result,testing_access,created_at,completed_at FROM kd.match WHERE player_id=$1 ORDER BY created_at DESC LIMIT 200",[a.id]);return {matches:rows};});
   app.get<{Params:{id:string}}>("/api/matches/:id",async req=>{const a=await auth.actor(req),row=await own(pool,uuid.parse(req.params.id),a.id);return {...publicMatch(row,await contentVersion(pool,row.version_id)),rewardSummary:(await pool.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[row.id,a.id])).rows[0]??null};});
+  app.post<{Params:{id:string}}>("/api/matches/:id/placement-options",async req=>{
+    const a=await auth.actor(req),b=z.object({revision:z.number().int().min(0),card:z.string().min(1).max(80)}).strict().parse(req.body);
+    await rateLimit(pool,"placement-preview:"+keyed(a.id,serverConfig),120,60);
+    const row=await own(pool,uuid.parse(req.params.id),a.id);if(row.revision!==b.revision)reject(409,"stale_match","Match changed. Reload before previewing.");
+    if(row.state.phase!=="playing"||row.state.active!==0||!row.state.players[0].hand.includes(b.card))reject(400,"illegal_action","Choose a card from your hand on your placement turn.");
+    const key=`${a.id}:${row.id}:${row.revision}:${b.card}:options`,cached=previews.get(key);if(cached)return cached;
+    const pack=await contentVersion(pool,row.version_id);return previews.put(key,{matchId:row.id,revision:row.revision,card:b.card,destinations:placementDestinations(row.state,libraryOf(pack),0,b.card)});
+  });
   app.post<{Params:{id:string}}>("/api/matches/:id/preview",async req=>{
     const a=await auth.actor(req),b=z.object({revision:z.number().int().min(0),action:actionInput}).strict().parse(req.body),row=await own(pool,uuid.parse(req.params.id),a.id);
+    await rateLimit(pool,"placement-preview:"+keyed(a.id,serverConfig),120,60);
     if(row.revision!==b.revision)reject(409,"stale_match","Match changed. Reload before previewing.");
     if(b.action.type!=="play")reject(400,"preview_play_only","Select a legal placement for a preview.");
-    const pack=await contentVersion(pool,row.version_id);let p;try{p=actionPreview(row.state,{...b.action,player:0},libraryOf(pack));}catch{reject(400,"illegal_action","This placement is not legal.");}
-    if(p.fault&&!p.privateConsequencesOmitted)reject(400,"illegal_action","This action cannot resolve safely.");return {changes:p.changes,scoreBefore:p.scoreBefore.totals,scoreAfter:p.scoreAfter.totals,privateConsequencesOmitted:p.privateConsequencesOmitted};
+    const key=`${a.id}:${row.id}:${row.revision}:${JSON.stringify(b.action)}`,cached=previews.get(key);if(cached)return cached;
+    const pack=await contentVersion(pool,row.version_id),library=libraryOf(pack),issue=placementIssue(row.state,library,0,b.action.card,b.action.row,b.action.col);if(issue)reject(400,"illegal_action",issue.message);
+    const p=tacticalPreview(row.state,library,0,b.action.card,b.action.row,b.action.col);
+    if(p.fault)reject(400,"illegal_action","This action cannot resolve safely.");return previews.put(key,{...p,matchId:row.id,revision:row.revision});
   });
   app.post<{Params:{id:string}}>("/api/matches/:id/actions",async req=>{
     const actor=await auth.actor(req),id=uuid.parse(req.params.id),b=z.object({revision:z.number().int().min(0),requestId:operationKey,action:actionInput}).strict().parse(req.body);

@@ -4,7 +4,7 @@ import {adjacentTile,floatingPosition,placementRequest,type Placement,type Place
 type View = PlacementSource & {hand:{id:string;definitionId:string}[];configuration:{battlefield:{rows:number;cols:number}}};
 type Target = {row:number;col:number};
 type Visual = {card:string;definition:string;phase:"held"|"returning"|"placing"};
-type Options = {value:View;root:RefObject<HTMLElement|null>;blocked:boolean;onChoose:(placement:Placement)=>void;onCancel:()=>void};
+type Options = {value:View;root:RefObject<HTMLElement|null>;blocked:boolean;onChoose:(placement:Placement)=>void;onCancel:()=>void;avoid?:RefObject<Target[]>};
 
 export function useCardPlacement(options:Options){
   const latest=useRef(options);latest.current=options;
@@ -24,8 +24,10 @@ export function useCardPlacement(options:Options){
   function hand(card:string){return [...(latest.current.root.current?.querySelectorAll<HTMLElement>("[data-hand-instance]")??[])].find(el=>el.dataset.handInstance===card);}
   function paint(){
     raf.current=0;if(!floating.current||!visualRef.current||visualRef.current.phase!=="held")return;
-    const width=innerWidth<700?92:128,height=width*4/3,area=targetRef.current?tile(targetRef.current.row,targetRef.current.col)?.getBoundingClientRect():undefined;
-    const pos=floatingPosition(point.current,width,height,{width:innerWidth,height:innerHeight},area);
+    const width=innerWidth<700?92:128,height=width*4/3+28,area=targetRef.current?tile(targetRef.current.row,targetRef.current.col)?.getBoundingClientRect():undefined;
+    const avoided=(latest.current.avoid?.current??[]).flatMap(p=>{const r=tile(p.row,p.col)?.getBoundingClientRect();return r?[r]:[];});
+    const pos=floatingPosition(point.current,width,height,{width:innerWidth,height:innerHeight},area,avoided);
+    const overlaps=avoided.some(r=>pos.x<r.right&&pos.x+width>r.left&&pos.y<r.bottom&&pos.y+height>r.top);floating.current.style.visibility=overlaps?"hidden":"visible";
     position.current={...pos,width};floating.current.style.width=width+"px";floating.current.style.transform=`translate3d(${pos.x}px,${pos.y}px,0)`;
   }
   function schedule(){if(!raf.current)raf.current=requestAnimationFrame(paint);}
@@ -34,14 +36,14 @@ export function useCardPlacement(options:Options){
     if(!previous)return;
     show({...previous,phase});
     const element=destination?tile(destination.row,destination.col)?.querySelector<HTMLElement>(".player-tile-card-space"):hand(previous.card),rect=element?.getBoundingClientRect();
-    if(rect&&floating.current){const width=Math.min(rect.width,rect.height*.75),x=rect.left+(rect.width-width)/2,y=rect.top+(rect.height-width*4/3)/2;floating.current.dataset.phase=phase;floating.current.style.transform=`translate3d(${x}px,${y}px,0) scale(${width/position.current.width})`;}
+    if(rect&&floating.current){const width=Math.min(rect.width,rect.height*.75),x=rect.left+(rect.width-width)/2,y=rect.top+(rect.height-width*4/3)/2;floating.current.style.visibility="visible";floating.current.dataset.phase=phase;floating.current.style.transform=`translate3d(${x}px,${y}px,0) scale(${width/position.current.width})`;}
     timer.current=setTimeout(()=>{show(null);timer.current=null;},matchMedia("(prefers-reduced-motion: reduce)").matches?0:220);
   }
   function cancel(announce=true){latest.current.onCancel();animateEnd("returning");if(announce)setMessage("Selection cancelled. Your hand and saved match are unchanged.");else setMessage("");}
   function select(card:string,at?:Point){
     if(!canSelect())return;
     const value=latest.current.value,creature=value.hand.find(c=>c.id===card);if(!creature)return;
-    if(!value.legalActions.some(a=>a.card===card)){setMessage("No legal destinations for this card. Inspect its placement requirement or choose another card.");return;}
+    if(!value.legalActions.some(a=>a.card===card)){setMessage("No legal destinations for this card. Inspect its placement requirement or choose another card.");}
     clearTimer();latest.current.onCancel();selection.current=card;setSelected(card);updateTarget(null);
     const rect=hand(card)?.getBoundingClientRect();point.current=at??{x:rect?rect.left+rect.width/2:innerWidth/2,y:rect?rect.top+rect.height/2:innerHeight/2};
     show({card,definition:creature.definitionId,phase:"held"});schedule();setMessage("Card selected. Choose a legal tile. Escape or Clear selection returns it to your hand.");
@@ -70,8 +72,8 @@ export function useCardPlacement(options:Options){
     const interrupt=()=>cancel();
     const hidden=()=>{if(document.hidden)cancel(false);};
     const key=(event:KeyboardEvent)=>{if(event.key==="Escape"&&selection.current){event.preventDefault();cancel();}};
-    window.addEventListener("pointermove",move,{passive:false});window.addEventListener("pointerup",up);window.addEventListener("pointercancel",interrupt);window.addEventListener("blur",interrupt);window.addEventListener("keydown",key);document.addEventListener("visibilitychange",hidden);
-    return()=>{window.removeEventListener("pointermove",move);window.removeEventListener("pointerup",up);window.removeEventListener("pointercancel",interrupt);window.removeEventListener("blur",interrupt);window.removeEventListener("keydown",key);document.removeEventListener("visibilitychange",hidden);clearTimer();cancelAnimationFrame(raf.current);const g=gesture.current;if(g?.button.hasPointerCapture(g.id))g.button.releasePointerCapture(g.id);};
+    window.addEventListener("pointermove",move,{passive:false});window.addEventListener("pointerup",up);window.addEventListener("pointercancel",interrupt);window.addEventListener("blur",interrupt);window.addEventListener("keydown",key);document.addEventListener("visibilitychange",hidden);window.addEventListener("resize",schedule);window.visualViewport?.addEventListener("resize",schedule);document.addEventListener("fullscreenchange",schedule);
+    return()=>{window.removeEventListener("pointermove",move);window.removeEventListener("pointerup",up);window.removeEventListener("pointercancel",interrupt);window.removeEventListener("blur",interrupt);window.removeEventListener("keydown",key);document.removeEventListener("visibilitychange",hidden);window.removeEventListener("resize",schedule);window.visualViewport?.removeEventListener("resize",schedule);document.removeEventListener("fullscreenchange",schedule);clearTimer();cancelAnimationFrame(raf.current);const g=gesture.current;if(g?.button.hasPointerCapture(g.id))g.button.releasePointerCapture(g.id);};
   },[]);
   function pointerDown(event:ReactPointerEvent<HTMLElement>,card:string){
     if(event.button!==0||!event.isPrimary||!canSelect()||!latest.current.value.legalActions.some(a=>a.card===card))return;
@@ -84,5 +86,5 @@ export function useCardPlacement(options:Options){
     if(row===undefined||col===undefined){if(!event.key.startsWith("Arrow"))return;const first=latest.current.value.legalActions.find(a=>a.card===selection.current);if(first){event.preventDefault();tile(first.row,first.col)?.querySelector<HTMLButtonElement>(".player-tile-action")?.focus();}return;}
     const field=latest.current.value.configuration.battlefield,next=adjacentTile(row,col,event.key,field.rows,field.cols);if(next){event.preventDefault();tile(next.row,next.col)?.querySelector<HTMLButtonElement>(".player-tile-action")?.focus();}
   }
-  return {selected,target,visual,floating,dragging,message,cancel,choose,clickCard,pointerDown,navigate,focusTile,lostCapture:(id:number)=>{if(gesture.current?.id===id)cancel();},accepted:(destination:Target)=>{animateEnd("placing",destination);setMessage("Placement accepted and saved.");},rejected:()=>{release();updateTarget(null);setMessage("Placement was not accepted. Your hand is preserved; review the saved position before retrying.");},pointTo:(at:Point)=>{point.current=at;schedule();}};
+  return {selected,target,visual,reposition:schedule,floating,dragging,message,cancel,choose,clickCard,pointerDown,navigate,focusTile,lostCapture:(id:number)=>{if(gesture.current?.id===id)cancel();},accepted:(destination:Target)=>{animateEnd("placing",destination);setMessage("Placement accepted and saved.");},rejected:()=>{release();updateTarget(null);setMessage("Placement was not accepted. Your hand is preserved; review the saved position before retrying.");},pointTo:(at:Point)=>{point.current=at;schedule();}};
 }
