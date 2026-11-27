@@ -11,6 +11,8 @@ import {keyed,token,passwordHash,digest} from "./security";
 import {validateRecord} from "../src/replay/record";
 import {validateWorkspace} from "../src/content/transfer";
 import {issueLocalRecovery} from "./identity";
+import {reconcileEconomy} from "./economy-assets";
+import {economyDigest} from "./economy-hash";
 const config=readConfig(),pool=database(config),command=process.argv[2]??"status",args=process.argv.slice(3);
 process.umask(0o077);
 const value=(key:string)=>args.find(x=>x.startsWith(`--${key}=`))?.slice(key.length+3);
@@ -68,6 +70,10 @@ try{
     for(const row of (await restored.query("SELECT workspace FROM kd.studio_workspace")).rows)validateWorkspace(row.workspace);
     const mismatch=await restored.query(`SELECT i.player_id FROM kd.inventory i LEFT JOIN (SELECT a.player_id,e.edition_id,sum(e.delta) AS balance FROM kd.inventory_entry e JOIN kd.acquisition a ON a.id=e.acquisition_id GROUP BY a.player_id,e.edition_id) l ON l.player_id=i.player_id AND l.edition_id=i.edition_id WHERE i.quantity<>coalesce(l.balance,0)`);
     if(mismatch.rowCount)throw Error("Restored inventory ledger does not reconcile");
+    if((await restored.query("SELECT to_regclass('kd.economy_transaction') AS relation")).rows[0].relation){
+      if(!(await reconcileEconomy(restored as any)).ok)throw Error("Restored economy ledger does not reconcile");
+      for(const row of (await restored.query("SELECT document,digest FROM kd.configuration_version")).rows)if(economyDigest(row.document)!==row.digest)throw Error("Restored configuration checksum mismatch");
+    }
     // Adopt only this newly created disposable copy; the source is never changed.
     await restored.query("UPDATE kd.environment_guard SET environment='integration',instance_id=$1,disposable=true WHERE singleton",[m.instanceId]);
     }finally{await restored.end();}

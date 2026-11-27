@@ -46,7 +46,7 @@ export function acquisitionRoutes(app:FastifyInstance,pool:DB,config:BackendConf
       if(!testingEnabled)reject(403,"testing_acquisition_disabled","Local testing acquisition is disabled. Previously acquired cards remain owned.");
       const editions=new Map<string,number>();
       for(const id of row.cards as string[]){const card=content.cards.find(card=>card.id===id);if(!card?.collectible)reject(503,"pack_content_unavailable","This pack's historical published content is unavailable.");const edition=`${card.collectible.gameplayId}:${card.collectible.edition}`;editions.set(edition,(editions.get(edition)??0)+1);}
-      const acquisition=await inventoryTransaction(c,actor.id,`pack:${row.id}`,"local-testing:sampler-v1",[...editions].map(([editionId,quantity])=>({editionId,quantity})),actor.id);
+      const acquisition=await inventoryTransaction(c,actor.id,`pack:${row.id}`,"local-testing:sampler-v1",[...editions].map(([editionId,quantity])=>({editionId,quantity})),actor.id,{origin:"sandbox",tradeable:false,sandbox:true});
       const {rows:[opened]}=await c.query("UPDATE kd.card_pack SET opened_at=now(),acquisition_id=$2 WHERE id=$1 RETURNING *",[row.id,acquisition.id]);
       await c.query("INSERT INTO kd.audit_event(actor_id,operation,target_id,details) VALUES($1,'local-testing-pack-opened',$2,$3)",[actor.id,row.id,{acquisition:acquisition.id,policy:policyId}]);
       return {pack:publicPack(opened),cards:row.cards,content,acquisition,replayed:false};

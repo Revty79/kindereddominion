@@ -14,6 +14,8 @@ import {identityRoutes} from "./identity";
 import {acquisitionRoutes} from "./acquisition";
 import {ApiError} from "./errors";
 import {keyed,rateLimit} from "./security";
+import {configurationRoutes} from "./configuration";
+import {economyRoutes} from "./economy-routes";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
   const pool=suppliedPool??database(config),app=Fastify({logger:false,bodyLimit:256*1024,trustProxy:false,requestTimeout:30000,connectionTimeout:10000});
   await app.register(cookie);await app.register(cors,{origin:config.origin,credentials:true,methods:["GET","POST","PUT","PATCH","DELETE"],allowedHeaders:["Content-Type","X-CSRF-Token"]});
@@ -37,6 +39,6 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   app.get("/readyz",async(_,reply)=>{try{await readiness(pool,config);return {status:"ready",database:"connected",catalog:"available"};}catch{return reply.code(503).send({status:"not-ready"});}});
   const root=await controlRoot(config.controlDirectory);
   if(["test","prod"].includes(config.environment)&&!root)throw Error("Hosted backend requires the protected control application build.");
-  const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth);matchRoutes(app,pool,auth);studioRoutes(app,pool,auth);
+  const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   if(!suppliedPool)app.addHook("onClose",()=>pool.end());return app;
 }

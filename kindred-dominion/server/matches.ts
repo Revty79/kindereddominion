@@ -12,11 +12,13 @@ import {actionPreview,publicEventText,presentationFrames} from "../src/ui/readab
 import {libraryOf} from "../src/content/validation";
 import {transaction,type DB} from "./db";
 import {activeContent,contentVersion} from "./catalog";
-import {validateOwnedDeck} from "./inventory";
+import {validateOwnedDeck,deckUsesSandbox} from "./inventory";
 import {getDeck} from "./player-routes";
 import {uuid,operationKey,type Authentication} from "./auth";
 import {digest} from "./security";
 import {reject} from "./errors";
+import type {BackendConfig} from "./config";
+import {enrollEconomyMatch,settleMatchReward} from "./economy";
 const actionInput=z.discriminatedUnion("type",[
   z.object({type:z.literal("play"),card:z.string().min(1).max(80),row:z.number().int().min(0).max(19),col:z.number().int().min(0).max(19)}).strict(),
   z.object({type:z.literal("mulligan"),cards:z.array(z.string().max(80)).max(5)}).strict(),
@@ -36,10 +38,12 @@ export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,i
     score:{totals:score.totals,rows:score.rows,columns:score.columns,creatures:score.creatures,bonuses:score.breakdown?.bonuses??[0,0]},
     log:state.events.slice(-50).map(e=>({turn:e.turn,type:e.type,text:publicEventText(e)})),result:state.result};
 }
-export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
+export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serverConfig:BackendConfig){
   const opponents=(pack:ContentPack,config:GameState["config"])=>pack.decks.filter(deck=>validateDeck(deck.cards,libraryOf(pack),config).length===0);
   async function own(db:any,id:string,playerId:string,lock=false){const {rows:[r]}=await db.query(`SELECT * FROM kd.match WHERE id=$1 AND player_id=$2 ${lock?"FOR UPDATE":""}`,[id,playerId]);if(!r)reject(404,"match_missing","Match was not found.");return r;}
-  async function complete(c:any,row:any,state:GameState){if(state.phase!=="finished"||row.testing_access)return;
+  async function complete(c:any,row:any,state:GameState){if(state.phase!=="finished")return;
+    await settleMatchReward(c,row.id,serverConfig);
+    if(row.testing_access)return;
     const kinds=[...new Set((row.decks[0] as string[]).map(id=>row.record.library[id].kindred))];
     await c.query("INSERT INTO kd.match_completion(match_id,player_id,scoring,kindreds,outcome) VALUES($1,$2,$3,$4,$5) ON CONFLICT(match_id) DO NOTHING",[row.id,row.player_id,state.config.scoring,JSON.stringify(kinds),state.result!.winner===0?"win":state.result!.winner===null?"draw":"loss"]);
   }
@@ -56,6 +60,9 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
       const deck=await getDeck(c,b.deckId,actor.id),pack=await activeContent(c),library=libraryOf(pack),config={...deck.config,...(b.scoring?{scoring:b.scoring}:{})};
       if(deck.draft)reject(400,"draft_deck","Finish and save a legal playing deck before entering a match.");
       await validateOwnedDeck(c,actor,deck.cards,pack,config,deck.testingAccess);
+      // Test-only acquisition lots cannot bootstrap ordinary reward progression.
+      // Freeze this classification with the match, independent of later trades.
+      const testingAccess=deck.testingAccess||await deckUsesSandbox(c,actor.id,deck.cards,pack);
       const candidates=opponents(pack,config);
       if(!candidates.length)reject(400,"opponent_deck_unavailable","No computer deck is legal under this selected configuration.");
       const selected=b.opponentDeckId?candidates.find(deck=>deck.id===b.opponentDeckId):null;
@@ -63,12 +70,12 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
       const seed=crypto.randomBytes(4).readUInt32LE(),startingPlayer=crypto.randomInt(2) as 0|1,opponent=selected??candidates[crypto.randomInt(candidates.length)];
       const decks:[string[],string[]]=[deck.cards,opponent.cards];let state=createMatch(decks,library,config,seed,startingPlayer),record=newRecord(state,library,decks,pack.id,"Server-authoritative computer match");
       const ai:Action={type:"mulligan",player:1,cards:computerMulligan(state,library,1)};state=act(state,ai,library);record=appendRecord(record,ai,state);
-      const id=crypto.randomUUID(),{rows:[row]}=await c.query("INSERT INTO kd.match(id,player_id,opponent_type,version_id,engine_version,config,decks,seed,starting_player,state,record,status,testing_access) VALUES($1,$2,'computer',$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",[id,actor.id,pack.id,record.engineVersion,config,JSON.stringify(decks),seed,startingPlayer,state,record,state.phase,deck.testingAccess]);
-      await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,1,'server-initial-mulligan',$2,$3)",[id,ai,record.actions[0].signature]);return publicMatch(row,pack);
+      const id=crypto.randomUUID(),{rows:[row]}=await c.query("INSERT INTO kd.match(id,player_id,opponent_type,version_id,engine_version,config,decks,seed,starting_player,state,record,status,testing_access) VALUES($1,$2,'computer',$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",[id,actor.id,pack.id,record.engineVersion,config,JSON.stringify(decks),seed,startingPlayer,state,record,state.phase,testingAccess]);
+      await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,1,'server-initial-mulligan',$2,$3)",[id,ai,record.actions[0].signature]);await enrollEconomyMatch(c,id,serverConfig);return publicMatch(row,pack);
     });
   });
   app.get("/api/matches",async req=>{const a=await auth.actor(req),{rows}=await pool.query("SELECT id,status,version_id,engine_version,config,revision,result,testing_access,created_at,completed_at FROM kd.match WHERE player_id=$1 ORDER BY created_at DESC LIMIT 200",[a.id]);return {matches:rows};});
-  app.get<{Params:{id:string}}>("/api/matches/:id",async req=>{const a=await auth.actor(req),row=await own(pool,uuid.parse(req.params.id),a.id);return publicMatch(row,await contentVersion(pool,row.version_id));});
+  app.get<{Params:{id:string}}>("/api/matches/:id",async req=>{const a=await auth.actor(req),row=await own(pool,uuid.parse(req.params.id),a.id);return {...publicMatch(row,await contentVersion(pool,row.version_id)),rewardSummary:(await pool.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[row.id,a.id])).rows[0]??null};});
   app.post<{Params:{id:string}}>("/api/matches/:id/preview",async req=>{
     const a=await auth.actor(req),b=z.object({revision:z.number().int().min(0),action:actionInput}).strict().parse(req.body),row=await own(pool,uuid.parse(req.params.id),a.id);
     if(row.revision!==b.revision)reject(409,"stale_match","Match changed. Reload before previewing.");
@@ -97,7 +104,7 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
       row.record=record;await complete(c,row,state);
       const view=publicMatch({...row,state,revision},pack);
       const frames=presentationFrames(before,state,steps,library).filter(f=>f.changes.length).map(f=>{const view=publicMatch({...row,state:f.state,revision},pack,f.state,false);return {caption:f.caption,changes:f.changes,board:view.board,score:view.score};});
-      return {...view,presentation:frames};
+      return {...view,presentation:frames,rewardSummary:(await c.query("SELECT status,reason,evidence FROM kd.match_reward WHERE match_id=$1 AND player_id=$2",[id,actor.id])).rows[0]??null};
     });
   });
   app.get<{Params:{id:string}}>("/api/matches/:id/replay",async req=>{

@@ -34,7 +34,7 @@ def main():
     proof = "kindred-ci-pg18:" + sha
     subprocess.run(["docker", "build", "--build-arg", "MAINTENANCE_IMAGE=kindred-ci-maintenance:" + sha, "--tag", proof, "--file", "deployment/operator/Dockerfile.postgres-proof", "."], cwd=app, check=True)
     repository = app.parent.resolve()
-    subprocess.run(["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true", "--pids-limit", "256", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m,mode=1777", "--tmpfs", "/app/.local:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000", "--tmpfs", "/proof:rw,nosuid,nodev,size=2g,mode=0700,uid=1000,gid=1000", "--tmpfs", "/var/lib/postgresql:ro,nosuid,nodev,size=1m,mode=0555", "--mount", "type=bind,src=" + str(repository) + ",dst=/source,readonly", proof], check=True)
+    subprocess.run(["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true", "--pids-limit", "256", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m,mode=1777", "--tmpfs", "/app/node_modules/.vite-temp:rw,nosuid,nodev,size=64m,mode=0700,uid=1000,gid=1000", "--tmpfs", "/app/node_modules/.vite:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000", "--tmpfs", "/app/.local:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000", "--tmpfs", "/proof:rw,nosuid,nodev,size=2g,mode=0700,uid=1000,gid=1000", "--tmpfs", "/var/lib/postgresql:ro,nosuid,nodev,size=1m,mode=0555", "--mount", "type=bind,src=" + str(repository) + ",dst=/source,readonly", proof], check=True)
     print(json.dumps({"revision": sha, "images": images, "networklessReadOnlyFullSuite": True, "sourceWritesDenied": True, "postgres18FullRehearsal": True, "hostDeploymentPerformed": False}, indent=2))
 
 

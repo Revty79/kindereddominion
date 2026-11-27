@@ -98,7 +98,16 @@ def main():
         host = FixtureHost(runner, admin, pg, env)
         revision = host.git(["rev-parse", "HEAD"])
         release = {"revision": revision, "applicationDir": str(APP), "images": {}}
-        print("PG18 proof: initializing current application schema and official content", flush=True)
+        legacy_cli = APP / ".local/pg18-legacy-cli"; legacy_cli.mkdir()
+        shutil.copyfile(APP / "server-dist/cli.mjs", legacy_cli / "cli.mjs")
+        (legacy_cli / "migrations").mkdir()
+        real_migrations = sorted((APP / "server-dist/migrations").glob("*.cjs"))
+        if len(real_migrations) < 8:
+            raise OperatorError("Economy preservation proof requires the seven-migration legacy boundary")
+        for migration in real_migrations[:7]:
+            shutil.copyfile(migration, legacy_cli / "migrations" / migration.name)
+        release["fixtureCli"] = str(legacy_cli / "cli.mjs")
+        print("PG18 proof: initializing preserved seven-migration schema and official content", flush=True)
         host.maintenance(release, ["migrate"])
         Host.publish(host, release)
         legacy = reproduce(pg)
@@ -149,12 +158,13 @@ INSERT INTO kd.invite(token_hash,max_uses,expires_at) VALUES('fixture-invite',1,
         cli = APP / ".local/pg18-candidate-cli"; cli.mkdir()
         shutil.copyfile(APP / "server-dist/cli.mjs", cli / "cli.mjs")
         shutil.copytree(APP / "server-dist/migrations", cli / "migrations")
-        (cli / "migrations/1795900000000_rehearsal_probe.cjs").write_text("exports.up=pgm=>pgm.sql('ALTER TABLE kd.invite ADD COLUMN proof_additive text; CREATE TABLE kd.proof_new_table(id integer);');exports.down=()=>{};\n")
+        next_timestamp = max(int(file.name.split("_", 1)[0]) for file in (cli / "migrations").glob("*.cjs")) + 1
+        (cli / "migrations" / (str(next_timestamp) + "_rehearsal_probe.cjs")).write_text("exports.up=pgm=>pgm.sql('ALTER TABLE kd.invite ADD COLUMN proof_additive text; CREATE TABLE kd.proof_new_table(id integer);');exports.down=()=>{};\n")
         candidate = {**release, "fixtureCli": str(cli / "cli.mjs")}
         print("PG18 proof: real backup, isolated restore, additive migration, publish, grants and row verification", flush=True)
         rehearsal = Host.rehearse(host, backup, candidate, migrate=True)
         restored = pg.copy(rehearsal["database"])
-        if len(restored.state()["migrations"]) != len(source_state["migrations"]) + 1:
+        if len(restored.state()["migrations"]) != len(real_migrations) + 1:
             raise OperatorError("Additive fixture migration did not execute")
         if [call[0] for call in host.maintenance_calls[source_calls:]] != ["migrate", "seed", "seed", "status"]:
             raise OperatorError("Complete rehearsal maintenance order changed")
@@ -210,7 +220,30 @@ INSERT INTO kd.invite(token_hash,max_uses,expires_at) VALUES('fixture-invite',1,
         pg.compare(before)
         if pg.state() != source_state:
             raise OperatorError("Original source database changed during isolated rehearsal")
-        result = {"postgresVersion": admin.identity()["version"], "legacyRegression": legacy, "applicationTables": len(before), "preservedOriginalRows": sum(table["count"] for table in before), "sourceMigrationCount": len(source_state["migrations"]), "rehearsalMigrationCount": len(restored.state()["migrations"]), "backupAndSourceBundleVerified": True, "completeHostRehearsalVerified": True, "postPublicationPreservationVerified": True, "rowColumnAndDuplicateCorruptionDetected": True, "runtimePermissionFailuresDetected": True, "runtimeDmlWithoutDdl": True, "backendReadyWithRuntimeRole": True, "sourceDatabaseUnchanged": True, "hostDatabaseAccessed": False}
+        # The full API integration suite runs against another empty, owned database.
+        # No source/rehearsal fixture credentials or data enter browser/host DBs.
+        token = secrets.token_urlsafe(40); REDACT.add(token)
+        admin.sql("CREATE ROLE kindred_test LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE PASSWORD '" + password + "'")
+        admin.command("createdb",["--owner=kindred_test","kd_integration"])
+        manifest = APP / ".local/v1.3d/postgres/instance.json"
+        manifest.parent.mkdir(parents=True, exist_ok=True)
+        manifest.write_text(json.dumps({"host":"127.0.0.1","port":5432,"database":"kd_integration","instanceId":token,"testDatabases":["kd_integration"]}))
+        os.chmod(manifest, 0o600)
+        integration_env = {**env,"APP_ENV":"integration","PGDATABASE":"kd_integration","PGUSER":"kindred_test","ISOLATION_TOKEN":token,"COOKIE_SECURE":"false","FRONTEND_ORIGIN":"http://127.0.0.1:5177","REGISTRATION_MODE":"local","ECONOMY_ENABLED":"true"}
+        print("PG18 proof: running full authoritative API, economy and concurrency suite", flush=True)
+        test_report = ROOT / "backend-tests.private.json"
+        try:
+            runner(["node","node_modules/vitest/vitest.mjs","run","--config","server/vitest.config.ts","--reporter=json","--outputFile="+str(test_report)],cwd=APP,env=integration_env,output=False,timeout=1800)
+        except OperatorError:
+            if test_report.exists():
+                report = json.loads(test_report.read_text())
+                failed = [case.get("fullName", "unnamed regression") for suite in report.get("testResults",[]) for case in suite.get("assertionResults",[]) if case.get("status")=="failed"]
+                print("PG18 failed regression names: "+json.dumps(failed),flush=True)
+            raise
+        report = json.loads(test_report.read_text())
+        if report.get("numFailedTests") or report.get("numPassedTests",0)<58:
+            raise OperatorError("The complete existing and economy API test suites did not pass")
+        result = {"backendIntegrationTestsPassed":report["numPassedTests"],"backendIntegrationSuitePassed":True,"legacySevenToCurrentMigrationsVerified":True,"postgresVersion": admin.identity()["version"], "legacyRegression": legacy, "applicationTables": len(before), "preservedOriginalRows": sum(table["count"] for table in before), "sourceMigrationCount": len(source_state["migrations"]), "rehearsalMigrationCount": len(restored.state()["migrations"]), "backupAndSourceBundleVerified": True, "completeHostRehearsalVerified": True, "postPublicationPreservationVerified": True, "rowColumnAndDuplicateCorruptionDetected": True, "runtimePermissionFailuresDetected": True, "runtimeDmlWithoutDdl": True, "backendReadyWithRuntimeRole": True, "sourceDatabaseUnchanged": True, "hostDatabaseAccessed": False}
         write_json(ROOT / "result.json", result)
         print(json.dumps(result, indent=2), flush=True)
     finally:

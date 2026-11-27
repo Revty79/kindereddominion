@@ -8,6 +8,8 @@ import {activeContent} from "./catalog";
 import {owned,startingCollection,grant,validateOwnedDeck,ownedDeckLegality} from "./inventory";
 import {DEFAULT_CONFIG} from "../src/engine/config";
 import {reject} from "./errors";
+import type {BackendConfig} from "./config";
+import {activityEconomy,currentEconomy,economyEvent} from "./economy";
 export const configInput=z.object({scoring:z.enum(["classic","domination"]).default("classic"),mode:z.enum(["standard","free"]).default("standard"),collection:z.enum(["mixed","Nature","Mythical","Arcane","Undead","Constructs"]).default("mixed")}).strict();
 const deckInput=z.object({name:z.string().trim().min(1).max(80),cards:z.array(z.string().min(1).max(80)).max(15),config:configInput,draft:z.boolean().default(false),testingAccess:z.boolean().default(false),revision:z.number().int().positive().optional()}).strict();
 export async function getDeck(db:any,id:string,playerId:string,lock=false){
@@ -15,7 +17,7 @@ export async function getDeck(db:any,id:string,playerId:string,lock=false){
   if(!d)reject(404,"deck_missing","Deck was not found.");const {rows}=await db.query("SELECT card_id FROM kd.deck_card WHERE deck_id=$1 ORDER BY slot",[id]);
   return {id:d.id,name:d.name,cards:rows.map((r:any)=>r.card_id),config:d.config,version:d.version_id,revision:d.revision,draft:d.is_draft,testingAccess:d.testing_access,createdAt:d.created_at,updatedAt:d.updated_at};
 }
-export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
+export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serverConfig:BackendConfig){
   app.get("/api/catalog",async()=>({content:await activeContent(pool)}));
   app.get("/api/collection",async req=>{
     const actor=await auth.actor(req),content=await activeContent(pool),inventory=await owned(pool,actor.id);
@@ -24,7 +26,7 @@ export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
     const editions=(await pool.query("SELECT id,card_id,edition FROM kd.edition WHERE card_id=ANY($1) ORDER BY card_id,edition",[content.cards.map(c=>c.collectible!.gameplayId)])).rows;
     return {content,inventory,completion,editions,ownership:"permanent",practiceAccess:"Local practice grants unrestricted testing access separately from permanent ownership."};
   });
-  app.post("/api/starting-collection",async req=>{const a=await auth.actor(req),b=z.object({kindred:z.enum(["Nature","Mythical","Arcane","Undead","Constructs"]),idempotencyKey:operationKey}).strict().parse(req.body);return startingCollection(pool,a,b.kindred,b.idempotencyKey);});
+  app.post("/api/starting-collection",async req=>{const a=await auth.actor(req),b=z.object({kindred:z.enum(["Nature","Mythical","Arcane","Undead","Constructs"]),idempotencyKey:operationKey}).strict().parse(req.body);return startingCollection(pool,a,b.kindred,b.idempotencyKey,async(c,cards)=>{const active=await currentEconomy(c,serverConfig);if(active)await economyEvent(c,a.id,"unique_card",`starter:${b.kindred}`,cards.length,{kindreds:[b.kindred]},active);});});
   app.post("/api/admin/inventory",async req=>{
     const a=await auth.actor(req,["administrator"]),b=z.object({playerId:uuid,idempotencyKey:operationKey,source:z.string().trim().min(3).max(100),changes:z.array(z.object({editionId:z.string().min(1).max(180),quantity:z.number().int().min(-1000).max(1000).refine(n=>n!==0)}).strict()).min(1).max(150)}).strict().parse(req.body);
     return grant(pool,b.playerId,b.idempotencyKey,b.source,b.changes,a);
@@ -44,6 +46,7 @@ export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
       for(let i=0;i<b.cards.length;i++)await c.query("INSERT INTO kd.deck_card(deck_id,slot,card_id) VALUES($1,$2,$3)",[deckId,i,b.cards[i]]);
       await c.query("INSERT INTO kd.deck_history(deck_id,revision,snapshot) VALUES($1,$2,$3)",[deckId,revision,{name:b.name,cards:b.cards,config,version:pack.id,testingAccess:b.testingAccess,draft:b.draft}]);
       if(b.draft)await c.query("UPDATE kd.player SET default_deck_id=NULL WHERE id=$1 AND default_deck_id=$2",[a.id,deckId]);
+      if(!b.draft&&!b.testingAccess)await activityEconomy(c,a.id,"deck_saved",`deck:${deckId}:${revision}`,serverConfig);
       return getDeck(c,deckId,a.id);
     });
   };
@@ -56,6 +59,6 @@ export function playerRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
     const a=await auth.actor(req),{rows}=await pool.query("SELECT scoring,outcome,kindreds FROM kd.match_completion WHERE player_id=$1",[a.id]);
     const stats={matches:rows.length,wins:0,losses:0,draws:0,rulesets:{} as Record<string,number>,kindreds:{} as Record<string,number>};
     for(const row of rows){stats[row.outcome==="win"?"wins":row.outcome==="loss"?"losses":"draws"]++;stats.rulesets[row.scoring]=(stats.rulesets[row.scoring]??0)+1;for(const k of row.kindreds)stats.kindreds[k]=(stats.kindreds[k]??0)+1;}
-    return {stats,source:"verified-server-matches",economyEnabled:false};
+    return {stats,source:"verified-server-matches",economyEnabled:!!(await currentEconomy(pool,serverConfig))};
   });
 }

@@ -5,6 +5,7 @@ import {transaction,type DB} from "./db";
 import type {BackendConfig} from "./config";
 import {keyed,token,equal,passwordHash,verifyPassword,rateLimit} from "./security";
 import {reject} from "./errors";
+import {onboardingEconomy} from "./economy";
 export type Actor={id:string;username:string;displayName:string;email:string|null;role:"player"|"developer"|"administrator";startingKindred:string|null;defaultDeckId:string|null;createdAt:string};
 type Session={token_hash:string;csrf:string;expires_at:string;player_id:string|null;actor:Actor|null};
 const username=z.string().min(3).max(32).regex(/^[a-zA-Z0-9_-]+$/).transform(x=>x.toLowerCase());
@@ -60,6 +61,7 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig,
       }
       const id=crypto.randomUUID();const {rows:[p]}=await c.query("INSERT INTO kd.player(id,username,display_name,password_hash,email) VALUES($1,$2,$3,$4,$5) RETURNING *",[id,b.username,b.displayName,hash,b.email]);
       await c.query("INSERT INTO kd.progression_extension(player_id) VALUES($1)",[id]);
+      await onboardingEconomy(c,id,config);
       const csrf=await issue(reply,id,old?.token_hash,c);reply.code(201);return {player:profile(p),csrf};
     });
   });

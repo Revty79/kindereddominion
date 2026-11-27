@@ -1,5 +1,6 @@
 import pg, { type PoolClient } from "pg";
 import type { BackendConfig } from "./config";
+import {REQUIRED_MIGRATION} from "./schema-version";
 export type DB = pg.Pool;
 export function database(config:BackendConfig) {
   const pool=new pg.Pool({host:config.host,port:config.port,database:config.database,user:config.user,password:config.password,
@@ -20,5 +21,5 @@ export async function readiness(pool:DB,config:BackendConfig){
   const {rows:[guard]}=await pool.query("SELECT environment,instance_id FROM kd.environment_guard WHERE singleton");
   if(!guard||guard.environment!==config.environment||(config.environment==="integration"&&guard.instance_id!==config.isolationToken))throw Error("Database environment guard does not match backend configuration.");
   const {rows}=await pool.query("SELECT version_id FROM kd.content_selection WHERE singleton");if(!rows.length)throw Error("Official catalog is not seeded.");
-  const {rows:migrations}=await pool.query("SELECT name FROM kd.migration_checksum WHERE name='1795800000000_hosted_administration.cjs'");if(!migrations.length)throw Error("Backend migrations are pending.");
+  const {rows:migrations}=await pool.query("SELECT name FROM kd.migration_checksum WHERE name=$1",[REQUIRED_MIGRATION]);if(!migrations.length)throw Error("Backend migrations are pending.");
 }
