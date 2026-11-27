@@ -1,0 +1,20 @@
+{
+  "hostname": "homeserver",
+  "lanAddress": "10.0.0.242",
+  "base": "/srv/kindred-dominion",
+  "repository": "/srv/kindred-dominion/source/repository",
+  "privateDirectory": "/etc/kindred-dominion/test",
+  "backupDirectory": "/srv/kindred-dominion/backups",
+  "database": "kindred_dominion_test",
+  "migrationRole": "kindred_test_migrator",
+  "runtimeRole": "kindred_test_runtime",
+  "postgresBin": "/usr/lib/postgresql/18/bin",
+  "network": "kindred-dominion-net",
+  "subnet": "172.23.0.0/24",
+  "bridge": "br-kindred",
+  "frontendPort": 18083,
+  "approvedOrigin": "https://packets-zum-permission-magical.trycloudflare.com",
+  "minimumFreeBytes": 4294967296,
+  "healthTimeoutSeconds": 180,
+  "publishedContent": "founding-kindreds-artwork-v1"
+}

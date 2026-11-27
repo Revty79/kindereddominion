@@ -1,0 +1,9 @@
+# Reference only. Preserve the existing /etc/kindred-dominion/test override.
+networks:
+  default:
+    external: true
+    name: kindred-dominion-net
+services:
+  maintenance:
+    tmpfs:
+      - /app/.local:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000
