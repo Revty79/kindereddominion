@@ -14,6 +14,7 @@ import {issueLocalRecovery} from "./identity";
 import {reconcileEconomy} from "./economy-assets";
 import {reconcileTrades} from "./trade-integrity";
 import {reconcileReservations} from "./trading-inventory";
+import {reconcileCommerce} from "./commerce-integrity";
 import {economyDigest} from "./economy-hash";
 const config=readConfig(),pool=database(config),command=process.argv[2]??"status",args=process.argv.slice(3);
 process.umask(0o077);
@@ -79,6 +80,7 @@ try{
     if((await restored.query("SELECT to_regclass('kd.inventory_reservation') AS relation")).rows[0].relation&&!(await reconcileReservations(restored as any)).ok)throw Error("Restored reservation counters do not reconcile");
     if((await restored.query("SELECT to_regclass('kd.trade_settlement') AS relation")).rows[0].relation&&!(await reconcileTrades(restored as any)).ok)throw Error("Restored trade consent, conservation or provenance does not reconcile");
     // Adopt only this newly created disposable copy; the source is never changed.
+      if((await restored.query("SELECT to_regclass('kd.commerce_order') AS relation")).rows[0].relation&&!(await reconcileCommerce(restored as any)).ok)throw Error("Restored commercial order sources or payment references do not reconcile");
     await restored.query("UPDATE kd.environment_guard SET environment='integration',instance_id=$1,disposable=true WHERE singleton",[m.instanceId]);
     }finally{await restored.end();}
     m.restoreDatabases=[...(m.restoreDatabases??[]),name];await fs.writeFile(".local/v1.3d/postgres/instance.json",JSON.stringify(m,null,2));

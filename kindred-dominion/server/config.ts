@@ -29,7 +29,8 @@ export function readConfig() {
   if(!testingPackCards.length||testingPackCards.length>10||testingPackCards.some(id=>!/^([a-z][a-z0-9_-]{0,79})$/.test(id)))throw Error("Configure one to ten portable published card IDs for the local testing sampler.");
   const economyEnabled=env.ECONOMY_ENABLED===undefined?["dev","integration"].includes(environment):env.ECONOMY_ENABLED==="true";
   if(environment==="prod"&&economyEnabled)throw Error("Production economy activation requires separate authorization.");
-  return {environment,host,port,database,user,password:required("PGPASSWORD"),sessionSecret,origin,secure,registration,economyEnabled,
+  const commerceMode=env.COMMERCE_MODE??"disabled";if(!["disabled","simulation","stripe_sandbox"].includes(commerceMode)||environment==="prod"&&commerceMode!=="disabled")throw Error("Commercial mode must be disabled in production; live payments are not supported.");
+  return {environment,host,port,database,user,password:required("PGPASSWORD"),sessionSecret,origin,secure,registration,economyEnabled,commerceMode,
     localTestingAcquisition,testingPackCards,
     sessionHours:integer("SESSION_HOURS",168,1,720),registrationLimit:integer("REGISTRATION_PER_HOUR",10,1,100),apiHost:env.API_HOST??"127.0.0.1",apiPort:integer("API_PORT",3001,1,65535),
     controlDirectory:path.resolve(env.CONTROL_APP_DIR??"dist-control"),logLevel:env.LOG_LEVEL??"info",isolationToken:env.ISOLATION_TOKEN??"",root:path.resolve(process.env.KINDRED_ROOT??".")};

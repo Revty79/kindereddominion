@@ -1,0 +1,7 @@
+import {describe,it,expect} from "vitest";
+import {DEFAULT_COMMERCE,commerceSchema,commercialProductSchema} from "../server/commerce-rules";
+describe("Sandbox commercial definitions",()=>{
+ it("preserves provisional packages as integer USD amounts without a universal exchange-rate claim",()=>{const packages=DEFAULT_COMMERCE.products.filter(p=>p.type==="aether");expect(packages.map(p=>[p.amountMinor,p.aether])).toEqual([[499,500],[999,1000],[1999,2100],[4999,5500],[9999,11500]]);expect(DEFAULT_COMMERCE.enabled).toBe(false);expect(new Set(packages.map(p=>p.amountMinor/p.aether)).size).toBeGreaterThan(1);expect(DEFAULT_COMMERCE.products.every(p=>p.sandbox&&!p.liveEligible)).toBe(true);});
+ it("rejects live eligibility, unsupported currencies, fractional amounts and ambiguous delivery",()=>{const p=DEFAULT_COMMERCE.products[0];for(const change of [{amountMinor:4.99},{amountMinor:0},{currency:"eur"},{sandbox:false},{liveEligible:true},{aether:0},{shopProducts:["extra"]},{type:"assets"}])expect(commercialProductSchema.safeParse({...p,...change}).success).toBe(false);expect(commerceSchema.safeParse({...DEFAULT_COMMERCE,products:[p,p]}).success).toBe(false);});
+ it("describes complete sets as explicit additional-copy products and preserves the ordinary Gold first-copy route",()=>{const sets=DEFAULT_COMMERCE.products.filter(p=>p.type==="assets");expect(sets).toHaveLength(6);expect(sets.every(p=>p.shopProducts.length===1&&p.shopProducts[0].endsWith("-extra-set"))).toBe(true);expect(sets.find(p=>p.id.includes("founding-all"))?.amountMinor).toBe(2999);});
+});
