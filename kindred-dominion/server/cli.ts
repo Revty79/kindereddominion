@@ -12,6 +12,8 @@ import {validateRecord} from "../src/replay/record";
 import {validateWorkspace} from "../src/content/transfer";
 import {issueLocalRecovery} from "./identity";
 import {reconcileEconomy} from "./economy-assets";
+import {reconcileTrades} from "./trade-integrity";
+import {reconcileReservations} from "./trading-inventory";
 import {economyDigest} from "./economy-hash";
 const config=readConfig(),pool=database(config),command=process.argv[2]??"status",args=process.argv.slice(3);
 process.umask(0o077);
@@ -74,6 +76,8 @@ try{
       if(!(await reconcileEconomy(restored as any)).ok)throw Error("Restored economy ledger does not reconcile");
       for(const row of (await restored.query("SELECT document,digest FROM kd.configuration_version")).rows)if(economyDigest(row.document)!==row.digest)throw Error("Restored configuration checksum mismatch");
     }
+    if((await restored.query("SELECT to_regclass('kd.inventory_reservation') AS relation")).rows[0].relation&&!(await reconcileReservations(restored as any)).ok)throw Error("Restored reservation counters do not reconcile");
+    if((await restored.query("SELECT to_regclass('kd.trade_settlement') AS relation")).rows[0].relation&&!(await reconcileTrades(restored as any)).ok)throw Error("Restored trade consent, conservation or provenance does not reconcile");
     // Adopt only this newly created disposable copy; the source is never changed.
     await restored.query("UPDATE kd.environment_guard SET environment='integration',instance_id=$1,disposable=true WHERE singleton",[m.instanceId]);
     }finally{await restored.end();}

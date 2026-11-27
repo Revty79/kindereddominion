@@ -1,1 +1,1 @@
-export const REQUIRED_MIGRATION="1796200000000_inventory_reservations.cjs";
+export const REQUIRED_MIGRATION="1796300000000_trade_settlement.cjs";
