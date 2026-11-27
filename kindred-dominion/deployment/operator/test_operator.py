@@ -204,6 +204,31 @@ class Adapter(unittest.TestCase):
         with self.assertRaises(OperatorError): pg.compare(expected)
         pg.snapshot = lambda _spec: [{"name": "card_revision", "rows": ["new"]}]
         with self.assertRaises(OperatorError): pg.compare(expected, after_publication=True)
+    def test_snapshot_checks_original_table_and_columns_against_catalog_identity(self):
+        pg = Postgres(None, ".", {})
+        queries = []
+        def rows(query):
+            queries.append(query)
+            if "pg_catalog.pg_class" in query:
+                return [{"name": "player", "oid": 12001}]
+            if "pg_catalog.pg_attribute" in query:
+                return [{"name": "id"}, {"name": "new_column"}]
+            self.fail("Unexpected metadata query")
+        pg.rows = rows; pg.sql = lambda query: "row-hash"
+        snapshot = pg.snapshot([{"name": "player", "columns": ["id"]}])
+        self.assertEqual(snapshot[0]["columns"], ["id"])
+        self.assertEqual(snapshot[0]["rows"], ["row-hash"])
+        self.assertIn("a.attrelid=12001::oid", queries[-1])
+        with self.assertRaises(OperatorError): pg.snapshot([{"name": "pg_statistic", "columns": ["id"]}])
+        with self.assertRaises(OperatorError): pg.snapshot([{"name": "player", "columns": ["missing_column"]}])
+    def test_runtime_audit_rejects_missing_table_sequence_and_unsafe_role_privileges(self):
+        pg = Postgres(None, ".", {})
+        for failed in ("table", "sequence", "role"):
+            pg.rows = lambda query, failed=failed: [{"name": "fixture"}] if ("application_sequences" if failed == "sequence" else "application_tables") in query and failed != "role" else []
+            pg.sql = lambda query, failed=failed: "t" if failed == "role" else "f"
+            with self.assertRaises(OperatorError): pg.verify_runtime_privileges()
+        pg.rows = lambda query: []; pg.sql = lambda query: "f"
+        pg.verify_runtime_privileges()
     def test_unresolved_interrupted_phase_blocks_start_and_other_revisions(self):
         with tempfile.TemporaryDirectory() as directory:
             host = Host.__new__(Host); host.state_dir = Path(directory); host.resume_context = None

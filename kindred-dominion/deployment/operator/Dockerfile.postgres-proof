@@ -1,0 +1,11 @@
+ARG MAINTENANCE_IMAGE
+FROM ${MAINTENANCE_IMAGE} AS candidate
+FROM postgres:18-bookworm@sha256:e742a2668255221388004f3a42b6150a2103f5054ab3a4a93ae9e4f01e551c35
+RUN apt-get update && apt-get install -y --no-install-recommends python3 git libstdc++6 libatomic1 && rm -rf /var/lib/apt/lists/*
+RUN useradd --uid 1000 --no-create-home --home-dir /proof --shell /usr/sbin/nologin kindredproof
+COPY --from=candidate /usr/local/bin/node /usr/local/bin/node
+COPY --from=candidate /app /app
+WORKDIR /app
+ENV HOME=/proof PGDATA=/proof/data
+USER 1000:1000
+ENTRYPOINT ["python3", "-B", "deployment/operator/rehearsal_postgres.py"]

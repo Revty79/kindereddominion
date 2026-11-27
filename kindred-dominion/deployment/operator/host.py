@@ -26,6 +26,9 @@ else:
 Path = pathlib.Path
 TABLE = re.compile(r"[a-z_][a-z0-9_]{0,62}")
 APPEND_TABLES = {"schema_migrations", "migration_checksum", "content_version", "card_identity", "card_revision", "edition"}
+# Both discovery and privilege audits use catalog identity. A WHERE schema
+# predicate does not guarantee name-based expressions run after that filter.
+APPLICATION_RELATIONS = "FROM pg_catalog.pg_class AS c JOIN pg_catalog.pg_namespace AS n ON n.oid=c.relnamespace WHERE n.nspname='kd' AND c.relkind IN ('r','p')"
 
 # .vite holds transform/test caches; Vite's bundled ESM config loader writes
 # to the separate sibling .vite-temp before Vitest can discover any tests.
@@ -151,21 +154,25 @@ class Postgres:
         return json.loads(self.sql("SELECT coalesce(json_agg(row_to_json(q)), '[]'::json) FROM (" + query + ") q"))
 
     def identity(self):
-        return self.rows("SELECT current_database() AS database,current_user AS username,inet_server_port() AS port,(SELECT rolsuper FROM pg_roles WHERE rolname=current_user) AS superuser,current_setting('server_version_num')::integer AS version")[0]
+        return self.rows("SELECT current_database() AS database,current_user AS username,inet_server_port() AS port,(SELECT rolsuper FROM pg_catalog.pg_roles WHERE rolname=current_user) AS superuser,current_setting('server_version_num')::integer AS version")[0]
 
     def state(self):
         return {"identity": self.identity(), "migrations": self.rows("SELECT name,sha256 FROM kd.migration_checksum ORDER BY name"), "content": self.rows("SELECT v.id,v.digest,v.engine_version FROM kd.content_selection s JOIN kd.content_version v ON v.id=s.version_id")}
 
     def snapshot(self, specifications=None):
-        tables = specifications if specifications is not None else [{"name": row["table_name"]} for row in self.rows("SELECT table_name FROM information_schema.tables WHERE table_schema='kd' AND table_type='BASE TABLE' ORDER BY table_name")]
+        relations = {row["name"]: row for row in self.rows("SELECT c.relname AS name,c.oid " + APPLICATION_RELATIONS + " ORDER BY c.relname")}
+        tables = specifications if specifications is not None else [{"name": name} for name in relations]
         result = []
         for table in tables:
             name = table["name"]
-            if not TABLE.fullmatch(name):
-                raise OperatorError("Unexpected database table identifier.")
-            columns = table.get("columns") or [row["column_name"] for row in self.rows("SELECT column_name FROM information_schema.columns WHERE table_schema='kd' AND table_name='" + name + "' ORDER BY ordinal_position")]
+            if not TABLE.fullmatch(name) or name not in relations:
+                raise OperatorError("Expected application table is missing or is not an ordinary/partitioned table in schema kd: " + str(name))
+            available = [row["name"] for row in self.rows("SELECT a.attname AS name FROM pg_catalog.pg_attribute AS a WHERE a.attrelid=" + str(int(relations[name]["oid"])) + "::oid AND a.attnum>0 AND NOT a.attisdropped ORDER BY a.attnum")]
+            columns = table.get("columns") or available
             if not columns or any(not TABLE.fullmatch(column) for column in columns):
                 raise OperatorError("Unexpected database column identifier.")
+            if any(column not in available for column in columns):
+                raise OperatorError("An original application column is missing from kd." + name + "; preservation failed.")
             projection = ",".join('"' + column + '"::text AS "' + column + '"' for column in columns)
             hashes = self.sql('SELECT encode(sha256(convert_to(row_to_json(q)::text,\'UTF8\')),\'hex\') AS row_hash FROM (SELECT ' + projection + ' FROM kd."' + name + '") q ORDER BY row_hash').splitlines()
             result.append({"name": name, "columns": columns, "rows": hashes, "count": len(hashes), "sha256": hashlib.sha256("\n".join(hashes).encode()).hexdigest()})
@@ -182,6 +189,13 @@ class Postgres:
             if (before - after) or (not allowed_append and before != after):
                 raise OperatorError("Existing data preservation failed for " + name + "; no old database was restored over newer data.")
         return True
+
+    def verify_runtime_privileges(self):
+        invalid = self.rows("WITH application_tables AS MATERIALIZED (SELECT c.oid,c.relname AS name " + APPLICATION_RELATIONS + ") SELECT name FROM application_tables WHERE NOT (pg_catalog.has_table_privilege('kindred_test_runtime',oid,'SELECT') AND pg_catalog.has_table_privilege('kindred_test_runtime',oid,'INSERT') AND pg_catalog.has_table_privilege('kindred_test_runtime',oid,'UPDATE') AND pg_catalog.has_table_privilege('kindred_test_runtime',oid,'DELETE'))")
+        sequences = self.rows("WITH application_sequences AS MATERIALIZED (SELECT c.oid,c.relname AS name FROM pg_catalog.pg_class AS c JOIN pg_catalog.pg_namespace AS n ON n.oid=c.relnamespace WHERE n.nspname='kd' AND c.relkind='S') SELECT name FROM application_sequences WHERE NOT (pg_catalog.has_sequence_privilege('kindred_test_runtime',oid,'USAGE') AND pg_catalog.has_sequence_privilege('kindred_test_runtime',oid,'SELECT'))")
+        unsafe = self.sql("SELECT pg_catalog.has_schema_privilege('kindred_test_runtime','kd','CREATE') OR pg_catalog.pg_has_role('kindred_test_runtime','kindred_test_migrator','MEMBER') OR NOT pg_catalog.has_schema_privilege('kindred_test_runtime','kd','USAGE') OR NOT pg_catalog.has_database_privilege('kindred_test_runtime',current_database(),'CONNECT')")
+        if invalid or sequences or unsafe != "f":
+            raise OperatorError("Runtime privilege verification failed; application DML/sequence access is required without schema CREATE or migrator membership.")
 
 
 class Host:
@@ -302,10 +316,10 @@ class Host:
         guard = self.pg.rows("SELECT environment,disposable FROM kd.environment_guard WHERE singleton")[0]
         if guard != {"environment": "test", "disposable": False}:
             raise OperatorError("Database environment guard is not the expected hosted TEST guard.")
-        roles = self.pg.rows("SELECT rolname,rolsuper,rolcreatedb,rolcreaterole FROM pg_roles WHERE rolname IN ('kindred_test_runtime','kindred_test_migrator')")
+        roles = self.pg.rows("SELECT rolname,rolsuper,rolcreatedb,rolcreaterole FROM pg_catalog.pg_roles WHERE rolname IN ('kindred_test_runtime','kindred_test_migrator')")
         if len(roles) != 2 or any(row["rolsuper"] or row["rolcreatedb"] or row["rolcreaterole"] for row in roles):
             raise OperatorError("Runtime/migrator must be dedicated nonsuperuser roles without role/database creation.")
-        if self.pg.sql("SELECT pg_get_userbyid(datdba) FROM pg_database WHERE datname=current_database()") != self.config["migrationRole"] or self.pg.sql("SELECT pg_get_userbyid(nspowner) FROM pg_namespace WHERE nspname='kd'") != self.config["migrationRole"]:
+        if self.pg.sql("SELECT pg_catalog.pg_get_userbyid(datdba) FROM pg_catalog.pg_database WHERE datname=current_database()") != self.config["migrationRole"] or self.pg.sql("SELECT pg_catalog.pg_get_userbyid(nspowner) FROM pg_catalog.pg_namespace WHERE nspname='kd'") != self.config["migrationRole"]:
             raise OperatorError("The reviewed migration role must own the TEST database/schema before automatic grants can be applied.")
         size = int(self.pg.sql("SELECT pg_database_size(current_database())"))
         minimum = max(4 * 1024 ** 3, int(self.config.get("minimumFreeBytes", 0))) + 4 * size
@@ -467,7 +481,7 @@ class Host:
 
     def no_other_writers(self):
         for _ in range(30):
-            rows = self.pg.rows("SELECT pid FROM pg_stat_activity WHERE datname=current_database() AND pid<>pg_backend_pid() AND backend_type='client backend'")
+            rows = self.pg.rows("SELECT pid FROM pg_catalog.pg_stat_activity WHERE datname=current_database() AND pid<>pg_backend_pid() AND backend_type='client backend'")
             if not rows:
                 return
             time.sleep(0.2)
@@ -562,9 +576,7 @@ class Host:
         if name != self.config["database"] and not re.fullmatch(r"kd_(rehearsal|recovery)_[a-f0-9]{20}", name):
             raise OperatorError("Runtime grants target is outside TEST or this operation's isolated copy.")
         pg.sql('GRANT CONNECT ON DATABASE "' + name + '" TO kindred_test_runtime; GRANT USAGE ON SCHEMA kd TO kindred_test_runtime; GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA kd TO kindred_test_runtime; GRANT USAGE,SELECT ON ALL SEQUENCES IN SCHEMA kd TO kindred_test_runtime; ALTER DEFAULT PRIVILEGES FOR ROLE kindred_test_migrator IN SCHEMA kd GRANT SELECT,INSERT,UPDATE,DELETE ON TABLES TO kindred_test_runtime; ALTER DEFAULT PRIVILEGES FOR ROLE kindred_test_migrator IN SCHEMA kd GRANT USAGE,SELECT ON SEQUENCES TO kindred_test_runtime;')
-        invalid = pg.rows("SELECT tablename FROM pg_tables WHERE schemaname='kd' AND NOT (has_table_privilege('kindred_test_runtime','kd.'||quote_ident(tablename),'SELECT') AND has_table_privilege('kindred_test_runtime','kd.'||quote_ident(tablename),'INSERT') AND has_table_privilege('kindred_test_runtime','kd.'||quote_ident(tablename),'UPDATE') AND has_table_privilege('kindred_test_runtime','kd.'||quote_ident(tablename),'DELETE'))")
-        if invalid or pg.sql("SELECT has_schema_privilege('kindred_test_runtime','kd','CREATE') OR pg_has_role('kindred_test_runtime','kindred_test_migrator','MEMBER')") != "f":
-            raise OperatorError("Runtime privilege verification failed; no runtime owner/DDL membership is permitted.")
+        pg.verify_runtime_privileges()
 
     def verify_preservation(self, backup):
         self.pg.compare(json.loads((Path(backup["directory"]) / "database.snapshot.json").read_text()), after_publication=True)
