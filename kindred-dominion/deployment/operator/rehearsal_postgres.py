@@ -144,7 +144,9 @@ INSERT INTO kd.invite(token_hash,max_uses,expires_at) VALUES('fixture-invite',1,
         source_state = pg.state()
         source_calls = len(host.maintenance_calls)
         backup = Host.backup(host, release, release)
-        cli = ROOT / "candidate-cli"; cli.mkdir()
+        # Keep ESM's ancestor node_modules resolution inside /app. The CLI
+        # and fixture migration remain on the dedicated writable tmpfs.
+        cli = APP / ".local/pg18-candidate-cli"; cli.mkdir()
         shutil.copyfile(APP / "server-dist/cli.mjs", cli / "cli.mjs")
         shutil.copytree(APP / "server-dist/migrations", cli / "migrations")
         (cli / "migrations/1795900000000_rehearsal_probe.cjs").write_text("exports.up=pgm=>pgm.sql('ALTER TABLE kd.invite ADD COLUMN proof_additive text; CREATE TABLE kd.proof_new_table(id integer);');exports.down=()=>{};\n")
