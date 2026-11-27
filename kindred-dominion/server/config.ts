@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { parseEnv } from "node:util";
+import {stripeSettings} from "./stripe-configuration";
 export type BackendConfig = ReturnType<typeof readConfig>;
 export function readConfig() {
   const file=process.env.KINDRED_ENV_FILE??"server/.env.local";
@@ -30,7 +31,7 @@ export function readConfig() {
   const economyEnabled=env.ECONOMY_ENABLED===undefined?["dev","integration"].includes(environment):env.ECONOMY_ENABLED==="true";
   if(environment==="prod"&&economyEnabled)throw Error("Production economy activation requires separate authorization.");
   const commerceMode=env.COMMERCE_MODE??"disabled";if(!["disabled","simulation","stripe_sandbox"].includes(commerceMode)||environment==="prod"&&commerceMode!=="disabled")throw Error("Commercial mode must be disabled in production; live payments are not supported.");
-  return {environment,host,port,database,user,password:required("PGPASSWORD"),sessionSecret,origin,secure,registration,economyEnabled,commerceMode,
+  return {environment,host,port,database,user,password:required("PGPASSWORD"),sessionSecret,origin,secure,registration,economyEnabled,commerceMode,stripe:stripeSettings(env),
     localTestingAcquisition,testingPackCards,
     sessionHours:integer("SESSION_HOURS",168,1,720),registrationLimit:integer("REGISTRATION_PER_HOUR",10,1,100),apiHost:env.API_HOST??"127.0.0.1",apiPort:integer("API_PORT",3001,1,65535),
     controlDirectory:path.resolve(env.CONTROL_APP_DIR??"dist-control"),logLevel:env.LOG_LEVEL??"info",isolationToken:env.ISOLATION_TOKEN??"",root:path.resolve(process.env.KINDRED_ROOT??".")};

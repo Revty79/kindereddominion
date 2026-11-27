@@ -12,5 +12,5 @@ export const DEFAULT_COMMERCE:CommerceRules=commerceSchema.parse({label:"Provisi
 export const paymentProviderNames=["simulation","stripe"] as const;
 export type PaymentProviderName=typeof paymentProviderNames[number];
 export type CheckoutRequest={orderId:string;playerId:string;productId:string;configVersion:string;name:string;amountMinor:number;currency:"usd";providerAccount:string;successUrl:string;cancelUrl:string};
-export type CheckoutSession={id:string;orderId:string;playerId:string;account:string;amountMinor:number;currency:string;livemode:boolean;status:"open"|"pending"|"paid"|"declined"|"cancelled"|"expired";paymentId:string|null;url:string|null;receiptUrl?:string|null};
+export type CheckoutSession={id:string;orderId:string;playerId:string;account:string;amountMinor:number;currency:string;livemode:boolean;status:"open"|"pending"|"paid"|"declined"|"cancelled"|"expired";paymentId:string|null;url:string|null;receiptUrl?:string|null;productId?:string;configVersion?:string;priceId?:string;refundedMinor?:number;disputed?:boolean;chargeId?:string|null};
 export interface PaymentProvider{readonly name:PaymentProviderName;readonly account:string;createCheckout(request:CheckoutRequest):Promise<CheckoutSession>;retrieveCheckout(id:string):Promise<CheckoutSession>;}

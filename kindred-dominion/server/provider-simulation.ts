@@ -1,0 +1,8 @@
+import type {DB} from "./db";
+import type {CheckoutRequest,CheckoutSession,PaymentProvider} from "./commerce-rules";
+import {reject} from "./errors";
+export class SimulationProvider implements PaymentProvider{
+ readonly name="simulation" as const;constructor(private pool:DB,readonly account:string){}
+ async createCheckout(r:CheckoutRequest){if(r.providerAccount!==this.account||r.currency!=="usd")reject(400,"provider_association","The simulated checkout association is invalid.");const id="cs_sim_"+r.orderId.replaceAll("-","");await this.pool.query("INSERT INTO kd.commerce_simulation_session(session_id,order_id,provider_account,amount_minor,currency,payment_id,state) VALUES($1,$2,$3,$4,$5,$6,'open') ON CONFLICT(order_id) DO NOTHING",[id,r.orderId,this.account,r.amountMinor,r.currency,"pi_sim_"+r.orderId.replaceAll("-","")]);return this.retrieveCheckout(id);}
+ async retrieveCheckout(id:string):Promise<CheckoutSession>{const row=(await this.pool.query("SELECT s.*,o.player_id,o.config_version,o.product_id FROM kd.commerce_simulation_session s JOIN kd.commerce_order o ON o.id=s.order_id WHERE s.session_id=$1 AND s.provider_account=$2",[id,this.account])).rows[0];if(!row)reject(404,"provider_session_missing","The simulated checkout session was not found.");return {id:row.session_id,orderId:row.order_id,playerId:row.player_id,account:this.account,amountMinor:row.amount_minor,currency:row.currency,livemode:false,status:row.state,paymentId:row.state==="paid"?row.payment_id:null,url:"#commerce?order="+row.order_id,productId:row.product_id,configVersion:row.config_version,refundedMinor:0,disputed:false};}
+}

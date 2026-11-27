@@ -38,7 +38,11 @@
     "account:password-reset": "tsx server/cli.ts password-reset",
     "account:status": "tsx server/cli.ts account-status",
     "validate:backend-isolation": "node scripts/verify-backend-isolation.mjs",
-    "build:control": "node scripts/build-control.mjs"
+    "build:control": "node scripts/build-control.mjs",
+    "commerce:configure": "node scripts/configure-commerce.mjs",
+    "commerce:verify": "tsx scripts/stripe-tools.mts verify",
+    "commerce:catalog": "tsx scripts/stripe-tools.mts catalog",
+    "commerce:listen": "tsx scripts/stripe-forward.mts"
   },
   "dependencies": {
     "@fastify/cookie": "^11.1.5",
@@ -50,6 +54,7 @@
     "pg": "^8.23.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "stripe": "23.2.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
