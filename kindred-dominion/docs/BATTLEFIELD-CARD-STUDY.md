@@ -71,4 +71,4 @@ npm run build
 npm run build:player
 ```
 
-The existing artwork A016/A018 exception decision and final-push hold remain separate from this visual checkpoint. Docker/Ubuntu validation remains owner-deferred.
+The existing artwork A016/A018 acceptance questions remain separate from this visual checkpoint. At closeout, GitHub main already contained the earlier artwork integration and exception report (`7a8cc2d`). This isolated study is synchronized under the owner's standing Git instruction; that does not authorize application-wide design rollout or resolve those artwork exceptions. Docker/Ubuntu validation remains owner-deferred.
