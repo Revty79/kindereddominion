@@ -6,11 +6,15 @@ import json
 import signal
 import sys
 from pathlib import Path
-from core import OperatorError, update, backup
-from host import Host
+if __package__:
+    from .core import OperatorError, update, backup
+    from .host import Host
+else:
+    from core import OperatorError, update, backup
+    from host import Host
 
 
-def main():
+def main(argv=None, *, lock_lease=None, approval=None):
     parser = argparse.ArgumentParser(description="Reviewed homeserver TEST operations; no automatic pruning or in-place database restoration.")
     parser.add_argument("--config", default="/etc/kindred-dominion/test/operator.json")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -28,15 +32,20 @@ def main():
     choice.add_argument("--complete-recovery", metavar="RECOVERY_PLAN_ID")
     rollback.add_argument("--preserved-database")
     rollback.add_argument("--reviewed", action="store_true")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     def interrupted(_signal, _frame):
         raise OperatorError("Operator command interrupted. Inspect the durable private journal before restarting writers.")
     signal.signal(signal.SIGTERM, interrupted)
     signal.signal(signal.SIGINT, interrupted)
     try:
-        host = Host(args.config)
+        host = Host(args.config, lock_lease=lock_lease)
         if args.command == "update":
-            result = update(host, args.revision, reviewed=args.reviewed, rehearse_only=args.rehearse_only, resume=args.resume)
+            if not approval or approval.get("revision") != args.revision or lock_lease is None:
+                raise OperatorError("Use the installed sudo kindred-update command so release approval and operator integrity are verified automatically.")
+            host.release_approval = approval
+            result = update(host, args.revision, reviewed=True, rehearse_only=args.rehearse_only, resume=args.resume)
+            result["message"] = "Kindred Dominion is up to date." if result.get("unchanged") else "Kindred Dominion rehearsal completed." if result.get("rehearsed") else "Kindred Dominion update completed."
+            result["releaseApproval"] = approval
         elif args.command == "backup":
             result = backup(host)
         elif args.command == "status":

@@ -16,7 +16,10 @@ import time
 import urllib.request
 import urllib.parse
 import uuid
-from core import OperatorError, revision
+if __package__:
+    from .core import OperatorError, revision
+else:
+    from core import OperatorError, revision
 
 Path = pathlib.Path
 TABLE = re.compile(r"[a-z_][a-z0-9_]{0,62}")
@@ -67,6 +70,12 @@ def write_json(file, value):
         stream.flush()
         os.fsync(stream.fileno())
     os.replace(temporary, file)
+    if os.name == "posix":
+        descriptor = os.open(file.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
 
 
 def read_env(file):
@@ -174,7 +183,8 @@ class Postgres:
 
 
 class Host:
-    def __init__(self, configuration):
+    def __init__(self, configuration, lock_lease=None):
+        self.lock_lease = lock_lease
         self.config = json.loads(Path(configuration).read_text(encoding="utf-8"))
         c = self.config
         fixed = {"hostname": "homeserver", "lanAddress": "10.0.0.242", "base": "/srv/kindred-dominion", "repository": "/srv/kindred-dominion/source/repository", "privateDirectory": "/etc/kindred-dominion/test", "backupDirectory": "/srv/kindred-dominion/backups", "database": "kindred_dominion_test", "migrationRole": "kindred_test_migrator", "runtimeRole": "kindred_test_runtime", "network": "kindred-dominion-net", "subnet": "172.23.0.0/24", "bridge": "br-kindred", "frontendPort": 18083, "postgresBin": "/usr/lib/postgresql/18/bin"}
@@ -228,6 +238,14 @@ class Host:
     def lock(self):
         import fcntl
         file = self.state_dir / "operator.lock"
+        lease = getattr(self, "lock_lease", None)
+        if lease is not None:
+            # Only an in-process handoff supplies this open file; there is no
+            # command-line/environment switch for skipping the exclusive lock.
+            if lease.closed or os.fstat(lease.fileno()).st_ino != file.stat().st_ino or os.fstat(lease.fileno()).st_dev != file.stat().st_dev:
+                raise OperatorError("Operator handoff lost its exclusive lock.")
+            yield lease
+            return
         with open(file, "a+b") as stream:
             os.chmod(file, 0o600)
             try:
@@ -235,7 +253,7 @@ class Host:
             except BlockingIOError as error:
                 raise OperatorError("Another Kindred operator command holds the exclusive update lock.") from error
             try:
-                yield
+                yield stream
             finally:
                 fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
 
@@ -379,7 +397,10 @@ class Host:
                 file = (app / relative).resolve()
                 if not file.is_relative_to(app) or relative not in tracked or sha(file) != digest:
                     raise OperatorError("Official source/runtime artwork is untracked, missing or corrupt.")
-        return {"revision": requested, "applicationDir": str(app), "images": {}}
+        result = {"revision": requested, "applicationDir": str(app), "images": {}}
+        if getattr(self, "release_approval", {}).get("revision") == requested:
+            result["releaseApproval"] = self.release_approval
+        return result
 
     def check_forward(self, old, candidate):
         self.git(["merge-base", "--is-ancestor", old["revision"], candidate["revision"]])

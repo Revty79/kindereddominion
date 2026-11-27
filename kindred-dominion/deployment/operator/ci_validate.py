@@ -1,0 +1,38 @@
+"""Disposable Ubuntu CI: actual three Docker builds and hardened unit container."""
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+source = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location("ci_operator", source / "__init__.py", submodule_search_locations=[str(source)])
+module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = module
+spec.loader.exec_module(module)
+from ci_operator.host import unit_validation_command
+
+
+def main():
+    app = source.parents[1]
+    sha = subprocess.check_output(["git", "-C", str(app), "rev-parse", "HEAD"], text=True).strip()
+    images = {}
+    for name, dockerfile, target in (("game", "Dockerfile", None), ("backend", "Dockerfile.backend", "runtime"), ("maintenance", "Dockerfile.backend", "maintenance")):
+        tag = "kindred-ci-" + name + ":" + sha
+        command = ["docker", "build", "--build-arg", "VCS_REF=" + sha, "--tag", tag, "--file", dockerfile]
+        if target:
+            command.extend(("--target", target))
+        subprocess.run([*command, "."], cwd=app, check=True)
+        images[name] = subprocess.check_output(["docker", "image", "inspect", "--format", "{{.Id}}", tag], text=True).strip()
+        user = subprocess.check_output(["docker", "image", "inspect", "--format", "{{.Config.User}}", tag], text=True).strip()
+        if user not in ("1000:1000", "101:101"):
+            raise RuntimeError("Candidate image is not explicitly nonroot.")
+    subprocess.run(unit_validation_command(images["maintenance"]), check=True)
+    # Separate immutable root-filesystem write probe, also networkless and
+    # credential-free. A successful write must fail CI.
+    subprocess.run(["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true", "--entrypoint", "node", images["maintenance"], "-e", "try{require('fs').writeFileSync('/app/src/ci-write-probe','forbidden');process.exit(1)}catch(e){if(!['EROFS','EACCES'].includes(e.code))throw e}"], check=True)
+    print(json.dumps({"revision": sha, "images": images, "networklessReadOnlyFullSuite": True, "sourceWritesDenied": True, "hostDeploymentPerformed": False}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

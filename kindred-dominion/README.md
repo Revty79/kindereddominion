@@ -18,6 +18,8 @@ Register with a unique username, valid email and a password of at least 15 chara
 
 Hosted administrators open **Administration** at `/api/control/` using their existing account. Developers see **Development tools** there. See the [hosted control guide](docs/V1.5-HOSTED-CONTROL.md), [permanent operator installation and recovery](docs/V1.5-OPERATIONS.md), and [V1.5 validation](docs/V1.5-VALIDATION.md). The [viewport correction](docs/GAMEPLAY-VIEWPORT.md) keeps normal gameplay within the browser viewport at 100% zoom.
 
+After the [one-time automatic updater installation](docs/V1.5-OPERATIONS.md#install-the-automatic-updater-once), normal hosted updates require only **`sudo kindred-update`**. It selects an owner-approved main release, verifies and updates its operator runtime, then performs the existing candidate validation, backups, restored-copy migration rehearsal, deployment and health checks. No routine SHA, fetch, checkout or reinstallation is required.
+
 Authorized developers use the same account and the restricted **Developer Studio** navigation in the full application. The separate player release excludes Studio, laboratory, simulation workers and unpublished artwork. Existing local practice remains at `practice.html`; practice/sandbox does not award permanent cards or results.
 
 Build and check:

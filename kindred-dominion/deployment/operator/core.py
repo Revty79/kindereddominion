@@ -92,7 +92,7 @@ def update(host, requested, *, reviewed=False, rehearse_only=False, resume=False
                 except BaseException:
                     pass
             host.phase(journal, "failed-after-migration" if migration_attempted else "failed-before-migration")
-            raise OperatorError(journal["error"] + (" Application writers remain stopped; inspect kindred-status and use the documented same-revision --resume or separate-database recovery." if migration_attempted else " No live migration was attempted.")) from error
+            raise OperatorError(journal["error"] + (" Application writers remain stopped. Run sudo kindred-status and inspect its private log; after review run sudo kindred-update --resume for this exact failed revision, or use the documented kindred-rollback separate-database recovery." if migration_attempted else " No live migration was attempted. Run sudo kindred-status, inspect its private log and retry sudo kindred-update after correcting the cause.")) from error
 
 
 def backup(host):

@@ -1,0 +1,24 @@
+name: Approve Kindred release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  approve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out owner-selected revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Verify owner approval and exact successful source CI
+        env:
+          RELEASE_SHA: ${{ github.sha }}
+          RELEASE_REF: ${{ github.ref }}
+          RELEASE_ACTOR_ID: ${{ github.actor_id }}
+          RELEASE_REPOSITORY_ID: ${{ github.repository_id }}
+          RELEASE_EVENT: ${{ github.event_name }}
+        run: python3 -B kindred-dominion/deployment/operator/approve_release.py

@@ -2,3 +2,6 @@ kindred-dominion/public/assets/** -text
 kindred-dominion/artwork-source/** -text
 kindred-dominion/tests/fixtures/artwork/** -text
 *.kindred.zip binary
+.github/workflows/*.yml text eol=lf
+kindred-dominion/deployment/operator/*.py text eol=lf
+kindred-dominion/deployment/operator/*.json text eol=lf

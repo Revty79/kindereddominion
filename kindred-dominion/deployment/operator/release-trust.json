@@ -1,0 +1,11 @@
+{
+  "format": 1,
+  "repositoryId": 1472796260,
+  "approverIds": [
+    132003666
+  ],
+  "workflowSha256": {
+    "kindred-ci.yml": "c32aeaf4bfc76d6cd91d6ae97751fb157d8bf62b68586cf836023c85f24e2205",
+    "kindred-release.yml": "34a313c1dfff38dde156bd62dc001083e98e785ff971e4a749ea8f71df889868"
+  }
+}
