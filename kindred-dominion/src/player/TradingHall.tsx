@@ -8,6 +8,7 @@ import {CardPresentation} from "../ui/cards/CardPresentation";
 import {api} from "../account/api";
 import {notificationsChanged} from "./Notifications";
 import "./trading.css";
+import TradingSafety from "./TradingSafety";
 type Item={cardId:string;quantity:number};
 const when=(v:string)=>new Date(v).toLocaleString();
 export default function TradingHall({playerId,content,initialOffer,onSaved,onProgression}:{playerId:string;content:ContentPack;initialOffer?:string;onSaved:()=>Promise<unknown>;onProgression:()=>void}){
@@ -48,6 +49,7 @@ export default function TradingHall({playerId,content,initialOffer,onSaved,onPro
  {tab!=="suggestions"&&<div className="button-row"><button disabled={!page} onClick={()=>setPage(p=>p-1)}>Previous records</button><span>Page {page+1}</span><button disabled={!rows?.hasMore} onClick={()=>setPage(p=>p+1)}>More records</button></div>}</>}
  {listingEditor&&<MetadataEditor kind="listing" initial={listingEditor} content={content} busy={busy} onClose={()=>setListingEditor(null)} onSave={input=>void act(async()=>{await api(listingEditor.id?`/trading/listings/${listingEditor.id}`:"/trading/listings",listingEditor.id?"PUT":"POST",{...input,...(listingEditor.id?{revision:listingEditor.revision}:{}),idempotencyKey:crypto.randomUUID()});setListingEditor(null);})}/>}
  {wishEditor&&<MetadataEditor kind="wish" initial={wishEditor} content={content} busy={busy} onClose={()=>setWishEditor(null)} onSave={input=>void act(async()=>{const {cardId,...body}=input;await api(`/trading/wishes/${cardId}`,"PUT",{...body,revision:wishEditor.revision,idempotencyKey:crypto.randomUUID()});setWishEditor(null);})}/>}
+ <TradingSafety key={detail?.id??"hall"} trade={detail} other={detail?.participants.find((p:any)=>p.id!==playerId)} onChanged={reload}/>
  {inspect&&library[inspect]&&<CardInspection card={library[inspect]} library={library} artwork={art[inspect]} context="Only the collectible card transfers. Equipped artwork, currencies and cosmetics stay with their owner." onClose={()=>setInspect(null)}/>}
  </section></CardPresentation>;
 }

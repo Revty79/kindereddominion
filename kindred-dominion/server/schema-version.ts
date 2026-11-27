@@ -1,1 +1,1 @@
-export const REQUIRED_MIGRATION="1796500000000_player_notifications.cjs";
+export const REQUIRED_MIGRATION="1796600000000_trading_safety.cjs";
