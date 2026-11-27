@@ -6,14 +6,16 @@ import {emptyCollectionFilter,filterCollection} from "../ui/collection";
 import CollectionFilters from "../ui/CollectionFilters";
 import CollectibleCard from "../ui/cards/CollectibleCard";
 import CardInspection from "../ui/cards/CardInspection";
+import {useCardPresentation} from "../ui/cards/CardPresentation";
 
 export default function CardBrowser({content,quantities,personal=false,onAdd,canAdd}:{content:ContentPack;quantities?:Map<string,number>;personal?:boolean;onAdd?:(id:string)=>void;canAdd?:(id:string)=>boolean}){
   const [query,setQuery]=useState(""),[kindred,setKindred]=useState("all"),[ownership,setOwnership]=useState(personal?"owned":"all"),[filter,setFilter]=useState({...emptyCollectionFilter}),[inspect,setInspect]=useState<string|null>(null);
-  const library=useMemo(()=>libraryOf(content),[content]),art=useMemo(()=>artworkMap(content),[content]);
+  const library=useMemo(()=>libraryOf(content),[content]),art=useMemo(()=>artworkMap(content),[content]),[rarity,setRarity]=useState(""),presentation=useCardPresentation();
   const owned=(id:string)=>quantities?.get(library[id].collectible?.gameplayId??id)??0;
-  const cards=filterCollection(content.cards,kindred,query,filter).filter(card=>ownership==="all"||ownership==="owned"&&owned(card.id)>0||ownership==="missing"&&!owned(card.id));
+  const cards=filterCollection(content.cards,kindred,query,filter).filter(card=>(!rarity||presentation.rarities?.[card.id]===rarity)&&(ownership==="all"||ownership==="owned"&&owned(card.id)>0||ownership==="missing"&&!owned(card.id)));
   return <section className="player-card-browser" aria-label={personal?"Personal card collection":"Published card catalog"}>
     <div className="player-filters"><label>Search cards<input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Name, number or ability"/></label><label>Kindred<select aria-label="Kindred" value={kindred} onChange={e=>setKindred(e.target.value)}><option value="all">All five Kindreds</option>{content.collections.map(k=><option key={k.id}>{k.id}</option>)}</select></label>{quantities&&<label>Ownership<select aria-label="Ownership" value={ownership} onChange={e=>setOwnership(e.target.value)}><option value="all">All published cards</option><option value="owned">Owned cards</option><option value="missing">Not yet owned</option></select></label>}</div>
+    {Object.keys(presentation.rarities??{}).length>0&&<label>Collectible rarity<select value={rarity} onChange={e=>setRarity(e.target.value)}><option value="">All rarities</option>{["common","uncommon","rare","epic","legendary"].map(r=><option key={r}>{r}</option>)}</select></label>}
     <details className="player-more-filters"><summary>More filters and sorting</summary><CollectionFilters cards={content.cards} value={filter} onChange={setFilter}/></details>
     <p className="player-muted" role="status">{cards.length} cards{personal?" in your collection view":" in the published catalog"}</p>
     <div className="player-card-grid">{cards.map(card=><article className="player-catalog-card" key={card.id} data-card-id={card.id}>

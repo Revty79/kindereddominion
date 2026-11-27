@@ -9,6 +9,7 @@ import {assetEnvironment,lockPlayer,moveCurrency,type Client,type AssetOrigin} f
 import {economySchema,bundleSchema,levelAt,scaleReward,allocateMastery,objectivePeriod,type EconomyRules,type RewardBundle} from "./economy-rules";
 import {replayAt,signature,validateRecord,type MatchRecord} from "../src/replay/record";
 import {economyDigest} from "./economy-hash";
+import {requireRewardEntitlements,fulfillRewardEntitlement,type RewardEntitlement} from "./reward-entitlements";
 export type EconomyVersion={id:string;rules:EconomyRules};
 export async function currentEconomy(c:DB|Client,config:BackendConfig):Promise<EconomyVersion|null>{
   if(!economyPermitted(config))return null;
@@ -22,7 +23,7 @@ export async function grantReward(c:Client,playerId:string,source:string,sourceI
   const bundle=bundleSchema.parse(value),prior=(await c.query("SELECT * FROM kd.reward_grant WHERE player_id=$1 AND source=$2 AND source_id=$3",[playerId,source,sourceId])).rows[0];
   const fingerprint=economyDigest({bundle,options});
   if(prior){if(fingerprint!==prior.result.fingerprint)reject(409,"idempotency_conflict","This reward source was already settled with different terms.");return {...prior.result,replayed:true};}
-  if(bundle.entitlements.length)reject(400,"entitlement_inactive","This reward entitlement type is not active yet.");
+  requireRewardEntitlements(bundle.entitlements);
   const id=crypto.randomUUID(),money=await moveCurrency(c,playerId,"reward:"+id,bundle.currencies,{type:"reward",reason:options.reason??source,origin:options.origin??"earned",configVersion:active.id,referenceId:options.referenceId??sourceId,actorId:options.actorId},active.rules);
   const levels:{axis:string;level:number}[]=[],xpChanges:Record<string,number>={};
   const xp=async(axis:string,amount:number)=>{
@@ -47,8 +48,10 @@ export async function grantReward(c:Client,playerId:string,source:string,sourceI
       if(changes.size){const acquisition=await inventoryTransaction(c,playerId,`reward:${id}:${i}`,"reward:"+source,[...changes].map(([editionId,quantity])=>({editionId,quantity})),options.actorId??null,{origin:options.cardOrigin??(definition.mode==="first_copy"?"first_copy":source==="level"?"mastery":"achievement"),tradeable:definition.mode==="additional"&&definition.tradeable&&options.origin!=="administrator"&&options.origin!=="sandbox",sandbox:options.origin==="sandbox",configVersion:active.id,sourceReference:options.referenceId??id});acquisitions.push(acquisition.id);}
     }
   }
-  const result={id,fingerprint,transactionId:money.id,currencies:bundle.currencies,xp:xpChanges,cards,acquisitionIds:acquisitions,source,sourceId,configVersion:active.id};
+  const entitlements:RewardEntitlement[]=bundle.entitlements.map(e=>({entitlementId:crypto.randomUUID(),type:e.type,definitionId:e.id,quantity:e.quantity}));
+  const result={id,fingerprint,transactionId:money.id,currencies:bundle.currencies,xp:xpChanges,cards,acquisitionIds:acquisitions,entitlements,source,sourceId,configVersion:active.id};
   await c.query("INSERT INTO kd.reward_grant(id,player_id,source,source_id,config_version,bundle,transaction_id,result) VALUES($1,$2,$3,$4,$5,$6,$7,$8)",[id,playerId,source,sourceId,active.id,bundle,money.id,result]);
+  for(const entitlement of entitlements){await c.query("INSERT INTO kd.reward_entitlement(id,player_id,type,definition_id,quantity,reward_id) VALUES($1,$2,$3,$4,$5,$6)",[entitlement.entitlementId,playerId,entitlement.type,entitlement.definitionId,entitlement.quantity,id]);await fulfillRewardEntitlement(c,playerId,entitlement,{economyVersion:active.id,origin:options.origin??"earned",cardOrigin:options.cardOrigin??(source==="level"?"mastery":"achievement"),actorId:options.actorId,referenceId:options.referenceId??id});}
   if(newCards.length&&options.origin!=="administrator"&&options.origin!=="sandbox")await economyEvent(c,playerId,"unique_card",`reward:${id}`,newCards.length,{matchId:options.referenceId},active);
   for(const entry of levels){const curve=entry.axis==="account"?active.rules.accountLevels:active.rules.masteryLevels;await grantReward(c,playerId,"level",`${entry.axis}:${entry.level}`,curve[entry.level-1].reward,active,{...options,mastery:{},cardOrigin:entry.axis==="account"?"achievement":"mastery"});if(options.origin!=="administrator"&&options.origin!=="sandbox")await economyEvent(c,playerId,entry.axis==="account"?"account_level":"mastery_level",`level:${entry.axis}:${entry.level}`,1,{kindreds:entry.axis==="account"?[]:[entry.axis.slice(8)],matchId:options.referenceId},active);}
   return {...result,replayed:false};

@@ -35,7 +35,7 @@ export async function selectedPlayerAssets(root: string, content: ContentPack): 
   const registry = JSON.parse(await readFile(path.join(root, "public/assets/manifest.json"), "utf8"));
   const ids = new Set(["kindred-art-fallback", "kindred-brand-crest"]);
   const references = Object.values(content.metadata).flatMap(m => m.artworkRef ? [m.artworkRef] : []);
-  const assets: OfficialAsset[] = registry.assets.filter((a: OfficialAsset) => ids.has(a.id) || references.some(r => r.id === a.id && r.revision === a.revision));
+  const assets: OfficialAsset[] = registry.assets.filter((a: OfficialAsset) => a.approval === "production" || ids.has(a.id) || references.some(r => r.id === a.id && r.revision === a.revision));
   for (const reference of references) if (!assets.some(a => a.id === reference.id && a.revision === reference.revision && a.approval === "production")) throw new Error("Approved artwork is missing from the repository registry.");
   return assets;
 }

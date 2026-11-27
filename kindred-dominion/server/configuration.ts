@@ -12,8 +12,9 @@ import {rateLimit} from "./security";
 
 export const domains=["economy","shop","trading","commerce"] as const;
 export type Domain=typeof domains[number];
-const validators=new Map<Domain,{parse:(v:unknown)=>any;defaults:unknown}>([["economy",{parse:v=>economySchema.parse(v),defaults:DEFAULT_ECONOMY}]]);
-export function registerConfiguration(domain:Domain,parse:(v:unknown)=>any,defaults:unknown){validators.set(domain,{parse,defaults});}
+export type PublicationHooks={rewardEntitlements?:boolean;validate?:(c:Client,document:any,config:BackendConfig)=>Promise<unknown>;published?:(c:Client,document:any,id:string,config:BackendConfig,context:unknown)=>Promise<void>};
+const validators=new Map<Domain,{parse:(v:unknown)=>any;defaults:unknown;hooks?:PublicationHooks}>([["economy",{parse:v=>economySchema.parse(v),defaults:DEFAULT_ECONOMY}]]);
+export function registerConfiguration(domain:Domain,parse:(v:unknown)=>any,defaults:unknown,hooks?:PublicationHooks){validators.set(domain,{parse,defaults,hooks});}
 export const economyPermitted=(config:BackendConfig)=>config.environment!=="prod"&&config.economyEnabled;
 export function requireEconomy(config:BackendConfig){if(!economyPermitted(config))reject(403,"economy_disabled","Economy operations are disabled by this server's environment configuration.");}
 export async function selectedConfiguration(db:DB|Client,domain:Domain){const row=(await db.query("SELECT v.*,s.activated_at FROM kd.configuration_selection s JOIN kd.configuration_version v ON v.id=s.version_id AND v.domain=s.domain WHERE s.domain=$1",[domain])).rows[0]??null;if(row&&economyDigest(row.document)!==row.digest)reject(503,"configuration_integrity","Published configuration integrity verification failed.");return row;}
@@ -33,14 +34,16 @@ export function configurationRoutes(app:FastifyInstance,pool:DB,config:BackendCo
     const document=validator(domain).parse(draft.document);
     if(domain==="economy"){
       const bundles=[...[...document.accountLevels,...document.masteryLevels,...document.objectives.filter((o:any)=>o.enabled)].map((x:any)=>x.reward),...Object.values(document.bundles)] as any[];
-      if(bundles.some((b:any)=>b.entitlements.length))reject(400,"reward_type_inactive","Booster/cosmetic/title reward activation requires its verified ownership service.");
+      if(bundles.some((b:any)=>b.entitlements.length)&&!validator(domain).hooks?.rewardEntitlements)reject(400,"reward_type_inactive","Booster/cosmetic/title reward activation requires its verified ownership service.");
       const published=(await c.query("SELECT c.id,c.kindred FROM kd.card_identity c JOIN kd.card_revision r ON r.card_id=c.id JOIN kd.content_selection s ON s.version_id=r.version_id WHERE NOT c.retired")).rows;
       const masteryTargets=[...document.objectives.filter((o:any)=>o.enabled&&o.reward.mastery).map((o:any)=>o.kindred),...document.promotions.filter((p:any)=>p.enabled&&document.bundles[p.bundleId].mastery).map((p:any)=>p.kindred)];
       if(masteryTargets.some((kindred:string)=>!published.some((card:any)=>card.kindred===kindred)))reject(400,"mastery_kindred_unavailable","Mastery rewards require an explicitly published Kindred.");
       if(bundles.some((b:any)=>b.cards.some((card:any)=>card.cardId&&!published.some((p:any)=>p.id===card.cardId))))reject(400,"reward_card_unavailable","Rewards must reference published permanent card identities.");
       if(bundles.some((b:any)=>b.cards.some((card:any)=>card.kindred&&!published.some((p:any)=>p.kindred===card.kindred))))reject(400,"reward_kindred_unavailable","Rewards must use a currently published Kindred.");
     }
+    const context=await validator(domain).hooks?.validate?.(c,document,config);
     const version=crypto.randomUUID();await c.query("INSERT INTO kd.configuration_version(id,domain,document,digest,created_by,reason) VALUES($1,$2,$3,$4,$5,$6)",[version,domain,document,economyDigest(document),actor.id,body.reason]);
+    await validator(domain).hooks?.published?.(c,document,version,config,context);
     await c.query("INSERT INTO kd.configuration_selection(domain,version_id) VALUES($1,$2) ON CONFLICT(domain) DO UPDATE SET version_id=EXCLUDED.version_id,activated_at=now()",[domain,version]);
     await c.query("UPDATE kd.configuration_draft SET published_version=$2 WHERE id=$1",[id,version]);
     await c.query("INSERT INTO kd.configuration_publication(domain,version_id,previous_id,actor_id,reason,operation) VALUES($1,$2,$3,$4,$5,'publish')",[domain,version,current?.id??null,actor.id,body.reason]);

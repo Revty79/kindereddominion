@@ -13,6 +13,7 @@ import {libraryOf} from "../src/content/validation";
 import {transaction,type DB} from "./db";
 import {activeContent,contentVersion} from "./catalog";
 import {validateOwnedDeck,deckUsesSandbox} from "./inventory";
+import {captureMatchShop,decorateMatch,deckFormat} from "./shop-formats";
 import {getDeck} from "./player-routes";
 import {uuid,operationKey,type Authentication} from "./auth";
 import {digest} from "./security";
@@ -31,7 +32,7 @@ export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,i
   const opponent=pack.decks.find(deck=>deck.cards.length===row.decks[1].length&&deck.cards.every((id,index)=>id===row.decks[1][index]));
   const card=(id:string)=>({id,owner:state.cards[id].owner,definitionId:state.cards[id].definitionId,name:library[state.cards[id].definitionId].name,number:library[state.cards[id].definitionId].collectible?.number??"",placementType:library[state.cards[id].definitionId].type,rank:library[state.cards[id].definitionId].rank,printedPower:library[state.cards[id].definitionId].power,power:powers[id]?.effective??library[state.cards[id].definitionId].power,text:library[state.cards[id].definitionId].text,layers:{permanent:state.cards[id].modifier,aura:powers[id]?.auras.reduce((n,a)=>n+a.amount,0)??0,dynamic:powers[id]?.dynamic??0},protections:powers[id]?[...powers[id].permanentProtections,...powers[id].continuousProtections.map(p=>p.protection)]:[]});
   return {id:row.id,revision:row.revision,status:state.phase,contentVersion:row.version_id,engineVersion:row.engine_version,createdAt:row.created_at,completedAt:row.completed_at,
-    ...(includeContent?{content:pack}:{}),opponent:{type:"computer",name:opponent?.name??"Computer opponent",kindred:opponent?.collection??"mixed"},configuration:state.config,active:state.active,turn:state.turn,testingAccess:row.testing_access,
+    ...(includeContent?{content:pack}:{}),opponent:{type:"computer",name:opponent?.name??"Computer opponent",kindred:opponent?.collection??"mixed"},configuration:state.config,active:state.active,turn:state.turn,testingAccess:row.testing_access,cosmetics:row.cosmetics??{},rarities:row.rarities??{},
     board:state.board.map(c=>({row:c.row,col:c.col,owner:c.owner,tokens:c.tokens,fortification:c.fortification,creature:c.creature?card(c.creature):null})),
     hand:state.players[0].hand.map(card),players:state.players.map(p=>({handCount:p.hand.length,drawCount:p.draw.length,graveyard:p.graveyard.map(card),exile:p.exile.map(card),mulliganDone:p.mulliganDone})),
     legalActions:state.phase==="playing"&&state.active===0?legalPlays(state,library,0).map(a=>a.type==="play"?{type:a.type,card:a.card,row:a.row,col:a.col}:null):[],
@@ -40,7 +41,7 @@ export function publicMatch(row:any,pack:ContentPack,state:GameState=row.state,i
 }
 export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serverConfig:BackendConfig){
   const opponents=(pack:ContentPack,config:GameState["config"])=>pack.decks.filter(deck=>validateDeck(deck.cards,libraryOf(pack),config).length===0);
-  async function own(db:any,id:string,playerId:string,lock=false){const {rows:[r]}=await db.query(`SELECT * FROM kd.match WHERE id=$1 AND player_id=$2 ${lock?"FOR UPDATE":""}`,[id,playerId]);if(!r)reject(404,"match_missing","Match was not found.");return r;}
+  async function own(db:any,id:string,playerId:string,lock=false){const {rows:[r]}=await db.query(`SELECT * FROM kd.match WHERE id=$1 AND player_id=$2 ${lock?"FOR UPDATE":""}`,[id,playerId]);if(!r)reject(404,"match_missing","Match was not found.");return decorateMatch(db,r);}
   async function complete(c:any,row:any,state:GameState){if(state.phase!=="finished")return;
     await settleMatchReward(c,row.id,serverConfig);
     if(row.testing_access)return;
@@ -51,6 +52,7 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
     const actor=await auth.actor(req),query=z.object({deckId:uuid}).strict().parse(req.query),deck=await getDeck(pool,query.deckId,actor.id),pack=await activeContent(pool);
     if(deck.draft||deck.testingAccess)reject(400,"deck_not_ready","Choose a legal ordinary playing deck.");
     await validateOwnedDeck(pool,actor,deck.cards,pack,deck.config);
+    const eligibility=await deckFormat(pool,deck.cards,pack,deck.config,deck.formatId);if(eligibility.errors.length)reject(400,"deck_format_ineligible",eligibility.errors.join(" "));
     return {contentVersion:pack.id,configuration:deck.config,opponents:opponents(pack,deck.config).map(deck=>({id:deck.id,name:deck.name,kindred:deck.collection,count:deck.cards.length}))};
   });
   app.post("/api/matches",async req=>{
@@ -62,7 +64,8 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
       await validateOwnedDeck(c,actor,deck.cards,pack,config,deck.testingAccess);
       // Test-only acquisition lots cannot bootstrap ordinary reward progression.
       // Freeze this classification with the match, independent of later trades.
-      const testingAccess=deck.testingAccess||await deckUsesSandbox(c,actor.id,deck.cards,pack);
+      const sandboxAccount=(await c.query("SELECT sandbox FROM kd.economy_account WHERE player_id=$1",[actor.id])).rows[0]?.sandbox;
+      const testingAccess=deck.testingAccess||!!sandboxAccount||await deckUsesSandbox(c,actor.id,deck.cards,pack);
       const candidates=opponents(pack,config);
       if(!candidates.length)reject(400,"opponent_deck_unavailable","No computer deck is legal under this selected configuration.");
       const selected=b.opponentDeckId?candidates.find(deck=>deck.id===b.opponentDeckId):null;
@@ -71,7 +74,7 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
       const decks:[string[],string[]]=[deck.cards,opponent.cards];let state=createMatch(decks,library,config,seed,startingPlayer),record=newRecord(state,library,decks,pack.id,"Server-authoritative computer match");
       const ai:Action={type:"mulligan",player:1,cards:computerMulligan(state,library,1)};state=act(state,ai,library);record=appendRecord(record,ai,state);
       const id=crypto.randomUUID(),{rows:[row]}=await c.query("INSERT INTO kd.match(id,player_id,opponent_type,version_id,engine_version,config,decks,seed,starting_player,state,record,status,testing_access) VALUES($1,$2,'computer',$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",[id,actor.id,pack.id,record.engineVersion,config,JSON.stringify(decks),seed,startingPlayer,state,record,state.phase,testingAccess]);
-      await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,1,'server-initial-mulligan',$2,$3)",[id,ai,record.actions[0].signature]);await enrollEconomyMatch(c,id,serverConfig);return publicMatch(row,pack);
+      await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,1,'server-initial-mulligan',$2,$3)",[id,ai,record.actions[0].signature]);await captureMatchShop(c,id,actor.id,deck.cards,pack,config,deck.formatId,deck.testingAccess);await enrollEconomyMatch(c,id,serverConfig);return publicMatch(await decorateMatch(c,row),pack);
     });
   });
   app.get("/api/matches",async req=>{const a=await auth.actor(req),{rows}=await pool.query("SELECT id,status,version_id,engine_version,config,revision,result,testing_access,created_at,completed_at FROM kd.match WHERE player_id=$1 ORDER BY created_at DESC LIMIT 200",[a.id]);return {matches:rows};});
