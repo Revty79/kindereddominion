@@ -15,6 +15,13 @@ import type { DiagnosticStep } from "../src/engine/types";
 import { ownerReadabilityScenarios } from "../src/content/owner-scenarios";
 import { validateScenario } from "../src/sandbox/scenario";
 
+it("filters actual placement ranks together with permanent number and Kindred without changing cards",()=>{
+  const cards=ownerContent().cards,rankTwo=filterCollection(cards,"Nature","",{...emptyCollectionFilter,rank:"2"});
+  expect(rankTwo.some(card=>card.id==="n027")).toBe(true);expect(rankTwo.some(card=>card.id==="n003")).toBe(false);
+  expect(filterCollection(cards,"Nature","N027",{...emptyCollectionFilter,rank:"1"})).toEqual([]);
+  expect(filterCollection(cards,"Nature","N003",{...emptyCollectionFilter,rank:"1"}).map(card=>card.id)).toEqual(["n003"]);
+});
+
 it("defaults fresh ordinary games to the separate owner catalog while retaining all historical versions and existing drafts", () => {
   const fresh = addBundledVersions(initialWorkspace());
   expect(fresh.activeVersion).toBe(CURRENT_OWNER_CONTENT_ID);

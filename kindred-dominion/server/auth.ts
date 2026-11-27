@@ -43,7 +43,7 @@ export function authentication(app:FastifyInstance,pool:DB,config:BackendConfig)
   });
   app.get("/api/session",async(req,reply)=>{
     let s=await session(req);
-    const capabilities={recovery:["dev","integration"].includes(config.environment)?"local-operator":"operator-assisted",emailDelivery:false};
+    const capabilities={recovery:["dev","integration"].includes(config.environment)?"local-operator":"operator-assisted",emailDelivery:false,localTestingAcquisition:config.localTestingAcquisition};
     if(!s){await rateLimit(pool,"session:"+keyed(req.ip,config),60,3600);const csrf=await issue(reply,null);return {player:null,csrf,registration:config.registration,capabilities};}
     return {player:s.actor,csrf:s.csrf,registration:config.registration,capabilities};
   });

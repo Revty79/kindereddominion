@@ -6,6 +6,7 @@ export default function CollectionFilters({ cards, value, onChange }: { cards: C
   return <div className="collection-extra-filters">
     {select("set", "Card set", [...new Set(cards.flatMap(c => c.collectible ? [c.collectible.setId] : []))])}
     {select("placement", "Placement type", ["standard", "replacement", "evolution"])}
+    {select("rank", "Placement rank", [...new Set(cards.map(card=>String(card.rank)))].sort((a,b)=>Number(a)-Number(b)))}
     {select("classification", "Creature classification", [...new Set(cards.flatMap(c => c.tags))].sort())}
     {select("mechanic", "Card mechanic", [...new Set(cards.flatMap(mechanicsOf))].sort())}
     <label>Minimum base power<input aria-label="Minimum base power" type="number" min="1" value={value.minPower} onChange={e => onChange({ ...value, minPower: e.target.value })} /></label>

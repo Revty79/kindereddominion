@@ -38,17 +38,23 @@ export async function grant(pool:DB,targetId:string,key:string,source:string,cha
     if(!result.replayed)await c.query("INSERT INTO kd.audit_event(actor_id,operation,target_id,details) VALUES($1,'inventory-grant',$2,$3)",[actor.id,targetId,{acquisition:result.id,source}]);return result;
   });
 }
-export async function validateOwnedDeck(c:DB|PoolClient,actor:Actor,cards:string[],pack:ContentPack,config:GameConfig,testing=false){
-  const errors=[...validateRules(config).filter(x=>x.severity==="error").map(x=>x.message),...validateDeck(cards,libraryOf(pack),config)];
-  if(config.deckSize!==15)errors.push("Permanent playing decks must contain exactly 15 cards.");
-  if(testing&&actor.role==="player")reject(403,"testing_forbidden","Unrestricted testing requires an authorized developer role.");
+export async function ownedDeckLegality(c:DB|PoolClient,actor:Actor,cards:string[],pack:ContentPack,config:GameConfig,testing=false){
+  const blocking=[...validateRules(config).filter(x=>x.severity==="error").map(x=>x.message)];
+  if(config.deckSize!==15)blocking.push("Permanent playing decks must contain exactly 15 cards.");
+  if(testing&&actor.role==="player")blocking.push("Unrestricted testing requires an authorized developer role.");
+  for(const id of new Set(cards))if(!pack.cards.some(card=>card.id===id))blocking.push(`${id}: card is not in the active published catalog.`);
   if(!testing){
     const quantities=new Map<string,number>();for(const row of await owned(c,actor.id))quantities.set(row.card_id,(quantities.get(row.card_id)??0)+row.quantity);
     const requested=new Map<string,number>();for(const id of cards){const identity=pack.cards.find(x=>x.id===id)?.collectible?.gameplayId??id;requested.set(identity,(requested.get(identity)??0)+1);}
-    for(const [id,n]of requested)if(n>(quantities.get(id)??0))errors.push(`${id.toUpperCase()}: deck requires ${n}, owned ${quantities.get(id)??0}.`);
+    for(const [id,n]of requested)if(n>(quantities.get(id)??0))blocking.push(`${id.toUpperCase()}: deck requires ${n}, owned ${quantities.get(id)??0}.`);
   }
   const identities=cards.map(id=>pack.cards.find(x=>x.id===id)?.collectible?.gameplayId??id);
-  if((await c.query("SELECT id FROM kd.card_identity WHERE retired AND id=ANY($1)",[identities])).rowCount)errors.push("Retired cards are unavailable for new playing decks or matches; historical records remain preserved.");
+  if((await c.query("SELECT id FROM kd.card_identity WHERE retired AND id=ANY($1)",[identities])).rowCount)blocking.push("Retired cards are unavailable for new playing decks or matches; historical records remain preserved.");
+  return {errors:[...blocking,...validateDeck(cards,libraryOf(pack),config)],blockingDraftErrors:blocking};
+}
+export async function validateOwnedDeck(c:DB|PoolClient,actor:Actor,cards:string[],pack:ContentPack,config:GameConfig,testing=false,draft=false){
+  if(testing&&actor.role==="player")reject(403,"testing_forbidden","Unrestricted testing requires an authorized developer role.");
+  const report=await ownedDeckLegality(c,actor,cards,pack,config,testing),errors=draft?report.blockingDraftErrors:report.errors;
   if(errors.length)reject(400,"illegal_deck",errors.join(" "));
 }
 export async function startingCollection(pool:DB,actor:Actor,kindred:string,key:string){

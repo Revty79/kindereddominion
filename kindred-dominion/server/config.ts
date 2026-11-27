@@ -23,7 +23,12 @@ export function readConfig() {
     const m=JSON.parse(fs.readFileSync(path.resolve(".local/v1.3d/postgres/instance.json"),"utf8"));
     if(host!==m.host||port!==m.port||database!==m.database&&![...(m.restoreDatabases??[]),...(m.testDatabases??[])].includes(database)||user!=="kindred_test"||env.ISOLATION_TOKEN!==m.instanceId)throw Error("Integration configuration does not match the owned isolated PostgreSQL instance.");
   }
+  const localTestingAcquisition=env.LOCAL_TEST_ACQUISITION==="true";
+  if(localTestingAcquisition&&!["dev","integration"].includes(environment))throw Error("Testing acquisition cannot be enabled in hosted environments.");
+  const testingPackCards=(env.LOCAL_TEST_PACK_CARDS??"a001,m001,c001").split(",").map(x=>x.trim());
+  if(!testingPackCards.length||testingPackCards.length>10||testingPackCards.some(id=>!/^([a-z][a-z0-9_-]{0,79})$/.test(id)))throw Error("Configure one to ten portable published card IDs for the local testing sampler.");
   return {environment,host,port,database,user,password:required("PGPASSWORD"),sessionSecret,origin,secure,registration,
+    localTestingAcquisition,testingPackCards,
     sessionHours:integer("SESSION_HOURS",168,1,720),registrationLimit:integer("REGISTRATION_PER_HOUR",10,1,100),apiHost:env.API_HOST??"127.0.0.1",apiPort:integer("API_PORT",3001,1,65535),
     logLevel:env.LOG_LEVEL??"info",isolationToken:env.ISOLATION_TOKEN??"",root:path.resolve(process.env.KINDRED_ROOT??".")};
 }

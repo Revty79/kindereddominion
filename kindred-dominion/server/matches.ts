@@ -46,6 +46,7 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
     return transaction(pool,async c=>{
       await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[actor.id]);
       const deck=await getDeck(c,b.deckId,actor.id),pack=await activeContent(c),library=libraryOf(pack),config={...deck.config,...(b.scoring?{scoring:b.scoring}:{})};
+      if(deck.draft)reject(400,"draft_deck","Finish and save a legal playing deck before entering a match.");
       await validateOwnedDeck(c,actor,deck.cards,pack,config,deck.testingAccess);
       const candidates=pack.decks.filter(d=>validateDeck(d.cards,library,config).length===0);
       if(!candidates.length)reject(400,"opponent_deck_unavailable","No computer deck is legal under this selected configuration.");
