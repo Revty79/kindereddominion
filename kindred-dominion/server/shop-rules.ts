@@ -85,16 +85,4 @@ export function inPool(card:CardDefinition,pool:PoolRule,rules:ShopRules){
  const memberships=rules.collections.filter(collection=>collection.cards.includes(card.id));
  return !pool.exclude.includes(card.id)&&(!pool.cards.length||pool.cards.includes(card.id))&&(!pool.kindreds.length||pool.kindreds.includes(card.kindred))&&(!pool.collections.length||memberships.some(c=>pool.collections.includes(c.id)))&&(!pool.rarities.length||pool.rarities.includes(rules.rarities[card.id]));
 }
-export function formatIssues(cards:string[],library:Record<string,CardDefinition>,format:FormatRule,rules:ShopRules){
- const errors:string[]=[];if(!format.enabled)return ["This event format is not active."];if(cards.length!==format.deckSize)errors.push(`This format requires ${format.deckSize} cards.`);
- const counts=new Map<string,number>();for(const id of cards)counts.set(id,(counts.get(id)??0)+1);
- for(const [id,count]of counts){const card=library[id];if(!card){errors.push(id+": unpublished card.");continue;}const membership=rules.collections.filter(c=>c.status!=="draft"&&c.cards.includes(id));
-  if(format.collections.length&&!membership.some(c=>format.collections.includes(c.id)))errors.push(id.toUpperCase()+": outside this format's allowed collections.");
-  if(membership.some(c=>format.excludeCollections.includes(c.id))||format.excludeCards.includes(id))errors.push(id.toUpperCase()+": excluded by this format.");
-  if(format.kindreds.length&&!format.kindreds.includes(card.kindred))errors.push(id.toUpperCase()+": Kindred not permitted.");
-  if(format.rarities.length&&!format.rarities.includes(rules.rarities[id]))errors.push(id.toUpperCase()+": rarity not permitted.");
-  if(format.eventPool.length&&!format.eventPool.includes(id))errors.push(id.toUpperCase()+": outside the event pool.");
-  const maximum=Math.min(format.maxCopies,format.cardLimits[id]??format.maxCopies);if(count>maximum)errors.push(`${id.toUpperCase()}: this format permits at most ${maximum} copies.`);
- }
- return errors;
-}
+export {formatIssues} from "../src/content/eligibility";

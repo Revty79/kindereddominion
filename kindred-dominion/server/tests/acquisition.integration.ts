@@ -19,12 +19,12 @@ async function complete(client:Client,deckId:string){let response=await client.r
 beforeAll(async()=>{await applyMigrations(pool,config);await seedRepository(pool);await publishContent(pool,content,"official",true);app=await createApi({...config,localTestingAcquisition:true,testingPackCards:["a001","m001","n001"]},pool);});
 afterAll(async()=>{await app?.close();await pool.end();});
 describe.sequential("owned deck drafts and bounded local acquisition",()=>{
-  it("saves incomplete owned drafts while blocking their use/default selection and unowned cards",async()=>{
+  it("saves repairable drafts while blocking their battle use and unknown identities",async()=>{
     const client=await new Client().register("draft"),starter=await client.starter(),body={name:"Incomplete formation",cards:["n001"],config:{scoring:"classic",mode:"standard",collection:"mixed"},draft:true};
     const response=await client.request("POST","/api/decks",body);expect(response.status).toBe(201);const id=response.body.id;
     expect((await client.request("GET","/api/decks")).body.decks.find((deck:any)=>deck.id===id)).toMatchObject({draft:true,legal:false});
     expect((await client.request("POST",`/api/decks/${id}/default`,{})).status).toBe(400);expect((await client.request("POST","/api/matches",{deckId:id})).status).toBe(400);
-    expect((await client.request("POST","/api/decks",{...body,cards:["m001"]})).status).toBe(400);expect((await client.request("POST","/api/decks",{...body,cards:["unpublished"]})).status).toBe(400);
+    const unowned=await client.request("POST","/api/decks",{...body,cards:["m001"]});expect(unowned.status).toBe(201);expect((await client.request("POST","/api/matches",{deckId:unowned.body.id})).status).toBe(400);expect((await client.request("GET","/api/collection")).body.inventory.some((r:any)=>r.card_id==="m001"&&r.quantity>0)).toBe(false);expect((await client.request("POST","/api/decks",{...body,cards:["unpublished"]})).status).toBe(400);
     expect((await client.request("POST","/api/decks",{...body,testingAccess:true})).status).toBe(403);
     const ready=await client.request("PUT",`/api/decks/${id}`,{...body,cards:content.decks[0].cards,draft:false,revision:1});expect(ready.status).toBe(200);expect((await client.request("POST",`/api/decks/${id}/default`,{})).status).toBe(200);
     expect((await client.request("PUT",`/api/decks/${id}`,{...body,revision:2})).status).toBe(200);expect((await client.request("GET","/api/decks")).body.defaultDeckId).toBeNull();

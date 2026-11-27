@@ -65,7 +65,14 @@ export async function ownedDeckLegality(c:DB|PoolClient,actor:Actor,cards:string
 }
 export async function validateOwnedDeck(c:DB|PoolClient,actor:Actor,cards:string[],pack:ContentPack,config:GameConfig,testing=false,draft=false){
   if(testing&&actor.role==="player")reject(403,"testing_forbidden","Unrestricted testing requires an authorized developer role.");
-  const report=await ownedDeckLegality(c,actor,cards,pack,config,testing),errors=draft?report.blockingDraftErrors:report.errors;
+  if(draft){
+    const rules=validateRules(config).filter(x=>x.severity==="error").map(x=>x.message);
+    const known=new Set((await c.query("SELECT id FROM kd.card_identity WHERE id=ANY($1)",[[...new Set(cards)]])).rows.map(r=>r.id));
+    for(const id of new Set(cards))if(!known.has(id))rules.push(`${id}: unknown permanent card identity.`);
+    if(rules.length)reject(400,"illegal_deck",rules.join(" "));
+    return; // A draft records intentions, never ownership or permission to play.
+  }
+  const report=await ownedDeckLegality(c,actor,cards,pack,config,testing),errors=report.errors;
   if(errors.length)reject(400,"illegal_deck",errors.join(" "));
 }
 export async function startingCollection(pool:DB,actor:Actor,kindred:string,key:string,onAcquired?:(c:PoolClient,cards:string[])=>Promise<void>,serverConfig?:BackendConfig){

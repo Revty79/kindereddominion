@@ -53,13 +53,14 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
     if(deck.draft||deck.testingAccess)reject(400,"deck_not_ready","Choose a legal ordinary playing deck.");
     await validateOwnedDeck(pool,actor,deck.cards,pack,deck.config);
     const eligibility=await deckFormat(pool,deck.cards,pack,deck.config,deck.formatId);if(eligibility.errors.length)reject(400,"deck_format_ineligible",eligibility.errors.join(" "));
-    return {contentVersion:pack.id,configuration:deck.config,opponents:opponents(pack,deck.config).map(deck=>({id:deck.id,name:deck.name,kindred:deck.collection,count:deck.cards.length}))};
+    return {deckRevision:deck.revision,contentVersion:pack.id,configuration:deck.config,opponents:opponents(pack,deck.config).map(deck=>({id:deck.id,name:deck.name,kindred:deck.collection,count:deck.cards.length}))};
   });
   app.post("/api/matches",async req=>{
-    const actor=await auth.actor(req),b=z.object({deckId:uuid,scoring:z.enum(["classic","domination"]).optional(),opponentDeckId:z.string().min(1).max(100).optional()}).strict().parse(req.body);
+    const actor=await auth.actor(req),b=z.object({deckId:uuid,scoring:z.enum(["classic","domination"]).optional(),opponentDeckId:z.string().min(1).max(100).optional(),deckRevision:z.number().int().positive().optional()}).strict().parse(req.body);
     return transaction(pool,async c=>{
       await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[actor.id]);
       const deck=await getDeck(c,b.deckId,actor.id),pack=await activeContent(c),library=libraryOf(pack),config={...deck.config,...(b.scoring?{scoring:b.scoring}:{})};
+      if(b.deckRevision!==undefined&&b.deckRevision!==deck.revision)reject(409,"stale_deck","Your battle deck changed. Review the updated match settings before starting.");
       if(deck.draft)reject(400,"draft_deck","Finish and save a legal playing deck before entering a match.");
       await validateOwnedDeck(c,actor,deck.cards,pack,config,deck.testingAccess);
       // Test-only acquisition lots cannot bootstrap ordinary reward progression.
@@ -74,7 +75,7 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
       const decks:[string[],string[]]=[deck.cards,opponent.cards];let state=createMatch(decks,library,config,seed,startingPlayer),record=newRecord(state,library,decks,pack.id,"Server-authoritative computer match");
       const ai:Action={type:"mulligan",player:1,cards:computerMulligan(state,library,1)};state=act(state,ai,library);record=appendRecord(record,ai,state);
       const id=crypto.randomUUID(),{rows:[row]}=await c.query("INSERT INTO kd.match(id,player_id,opponent_type,version_id,engine_version,config,decks,seed,starting_player,state,record,status,testing_access) VALUES($1,$2,'computer',$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",[id,actor.id,pack.id,record.engineVersion,config,JSON.stringify(decks),seed,startingPlayer,state,record,state.phase,testingAccess]);
-      await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,1,'server-initial-mulligan',$2,$3)",[id,ai,record.actions[0].signature]);await captureMatchShop(c,id,actor.id,deck.cards,pack,config,deck.formatId,deck.testingAccess);await enrollEconomyMatch(c,id,serverConfig);return publicMatch(await decorateMatch(c,row),pack);
+      await c.query("INSERT INTO kd.match_action(match_id,sequence,request_id,action,signature) VALUES($1,1,'server-initial-mulligan',$2,$3)",[id,ai,record.actions[0].signature]);await captureMatchShop(c,id,actor.id,deck.cards,pack,config,deck.formatId,deck.testingAccess);await enrollEconomyMatch(c,id,serverConfig);if(!deck.testingAccess)await c.query("UPDATE kd.player SET default_deck_id=$2 WHERE id=$1",[actor.id,deck.id]);return publicMatch(await decorateMatch(c,row),pack);
     });
   });
   app.get("/api/matches",async req=>{const a=await auth.actor(req),{rows}=await pool.query("SELECT id,status,version_id,engine_version,config,revision,result,testing_access,created_at,completed_at FROM kd.match WHERE player_id=$1 ORDER BY created_at DESC LIMIT 200",[a.id]);return {matches:rows};});

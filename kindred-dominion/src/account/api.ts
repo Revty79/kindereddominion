@@ -1,10 +1,11 @@
 let csrf="";
 const sessions=typeof BroadcastChannel!=="undefined"?new BroadcastChannel("kindred-account-session"):null;
 export function onSessionChange(fn:()=>void){sessions?.addEventListener("message",fn);return()=>sessions?.removeEventListener("message",fn);}
-export async function api<T=any>(path:string,method="GET",body?:unknown):Promise<T>{
-  const response=await fetch(`/api${path}`,{method,credentials:"include",headers:{...(body===undefined?{}:{"Content-Type":"application/json"}),...(method==="GET"?{}:{"X-CSRF-Token":csrf})},...(body===undefined?{}:{body:JSON.stringify(body)})});
+export class ApiRequestError extends Error {constructor(public status:number,public code:string,message:string){super(message);}}
+export async function api<T=any>(path:string,method="GET",body?:unknown,options:{keepalive?:boolean;signal?:AbortSignal}={}):Promise<T>{
+  const response=await fetch(`/api${path}`,{method,credentials:"include",...options,headers:{...(body===undefined?{}:{"Content-Type":"application/json"}),...(method==="GET"?{}:{"X-CSRF-Token":csrf})},...(body===undefined?{}:{body:JSON.stringify(body)})});
   const value=await response.json().catch(()=>null);
-  if(!response.ok)throw new Error(value?.error?.message??"The account server is unavailable. Your local practice data remains available.");
+  if(!response.ok)throw new ApiRequestError(response.status,value?.error?.code??"request_failed",value?.error?.message??"The account server is unavailable. Your local practice data remains available.");
   if(value?.csrf)csrf=value.csrf;
   if(method==="POST"&&["/login","/logout","/accounts","/password/change","/password/recover"].includes(path))sessions?.postMessage({type:"session-changed"});
   return value;
