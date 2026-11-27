@@ -14,10 +14,10 @@ The exact private credential file is `D:\kindereddominion\kindred-dominion\serve
 Prefer a restricted `rk_test_` runtime key. The implemented calls need Account read, Balance read, Checkout Sessions read/write, Products read, Prices read, Payment Intents read and Charges read. Event investigation needs Events read; refund/dispute operations require Refunds read/write and Disputes read. Stripe may group these permissions differently in its restricted-key interface. Grant only the corresponding resources; Payouts, bank accounts and Connect account management are unnecessary. Use a separate setup-only key with Products/Prices write on `STRIPE_CATALOG_SECRET_KEY=` where practical; remove it after catalog setup. If a restricted key is denied, review the missing resource privately rather than printing provider errors or granting every permission.
 
 ```powershell
-npm run commerce:verify -- --pin-account
+npm.cmd run commerce:verify -- --pin-account
 ```
 
-This checks the current account and test balance, then privately saves its non-secret `acct_` identity on `STRIPE_ACCOUNT_ID=`. Subsequent connections must match it. It does not connect to PostgreSQL or grant assets. Failure output is sanitized. The optional publishable key must belong to the same sandbox; the server does not use it for authorization.
+This checks the current account and test balance, then privately saves its non-secret `acct_` identity on `STRIPE_ACCOUNT_ID=`. Subsequent connections must match it. It does not connect to PostgreSQL or grant assets. Failure output is sanitized. The optional publishable key must belong to the same sandbox; the server does not use it for authorization. In Windows PowerShell, use `npm.cmd` when forwarding script flags: this machine's `npm.ps1` invocation rejected `--pin-account`, while `npm.cmd` and the compiled equivalent below passed. Do not change global npm configuration to work around it.
 
 Install the official CLI once (or use the official Windows installer):
 
@@ -32,7 +32,7 @@ Use a disposable isolated database copy and a permanently sandbox-designated acc
 
 ```powershell
 npm run commerce:catalog
-npm run commerce:catalog -- --apply
+npm.cmd run commerce:catalog -- --apply
 ```
 
 The first command is a dry run. The second creates immutable sandbox Products and Prices for the exact published configuration, verifies them and records mappings. Repetition reuses the same objects. Publishing a new version creates new revision-specific mappings; old order terms remain pinned. Do not edit old Stripe Prices to change settled terms.
@@ -41,7 +41,7 @@ Set `COMMERCE_MODE=stripe_sandbox` only in the isolated acceptance environment a
 
 Back up the private environment separately in secure owner-controlled storage; never add it to a source bundle, Git, report, screenshot or support transcript. Rotate compromised keys in Stripe, update the private file and restart only the authorized isolated service. Database recovery uses the existing paired backup/isolated restore procedures; credentials are restored separately. Hosted TEST acceptance and `sudo kindred-update` remain owner operations. No production or real-money activation is authorized.
 
-Primary references: [restricted keys](https://docs.stripe.com/keys/restricted-api-keys), [key handling](https://docs.stripe.com/keys-best-practices), [CLI forwarding](https://docs.stripe.com/cli/listen), [Checkout fulfillment](https://docs.stripe.com/checkout/fulfillment?ui=full-page), [webhook signatures](https://docs.stripe.com/webhooks), [official CLI installation](https://github.com/stripe/stripe-cli#installation). Genuine verification remains pending until credentials are supplied privately and the complete acceptance sequence is executed.
+Primary references: [restricted keys](https://docs.stripe.com/keys/restricted-api-keys), [key handling](https://docs.stripe.com/keys-best-practices), [CLI forwarding](https://docs.stripe.com/cli/listen), [Checkout fulfillment](https://docs.stripe.com/checkout/fulfillment?ui=full-page), [webhook signatures](https://docs.stripe.com/webhooks), [official CLI installation](https://github.com/stripe/stripe-cli#installation). [Genuine local sandbox acceptance](V1.5F-STRIPE-SANDBOX-VALIDATION.md) passed on November 27 after the owner supplied credentials privately. Hosted configuration and real-money activation remain separate; repeat acceptance for a new environment or materially changed implementation.
 
 ## Compiled and hosted tooling
 
