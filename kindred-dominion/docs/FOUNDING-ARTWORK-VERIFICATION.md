@@ -108,7 +108,9 @@ This explicit step is already complete on the owner's DEV computer. Ordinary rep
 
 ## Presentation approval checkpoint and remaining items
 
-The isolated development page is **http://127.0.0.1:5173/card-design.html**. It uses one data-driven component for Red Fox, Dragon, Crystal Elemental, Lich, Iron Golem, Grey Wolf (evolution) and Venus Flytrap (replacement), at inspection, hand and battlefield scales. Full-card inspection is available by selecting a card. Source portraits are displayed proportionally; temporary selection styling remains outside the printed design.
+The isolated development page is **http://127.0.0.1:5173/card-design.html**. It uses one data-driven component for Red Fox, Dragon, Crystal Elemental, Lich, Iron Golem, Grey Wolf (evolution) and Venus Flytrap (replacement), at inspection, hand and battlefield scales. The later [artwork-first clarification](ARTWORK-FIRST-CARD-DIRECTION.md) supersedes the original inset-picture layout: illustration now fills the entire 3:4 face, with permanent information in transparent overlays. No image files were modified. Temporary state remains separate from the printed face.
+
+The [focused battlefield study](BATTLEFIELD-CARD-STUDY.md) is **http://127.0.0.1:5173/battlefield-design.html**. It demonstrates five cards resting on separate tiles, a selected evolution, a replacement, hover/keyboard inspection and actual engine-derived power/scoring. Its additional validation is recorded separately from the integration tests above.
 
 Review screenshots: [collection](founding-artwork/review/collection.png), [full inspection](founding-artwork/review/full-inspection.png), [hand](founding-artwork/review/hand.png), [battlefield](founding-artwork/review/battlefield.png), [mobile](founding-artwork/review/mobile.png). The mobile study was checked at 390 pixels with no document overflow or page errors; this is emulation, not physical-device acceptance.
 
@@ -117,7 +119,7 @@ The [owner supplement](FOUNDING-CARD-PRESENTATION-SUPPLEMENT.md) states: “Do n
 Priorities:
 
 1. **Complete local match blockers: none found.** All five founding starters completed actual computer games.
-2. **Design rollout: awaiting explicit owner approval** of the isolated framing and scale examples.
+2. **Design rollout: awaiting explicit owner approval** of the full-bleed artwork-first prototype, overlay readability and card-on-tile examples.
 3. **Artwork exceptions: A016 and A018 contain baked-in numerals.** Owner decision is required under the supplied roster before final artwork acceptance.
 4. **Deployment: Docker execution and Ubuntu TEST deployment remain owner-deferred**, outside local-play acceptance.
 5. **Advisory review:** 17 non-preferred aspect ratios; no automatic cropping. Phoenix's existing M003 resurrection prerequisite is preserved as documented, not silently bypassed. Physical-device acceptance remains future validation.
