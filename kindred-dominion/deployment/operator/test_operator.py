@@ -7,7 +7,7 @@ import tempfile
 import threading
 import unittest
 from core import update, backup, revision, OperatorError
-from host import Host, Postgres, Runner, read_env, write_json, maintenance_storage
+from host import Host, Postgres, Runner, read_env, write_json, maintenance_storage, unit_validation_command
 
 OLD, NEW = "a" * 40, "b" * 40
 
@@ -121,6 +121,55 @@ class Workflow(unittest.TestCase):
 
 
 class Adapter(unittest.TestCase):
+    def test_vitest_has_separate_config_and_transform_cache_mounts(self):
+        command = unit_validation_command("sha256:" + "a" * 64)
+        mounts = [command[index + 1] for index, value in enumerate(command) if value == "--tmpfs"]
+        by_path = dict(mount.split(":", 1) for mount in mounts)
+        self.assertEqual(len(mounts), len(by_path))
+        self.assertEqual(set(by_path), {"/tmp", "/app/.local", "/app/node_modules/.vite", "/app/node_modules/.vite-temp"})
+        self.assertIn("size=64m", by_path["/app/node_modules/.vite-temp"])
+        for name in ("/app/.local", "/app/node_modules/.vite", "/app/node_modules/.vite-temp"):
+            for option in ("rw", "nosuid", "nodev", "mode=0700", "uid=1000", "gid=1000"):
+                self.assertIn(option, by_path[name].split(","))
+    def test_vitest_keeps_full_suite_and_container_isolation(self):
+        command = unit_validation_command("sha256:" + "a" * 64)
+        self.assertIn("--read-only", command)
+        self.assertEqual(command[command.index("--network") + 1], "none")
+        self.assertEqual(command[command.index("--cap-drop") + 1], "ALL")
+        self.assertEqual(command[command.index("--security-opt") + 1], "no-new-privileges:true")
+        self.assertEqual(command[-4:], ["node_modules/vitest/vitest.mjs", "run", "--maxWorkers=1", "--no-file-parallelism"])
+        self.assertFalse(any(arg in command for arg in ("--env", "-e", "--env-file", "--volume", "-v", "--privileged", "--passWithNoTests")))
+    def test_build_uses_the_hardened_full_suite_before_marking_candidate_validated(self):
+        host = Host.__new__(Host); host.config = {"network": "kindred-dominion-net"}
+        candidate = {"revision": NEW, "applicationDir": "/isolated/release/kindred-dominion", "images": {}}
+        service = {"read_only": True, "cap_drop": ["ALL"], "security_opt": ["no-new-privileges:true"]}
+        config = {"services": {name: copy.deepcopy(service) for name in ("game", "backend", "maintenance")}, "networks": {"default": {"external": True, "name": host.config["network"]}}}
+        config["services"]["game"]["ports"] = [{"host_ip": "127.0.0.1", "published": "18083", "target": 8080}]
+        config["services"]["maintenance"]["tmpfs"] = ["/app/.local:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000"]
+        host.compose = lambda *args, **kwargs: json.dumps(config)
+        host.image_revision = lambda image: NEW
+        host.git = lambda args, directory=None: NEW if args == ["rev-parse", "HEAD"] else ""
+        commands = []
+        def run(args, **kwargs):
+            commands.append(args)
+            if args[1:3] == ["image", "ls"]:
+                return "\n".join(name + ":" + NEW for name in ("kindred-dominion", "kindred-dominion-backend", "kindred-dominion-maintenance"))
+            if "{{.Config.User}}" in args:
+                return "101:101" if args[-1].startswith("kindred-dominion:") else "1000:1000"
+            if "{{.Id}}" in args: return "sha256:" + "a" * 64
+            return ""
+        host.run = run
+        host.build(candidate)
+        validation = [command for command in commands if "node_modules/vitest/vitest.mjs" in command]
+        self.assertEqual(len(validation), 1)
+        self.assertIn("/app/node_modules/.vite-temp:rw,nosuid,nodev,size=64m,mode=0700,uid=1000,gid=1000", validation[0])
+        self.assertTrue(candidate["validatedBeforeDowntime"])
+        def fail_validation(args, **kwargs):
+            if "node_modules/vitest/vitest.mjs" in args: raise OperatorError("Injected Vite configuration write failure")
+            return run(args, **kwargs)
+        host.run = fail_validation; candidate.pop("validatedBeforeDowntime")
+        with self.assertRaises(OperatorError): host.build(candidate)
+        self.assertNotIn("validatedBeforeDowntime", candidate)
     def test_environment_is_literal_and_duplicates_fail(self):
         with tempfile.TemporaryDirectory() as directory:
             file = Path(directory) / "private.env"

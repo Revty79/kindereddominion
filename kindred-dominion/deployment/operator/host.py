@@ -22,6 +22,22 @@ Path = pathlib.Path
 TABLE = re.compile(r"[a-z_][a-z0-9_]{0,62}")
 APPEND_TABLES = {"schema_migrations", "migration_checksum", "content_version", "card_identity", "card_revision", "edition"}
 
+# .vite holds transform/test caches; Vite's bundled ESM config loader writes
+# to the separate sibling .vite-temp before Vitest can discover any tests.
+VALIDATION_TMPFS = (
+    "/tmp:rw,nosuid,nodev,size=256m,mode=1777",
+    "/app/.local:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000",
+    "/app/node_modules/.vite:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000",
+    "/app/node_modules/.vite-temp:rw,nosuid,nodev,size=64m,mode=0700,uid=1000,gid=1000",
+)
+
+
+def unit_validation_command(image):
+    command = ["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true"]
+    for mount in VALIDATION_TMPFS:
+        command.extend(("--tmpfs", mount))
+    return [*command, "--entrypoint", "node", image, "node_modules/vitest/vitest.mjs", "run", "--maxWorkers=1", "--no-file-parallelism"]
+
 
 def maintenance_storage(items):
     for item in items:
@@ -403,7 +419,7 @@ class Host:
                 raise OperatorError("Replacement images must retain their nonroot users.")
             candidate["images"][service] = self.run(["docker", "image", "inspect", "--format", "{{.Id}}", tag], output=False)
         # No database credentials or networking are supplied to source/unit validation.
-        self.run(["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true", "--tmpfs", "/tmp:rw,nosuid,nodev,size=256m,mode=1777", "--tmpfs", "/app/.local:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000", "--tmpfs", "/app/node_modules/.vite:rw,nosuid,nodev,size=128m,mode=0700,uid=1000,gid=1000", "--entrypoint", "node", candidate["images"]["maintenance"], "node_modules/vitest/vitest.mjs", "run", "--maxWorkers=1", "--no-file-parallelism"], timeout=1800)
+        self.run(unit_validation_command(candidate["images"]["maintenance"]), timeout=1800)
         self.run(["docker", "run", "--rm", "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges:true", "--entrypoint", "node", candidate["images"]["backend"], "-e", "const fs=require('fs'),crypto=require('crypto');const m=JSON.parse(fs.readFileSync('/app/dist-control/control-manifest.json'));if(m.format!=='kindred-protected-control'||m.revision!==process.argv[1])process.exit(1);for(const f of m.files){const b=fs.readFileSync('/app/dist-control/'+f.path);if(crypto.createHash('sha256').update(b).digest('hex')!==f.sha256)process.exit(1);}", candidate["revision"]])
         candidate["validatedBeforeDowntime"] = True
         root = Path(candidate["applicationDir"]).parent

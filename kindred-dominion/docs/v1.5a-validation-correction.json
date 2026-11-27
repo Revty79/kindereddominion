@@ -1,0 +1,27 @@
+{
+  "node": "24.18.0",
+  "vite": "7.3.8",
+  "vitest": "4.1.12",
+  "oldConfigWriteDenied": true,
+  "correctedFullSuitePassed": 403,
+  "ordinarySourceWriteDenied": true,
+  "containerWritePaths": [
+    "/tmp",
+    "/app/.local",
+    "/app/node_modules/.vite",
+    "/app/node_modules/.vite-temp"
+  ],
+  "databaseCredentialsSupplied": false,
+  "dockerExecuted": false,
+  "scope": "Node filesystem-permission model; Linux Docker rehearsal remains separate",
+  "operatorTestsPassed": 23,
+  "ownerReported": {
+    "preflightHealthy": true,
+    "threeCandidateImagesBuilt": true,
+    "originalRehearsal": "failed-before-migration",
+    "liveMigrationAttempted": false,
+    "independentlyObserved": false
+  },
+  "homeserverAccessed": false,
+  "linuxDockerRehearsal": "pending owner and Ember"
+}
