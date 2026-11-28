@@ -18,9 +18,8 @@
     "major": 18,
     "nativeVersion": 180000,
     "files": 30,
-    "passed": 308,
-    "newStoreCases": 17,
-    "expandedSuiteExpected": 309
+    "passed": 309,
+    "newStoreCases": 17
   },
   "operator": {
     "total": 55,
@@ -98,6 +97,15 @@
       "privateFixtureAssetsRetained": true,
       "normalDevWrites": false,
       "hostedAccessed": false
+    },
+    "v14Ci": {
+      "sourceSchema": 7,
+      "committedCurrentSchema": 24,
+      "temporaryProbeMigration": true,
+      "originalRelations": 34,
+      "originalRows": 1391,
+      "allOriginalRowsAndColumnsPreserved": true,
+      "sourceUnchanged": true
     }
   },
   "assets": {
@@ -126,7 +134,29 @@
   "livePaymentsEnabled": false,
   "v17Started": false,
   "exactCommitCi": {
-    "status": "awaiting corrected source validation",
+    "status": "success",
+    "sourceCommit": "13af8f946b18e9d4bc07fef0d1a30dc135681d7f",
+    "runId": 46112091512,
+    "jobId": 140877651367,
+    "url": "https://github.com/Revty79/kindereddominion/actions/runs/46112091512",
+    "unitTestsPassed": 1140,
+    "postgresTestsPassed": 309,
+    "postgresVersion": 180007,
+    "operatorTestsPassed": 55,
+    "legacySevenToCurrentMigrationsVerified": true,
+    "backupAndSourceBundleVerified": true,
+    "completeHostRehearsalVerified": true,
+    "postPublicationPreservationVerified": true,
+    "rowColumnAndDuplicateCorruptionDetected": true,
+    "runtimePermissionFailuresDetected": true,
+    "runtimeDmlWithoutDdl": true,
+    "backendReadyWithRuntimeRole": true,
+    "sourceDatabaseUnchanged": true,
+    "networklessReadOnlyFullSuite": true,
+    "sourceWritesDenied": true,
+    "postgres18FullRehearsal": true,
+    "hostDatabaseAccessed": false,
+    "hostDeploymentPerformed": false,
     "failedAttempts": [
       {
         "commit": "3b914f719d1ef5f60cfb0ec5834dabcc4a3079ac",
