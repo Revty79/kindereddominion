@@ -22,7 +22,7 @@ export default function PrivateStudio({onError,content}:{onError:(message:string
     }
     return workspace;
   }
-  if(open&&saved?.workspace)return <Studio workspace={saved.workspace} onChange={change} onRecovery={recovery} onExit={()=>setOpen(false)}/>;
+  if(open&&saved?.workspace)return <Studio storage="account" workspace={saved.workspace} onChange={change} onRecovery={recovery} onExit={()=>setOpen(false)}/>;
   return <section className="private-studio"><h2>Private developer workspace</h2><p>This account’s drafts, scenarios, reports and replays are private and have no effect on permanent ownership or verified progression. Repository publication remains a separate reviewed command. Experimental images here are private draft data; official artwork still belongs in the repository.</p>{message&&<p role="status">{message}</p>}
     {!saved?<p>Loading private workspace…</p>:saved.workspace?<><p>Server workspace revision {saved.revision}</p><button className="primary" onClick={()=>setOpen(true)}>Open saved private Studio</button><button onClick={()=>downloadJson("kindred-private-studio-backup.json",exportTransfer(saved.workspace!,"backup"))}>Download private Studio backup</button></>:<button className="primary" onClick={()=>run(async()=>{const result=await api("/developer/workspace","PUT",{revision:-1,workspace:freshWorkspace()});current.current=result;setSaved(result);setMessage("Private workspace initialized and saved.");})}>Initialize private Studio from bundled content</button>}
     <h3>Import existing local Studio explicitly</h3><p>Preview and download a recoverable backup before replacing this account’s private workspace. Original browser-local data is retained. Local matches/replays remain untrusted development records.</p>

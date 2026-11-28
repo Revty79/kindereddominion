@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ContentPack, Ruleset } from "../content/types";
+import type { ContentPack, Ruleset, RulesetVersion } from "../content/types";
 import type { GameConfig, Player } from "../engine/types";
 import { battlefield } from "../engine/config";
 import { validateRules } from "../content/validation";
@@ -7,8 +7,11 @@ import { Field, Issues, NumberField } from "./components";
 export default function Rules({
   content,
   onSave,
+  versions=[],onPublish,
 }: {
   content: ContentPack;
+  versions?:RulesetVersion[];
+  onPublish?:(rule:Ruleset)=>Promise<void>;
   onSave: (pack: ContentPack) => Promise<void>;
 }) {
   const [selected, setSelected] = useState(content.rulesets[0].id),
@@ -23,11 +26,12 @@ export default function Rules({
     [tokens, setTokens] = useState(1),
     [fortification, setFortification] = useState(0);
   function size(rows: number, cols: number) {
+    if(!Number.isInteger(rows)||!Number.isInteger(cols)||rows<1||rows>20||cols<2||cols>30||rows*cols>300){setMessage("Current Studio authoring supports 1–20 rows, 2–30 columns and at most 300 cells. This is an implementation safety boundary, not a permanent ruleset restriction.");return;}
     config({
       battlefield: {
         ...battlefield(
-          Math.max(1, Math.min(20, rows)),
-          Math.max(2, Math.min(30, cols)),
+          rows,
+          cols,
         ),
         maxTokens: b.maxTokens,
         maxFortification: b.maxFortification,
@@ -303,6 +307,9 @@ export default function Rules({
       >
         Save experimental ruleset
       </button>
+      <section className="studio-subpanel"><h3>Private testing revisions</h3><p>Save the draft first, then publish an immutable private testing revision. This does not approve a hosted competitive ruleset or change an active match.</p><button disabled={!onPublish||!!draft||issues.some(i=>i.severity==="error")} onClick={()=>void onPublish?.(rule).then(()=>setMessage("Private tactical ruleset revision published. Existing scenarios and matches keep their snapshots.")).catch(e=>setMessage(String(e)))}>Publish private ruleset revision</button><ol>{versions.filter(v=>v.id===rule.id).map(v=><li key={v.revision}>Revision {v.revision} · {v.publishedAt} · {v.config.battlefield.rows}×{v.config.battlefield.cols} · {v.config.deckSize}-card deck <button onClick={()=>setDraft({...rule,name:v.name,config:structuredClone(v.config),completion:v.completion})}>Restore revision {v.revision} as draft</button></li>)}</ol></section>
+      <details className="studio-subpanel"><summary>All preserved private ruleset revisions</summary><p>This includes rules no longer present in the current draft after backup restoration. Loading a revision creates an editable draft; it cannot rewrite the published entry.</p><ul>{versions.map(v=><li key={v.id+":"+v.revision}>{v.name} · {v.id} revision {v.revision} · {v.config.battlefield.rows}×{v.config.battlefield.cols} · {v.config.deckSize} cards · {v.contentVersion}<button onClick={()=>{setSelected(content.rulesets.some(r=>r.id===v.id)?v.id:"");setDraft({id:v.id,name:v.name,description:"Restored from a preserved private testing revision.",config:structuredClone(v.config),completion:v.completion});}}>Load {v.id} revision {v.revision} as draft</button></li>)}</ul>{!versions.length&&<p>No private ruleset revision has been published in this workspace.</p>}</details>
+      <details className="studio-subpanel"><summary>Supported rules and implementation boundaries</summary><p>Current engine: two alternating participants; one action per turn, automatic draw and mandatory single opening exchange, consecutive-pass completion or active-player surrender. Scoring options above are executable engine settings. Collection, mode and copy settings are applied by the existing deck validator; per-card copy limits remain authoritative.</p><p>Studio authoring is currently validated up to 300 tiles, 20 rows and 30 columns. The engine's separate safety ceiling is 1,000 tiles. Larger-board usability and performance need testing; these are not permanent game-design limits.</p><p>Custom turn/victory scripts, arbitrary ruleset-specific card lists, shared teams, registration-order starts and more than two participants require V1.7 engine work. They remain inactive; no custom settings are silently converted to Classic Duel.</p><button disabled>Team and multiplayer settings — engine dependency</button><button disabled>Custom victory or turn rules — engine dependency</button></details>
       {message && <p role="status">{message}</p>}
     </section>
   );

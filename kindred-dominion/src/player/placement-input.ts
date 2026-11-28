@@ -1,13 +1,13 @@
 // Presentation adapters consume exact, server-produced legal actions. No rules
 // are inferred from tile ownership, rank, printed power or artwork here.
 export type Placement = {card:string;row:number;col:number};
-export type PlacementSource = {id:string;revision:number;status:string;active:number;legalActions:Placement[]};
+export type PlacementSource = {id:string;revision:number;status:string;active:number;viewer?:number;legalActions:Placement[]};
 export type PlacementPreviewRequest = {matchId:string;revision:number;action:Placement & {type:"play"}};
 export type Point = {x:number;y:number};
 export type Rect = {left:number;top:number;right:number;bottom:number};
 
 export function placementRequest(source:PlacementSource,card:string,row:number,col:number):PlacementPreviewRequest|null {
-  if(source.status!=="playing"||source.active!==0||!source.legalActions.some(a=>a.card===card&&a.row===row&&a.col===col))return null;
+  if(source.status!=="playing"||source.active!==(source.viewer??0)||!source.legalActions.some(a=>a.card===card&&a.row===row&&a.col===col))return null;
   return {matchId:source.id,revision:source.revision,action:{type:"play",card,row,col}};
 }
 

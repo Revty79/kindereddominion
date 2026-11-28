@@ -22,7 +22,7 @@ export default function Decks({
   const rule = content.rulesets.find((r) => r.id === ruleId)!;
   const config = {
     ...rule.config,
-    mode: free ? ("free" as const) : ("standard" as const),
+    mode: free ? ("free" as const) : rule.config.mode,
     collection: deck?.collection ?? "mixed",
   };
   const analysis = deck ? deckAnalysis(deck.cards, content, config) : null;

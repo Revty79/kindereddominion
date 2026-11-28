@@ -35,6 +35,7 @@ const groups:Group[]=[
  {name:"cosmetics",file:"cosmetics",flag:"KINDRED_COSMETICS_ACCEPT",ports:[3108,5279],simulation:true,optional:true},
  {name:"trading-experience",file:"trading-experience",flag:"KINDRED_TRADING_EXPERIENCE_ACCEPT",ports:[3118,5289],optional:true},
  {name:"onboarding",file:"onboarding",flag:"KINDRED_ONBOARDING_ACCEPT",ports:[3120,5291],optional:true},
+ {name:"studio-laboratory",file:"studio-laboratory",flag:"KINDRED_STUDIO_LAB_ACCEPT",ports:[3130,5301],optional:true},
  {name:"offline-gameplay",file:"offline-gameplay",ports:[3122,5293],external:true,full:true,optional:true},
  {name:"offline-invited",file:"offline-invited",ports:[3124,5295],external:true,optional:true},
  {name:"clean-player",file:"clean-player",flag:"KINDRED_CLEAN_PLAYER_ACCEPT",ports:[3126,5297],optional:true},

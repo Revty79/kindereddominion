@@ -178,12 +178,9 @@ test("A and B: visually author, persist, build a deck, execute, inspect and repe
   ).toBeVisible();
   await page
     .getByRole("button", { name: "Execute scenario", exact: true })
-    .click();
+    .click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click();
   await chooseHand(page, "Owner Sentinel");
   await page.getByRole("button", { name: "Sandbox A1:", exact: false }).click();
-  await page
-    .getByRole("button", { name: "Execute placement at A1", exact: true })
-    .click();
   const result = await page.locator(".sandbox-board").innerText();
   await expect(page.locator(".sandbox-board")).toContainText("3 power");
   await expect(
@@ -201,9 +198,6 @@ test("A and B: visually author, persist, build a deck, execute, inspect and repe
     .click();
   await chooseHand(page, "Owner Sentinel");
   await page.getByRole("button", { name: "Sandbox A1:", exact: false }).click();
-  await page
-    .getByRole("button", { name: "Execute placement at A1", exact: true })
-    .click();
   expect(await page.locator(".sandbox-board").innerText()).toBe(result);
   await page
     .getByRole("button", { name: "Save sandbox replay", exact: true })
@@ -245,13 +239,10 @@ test("C: exact and classification evolution plus replacement sacrifice use the r
     await add(page, incoming);
     await page
       .getByRole("button", { name: "Execute scenario", exact: true })
-      .click();
+      .click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click();
     await chooseHand(page, name);
     await page
       .getByRole("button", { name: "Sandbox A1:", exact: false })
-      .click();
-    await page
-      .getByRole("button", { name: "Execute placement at A1", exact: true })
       .click();
     await expect(page.locator(".sandbox-board")).toContainText(name);
     if (incoming === "crypt-harvester")

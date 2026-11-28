@@ -15,7 +15,7 @@ export function useCardPlacement(options:Options){
   const point=useRef<Point>({x:0,y:0}),raf=useRef(0),timer=useRef<ReturnType<typeof setTimeout>|null>(null);
   const gesture=useRef<{id:number;card:string;start:Point;moved:boolean;button:HTMLElement}|null>(null),suppressed=useRef<{card:string;until:number}|null>(null);
   const position=useRef({x:0,y:0,width:110});
-  const canSelect=()=>{const o=latest.current;return !o.blocked&&o.value.status==="playing"&&o.value.active===0;};
+  const canSelect=()=>{const o=latest.current;return !o.blocked&&o.value.status==="playing"&&o.value.active===(o.value.viewer??0);};
   const tile=(row:number,col:number)=>latest.current.root.current?.querySelector<HTMLElement>(`[data-placement-row="${row}"][data-placement-col="${col}"]`)??null;
   function updateTarget(next:Target|null){if(targetRef.current?.row===next?.row&&targetRef.current?.col===next?.col)return;targetRef.current=next;setTarget(next);}
   function show(next:Visual|null){visualRef.current=next;setVisual(next);}

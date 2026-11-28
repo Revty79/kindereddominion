@@ -1,3 +1,4 @@
+import {sameRules,validateRulesetVersion} from "../content/rulesets";
 import {
   act,
   assertInvariants,
@@ -37,6 +38,7 @@ export type MatchRecord = {
   actions: RecordedAction[];
   finalResult: GameState["result"];
   artwork?: Record<string, string>;
+  ruleset?: import("../content/types").RulesetVersion;
 };
 export function signature(state: GameState): string {
   const string = JSON.stringify(state);
@@ -123,6 +125,7 @@ export function replayAt(
   return { state, steps };
 }
 export function validateRecord(value: unknown): void {
+  if((value as MatchRecord)?.ruleset){const r=(value as MatchRecord).ruleset!;validateRulesetVersion(r);if(!sameRules(r.config,(value as MatchRecord).config))throw Error("Replay differs from its pinned ruleset revision.");}
   const record = value as MatchRecord;
   if (
     !record ||

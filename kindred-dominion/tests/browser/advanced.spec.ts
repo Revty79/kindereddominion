@@ -269,12 +269,9 @@ test("owner authors all eight advanced card families, tests real power changes, 
     .click();
   await page
     .getByRole("button", { name: "Execute scenario", exact: true })
-    .click();
+    .click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click();
   await hand(page, "Owner Replacement");
   await page.getByRole("button", { name: "Sandbox A1:", exact: false }).click();
-  await page
-    .getByRole("button", { name: "Execute placement at A1", exact: true })
-    .click();
   await page
     .getByLabel("Inspect effective-power instance", { exact: true })
     .selectOption("c2");
@@ -454,7 +451,7 @@ test("laboratory scenarios expose aura loss, conditional protection, thresholds,
       .selectOption(`lab-v1.3a-${id}`);
     await page
       .getByRole("button", { name: "Execute scenario", exact: true })
-      .click();
+      .click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click();
     const option = page
       .getByLabel("Sandbox active hand card", { exact: true })
       .locator("option")
@@ -471,7 +468,6 @@ test("laboratory scenarios expose aura loss, conditional protection, thresholds,
             ? "Sandbox C1:"
             : "Sandbox A1:";
     await page.getByRole("button", { name: destination, exact: false }).click();
-    await page.getByRole("button", { name: /^Execute placement at / }).click();
     await expect(
       page.getByRole("heading", { name: "Ability resolution inspector" }),
     ).toBeVisible();

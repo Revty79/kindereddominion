@@ -39,6 +39,27 @@ export type Ruleset = {
   config: GameConfig;
   completion: "twoPasses";
 };
+export type RulesetVersion = {
+  id: string;
+  revision: number;
+  name: string;
+  config: GameConfig;
+  completion: "twoPasses";
+  publishedAt: string;
+  contentVersion: string;
+  classification: "private-testing";
+};
+export type ScenarioLaboratory = {
+  classification: "artificial" | "production-representative";
+  opponent: "manual" | "computer";
+  seed: number;
+  decks?: [string[], string[]];
+  ruleset?: RulesetVersion;
+  contentRevision: {id:string;createdAt:string;engineVersion:string;workspaceRevision?:number};
+  intendedAction?: import("../engine/types").Action;
+  expected?: {stateSignature?:string;totals?:[number,number];phase?:GameState["phase"]};
+  reference: string;
+};
 export type ContentPack = {
   schema: 1 | 2;
   engineVersion: string;
@@ -60,6 +81,7 @@ export type Scenario = {
   content: ContentPack;
   state: GameState;
   savedAt: string;
+  laboratory?: ScenarioLaboratory;
 };
 export type Workspace = {
   schema: 1;
@@ -70,6 +92,7 @@ export type Workspace = {
   scenarios: Scenario[];
   replays: MatchRecord[];
   reports: SimulationReport[];
+  rulesetVersions?: RulesetVersion[];
 };
 export type Issue = {
   severity: "error" | "warning" | "info";

@@ -1,3 +1,4 @@
+import {preserveRulesetVersions} from "./rulesets";
 import { initialWorkspace } from "./baseline";
 import type { Workspace } from "./types";
 const DB = "kindred-dominion-studio";
@@ -56,7 +57,7 @@ export async function persistWorkspace(
           return;
         }
         if (current.result) store.put(current.result, "previous");
-        store.put(structuredClone(workspace), "current");
+        try{store.put(structuredClone(preserveRulesetVersions(current.result??null,workspace)), "current");}catch{conflict=true;tx.abort();}
       };
       tx.oncomplete = () => resolve();
       tx.onerror = () =>

@@ -1,9 +1,10 @@
 import {useEffect,useLayoutEffect,useMemo,useRef,useState} from "react";
-import {api} from "../account/api";
+import {useBattleConnection} from "./BattleConnection";
 import {expandRecentMove,type RecentMoves} from "../ui/recent-moves";
 import type {MotionProfile} from "./presentation-preferences";
 import {RESOLUTION_TIMING} from "./resolution-queue";
 export function useLastMove(value:any,profile:MotionProfile){
+  const {request:api}=useBattleConnection();
   const [active,setActive]=useState(false),[history,setHistory]=useState<RecentMoves|null>(null),[selected,setSelected]=useState(""),[index,setIndex]=useState(0),[playing,setPlaying]=useState(false),[loading,setLoading]=useState(false),[message,setMessage]=useState("");
   const latest=useRef(value),cache=useRef<RecentMoves|null>(value.recentPresentation??null),abort=useRef<AbortController|null>(null),ticket=useRef(0),started=useRef(0),prior=useRef({id:value.id,revision:value.revision}),mounted=useRef(true),activeRef=useRef(false);latest.current=value;activeRef.current=active;
   const move=history?.moves.find(m=>m.id===selected)??null,events=useMemo(()=>{try{return move?expandRecentMove(move):[];}catch{return [];}},[move]);

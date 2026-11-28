@@ -1,3 +1,4 @@
+import {preserveRulesetVersions} from "../content/rulesets";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import App from "./App";
 import { initialWorkspace } from "../content/baseline";
@@ -71,7 +72,7 @@ export default function GameHost() {
       .catch(() => {})
       .then(async () => {
         const previous = current.current;
-        const next = { ...fn(previous), revision: previous.revision + 1 };
+        const next = preserveRulesetVersions(previous,{ ...fn(previous), revision: previous.revision + 1 });
         await persistWorkspace(next, previous.revision);
         current.current = next;
         setWorkspace(next);
@@ -82,10 +83,10 @@ export default function GameHost() {
   }
   async function recovery(value: Workspace) {
     validateWorkspace(value);
-    const next = {
+    const next = preserveRulesetVersions(current.current,{
       ...structuredClone(value),
       revision: current.current.revision + 1,
-    };
+    });
     await persistWorkspace(next);
     current.current = next;
     setWorkspace(next);

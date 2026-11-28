@@ -5,19 +5,19 @@ import CollectibleCard from "../ui/cards/CollectibleCard";
 import {RESOLUTION_TIMING} from "./resolution-queue";
 import "./resolution.css";
 
-export function ResolutionFlight({event,root,library,art,onFailure,duration=RESOLUTION_TIMING.move,includePlayer=false}:{event:ResolutionEvent|null;root:RefObject<HTMLElement|null>;library:CardLibrary;art:Record<string,any>;onFailure:()=>void;duration?:number;includePlayer?:boolean}){
+export function ResolutionFlight({event,root,library,art,onFailure,duration=RESOLUTION_TIMING.move,includePlayer=false,viewer=0}:{event:ResolutionEvent|null;root:RefObject<HTMLElement|null>;library:CardLibrary;art:Record<string,any>;onFailure:()=>void;duration?:number;includePlayer?:boolean;viewer?:number}){
   const element=useRef<HTMLDivElement>(null);
   useLayoutEffect(()=>{
-    if(event?.kind!=="move"||event.actor!==1&&!includePlayer||!event.target||!element.current)return;
-    const origin=root.current?.querySelector<HTMLElement>(event.actor===1?"[data-opponent-origin]":"[data-player-origin]")?.getBoundingClientRect(),destination=root.current?.querySelector<HTMLElement>(`[data-placement-row="${event.target.row}"][data-placement-col="${event.target.col}"] .player-tile-card-space`)?.getBoundingClientRect();
+    if(event?.kind!=="move"||event.actor===viewer&&!includePlayer||!event.target||!element.current)return;
+    const origin=root.current?.querySelector<HTMLElement>(event.actor!==viewer?"[data-opponent-origin]":"[data-player-origin]")?.getBoundingClientRect(),destination=root.current?.querySelector<HTMLElement>(`[data-placement-row="${event.target.row}"][data-placement-col="${event.target.col}"] .player-tile-card-space`)?.getBoundingClientRect();
     if(!origin||!destination){onFailure();return;}
     const width=Math.min(120,destination.width,destination.height*.75),height=width*4/3,x=destination.left+(destination.width-width)/2,y=destination.top+(destination.height-height)/2;
     element.current.style.cssText=`left:${x}px;top:${y}px;width:${width}px;`;
     let animation:Animation|undefined;
     try{animation=element.current.animate([{transform:`translate(${origin.left+origin.width/2-x-width/2}px,${origin.top+origin.height/2-y-height/2}px) scale(.65)`,opacity:.6},{transform:"translate(0,0) scale(1)",opacity:1}],{duration,easing:"cubic-bezier(.2,.7,.2,1)",fill:"both"});}catch{onFailure();}
     return()=>animation?.cancel();
-  },[event?.id,duration,includePlayer]);
-  if(event?.kind!=="move"||event.actor!==1&&!includePlayer||!event.card||!library[event.card.definitionId])return null;
+  },[event?.id,duration,includePlayer,viewer]);
+  if(event?.kind!=="move"||event.actor===viewer&&!includePlayer||!event.card||!library[event.card.definitionId])return null;
   return <div ref={element} className="resolution-flight" data-resolution-flight={event.card.definitionId} aria-hidden="true"><CollectibleCard card={library[event.card.definitionId]} library={library} artwork={art[event.card.definitionId]} scale="battlefield" player={event.actor}/></div>;
 }
 

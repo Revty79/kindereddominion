@@ -78,26 +78,25 @@ test("prepared owner scenarios visibly explain Honeybee aura loss, sacrifice gif
   test.setTimeout(120000);
   await page.goto("/practice.html"); await page.getByRole("button", { name: "Developer Studio", exact: true }).click(); await nav(page, "Battlefield Sandbox");
   const scenarios = page.getByLabel("Load saved scenario", { exact: true });
-  await scenarios.selectOption("owner-demo-honeybee"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click();
+  await scenarios.selectOption("owner-demo-honeybee"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click();
   const hand = page.getByLabel("Sandbox active hand card", { exact: true });
   const play = async (id: string, coordinate: string) => {
     const option = hand.locator("option").filter({ hasText: pack.cards.find(c => c.id === id)!.name }).first();
     await hand.selectOption((await option.getAttribute("value"))!);
     await page.getByRole("button", { name: new RegExp(`^Sandbox ${coordinate}:`) }).click();
-    await page.getByRole("button", { name: `Execute placement at ${coordinate}`, exact: true }).click();
   };
   await play("n005", "A1");
   await expect(page.getByRole("button", { name: /^Sandbox B1:/ })).toContainText("3 power");
   await play("a013", "A2"); await expect(page.getByRole("button", { name: /^Sandbox B1:/ })).toContainText("2 power");
   await page.getByRole("button", { name: "Edit construction", exact: true }).click();
-  await scenarios.selectOption("owner-demo-bone-gift"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await play("u024", "B1");
+  await scenarios.selectOption("owner-demo-bone-gift"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click(); await play("u024", "B1");
   await expect(page.getByRole("button", { name: /^Sandbox B1:/ })).toContainText("6 power"); await expect(page.getByRole("button", { name: /^Sandbox A1:/ })).toContainText("3 power");
   await page.getByRole("button", { name: "Edit construction", exact: true }).click();
-  await scenarios.selectOption("owner-demo-score"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await play("m025", "B1");
+  await scenarios.selectOption("owner-demo-score"); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click(); await play("m025", "B1");
   await page.locator('[data-testid="score-breakdown"] summary').click(); await expect(page.locator('[data-testid="score-breakdown"]')).toContainText("3 / 0");
   await page.screenshot({ path: ".local/v1.3bc/owner-score-bonuses.png", fullPage: true });
   for (const supported of [false, true]) {
-    await page.getByRole("button", { name: "Edit construction", exact: true }).click(); await scenarios.selectOption(`owner-demo-phoenix-${supported ? "supported" : "blocked"}`); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await play("m026", "A2");
+    await page.getByRole("button", { name: "Edit construction", exact: true }).click(); await scenarios.selectOption(`owner-demo-phoenix-${supported ? "supported" : "blocked"}`); await page.getByRole("button", { name: "Execute scenario", exact: true }).click(); await page.getByRole("button",{name:"Return to laboratory controls",exact:true}).click(); await play("m026", "A2");
     await expect(page.getByRole("button", { name: /^Sandbox B1:/ })).toContainText(supported ? "Phoenix" : "Empty");
   }
 });

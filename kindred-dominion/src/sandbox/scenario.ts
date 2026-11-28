@@ -1,3 +1,4 @@
+import {validateLaboratory} from "./laboratory-validation";
 import {
   assertInvariants,
   cellAt,
@@ -151,6 +152,7 @@ export function validateScenario(scenario: Scenario): Issue[] {
     lib = libraryOf(scenario.content);
   try {
     validateConfig(s.config);
+    validateLaboratory(scenario);
     assertInvariants(s, lib);
     if (
       s.board.length !==

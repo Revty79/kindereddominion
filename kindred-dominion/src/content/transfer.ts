@@ -1,3 +1,4 @@
+import {validateRulesetVersion} from "./rulesets";
 import { baselineContent } from "./baseline";
 import { ENGINE_VERSION } from "./types";
 import type { ContentPack, EntityType, Transfer, Workspace } from "./types";
@@ -10,7 +11,7 @@ import { libraryOf } from "./validation";
 import { engineVersionFor, SUPPORTED_ENGINES } from "../engine/versions";
 const plain = (value: unknown): value is Record<string, any> =>
   !!value && typeof value === "object" && !Array.isArray(value);
-function safeTree(value: unknown, depth = 0): void {
+export function safeTree(value: unknown, depth = 0): void {
   if (depth > 70)
     throw new Error("Import nesting exceeds the supported limit.");
   if (value && typeof value === "object")
@@ -63,6 +64,7 @@ export function validateWorkspace(value: unknown): void {
     throw new Error("The immutable original V1.1 version must remain intact.");
   if (!ws.versions.some((v) => v.id === ws.activeVersion))
     throw new Error("Active version is missing.");
+  if(ws.rulesetVersions!==undefined){if(!Array.isArray(ws.rulesetVersions)||ws.rulesetVersions.length>1000)throw Error("Invalid ruleset publication history.");const keys=new Set<string>();for(const v of ws.rulesetVersions){validateRulesetVersion(v);const key=v.id+":"+v.revision;if(keys.has(key))throw Error("Duplicate ruleset publication revision.");keys.add(key);}}
   for (const scenario of ws.scenarios) {
     const errors = validateScenario(scenario).filter(
       (i) => i.severity === "error",

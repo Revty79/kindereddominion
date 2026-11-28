@@ -1,9 +1,10 @@
 import {useEffect,useRef,useState} from "react";
-import {api} from "../account/api";
+import {useBattleConnection} from "./BattleConnection";
 import type {PlacementDestination,TacticalPreview} from "../ui/tactical-preview";
 type Preview=TacticalPreview & {matchId:string;revision:number};
 type Options={matchId:string;revision:number;card:string;destinations:PlacementDestination[]};
 export function useTacticalPreview(id:string,revision:number,card:string,target:{row:number;col:number}|null,enabled:boolean){
+  const {request:api}=useBattleConnection();
   const [options,setOptions]=useState<Options|null>(null),[result,setResult]=useState<{key:string;preview:Preview}|null>(null),[failure,setFailure]=useState<{key:string;message:string}|null>(null),[loading,setLoading]=useState("");
   const cache=useRef(new Map<string,Preview>()),optionCache=useRef(new Map<string,Options>()),generation=useRef(0);
   const base=`${id}:${revision}:${card}`,key=target?`${base}:${target.row}:${target.col}`:"",current=useRef("");current.current=enabled?key:"";

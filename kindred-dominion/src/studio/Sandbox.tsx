@@ -1,4 +1,8 @@
-import { useEffect, useState } from "react";
+import LaboratoryBattle from "./LaboratoryBattle";
+import {LaboratorySession,laboratoryMetadata,representativeScenario,regressionResult,exportRegression,importRegression} from "../sandbox/laboratory";
+import {matchingRuleset} from "../content/rulesets";
+import {download} from "./components";
+import { useEffect, useState, useRef } from "react";
 import type { ContentPack, Scenario, Workspace } from "../content/types";
 import type {
   Action,
@@ -17,7 +21,7 @@ import {
 import { cellAt, coordinate, legalPlays } from "../engine/game";
 import { chooseComputerAction } from "../engine/ai";
 import { libraryOf } from "../content/validation";
-import { appendRecord, newRecord, traceAction } from "../replay/record";
+import { traceAction, signature } from "../replay/record";
 import type { MatchRecord } from "../replay/record";
 import { BoardView, Field, Issues, NumberField } from "./components";
 import Diagnostics from "./Diagnostics";
@@ -33,6 +37,8 @@ export default function Sandbox({
   onSave: (scenario: Scenario) => Promise<void>;
   onReplay: (record: MatchRecord) => Promise<void>;
 }) {
+  const session=useRef<LaboratorySession|null>(null),[battleOpen,setBattleOpen]=useState(false),[saving,setSaving]=useState(false);
+  const [seed,setSeed]=useState(1),[firstDeck,setFirstDeck]=useState(workspace.working.decks[0]?.id??""),[secondDeck,setSecondDeck]=useState(workspace.working.decks[1]?.id??workspace.working.decks[0]?.id??""),[startingPlayer,setStartingPlayer]=useState<Player>(0),[regressionAction,setRegressionAction]=useState(""),[expectedText,setExpectedText]=useState("{}");
   const [scenario, setScenario] = useState(() =>
     emptyScenario(workspace.working, workspace.working.rulesets[0].config),
   );
@@ -53,7 +59,6 @@ export default function Sandbox({
     [instance, setInstance] = useState(""),
     [form, setForm] = useState(workspace.working.cards[0].id),
     [hand, setHand] = useState(""),
-    [pending, setPending] = useState<Position | null>(null),
     [message, setMessage] = useState(""),
     [auto, setAuto] = useState(false),
     [autoCount, setAutoCount] = useState(0);
@@ -71,10 +76,11 @@ export default function Sandbox({
     (cell?.creature ? state.cards[cell.creature] : null);
   const legal = running ? legalPlays(state, lib) : [];
   const issues = validateScenario({ ...scenario, state });
+  function adoptScenario(value:Scenario){setScenario(structuredClone(value));setSeed(value.state.seed);setRegressionAction(value.laboratory?.intendedAction?JSON.stringify(value.laboratory.intendedAction):"");setExpectedText(JSON.stringify(value.laboratory?.expected??{}));}
   function edit(fn: (s: GameState) => GameState) {
     if (running) return;
     try {
-      setScenario((s) => ({ ...s, state: fn(s.state) }));
+      setScenario((s) => ({ ...s, state: fn(s.state),laboratory:{...(s.laboratory??laboratoryMetadata(s.content,s.state.seed,workspace.revision)),classification:"artificial"} }));
       setMessage(
         "Scenario construction changed. Save explicitly to preserve this revision.",
       );
@@ -90,6 +96,7 @@ export default function Sandbox({
     });
   }
   async function save() {
+    if(saving)return;setSaving(true);setMessage("Saving scenario...");
     try {
       if (issues.some((i) => i.severity === "error"))
         throw new Error("Fix structural validation errors before saving.");
@@ -97,26 +104,25 @@ export default function Sandbox({
         ...structuredClone(scenario),
         savedAt: new Date().toISOString(),
       };
+      if(next.laboratory?.intendedAction)next.laboratory.expected=JSON.parse(expectedText);
+      const invalid=validateScenario(next).filter(i=>i.severity==="error");if(invalid.length)throw Error(invalid.map(i=>i.message).join("; "));
       await onSave(next);
-      setSaved(next);
+      setSaved(next);setScenario(current=>current===scenario?next:current);
       setMessage(
         "Scenario saved. Execution will preserve this construction snapshot.",
       );
     } catch (e) {
       setMessage(String(e));
-    }
+    }finally{setSaving(false);}
   }
   function execute(action: Action) {
     if (!running || intermediate) return;
     try {
-      const traced = traceAction(state, action, lib);
-      setHistory((h) => [...h, traced.state]);
-      setSteps(traced.steps);
-      setIntermediate(null);
+      if(!session.current)throw Error("Start execution first.");
+      session.current.execute(action);
+      syncSession();
       setHand("");
-      setPending(null);
-      if (record) setRecord(appendRecord(record, action, traced.state));
-      if (traced.state.phase !== "playing") setAuto(false);
+      if(session.current.state.phase!=="playing")setAuto(false);
     } catch (e) {
       setMessage(String(e));
       setAuto(false);
@@ -138,16 +144,8 @@ export default function Sandbox({
       setMessage("Correct scenario validation errors first.");
       return;
     }
-    setHistory([structuredClone(scenario.state)]);
-    setRecord(
-      newRecord(
-        scenario.state,
-        lib,
-        [[], []],
-        content.id,
-        `Sandbox: ${scenario.name}`,
-      ),
-    );
+    session.current=new LaboratorySession(scenario);
+    syncSession();setBattleOpen(true);
     setRunning(true);
     setIntermediate(null);
     setSteps([]);
@@ -156,10 +154,10 @@ export default function Sandbox({
     );
   }
   async function saveReplay() {
-    if (!record) return;
-    await onReplay({ ...record, artwork: recordArtworkMap(content) });
-    setMessage("Sandbox action record saved in Replay & Diagnostics.");
+    if(!record||saving)return;setSaving(true);setMessage("Saving sandbox replay...");
+    try{await onReplay({...record,artwork:recordArtworkMap(content)});setMessage("Sandbox action record saved in Replay & Diagnostics.");}catch(e){setMessage(String(e));}finally{setSaving(false);}
   }
+  function syncSession(){const current=session.current;if(!current)return;setHistory([...current.states]);setRecord(current.record);setSteps(current.steps);setIntermediate(null);}
   const available = workspace.working.rulesets;
   const selectedContent =
     version === "working"
@@ -192,16 +190,7 @@ export default function Sandbox({
               </button>
               <button
                 onClick={() => {
-                  setHistory([structuredClone(scenario.state)]);
-                  setRecord(
-                    newRecord(
-                      scenario.state,
-                      lib,
-                      [[], []],
-                      content.id,
-                      `Sandbox: ${scenario.name}`,
-                    ),
-                  );
+                  session.current=new LaboratorySession(scenario);syncSession();
                   setSteps([]);
                   setIntermediate(null);
                   setAuto(false);
@@ -238,7 +227,7 @@ export default function Sandbox({
                 (s) => s.id === e.target.value,
               );
               if (s) {
-                setScenario(structuredClone(s));
+                adoptScenario(s);setRule(s.laboratory?.ruleset?.id??rule);
                 setSaved(s);
                 setCard(s.content.cards[0].id);
                 setInstance("");
@@ -287,8 +276,8 @@ export default function Sandbox({
           <button
             onClick={() => {
               const r = available.find((r) => r.id === rule)!;
-              const next = emptyScenario(selectedContent, r.config);
-              setScenario(next);
+              const next = emptyScenario(selectedContent, r.config);next.state.seed=seed;next.state.rng=seed||1;next.laboratory={...laboratoryMetadata(selectedContent,seed,workspace.revision),ruleset:matchingRuleset(workspace.rulesetVersions,r.id,r.config)};
+              adoptScenario(next);
               setSaved(null);
               setSelected({ row: 0, col: 0 });
               setInstance("");
@@ -298,9 +287,10 @@ export default function Sandbox({
           </button>
           <button
             onClick={() =>
-              setScenario({
+              adoptScenario({
                 ...scenario,
                 content: structuredClone(selectedContent),
+                laboratory:{...laboratoryMetadata(selectedContent,scenario.state.seed,workspace.revision),ruleset:matchingRuleset(workspace.rulesetVersions,rule,available.find(r=>r.id===rule)!.config)},
                 state: {
                   ...scenario.state,
                   config: structuredClone(
@@ -312,12 +302,12 @@ export default function Sandbox({
           >
             Apply selected definitions & rules (validate dimensions)
           </button>
-          <button className="primary" onClick={save}>
+          <button className="primary" disabled={saving} onClick={save}>
             Save scenario
           </button>
           <button
             disabled={!saved}
-            onClick={() => saved && setScenario(structuredClone(saved))}
+            onClick={() => saved && adoptScenario(saved)}
           >
             Restore saved construction
           </button>
@@ -335,6 +325,8 @@ export default function Sandbox({
           </button>
         </div>
       )}
+      {!running&&<section className="studio-subpanel"><h3>Battle Laboratory setup</h3><p className="studio-lab-boundary">All Studio execution is private development. Artificial fixtures can bypass construction prerequisites; production-representative starts require valid decks and a pinned private testing ruleset. Neither grants player assets or rewards.</p><div className="studio-grid three"><NumberField label="Scenario random seed" min={0} max={4294967295} value={seed} onChange={n=>{setSeed(n);setScenario({...scenario,state:{...scenario.state,seed:n,rng:n||1},laboratory:{...(scenario.laboratory??laboratoryMetadata(scenario.content,n,workspace.revision)),seed:n,classification:"artificial"}});}}/><Field label="Computer opponent configuration"><select value={scenario.laboratory?.opponent??"manual"} onChange={e=>setScenario({...scenario,laboratory:{...(scenario.laboratory??laboratoryMetadata(scenario.content,scenario.state.seed,workspace.revision)),opponent:e.target.value as "manual"|"computer"}})}><option value="manual">Manual control of both participants</option><option value="computer">Jade controlled here; Amber computer</option></select></Field><Field label="Starting participant"><select value={startingPlayer} onChange={e=>setStartingPlayer(Number(e.target.value) as Player)}><option value="0">Jade</option><option value="1">Amber</option></select></Field>{[[firstDeck,setFirstDeck,"Jade initial deck"],[secondDeck,setSecondDeck,"Amber initial deck"]].map(([id,setter,label])=><Field key={String(label)} label={String(label)}><select value={String(id)} onChange={e=>(setter as (v:string)=>void)(e.target.value)}>{selectedContent.decks.map(d=><option key={d.id} value={d.id}>{d.name} · {d.cards.length} cards</option>)}</select></Field>)}</div><button onClick={()=>{try{const r=available.find(r=>r.id===rule)!,v=matchingRuleset(workspace.rulesetVersions,r.id,r.config);if(!v)throw Error("Save and publish the selected ruleset as a private testing revision first.");const decks=[firstDeck,secondDeck].map(id=>selectedContent.decks.find(d=>d.id===id)?.cards);if(decks.some(d=>!d))throw Error("Choose two existing test decks.");const next=representativeScenario(selectedContent,v,decks as [string[],string[]],seed,startingPlayer);next.laboratory!.contentRevision.workspaceRevision=workspace.revision;adoptScenario(next);setSaved(null);setMessage("Representative initial state created through the unchanged match constructor and deck validator.");}catch(e){setMessage(String(e));}}}>Create validated battle from decks</button><p>Classification: <strong>{scenario.laboratory?.classification??"legacy artificial / unknown provenance"}</strong>. Ruleset: {scenario.laboratory?.ruleset?`${scenario.laboratory.ruleset.name} revision ${scenario.laboratory.ruleset.revision}`:"unpublished captured configuration"}. Content: {scenario.content.id} · {scenario.content.createdAt}. Source workspace revision: {scenario.laboratory?.contentRevision.workspaceRevision??"not recorded on this historical snapshot"}.</p><Field label="Investigation or defect reference"><input value={scenario.laboratory?.reference??""} onChange={e=>setScenario({...scenario,laboratory:{...(scenario.laboratory??laboratoryMetadata(scenario.content,scenario.state.seed,workspace.revision)),reference:e.target.value}})}/></Field></section>}
+      {!running&&<details className="studio-subpanel studio-lab-regression"><summary>Scenario regression library and automation export</summary><p>The initial state, definitions and actual ruleset snapshot travel together. Pick an intended legal action; expected assertions are optional. Generated signatures detect deterministic divergence, not security authenticity.</p><Field label="Regression intended action"><select value={regressionAction} onChange={e=>{setRegressionAction(e.target.value);setExpectedText("{}");const m=scenario.laboratory??laboratoryMetadata(scenario.content,scenario.state.seed,workspace.revision);setScenario({...scenario,laboratory:{...m,intendedAction:e.target.value?JSON.parse(e.target.value):undefined,expected:undefined}});}}><option value="">No intended action</option>{(state.phase==="playing"?[...legalPlays(state,lib),{type:"pass",player:state.active} as Action]:state.phase==="mulligan"?[{type:"mulligan",player:state.active,cards:[]} as Action]:[]).map(a=><option key={JSON.stringify(a)} value={JSON.stringify(a)}>{a.type==="play"?`${lib[state.cards[a.card].definitionId].name} at ${coordinate(a)}`:a.type}</option>)}</select></Field><Field label="Expected regression assertions (JSON)"><textarea value={expectedText} onChange={e=>setExpectedText(e.target.value)}/></Field><button onClick={()=>{try{const expected=JSON.parse(expectedText),next={...scenario,laboratory:{...(scenario.laboratory??laboratoryMetadata(scenario.content,scenario.state.seed,workspace.revision)),expected}};const result=regressionResult(next);setScenario(next);setMessage(`Regression ${result.passed?"passed":"FAILED"}: ${result.stateSignature}; score ${result.totals.join(" / ")}; ${result.phase}.`);}catch(e){setMessage(String(e));}}}>Validate and run regression</button><button disabled={!scenario.laboratory?.intendedAction} onClick={()=>{try{const result=regressionResult({...scenario,laboratory:{...scenario.laboratory!,expected:undefined}}),expected={stateSignature:result.stateSignature,totals:result.totals,phase:result.phase};setExpectedText(JSON.stringify(expected,null,2));setScenario({...scenario,laboratory:{...scenario.laboratory!,expected}});setMessage("Expected result captured explicitly from the real engine. Review before saving.");}catch(e){setMessage(String(e));}}}>Capture current expected result</button><button onClick={()=>{try{download(scenario.id+"-regression.json",exportRegression(scenario));}catch(e){setMessage(String(e));}}}>Export regression fixture</button><Field label="Import scenario regression fixture"><input type="file" accept=".json,application/json" onChange={e=>{const f=e.target.files?.[0];if(f&&f.size>16*1024*1024){setMessage("Regression package exceeds the private workspace size limit.");return;}if(f)void f.text().then(text=>{const next=importRegression(JSON.parse(text));setScenario({...next,id:"scenario-"+crypto.randomUUID(),name:next.name+" imported"});setSaved(null);setSeed(next.state.seed);setRegressionAction(next.laboratory?.intendedAction?JSON.stringify(next.laboratory.intendedAction):"");setExpectedText(JSON.stringify(next.laboratory?.expected??{}));setMessage("Regression fixture imported as a separate unsaved private construction.");}).catch(e=>setMessage(String(e)));}}/></Field></details>}
       <Field label="Scenario description">
         <textarea
           disabled={running}
@@ -361,7 +353,7 @@ export default function Sandbox({
             const action = legal.find(
               (a) => a.card === hand && a.row === p.row && a.col === p.col,
             );
-            if (action) setPending({ row: p.row, col: p.col });
+            if (action) execute({...action,type:"play",player:state.active});
             else
               setMessage(
                 "This is not a legal destination for the selected hand card.",
@@ -751,7 +743,7 @@ export default function Sandbox({
         </>
       ) : (
         <section className="studio-subpanel">
-          <h3>Real-engine action controls</h3>
+          <h3>Real-engine action controls</h3><button className="primary" disabled={!!intermediate||auto} onClick={()=>setBattleOpen(true)}>Open shared gameplay interface</button><p>Selection, click/tap/drop, previews, animations, Last Move, replay and display preferences use the player interface. Manual mode controls the active participant; computer mode plays Amber after your action. Developer zones and time travel remain separate from ordinary play.</p>
           <p>
             Active Player {state.active + 1} · turn {state.turn} · {state.phase}
             .{" "}
@@ -787,23 +779,14 @@ export default function Sandbox({
             <button
               disabled={history.length < 2 || auto}
               onClick={() => {
-                setHistory((h) => h.slice(0, -1));
-                setRecord((r) =>
-                  r
-                    ? {
-                        ...r,
-                        actions: r.actions.slice(0, -1),
-                        finalResult: null,
-                      }
-                    : r,
-                );
+                session.current?.undo();syncSession();
                 setSteps([]);
                 setIntermediate(null);
               }}
             >
               Undo committed action
             </button>
-            <button onClick={() => void saveReplay()}>
+            <button disabled={saving} onClick={() => void saveReplay()}>
               Save sandbox replay
             </button>
           </div>
@@ -817,7 +800,6 @@ export default function Sandbox({
               value={hand}
               onChange={(e) => {
                 setHand(e.target.value);
-                setPending(null);
               }}
             >
               <option value="">Choose a hand instance</option>
@@ -839,22 +821,8 @@ export default function Sandbox({
               . Click a destination on the field.
             </p>
           )}
-          {pending && hand && (
-            <button
-              className="primary"
-              disabled={!!intermediate}
-              onClick={() =>
-                execute({
-                  type: "play",
-                  player: state.active,
-                  card: hand,
-                  ...pending,
-                })
-              }
-            >
-              Execute placement at {coordinate(pending)}
-            </button>
-          )}
+          {hand&&<div className="studio-lab-actions" aria-label="Developer legal destinations">{legal.filter(a=>a.card===hand).map(a=><button disabled={!!intermediate||auto} key={coordinate(a)} onClick={()=>execute({...a,type:"play",player:state.active})}>Place at {coordinate(a)}</button>)}</div>}
+          <button disabled={!!intermediate||auto||!record?.actions.length} onClick={()=>{try{const current=session.current!,before=current.states.at(-2),action=current.record.actions.at(-1)?.action;if(!before||!action)throw Error("No preceding committed action is available.");const traced=traceAction(before,action,lib);if(signature(traced.state)!==signature(current.state))throw Error("Diagnostic replay diverged; the committed state is unchanged.");setSteps(traced.steps);setIntermediate(null);setMessage("Full original diagnostic capture replayed read-only; no action or account event was submitted.");}catch(e){setMessage(String(e));}}}>Capture full diagnostics for last action</button>
           <Diagnostics
             key={history.length}
             steps={steps}
@@ -904,6 +872,7 @@ export default function Sandbox({
         ))}
       </div>
       {!running && <Issues issues={issues} />}
+      {battleOpen&&session.current&&<LaboratoryBattle session={session.current} onChange={syncSession} onExit={()=>setBattleOpen(false)}/>}
     </section>
   );
 }

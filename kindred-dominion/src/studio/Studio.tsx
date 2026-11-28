@@ -1,3 +1,4 @@
+import {publishRuleset} from "../content/rulesets";
 import { useState } from "react";
 import type { CardDefinition } from "../engine/types";
 import type { CardMetadata, ContentPack, Workspace } from "../content/types";
@@ -32,8 +33,10 @@ export default function Studio({
   onChange,
   onRecovery,
   onExit,
+  storage="local",
 }: {
   workspace: Workspace;
+  storage?:"local"|"account";
   onChange: (fn: (w: Workspace) => Workspace) => Promise<void>;
   onRecovery: (w: Workspace) => Promise<void>;
   onExit: () => void;
@@ -50,7 +53,8 @@ export default function Studio({
     [deckId, setDeckId] = useState<string | undefined>();
   const content = workspace.working;
   const save = async (pack: ContentPack) => {
-    await onChange((w) => ({ ...w, working: pack }));
+    setBusy(true);
+    try{await onChange((w) => ({ ...w, working: pack }));}finally{setBusy(false);}
   };
   function edit(id: string) {
     setEditor({
@@ -115,7 +119,7 @@ export default function Studio({
           <h1>Developer Studio</h1>
         </div>
         <div>
-          <span>Local content revision {workspace.revision}</span>
+          <span>Workspace revision {workspace.revision}</span>
           <button disabled={busy} onClick={onExit}>
             Return to game
           </button>
@@ -145,7 +149,7 @@ export default function Studio({
                 ?.name
             }
             <br />
-            Simulation runs lock navigation until completion or cancellation.
+            Pending saves and simulations hold navigation until completion or cancellation.
           </p>
         </nav>
         <main className="studio-main">
@@ -206,8 +210,7 @@ export default function Studio({
                       Run test decks in Match Simulator and export results.
                     </li>
                     <li>
-                      Activate a valid saved testing version only when you want
-                      new ordinary matches to use it.
+                      Activate a saved testing version for browser-local development matches. Hosted player battles retain repository-published content.
                     </li>
                   </ol>
                   <button className="primary" onClick={create}>
@@ -240,10 +243,7 @@ export default function Studio({
               <section className="studio-subpanel">
                 <h3>Preservation and backups</h3>
                 <p>
-                  Original V1.1 content is an immutable saved version. Local
-                  artwork and content live in IndexedDB. Download a complete
-                  backup outside browser storage, especially before importing or
-                  restoring content.
+                  {storage==="account"?"This account's private drafts, original artwork, scenarios and versions are stored on the server. Browser-local data remains separate until explicitly imported. Download a complete private backup before import or recovery; official artwork still belongs in the repository.":"Original V1.1 content is an immutable saved version. Local artwork and content live in IndexedDB. Download a complete backup outside browser storage before importing or restoring content."}
                 </p>
                 <button
                   onClick={() => setSection("Content Versions and Backups")}
@@ -340,7 +340,7 @@ export default function Studio({
             />
           )}
           {section === "Tactical Ruleset Editor" && (
-            <Rules content={content} onSave={save} />
+            <Rules content={content} onSave={save} versions={workspace.rulesetVersions} onPublish={rule=>onChange(w=>publishRuleset(w,rule))}/>
           )}
           {section === "Match Simulator" && (
             <Simulator

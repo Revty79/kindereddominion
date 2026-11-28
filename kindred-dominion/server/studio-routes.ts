@@ -1,3 +1,4 @@
+import {preserveRulesetVersions} from "../src/content/rulesets";
 import {z} from "zod";
 import type {FastifyInstance} from "fastify";
 import type {Workspace} from "../src/content/types";
@@ -14,6 +15,7 @@ export function studioRoutes(app:FastifyInstance,pool:DB,auth:Authentication){
     await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[id]);const previous=await current(c,id,true);
     if(previous.revision!==expected)reject(409,"stale_workspace","Private Studio changed in another session. Reload or export your draft before retrying.");
     if(previous.workspace)await c.query("INSERT INTO kd.studio_workspace_history(player_id,revision,workspace) VALUES($1,$2,$3) ON CONFLICT DO NOTHING",[id,previous.revision,previous.workspace]);
+    try{workspace=preserveRulesetVersions(previous.workspace,workspace);}catch{reject(409,"immutable_ruleset","Published tactical ruleset revisions cannot be rewritten. Create a new revision.");}
     const revision=previous.revision+1;
     await c.query("INSERT INTO kd.studio_workspace(player_id,revision,workspace) VALUES($1,$2,$3) ON CONFLICT(player_id) DO UPDATE SET revision=EXCLUDED.revision,workspace=EXCLUDED.workspace,updated_at=now()",[id,revision,{...workspace,revision}]);
     return {revision,workspace:{...workspace,revision}};
