@@ -2,6 +2,8 @@ import {z} from "zod";
 import {portable,units} from "./economy-rules";
 import {ownerContent} from "../src/content/owner";
 import type {CardDefinition} from "../src/engine/types";
+import {DEFAULT_STARTERS} from "./starter-rules";
+import {economyDigest} from "./economy-hash";
 
 export const rarities=["common","uncommon","rare","epic","legendary"] as const;
 export const raritySchema=z.enum(rarities);
@@ -14,10 +16,11 @@ export const pricesSchema=z.object({common:units,uncommon:units,rare:units,epic:
 const directSchema=z.object({enabled:z.boolean(),currency:portable,prices:pricesSchema,overrides:z.record(portable,units.refine(n=>n>0)).default({}),pool:poolSchema,quantity:z.number().int().min(1).max(100).default(1),tradeable:z.boolean().default(false)}).strict();
 export const productSchema=z.object({
  id:portable,name:z.string().min(1).max(100),description:z.string().max(600),category:z.enum(["boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]),
- type:z.enum(["booster","bundle","cosmetic"]),mode:z.enum(["first_copy","additional","cosmetic"]),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false),
+ type:z.enum(["booster","bundle","cosmetic"]),mode:z.enum(["first_copy","additional","completion","cosmetic"]),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false),
  artwork:assetRefSchema.optional(),featured:z.boolean().default(false),edition:z.enum(["standard","premium","collector","deluxe","expansion"]).default("standard"),currency:portable,price:units.refine(n=>n>0),pricing:z.enum(["fixed","per_card","sum_rarity"]).default("fixed"),discountBasisPoints:z.number().int().min(0).max(9500).default(0),
  pool:poolSchema.default(()=>poolSchema.parse({})),slots:z.array(slotSchema).max(50).default([]),cosmetics:z.array(portable).max(100).default([]),
- quantity:z.number().int().min(1).max(100).default(1),duplicates:z.enum(["none","allowed"]).default("none"),tradeable:z.boolean().default(false),
+ quantity:z.number().int().min(1).max(100).default(1),quantities:z.record(portable,z.number().int().min(1).max(100)).default({}),duplicates:z.enum(["none","allowed"]).default("none"),tradeable:z.boolean().default(false),
+ starterRecipe:z.object({version:portable,digest:z.string().regex(/^[a-f0-9]{64}$/),kindreds:z.array(z.enum(["Nature","Mythical","Arcane","Undead","Constructs"])).min(1).max(5)}).strict().optional(),
  startsAt:z.string().datetime().optional(),endsAt:z.string().datetime().optional(),limit:z.object({period:z.enum(["lifetime","daily","weekly"]),quantity:z.number().int().min(1).max(10000)}).strict().optional(),
 }).strict().superRefine((p,c)=>{
  if(p.type==="booster"&&(!p.slots.length||p.pricing!=="fixed"))c.addIssue({code:"custom",message:"Boosters require explicit slots and a fixed full-pack price."});
@@ -27,6 +30,10 @@ export const productSchema=z.object({
  if(p.type==="cosmetic"?(p.mode!=="cosmetic"||!p.cosmetics.length):(p.mode==="cosmetic"||!!p.cosmetics.length))c.addIssue({code:"custom",message:"Cosmetic products and gameplay products use separate asset grants."});
  if(p.type==="cosmetic"&&(p.quantity!==1||p.tradeable||p.duplicates!=="none"||new Set(p.cosmetics).size!==p.cosmetics.length))c.addIssue({code:"custom",message:"Cosmetic ownership is distinct, single, nontransferable and separate from playable quantities."});
  if(p.mode==="first_copy"&&(p.quantity!==1||p.duplicates!=="none"||p.tradeable))c.addIssue({code:"custom",message:"Ordinary first-copy products grant one bound copy per distinct identity."});
+ if(Object.keys(p.quantities).length&&(p.type!=="bundle"||p.mode==="first_copy"))c.addIssue({code:"custom",message:"Per-identity quantities require a guaranteed completion or additional-set bundle."});
+ if(p.mode==="completion"&&p.type!=="bundle")c.addIssue({code:"custom",message:"Target-quantity completion requires a guaranteed bundle."});
+ if(p.mode==="completion"&&p.currency==="gold")c.addIssue({code:"custom",message:"Guaranteed premium target completion uses premium currency; ordinary Gold acquisition retains lifetime first-copy protection."});
+ if(p.starterRecipe&&(p.type!=="bundle"||new Set(p.starterRecipe.kindreds).size!==p.starterRecipe.kindreds.length))c.addIssue({code:"custom",message:"A deluxe starter recipe requires a bundle and distinct Kindreds."});
  if(p.endsAt&&p.startsAt&&Date.parse(p.endsAt)<=Date.parse(p.startsAt))c.addIssue({code:"custom",message:"Availability must have an increasing UTC window."});
 });
 const collectionSchema=z.object({id:portable,name:z.string().min(1).max(100),description:z.string().max(600),classification:z.enum(["founding","expansion","premium","promotional","cosmetic"]),status:z.enum(["draft","published","archived"]),acquisition:z.enum(["free","premium","promotional","cosmetic","unavailable"]),cards:z.array(portable).max(10000),artwork:assetRefSchema.optional(),releaseAt:z.string().datetime().optional()}).strict();
@@ -66,6 +73,7 @@ const proposedNumbers:Record<string,{uncommon:number[];rare:number[];epic:number
 export function proposedRarities(){return Object.fromEntries(ownerContent().cards.map(card=>{const number=Number(card.collectible!.number.slice(1)),group=proposedNumbers[card.kindred],rarity=(Object.entries(group).find(([,numbers])=>numbers.includes(number))?.[0]??"common") as Rarity;return [card.id,rarity];}));}
 const weights=(common:number,uncommon:number,rare:number,epic:number,legendary:number)=>({common,uncommon,rare,epic,legendary});
 export const STANDARD_SLOTS:Slot[]=[weights(7500,2000,400,90,10),weights(7500,2000,400,90,10),weights(0,8000,1500,400,100),weights(0,0,8500,1200,300),weights(4500,3000,1700,600,200)].map((weights,i)=>slotSchema.parse({id:"slot-"+(i+1),weights,depleted:"available_pool"}));
+export const COLLECTOR_SLOTS:Slot[]=[weights(4000,3000,2000,800,200),weights(2000,3500,3000,1200,300),weights(0,5000,3200,1400,400),weights(0,0,6500,2500,1000),weights(1000,2000,4000,2200,800)].map((weights,i)=>slotSchema.parse({id:"slot-"+(i+1),weights,depleted:"available_pool"}));
 export const FIRST_PRICES={common:75,uncommon:150,rare:300,epic:600,legendary:1200};
 export const ADDITIONAL_PRICES={common:20,uncommon:40,rare:80,epic:160,legendary:320};
 export const DEFAULT_SHOP:ShopRules=(()=>{
@@ -76,6 +84,16 @@ export const DEFAULT_SHOP:ShopRules=(()=>{
  products.push(booster("founding-first","Founding first-copy booster",pool,"gold",250,"first_copy"),booster("founding-additional","Founding additional-copy booster",pool,"aether",199,"additional"));
  for(const collection of collections){const isAll=collection.id==="founding-all";if(!isAll){products.push(booster(collection.id+"-first",collection.name+" first-copy booster",{collections:[collection.id]},"gold",300,"first_copy"),booster(collection.id+"-additional",collection.name+" additional-copy booster",{collections:[collection.id]},"aether",249,"additional"));}
   products.push(product({id:collection.id+"-complete",name:collection.name+" completion",description:"One bound copy of every eligible missing first copy. The quote lists exactly what remains eligible; earlier lifetime acquisitions stay excluded.",category:"kindreds",type:"bundle",mode:"first_copy",currency:"gold",price:50,pricing:"per_card",discountBasisPoints:isAll?1500:0,pool:{collections:[collection.id]}}),product({id:collection.id+"-extra-set",name:collection.name+" additional complete set",description:"One additional playable copy of every listed card, including cards already owned.",category:"additional",type:"bundle",mode:"additional",currency:"aether",price:isAll?2999:999,pool:{collections:[collection.id]},tradeable:true}));
+ }
+ // New launch identities preserve all legacy product semantics and receipts.
+ // Configuration publication remains explicit; existing selections are never
+ // reseeded. Premium randomness is restricted to designated sandbox accounts.
+ for(const [id,name,price,slots,edition]of [["dominion-booster","Dominion Booster",200,STANDARD_SLOTS,"premium"],["collector-booster","Collector Booster",400,COLLECTOR_SLOTS,"collector"]] as const)products.push(product({id,name,description:"Five randomized founding copies; previously unowned cards and additional copies are possible. Sandbox currency testing only; commercially funded randomized sales remain disabled.",category:"boosters",type:"booster",mode:"additional",currency:"aether",price,pool,slots,edition,testOnly:true,duplicates:"allowed",tradeable:true}));
+ for(const collection of collections){const isAll=collection.id==="founding-all",kindreds=isAll?pack.collections.map(k=>k.id):pack.collections.filter(k=>"founding-"+k.id.toLowerCase()===collection.id).map(k=>k.id);
+  for(const deluxe of [false,true])for(const completion of [true,false]){
+   const extras=deluxe?Object.fromEntries(DEFAULT_STARTERS.definitions.filter(d=>kindreds.includes(d.kindred)).flatMap(d=>d.additional.map(r=>[r.cardId,1+r.quantity]))):{};
+   products.push(product({id:collection.id+(deluxe?"-deluxe":"-standard")+(completion?"-completion":"-additional"),name:collection.name+(deluxe?" Deluxe":" Standard")+(completion?" — Complete my collection":" — Additional set"),description:(deluxe?"Thirty identities plus ten selected additional copies per Kindred; provisional V1.6A recipe awaiting owner approval. ":"One copy of each of the thirty founding identities per Kindred. ")+(completion?"Buy only missing quantities toward the target; all owned starter copies count. Price is prorated against total target copies.":"Buy the full fixed set in addition to your existing copies. This is a collection, not a 15-card battle deck."),category:"kindreds",type:"bundle",mode:completion?"completion":"additional",status:deluxe?"draft":"published",enabled:!deluxe,currency:"aether",price:isAll?(deluxe?4000:3000):(deluxe?1300:1000),pool:{collections:[collection.id]},quantities:extras,edition:deluxe?"deluxe":"standard",tradeable:true,...(deluxe?{starterRecipe:{version:DEFAULT_STARTERS.recipeVersion,digest:economyDigest({upgradeId:DEFAULT_STARTERS.upgradeId,definitions:DEFAULT_STARTERS.definitions}),kindreds}}:{})}));
+  }
  }
  const format=(id:string,name:string,collections:string[],enabled=true,eventPool:string[]=[])=>({id,name,description:name+" deck eligibility; existing gameplay and ownership validation also apply.",enabled,collections,excludeCollections:[],kindreds:[],excludeCards:[],rarities:[],deckSize:15,maxCopies:3,cardLimits:{},standardArtwork:false,eventPool});
  return shopSchema.parse({label:"Provisional DEV founding shop",enabled:true,quoteSeconds:120,collections,rarities:proposedRarities(),products,cosmetics:[],formats:[format("founders","Founders",["founding-all"]),format("standard","Standard",["founding-all"]),format("unlimited","Unlimited",[]),format("draft","Draft event pool",[],false),format("special","Special event",[],false)],defaultFormat:"founders",directFirst:{enabled:true,currency:"gold",prices:FIRST_PRICES,pool},directAdditional:{enabled:true,currency:"aether",prices:ADDITIONAL_PRICES,pool,tradeable:true},purchasedHoldHours:168});

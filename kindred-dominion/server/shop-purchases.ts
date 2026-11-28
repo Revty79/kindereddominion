@@ -13,13 +13,16 @@ import {drawPack,packPlan} from "./shop-draw";
 import {shopState,offer,permittedPool,type ShopState} from "./shop-catalog";
 import {registerRewardEntitlement,type RewardEntitlement,type EntitlementContext} from "./reward-entitlements";
 import {reject} from "./errors";
+import {bundleQuantities} from "./shop-quantities";
+import {checkRandomizedFunding,commerciallyFunded} from "./shop-funding";
 
 type Fulfillment={purchaseId:string;source:"wallet"|"reward"|"commercial"|"sandbox";sourceReference?:string;actorId?:string;rewardId?:string;funding?:{lot_id:string;origin:string;quantity:string;source_reference:string|null}[];cardOrigin?:Provenance["origin"];allowEmpty?:boolean};
 export async function fulfillShopAssets(c:Client,playerId:string,state:ShopState,product:Product,eligible:ShopState["cards"],context:Fulfillment){
  const sandbox=!!state.account.sandbox,testFunding=context.funding?.some(lot=>["administrator","sandbox"].includes(lot.origin))??false;
  if(product.testOnly&&!sandbox)reject(403,"sandbox_account_required","Testing artwork and products require a permanently designated sandbox account.");
- const originalQuantities=new Map(state.quantities),observed=new Set(state.lifetime),now=new Date((await c.query("SELECT now() AS value")).rows[0].value),purchasedFunds=context.funding?.some(lot=>lot.origin==="purchased")??false;
- const origin:Provenance["origin"]=sandbox?"sandbox":testFunding?"administrator":context.cardOrigin??(product.mode==="first_copy"?"first_copy":"purchased"),tradeable=product.mode==="additional"&&product.tradeable&&!sandbox&&!testFunding&&origin!=="administrator";
+ await checkRandomizedFunding(c,product,context.funding?.map(lot=>lot.lot_id)??[],sandbox,context.source==="commercial");
+ const originalQuantities=new Map(state.quantities),observed=new Set(state.lifetime),now=new Date((await c.query("SELECT now() AS value")).rows[0].value),purchasedFunds=await commerciallyFunded(c,context.funding?.map(lot=>lot.lot_id)??[]);
+ const origin:Provenance["origin"]=sandbox?"sandbox":testFunding?"administrator":context.cardOrigin??(product.mode==="first_copy"?"first_copy":"purchased"),tradeable=["additional","completion"].includes(product.mode)&&product.tradeable&&!sandbox&&!testFunding&&origin!=="administrator";
  const provenance:Provenance={origin,tradeable,sandbox,configVersion:state.id,sourceReference:context.purchaseId,...(tradeable&&purchasedFunds&&state.rules.purchasedHoldHours?{holdUntil:new Date(now.getTime()+state.rules.purchasedHoldHours*3600000).toISOString()}: {})};
  let slots:ReturnType<typeof drawPack>=[],items:{cardId:string;quantity:number;newCard:boolean;rarity:string;previousQuantity:number;currentQuantity:number}[]=[],acquisition:any=null;
  const cosmetics:string[]=[],packIds:string[]=[];
@@ -28,7 +31,7 @@ export async function fulfillShopAssets(c:Client,playerId:string,state:ShopState
   if(plan.feasible)slots=drawPack(product,eligible,state.rules,observed);
   const totals=new Map<string,number>();for(const slot of slots)totals.set(slot.cardId,(totals.get(slot.cardId)??0)+slot.quantity);
   items=[...totals].map(([cardId,quantity])=>({cardId,quantity,newCard:!observed.has(cardId),rarity:state.rules.rarities[cardId],previousQuantity:originalQuantities.get(cardId)??0,currentQuantity:(originalQuantities.get(cardId)??0)+quantity}));
- }else if(product.type==="bundle")items=eligible.map(card=>({cardId:card.id,quantity:product.quantity,newCard:!observed.has(card.id),rarity:state.rules.rarities[card.id],previousQuantity:originalQuantities.get(card.id)??0,currentQuantity:(originalQuantities.get(card.id)??0)+product.quantity}));
+ }else if(product.type==="bundle"){const plan=bundleQuantities(product,eligible.map(card=>card.id),originalQuantities);items=eligible.filter(card=>plan.grants[card.id]).map(card=>({cardId:card.id,quantity:plan.grants[card.id],newCard:!observed.has(card.id),rarity:state.rules.rarities[card.id],previousQuantity:originalQuantities.get(card.id)??0,currentQuantity:(originalQuantities.get(card.id)??0)+plan.grants[card.id]}));}
  if(product.type!=="cosmetic"){
   if(!items.length&&!context.allowEmpty)reject(409,"empty_acquisition","No eligible playable cards remain; no currency was charged.");
   if(items.length){const changes=items.map(item=>{const card=state.pack.cards.find(card=>card.id===item.cardId);if(!card?.collectible)reject(409,"card_unavailable","A permanent card identity is unavailable in the original published snapshot.");return {editionId:`${card.collectible.gameplayId}:${card.collectible.edition}`,quantity:item.quantity};});acquisition=await inventoryTransaction(c,playerId,"shop:"+context.purchaseId,"shop:"+product.id,changes,context.actorId??null,provenance);}

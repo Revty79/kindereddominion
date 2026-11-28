@@ -1,0 +1,111 @@
+{
+  "milestone": "V1.6H.3-4",
+  "baseline": "393647b3263c747e219feb78836035bf3cba9a7b",
+  "typechecks": [
+    "application",
+    "backend",
+    "acceptance"
+  ],
+  "unit": {
+    "files": 35,
+    "passed": 1122
+  },
+  "postgres": {
+    "version": 180000,
+    "fullFiles": 28,
+    "fullPassed": 274,
+    "finalFocusedCatalogPassed": 14,
+    "fullSuitePrecedesAdditionalCopyCapRegression": true
+  },
+  "browser": {
+    "passed": 23,
+    "groups": [
+      {
+        "group": "placement",
+        "passed": true,
+        "elapsedSeconds": 108
+      },
+      {
+        "group": "viewport",
+        "passed": true,
+        "elapsedSeconds": 82
+      },
+      {
+        "group": "shop",
+        "passed": true,
+        "elapsedSeconds": 94
+      },
+      {
+        "group": "commerce",
+        "passed": true,
+        "elapsedSeconds": 26
+      },
+      {
+        "group": "commerce-admin",
+        "passed": true,
+        "elapsedSeconds": 25
+      },
+      {
+        "group": "launch-catalog",
+        "passed": true,
+        "elapsedSeconds": 21
+      },
+      {
+        "group": "storefront",
+        "passed": true,
+        "elapsedSeconds": 38
+      }
+    ],
+    "desktopAndNativeTouch": true,
+    "isolatedTargets": true,
+    "finalStoreGroupsSequential": true,
+    "consoleErrors": 0
+  },
+  "builds": [
+    "full",
+    "player",
+    "protected-control",
+    "backend"
+  ],
+  "packaging": {
+    "artwork": 152,
+    "checksumsMatch": true,
+    "sourceMastersIncluded": false,
+    "developmentChunks": 0
+  },
+  "catalog": {
+    "definitions": 350,
+    "cashDefinitions": 23,
+    "byteForByteReproducible": true,
+    "simulationSamplesPerPremiumBooster": 10000,
+    "deluxeOwnerApproved": false,
+    "proposalOnly": true
+  },
+  "preservation": {
+    "fromSchema": 20,
+    "toSchema": 23,
+    "originalRelations": 107,
+    "originalRows": 566098,
+    "allExistingColumnsPreserved": true,
+    "originalSourceUntouched": true,
+    "storeMigrations": 0,
+    "normalDevWrites": false,
+    "hostedAccessed": false,
+    "sourceRoot": "isolated V1.6H worktree"
+  },
+  "migrationsAdded": 0,
+  "gameplayMechanicsChanged": false,
+  "ownerDevModified": false,
+  "hostedAccessed": false,
+  "livePaymentsEnabled": false,
+  "genuineStripeVerificationClaimed": false,
+  "ci": {
+    "required": "existing exact-commit Ubuntu TEST eligibility workflow",
+    "result": "supplied in final delivery after push"
+  },
+  "ownerTasks": [
+    "Approve exact V1.6A deluxe recipe before hosted publication",
+    "Review provisional prices and approved product packaging artwork",
+    "Run owner-operated hosted TEST acceptance; no deployment performed here"
+  ]
+}

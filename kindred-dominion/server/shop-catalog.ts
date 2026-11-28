@@ -9,6 +9,7 @@ import {shopSchema,productSchema,inPool,type ShopRules,type Product} from "./sho
 import {packPlan,conditionalChoices} from "./shop-draw";
 import {economyDigest} from "./economy-hash";
 import {reject} from "./errors";
+import {bundleQuantities} from "./shop-quantities";
 
 export async function shopState(c:DB|Client,playerId:string,config:BackendConfig){
  const selected=await selectedConfiguration(c,"shop"),economy=await currentEconomy(c,config);if(!selected||!economy||!economyPermitted(config))reject(409,"shop_unavailable","The shop needs active, validated economy and shop publications in this environment.");
@@ -19,17 +20,18 @@ export async function shopState(c:DB|Client,playerId:string,config:BackendConfig
  return {id:selected.id,economy,pack,cards,rules,quantities,lifetime,ownedCosmetics,account};
 }
 export type ShopState=Awaited<ReturnType<typeof shopState>>;
-export function resolveProduct(state:ShopState,id:string):Product|null{
+export function resolveProduct(state:Pick<ShopState,"cards"|"rules">,id:string):Product|null{
  const explicit=state.rules.products.find(product=>product.id===id);if(explicit)return explicit;
  const direct=/^card-(first|additional)-([a-z][a-z0-9_-]{0,79})$/.exec(id);if(!direct)return null;const card=state.cards.find(card=>card.id===direct[2]),first=direct[1]==="first",definition=first?state.rules.directFirst:state.rules.directAdditional,rarity=state.rules.rarities[direct[2]];
  if(!card||!rarity||!inPool(card,definition.pool,state.rules))return null;
  return productSchema.parse({id,name:card.name+(first?" first copy":" playable copies"),description:first?"One bound first copy of this permanent card; current ownership and lifetime acquisition are checked together.":`${definition.quantity} explicit playable copies of this card, including copies already owned.`,category:first?"cards":"additional",type:"bundle",mode:first?"first_copy":"additional",status:"published",enabled:definition.enabled,currency:definition.currency,price:definition.overrides[card.id]??definition.prices[rarity],pricing:"per_card",quantity:definition.quantity,tradeable:definition.tradeable,pool:{cards:[card.id]}});
 }
 const ceilRatio=(value:bigint,divisor:bigint)=>(value+divisor-1n)/divisor;
-export function offerPrice(product:Product,eligibleIds:string[],fullCount:number,rules:ShopRules){
+export function offerPrice(product:Product,eligibleIds:string[],fullCount:number,rules:ShopRules,quantities?:ReturnType<typeof bundleQuantities>){
  if(!eligibleIds.length||!fullCount)return 0;let amount:bigint;
- if(product.pricing==="per_card")amount=BigInt(product.price)*BigInt(eligibleIds.length)*BigInt(product.quantity);
- else if(product.pricing==="sum_rarity"){const table=product.mode==="first_copy"?rules.directFirst:rules.directAdditional;amount=eligibleIds.reduce((n,id)=>n+BigInt(table.overrides[id]??table.prices[rules.rarities[id]])*BigInt(product.quantity),0n);}
+ if(product.pricing==="per_card")amount=BigInt(product.price)*BigInt(quantities?.total??eligibleIds.length*product.quantity);
+ else if(product.pricing==="sum_rarity"){const table=product.mode==="first_copy"?rules.directFirst:rules.directAdditional;amount=eligibleIds.reduce((n,id)=>n+BigInt(table.overrides[id]??table.prices[rules.rarities[id]])*BigInt(quantities?.grants[id]??product.quantity),0n);}
+ else if(product.mode==="completion")amount=ceilRatio(BigInt(product.price)*BigInt(quantities?.total??eligibleIds.length*product.quantity),BigInt(quantities?.fullTotal??fullCount*product.quantity));
  else amount=product.mode==="first_copy"||product.mode==="cosmetic"?ceilRatio(BigInt(product.price)*BigInt(eligibleIds.length),BigInt(fullCount)):BigInt(product.price);
  amount=ceilRatio(amount*BigInt(10000-product.discountBasisPoints),10000n);if(amount>1000000000000n)reject(400,"price_limit","This product price exceeds the supported integer currency-operation limit.");return Number(amount);
 }
@@ -42,17 +44,19 @@ export async function offer(c:DB|Client,state:ShopState,playerId:string,productI
  if(product.startsAt&&Date.parse(product.startsAt)>now.getTime())problems.push("This product's availability window has not started.");if(product.endsAt&&Date.parse(product.endsAt)<=now.getTime())problems.push("This product's availability window has ended.");
  if(!state.economy.rules.currencies.some(currency=>currency.id===product.currency&&currency.active))problems.push("This product's currency is inactive.");
  let used=0;if(product.limit){const period=product.limit.period,from=period==="lifetime"?null:period==="daily"?new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate())):new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()-(now.getUTCDay()+6)%7));used=read?(read.usage.get(product.id)?.[period]??0):Number((await c.query("SELECT count(*) AS count FROM kd.shop_purchase WHERE player_id=$1 AND product_id=$2 AND source<>'reward' AND ($3::timestamptz IS NULL OR created_at>=$3)",[playerId,product.id,from])).rows[0].count);if(used>=product.limit.quantity)problems.push("This account has reached the published purchase limit for this period.");}
- const full=permittedPool(state,product),eligible=product.mode==="first_copy"?full.filter(card=>!state.lifetime.has(card.id)&&!(state.quantities.get(card.id)??0)):full;
+ const full=permittedPool(state,product),quantities=bundleQuantities(product,full.map(c=>c.id),state.quantities),eligible=product.mode==="first_copy"?full.filter(card=>!state.lifetime.has(card.id)&&!(state.quantities.get(card.id)??0)):product.mode==="completion"?full.filter(card=>quantities.grants[card.id]):full;
  const plan=product.type==="booster"?packPlan(product,eligible,state.rules):null,cosmetics=product.cosmetics.filter(id=>!state.ownedCosmetics.has(id)),ids=product.mode==="cosmetic"?cosmetics:product.type==="booster"?eligible.slice(0,plan!.size).map(card=>card.id):eligible.map(card=>card.id),count=product.type==="booster"?plan!.size:ids.length;
  if(!count)problems.push(product.mode==="cosmetic"?"All included cosmetics are already owned.":product.mode==="first_copy"?"No eligible first copies remain. Lifetime acquisitions stay protected even after cards leave the inventory.":"No eligible published cards remain.");
  if(plan&&!plan.feasible)problems.push("The configured slot guarantees cannot be fulfilled from the eligible pool; use an available completion or direct-card option.");
- const fullCount=product.type==="booster"?product.slots.length:product.mode==="cosmetic"?product.cosmetics.length:full.length,price=offerPrice(product,ids,fullCount,state.rules);
+ const fullCount=product.type==="booster"?product.slots.length:product.mode==="cosmetic"?product.cosmetics.length:full.length,price=offerPrice(product,ids,fullCount,state.rules,product.type==="bundle"&&product.mode!=="first_copy"?quantities:undefined);
  const odds=plan?.slots.map((slot,index)=>{const conditioned=conditionalChoices(slot,plan.slots.slice(index+1),plan.pool,state.rules,plan.unique);return {slotId:slot.id,baseWeights:slot.weights,conditionalWeights:conditioned.weights,eligibleCounts:conditioned.counts,fallback:conditioned.fallback,policy:slot.depleted};})??[];
  const warnings:string[]=[];if(count&&count<fullCount&&(product.mode==="first_copy"||product.mode==="cosmetic"))warnings.push(`Reduced contents: ${count} of ${fullCount}; the exact ${price}-unit price is prorated before confirmation.`);if(plan?.omittedSlots.length)warnings.push("Omitted reduced-pack slots: "+plan.omittedSlots.join(", ")+".");if(plan)warnings.push("Each slot is conditioned on earlier selections and cards reserved for strict later slots. Disclosed fallback slots use remaining eligible rarities if weighted pools are exhausted or reserved; strict slots never substitute an unpromised rarity.");
- const terms={product,shopVersion:state.id,economyVersion:state.economy.id,contentVersion:state.pack.id,currency:product.currency,price,count,unitQuantity:product.quantity,totalCopies:product.mode==="cosmetic"?0:count*product.quantity,fullCount,eligibleCount:product.mode==="cosmetic"?cosmetics.length:eligible.length,eligibleIds:eligible.map(card=>card.id).sort(),cosmetics,ownedQuantities:Object.fromEntries(full.map(card=>[card.id,state.quantities.get(card.id)??0])),odds,warnings,limit:product.limit?{...product.limit,used}:null,sandbox:!!state.account.sandbox};
+ if(product.mode==="completion")warnings.push(`Guaranteed target completion: ${quantities.total} of ${quantities.fullTotal} target copies remain. Price is rounded up after prorating missing copies; all owned copies count. Lifetime history is preserved.`);
+ if(plan&&product.currency!=="gold")warnings.push("Additional copies are possible. Commercially funded randomized purchases are disabled pending owner policy review.");
+ const terms={product,shopVersion:state.id,economyVersion:state.economy.id,contentVersion:state.pack.id,currency:product.currency,price,count,unitQuantity:product.quantity,totalCopies:product.mode==="cosmetic"?0:product.type==="bundle"&&product.mode!=="first_copy"?quantities.total:count*product.quantity,grantQuantities:product.type==="bundle"?Object.fromEntries(eligible.map(c=>[c.id,quantities.grants[c.id]])):undefined,targetQuantities:product.type==="bundle"?quantities.targets:undefined,fullCopies:quantities.fullTotal,fullCount,eligibleCount:product.mode==="cosmetic"?cosmetics.length:eligible.length,eligibleIds:eligible.map(card=>card.id).sort(),cosmetics,ownedQuantities:Object.fromEntries(full.map(card=>[card.id,state.quantities.get(card.id)??0])),odds,warnings,limit:product.limit?{...product.limit,used}:null,sandbox:!!state.account.sandbox};
  // Ownership counts are informational for explicit additional-copy purchases;
  // first-copy/cosmetic eligibility and prices remain strict confirmation terms.
- const fingerprint=economyDigest({product,shopVersion:state.id,economyVersion:state.economy.id,contentVersion:state.pack.id,price,count,eligibleIds:terms.eligibleIds,cosmetics,sandbox:terms.sandbox});
+ const fingerprint=economyDigest({product,shopVersion:state.id,economyVersion:state.economy.id,contentVersion:state.pack.id,price,count,eligibleIds:terms.eligibleIds,completionGrants:product.mode==="completion"?terms.grantQuantities:undefined,cosmetics,sandbox:terms.sandbox});
  return {available:!problems.length,reasons:problems,terms,fingerprint,eligible,product};
 }
 export async function createShopQuote(c:Client,playerId:string,productId:string,config:BackendConfig){

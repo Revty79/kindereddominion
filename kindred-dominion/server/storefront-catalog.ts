@@ -1,4 +1,5 @@
 import {z} from "zod";
+import {bundleQuantities} from "./shop-quantities";
 import type {DB} from "./db";
 import type {BackendConfig} from "./config";
 import {shopState,resolveProduct,offer,offerPrice,type OfferReadContext,type ShopState} from "./shop-catalog";
@@ -10,7 +11,7 @@ export const storefrontQuery=z.object({
  category:z.enum(["all","boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]).default("all"),
  department:z.enum(["all",...STORE_DEPARTMENTS.map(d=>d.id)]).default("all"),
  kindred:z.string().max(80).default(""),rarity:z.string().max(30).default(""),collection:z.string().max(80).default(""),
- ownership:z.enum(["all","owned","unowned"]).default("all"),mode:z.enum(["all","first_copy","additional","cosmetic"]).default("all"),
+ ownership:z.enum(["all","owned","unowned"]).default("all"),mode:z.enum(["all","first_copy","additional","completion","cosmetic"]).default("all"),
  currency:z.string().max(80).default(""),availability:z.enum(["all","available"]).default("all"),
  sort:z.enum(["name","price_asc","price_desc"]).default("name"),
 }).strict();
@@ -40,10 +41,10 @@ export async function storefrontCatalog(pool:DB,playerId:string,config:BackendCo
  for(const product of definitions){
   const value=await offer(pool,state,playerId,product.id,read);if(query.availability==="available"&&!value.available)continue;
   const cards=productCards(state,product),collections=state.rules.collections.filter(c=>c.status==="published"&&cards.some(card=>c.cards.includes(card.id)));
-  const originalPrice=offerPrice({...product,discountBasisPoints:0},product.mode==="cosmetic"?value.terms.cosmetics:product.type==="booster"?value.terms.eligibleIds.slice(0,value.terms.count):value.terms.eligibleIds,value.terms.fullCount,state.rules);
+  const originalPrice=offerPrice({...product,discountBasisPoints:0},product.mode==="cosmetic"?value.terms.cosmetics:product.type==="booster"?value.terms.eligibleIds.slice(0,value.terms.count):value.terms.eligibleIds,value.terms.fullCount,state.rules,product.type==="bundle"&&product.mode!=="first_copy"?bundleQuantities(product,cards.map(c=>c.id),state.quantities):undefined);
   products.push({id:product.id,name:product.name,description:product.description,type:product.type,mode:product.mode,category:product.category,department:productDepartment(product,state.rules.cosmetics),featured:product.featured||product.category==="offers",edition:product.edition,
    artwork:product.artwork??null,artworkUrl:storefrontArtwork(product,state.id),available:value.available,reasons:value.reasons,currency:product.currency,price:value.terms.price,originalPrice:originalPrice>value.terms.price?originalPrice:null,discountBasisPoints:product.discountBasisPoints,
-   count:value.terms.count,totalCopies:value.terms.totalCopies,eligibleCount:value.terms.eligibleCount,fullCount:value.terms.fullCount,warnings:value.terms.warnings,limit:value.terms.limit,startsAt:product.startsAt??null,endsAt:product.endsAt??null,
+   count:value.terms.count,totalCopies:value.terms.totalCopies,fullCopies:value.terms.fullCopies,eligibleCount:value.terms.eligibleCount,fullCount:value.terms.fullCount,warnings:value.terms.warnings,limit:value.terms.limit,startsAt:product.startsAt??null,endsAt:product.endsAt??null,
    pool:product.pool,previewCardIds:cards.slice(0,3).map(c=>c.id),collections:collections.map(c=>({id:c.id,name:c.name})),kindreds:[...new Set(cards.map(c=>c.kindred))],
    ownedUnique:cards.filter(c=>(state.quantities.get(c.id)??0)>0).length,ownedCopies:cards.reduce((n,c)=>n+(state.quantities.get(c.id)??0),0),ownedCosmetics:product.cosmetics.filter(id=>state.ownedCosmetics.has(id)).length,
    ownedQuantities:product.id.startsWith("card-")?value.terms.ownedQuantities:undefined,rarity:product.pool.cards.length===1?state.rules.rarities[product.pool.cards[0]]:null});

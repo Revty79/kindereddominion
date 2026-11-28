@@ -20,7 +20,7 @@ export function StoreProductArt({product,content}:{product:StoreProduct;content:
 }
 export default function StoreProductCard({product:p,content,busy,pending,onDetails,onReview}:{product:StoreProduct;content:ContentPack;busy:boolean;pending?:boolean;onDetails?:()=>void;onReview:()=>void}){
  const label=useId();return <article className="store-product" aria-labelledby={label} data-product-id={p.id}>
-  <StoreProductArt product={p} content={content}/><div className="store-product-body"><div className="store-product-tags"><span>{p.mode==="first_copy"?"First copies":p.mode==="additional"?"Additional copies":p.mode==="cosmetic"?"Cosmetic ownership":p.type==="aether"?"Sandbox currency":"Sandbox product"}</span>{p.edition&&p.edition!=="standard"&&<span>{p.edition}</span>}{p.featured&&<span>Featured</span>}{p.rarity&&<span>{p.rarity}</span>}</div>
+  <StoreProductArt product={p} content={content}/><div className="store-product-body"><div className="store-product-tags"><span>{p.mode==="first_copy"?"First copies":p.mode==="completion"?"Complete my collection":p.mode==="additional"?"Additional copies":p.mode==="cosmetic"?"Cosmetic ownership":p.type==="aether"?"Sandbox currency":"Sandbox product"}</span>{p.edition&&p.edition!=="standard"&&<span>{p.edition}</span>}{p.featured&&<span>Featured</span>}{p.rarity&&<span>{p.rarity}</span>}</div>
   <h2 id={label}>{p.name}</h2><p>{p.description}</p><p className="store-contents">{productContents(p)}</p>
   {!!p.collections?.length&&<p className="store-association">{p.collections.map(c=>c.name).join(" · ")}</p>}
   <p className="store-price">{p.originalPrice&&p.price>0&&<><del>{storePrice(p.originalPrice,p.currency)}</del> </>}<strong>{p.price>0?storePrice(p.price,p.currency):"Currently unavailable"}</strong></p>

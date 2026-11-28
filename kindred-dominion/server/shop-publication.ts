@@ -13,6 +13,8 @@ import {ownerContent} from "../src/content/owner";
 import {reject} from "./errors";
 import {offerPrice} from "./shop-catalog";
 import {packPlan} from "./shop-draw";
+import {bundleQuantities} from "./shop-quantities";
+import {checkDeluxe} from "./shop-deluxe";
 
 export async function artworkRegistry(config:BackendConfig){
  const candidates=[{manifest:path.join(config.root,"public/assets/manifest.json"),root:path.join(config.root,"public")},{manifest:path.join(config.controlDirectory,"assets/manifest.json"),root:config.controlDirectory}];
@@ -31,7 +33,7 @@ export async function validateShopPublication(c:Client,rules:ShopRules,config:Ba
  const economy=await selectedConfiguration(c,"economy"),currencies=economy?economySchema.parse(economy.document).currencies:DEFAULT_ECONOMY.currencies;
  const currency=(id:string)=>{if(!currencies.some(v=>v.id===id&&v.active))reject(400,"currency_inactive","Active acquisition definitions require an active published currency.");};
  const pack=await activeContent(c),known=new Set((await c.query("SELECT DISTINCT i.id FROM kd.card_identity i JOIN kd.card_revision r ON r.card_id=i.id JOIN kd.content_version v ON v.id=r.version_id WHERE v.channel='official'")).rows.map(r=>r.id));
- const referenced=[...Object.keys(rules.rarities),...rules.collections.flatMap(k=>k.cards),...rules.products.flatMap(p=>[...p.pool.cards,...p.pool.exclude,...p.slots.flatMap(s=>[...s.pool.cards,...s.pool.exclude])]),...rules.formats.flatMap(f=>[...f.excludeCards,...f.eventPool,...Object.keys(f.cardLimits)]),...rules.cosmetics.flatMap(v=>v.cardId?[v.cardId]:[])];
+ const referenced=[...Object.keys(rules.rarities),...rules.collections.flatMap(k=>k.cards),...rules.products.flatMap(p=>[...Object.keys(p.quantities),...p.pool.cards,...p.pool.exclude,...p.slots.flatMap(s=>[...s.pool.cards,...s.pool.exclude])]),...rules.formats.flatMap(f=>[...f.excludeCards,...f.eventPool,...Object.keys(f.cardLimits)]),...rules.cosmetics.flatMap(v=>v.cardId?[v.cardId]:[])];
  if(referenced.some(id=>!known.has(id)))reject(400,"unpublished_shop_card","Publish permanent gameplay identities through the existing content pipeline before offering them in the shop.");
  for(const collection of rules.collections)if(collection.artwork)await checkedArtwork(config,collection.artwork,false);
  for(const product of rules.products){if(product.artwork)await checkedArtwork(config,product.artwork,product.testOnly);if(product.status!=="published"||!product.enabled)continue;
@@ -40,8 +42,12 @@ export async function validateShopPublication(c:Client,rules:ShopRules,config:Ba
   for(const id of product.cosmetics){const cosmetic=rules.cosmetics.find(v=>v.id===id);if(!cosmetic?.enabled||cosmetic.status!=="published"||cosmetic.testOnly&&!product.testOnly)reject(400,"cosmetic_unavailable","Active cosmetic products need an active published cosmetic and the same testing boundary.");}
   const pool=pack.cards.filter(card=>inPool(card,product.pool,rules)&&rules.collections.some(k=>k.status==="published"&&k.acquisition!=="unavailable"&&k.acquisition!=="cosmetic"&&k.cards.includes(card.id)&&(product.mode!=="first_copy"||k.acquisition==="free")));
   if(product.type!=="cosmetic"&&pool.some(card=>!rules.rarities[card.id]))reject(400,"rarity_unassigned","Every active product identity needs an explicit rarity assignment.");
+  const quantities=bundleQuantities(product,pool.map(card=>card.id));
+  if(Object.keys(product.quantities).some(id=>!pool.some(card=>card.id===id)))reject(400,"quantity_outside_pool","Per-card quantities must belong to this published product pool.");
+  if(product.type==="bundle"&&quantities.fullTotal>10000)reject(400,"bundle_delivery_limit","A bundle exceeds the 10,000-copy atomic delivery limit.");
+  await checkDeluxe(c,product,pool.map(card=>card.id),config);
   if(product.type==="booster"&&!packPlan(product,pool,rules).feasible)reject(400,"pack_unavailable","The published full pool cannot satisfy this pack's slot guarantees.");
-  const ids=product.type==="cosmetic"?product.cosmetics:product.type==="booster"?product.slots.map(s=>s.id):pool.map(card=>card.id);offerPrice(product,ids,ids.length,rules);
+  const ids=product.type==="cosmetic"?product.cosmetics:product.type==="booster"?product.slots.map(s=>s.id):pool.map(card=>card.id);offerPrice(product,ids,ids.length,rules,product.type==="bundle"?quantities:undefined);
  }
  for(const direct of [rules.directFirst,rules.directAdditional])if(direct.enabled){currency(direct.currency);for(const card of pack.cards.filter(card=>inPool(card,direct.pool,rules))){if(!rules.rarities[card.id])reject(400,"rarity_unassigned","Every active direct acquisition needs an explicit rarity.");if(BigInt(direct.overrides[card.id]??direct.prices[rules.rarities[card.id]])*BigInt(direct.quantity)>1000000000000n)reject(400,"price_limit","Direct quantity pricing exceeds the supported operation limit.");}}
  for(const cosmetic of rules.cosmetics){if(cosmetic.asset)await checkedArtwork(config,cosmetic.asset,cosmetic.testOnly);if(cosmetic.enabled&&cosmetic.asset){const {asset}=await checkedArtwork(config,cosmetic.asset,cosmetic.testOnly);if(asset.category!=="cards")reject(400,"creature_art_required","Alternate creature artwork must use an independent card illustration asset.");}}

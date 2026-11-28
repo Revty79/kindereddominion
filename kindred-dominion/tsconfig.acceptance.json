@@ -18,6 +18,9 @@
     "server/tests/browser/shop.spec.ts",
     "server/tests/gameplay-experience.integration.ts",
     "server/tests/storefront.integration.ts",
-    "server/tests/browser/storefront.spec.ts"
+    "server/tests/browser/storefront.spec.ts",
+    "scripts/launch-catalog.mts",
+    "server/tests/launch-catalog.integration.ts",
+    "server/tests/browser/launch-catalog.spec.ts"
   ]
 }

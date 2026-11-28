@@ -29,6 +29,7 @@ const groups:Group[]=[
  // target. Run it last so the other legacy cases still test their 30-copy path.
  {name:"starters",file:"starters",flag:"KINDRED_STARTER_ACCEPT"},
  {name:"legacy-restored",file:"experience-restore",flag:"KINDRED_EXPERIENCE_RESTORE_ACCEPT",ports:[3098,5259],optional:true},
+ {name:"launch-catalog",file:"launch-catalog",flag:"KINDRED_LAUNCH_CATALOG_ACCEPT",ports:[3104,5275],simulation:true,optional:true},
  {name:"storefront",file:"storefront",flag:"KINDRED_STOREFRONT_ACCEPT",ports:[3102,5273],simulation:true,optional:true},
 ];
 const only=args.find(a=>a.startsWith("--only="))?.slice(7).split(","),selected=groups.filter(g=>only?only.includes(g.name):!g.optional);if(!selected.length||only?.some(n=>!groups.some(g=>g.name===n)))throw Error("Unknown browser group; no service started.");
