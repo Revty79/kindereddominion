@@ -1,0 +1,47 @@
+{
+  "baseGameplayCommit": "b11e5c3918c72a18aa52818008b152989f406fd6",
+  "unitTests": 1115,
+  "unitFiles": 34,
+  "nativePostgreSqlMajor": 18,
+  "integrationTests": 261,
+  "integrationFiles": 27,
+  "newStorefrontIntegrationCases": 6,
+  "compiledBrowserCases": 34,
+  "compiledBrowserGroups": [
+    {
+      "group": "placement",
+      "passed": 10
+    },
+    {
+      "group": "history",
+      "passed": 14
+    },
+    {
+      "group": "viewport",
+      "passed": 4
+    },
+    {
+      "group": "shop",
+      "passed": 1
+    },
+    {
+      "group": "commerce",
+      "passed": 1
+    },
+    {
+      "group": "commerce-admin",
+      "passed": 1
+    },
+    {
+      "group": "storefront",
+      "passed": 3
+    }
+  ],
+  "publishedScreenshots": 9,
+  "physicalOwnerAcceptance": false,
+  "genuineStripeVerifiedByThisMilestone": false,
+  "providerSimulation": true,
+  "hostedAccessed": false,
+  "normalDevWrites": false,
+  "newMigrations": 0
+}

@@ -1,3 +1,5 @@
+import {createReadStream} from "node:fs";
+import {storefrontCatalog,visibleProduct} from "./storefront-catalog";
 import {z} from "zod";
 import type {FastifyInstance} from "fastify";
 import type {Authentication} from "./auth";
@@ -14,25 +16,20 @@ import {compensateShop} from "./shop-compensation";
 import {purchaseShop} from "./shop-purchases";
 import {shopSchema,inPool} from "./shop-rules";
 import {drawPack,seededRandom} from "./shop-draw";
-import {validateShopPublication} from "./shop-publication";
+import {validateShopPublication,checkedArtwork} from "./shop-publication";
 
 const paging=z.object({page:z.coerce.number().int().min(0).max(10000).default(0)}).strict();
 const publicPack=(row:any)=>({id:row.id,commercialOrderId:row.commercial_order_id??null,commercialDelivery:row.commercial_delivery??null,commercialRefundedMinor:row.commercial_refunded_minor??0,commercialDispute:row.commercial_dispute??null,label:row.label,productId:row.product_id,count:row.cards.length,revealCount:row.reveal_count,status:row.revealed_at?"revealed":"settled",createdAt:row.created_at,revealedAt:row.revealed_at,ownership:"Cards were granted atomically at settlement. Revealing never grants them again."});
 export function shopRoutes(app:FastifyInstance,pool:DB,config:BackendConfig,auth:Authentication){
  const administrator=async(req:any)=>{const actor=await auth.actor(req,["administrator"]);if(req.method!=="GET")await rateLimit(pool,"admin-write:"+actor.id,60,60);return actor;};
  app.get("/api/shop",async req=>{
-  const actor=await auth.actor(req),query=paging.extend({q:z.string().max(80).default(""),category:z.enum(["all","boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]).default("all"),kindred:z.string().max(80).default(""),rarity:z.string().max(30).default(""),collection:z.string().max(80).default(""),ownership:z.enum(["all","owned","unowned"]).default("all")}).strict().parse(req.query);
-  let state;try{state=await shopState(pool,actor.id,config);}catch(error){if(error instanceof ApiError&&["shop_unavailable","shop_paused"].includes(error.code))return {enabled:false,reason:error.message,products:[],hasMore:false};throw error;}
-  const ids=[...state.rules.products.map(p=>p.id),...state.cards.flatMap(card=>[`card-first-${card.id}`,`card-additional-${card.id}`])],q=query.q.trim().toLowerCase();
-  const definitions=ids.map(id=>resolveProduct(state,id)).filter((product):product is NonNullable<typeof product>=>!!product&&product.status==="published"&&(!product.testOnly||state.account.sandbox)).filter(product=>{
-   if(query.category!=="all"&&query.category!==product.category)return false;if(q&&!(product.id+" "+product.name+" "+product.description).toLowerCase().includes(q))return false;
-   const cards=state.cards.filter(card=>inPool(card,product.pool,state!.rules));if(query.kindred&&!cards.some(card=>card.kindred===query.kindred))return false;if(query.rarity&&!cards.some(card=>state!.rules.rarities[card.id]===query.rarity))return false;if(query.collection&&!state!.rules.collections.some(c=>c.id===query.collection&&cards.some(card=>c.cards.includes(card.id))))return false;
-   if(product.id.startsWith("card-")&&query.ownership!=="all"){const owned=!!(state!.quantities.get(product.pool.cards[0])??0);if(owned!==(query.ownership==="owned"))return false;}return true;
-  }).sort((a,b)=>a.name.localeCompare(b.name)||a.id.localeCompare(b.id));
-  const products=[];for(const product of definitions.slice(query.page*20,query.page*20+20)){const value=await offer(pool,state,actor.id,product.id);products.push({id:product.id,name:product.name,description:product.description,type:product.type,mode:product.mode,category:product.category,artwork:product.artwork??null,available:value.available,reasons:value.reasons,currency:product.currency,price:value.terms.price,count:value.terms.count,eligibleCount:value.terms.eligibleCount,fullCount:value.terms.fullCount,warnings:value.terms.warnings,pool:product.pool,ownedQuantities:product.id.startsWith("card-")?value.terms.ownedQuantities:undefined,rarity:product.pool.cards.length===1?state.rules.rarities[product.pool.cards[0]]:null});}
-  const buckets=(await pool.query("SELECT currency_id,origin,balance,held FROM kd.wallet_balance WHERE player_id=$1",[actor.id])).rows;
-  const wallet=state.economy.rules.currencies.map(currency=>{const rows=buckets.filter(row=>row.currency_id===currency.id&&(state!.account.sandbox?row.origin==="sandbox":row.origin!=="sandbox"));return {id:currency.id,name:currency.name,available:rows.reduce((n,row)=>n+Number(row.balance)-Number(row.held),0)};});
-  return {enabled:true,shopVersion:state.id,economyVersion:state.economy.id,sandbox:!!state.account.sandbox,products,total:definitions.length,page:query.page,hasMore:definitions.length>(query.page+1)*20,wallet,kindreds:state.pack.collections.map(k=>k.id),collections:state.rules.collections.filter(c=>c.status!=="draft"),rarities:state.rules.rarities,formats:state.rules.formats.filter(f=>f.enabled)};
+  const actor=await auth.actor(req);try{return await storefrontCatalog(pool,actor.id,config,req.query);}catch(error){if(error instanceof ApiError&&["shop_unavailable","shop_paused"].includes(error.code))return {enabled:false,reason:error.message,products:[],hasMore:false};throw error;}
+ });
+ app.get<{Params:{id:string};Querystring:{version?:string}}>("/api/shop/product-artwork/:id",async(req,reply)=>{
+  const actor=await auth.actor(req),state=await shopState(pool,actor.id,config),product=resolveProduct(state,z.string().max(180).parse(req.params.id));
+  if(!product||!visibleProduct(state,product)||!product.artwork||req.query.version&&req.query.version!==state.id)reject(404,"product_artwork_missing","This published product artwork is unavailable.");
+  const value=await checkedArtwork(config,product.artwork,!!state.account.sandbox&&product.testOnly);
+  reply.header("Content-Security-Policy","default-src 'none'; sandbox").header("Cache-Control","private, max-age=60").type(value.asset.mime);return reply.send(createReadStream(value.file));
  });
  app.get<{Params:{id:string}}>("/api/shop/products/:id",async req=>{const actor=await auth.actor(req),id=z.string().max(180).parse(req.params.id),state=await shopState(pool,actor.id,config),value=await offer(pool,state,actor.id,id);if(value.product.testOnly&&!state.account.sandbox)reject(404,"product_missing","This published product was not found.");return {...value.terms,available:value.available,reasons:value.reasons,cosmeticDefinitions:state.rules.cosmetics.filter(v=>value.product.cosmetics.includes(v.id)).map(v=>({...v,preview:`/api/shop/appearance-preview/${encodeURIComponent(v.id)}`})),content:state.pack};});
  app.post("/api/shop/quotes",async req=>{const actor=await auth.actor(req);requireEconomy(config);await rateLimit(pool,"shop-quote:"+actor.id,30,60);const body=z.object({productId:z.string().min(1).max(180)}).strict().parse(req.body);return transaction(pool,async c=>{await lockPlayer(c,actor.id);return createShopQuote(c,actor.id,body.productId,config);});});

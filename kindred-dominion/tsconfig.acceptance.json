@@ -16,6 +16,8 @@
     "server/tests/browser/history.spec.ts",
     "server/tests/browser/viewport.spec.ts",
     "server/tests/browser/shop.spec.ts",
-    "server/tests/gameplay-experience.integration.ts"
+    "server/tests/gameplay-experience.integration.ts",
+    "server/tests/storefront.integration.ts",
+    "server/tests/browser/storefront.spec.ts"
   ]
 }

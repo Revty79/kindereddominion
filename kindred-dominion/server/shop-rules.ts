@@ -15,7 +15,7 @@ const directSchema=z.object({enabled:z.boolean(),currency:portable,prices:prices
 export const productSchema=z.object({
  id:portable,name:z.string().min(1).max(100),description:z.string().max(600),category:z.enum(["boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]),
  type:z.enum(["booster","bundle","cosmetic"]),mode:z.enum(["first_copy","additional","cosmetic"]),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false),
- artwork:assetRefSchema.optional(),currency:portable,price:units.refine(n=>n>0),pricing:z.enum(["fixed","per_card","sum_rarity"]).default("fixed"),discountBasisPoints:z.number().int().min(0).max(9500).default(0),
+ artwork:assetRefSchema.optional(),featured:z.boolean().default(false),edition:z.enum(["standard","premium","collector","deluxe","expansion"]).default("standard"),currency:portable,price:units.refine(n=>n>0),pricing:z.enum(["fixed","per_card","sum_rarity"]).default("fixed"),discountBasisPoints:z.number().int().min(0).max(9500).default(0),
  pool:poolSchema.default(()=>poolSchema.parse({})),slots:z.array(slotSchema).max(50).default([]),cosmetics:z.array(portable).max(100).default([]),
  quantity:z.number().int().min(1).max(100).default(1),duplicates:z.enum(["none","allowed"]).default("none"),tradeable:z.boolean().default(false),
  startsAt:z.string().datetime().optional(),endsAt:z.string().datetime().optional(),limit:z.object({period:z.enum(["lifetime","daily","weekly"]),quantity:z.number().int().min(1).max(10000)}).strict().optional(),

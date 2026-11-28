@@ -1,0 +1,12 @@
+{
+  "fromSchema": 20,
+  "toSchema": 23,
+  "originalRelations": 107,
+  "originalRows": 566098,
+  "allExistingColumnsPreserved": true,
+  "originalSourceUntouched": true,
+  "storeMigrations": 0,
+  "normalDevWrites": false,
+  "hostedAccessed": false,
+  "sourceRoot": "isolated V1.6H worktree"
+}
