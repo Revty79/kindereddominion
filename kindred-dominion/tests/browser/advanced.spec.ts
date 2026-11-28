@@ -556,7 +556,6 @@ test("the laboratory plays through the ordinary interface, records an advanced m
     .getByRole("button", { name: "Close Card details", exact: true })
     .click();
   await page.locator(".cell.legal").first().click();
-  await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
   await reveal();
   await page
     .getByRole("button", { name: /^(Pass turn|Confirm forced pass)$/ })

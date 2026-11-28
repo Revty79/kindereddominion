@@ -92,7 +92,6 @@ test("clean production checkout provides all 150 packaged cards and repository a
   ).not.toContain("data:");
   await page.locator(".hand-card").first().click();
   await page.locator(".cell.legal").first().click();
-  await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
   await expect(
     page.locator('.cell img[alt="Briar Sprout illustration"]'),
   ).toBeVisible();

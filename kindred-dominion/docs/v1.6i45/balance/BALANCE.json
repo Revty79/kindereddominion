@@ -1,0 +1,473 @@
+{
+  "sourceCommit": "d623e2e6ceee4ac959742ad4eaffd2be1c57d8e9",
+  "aiOnly": true,
+  "ownerAccepted": false,
+  "gameplayChanged": false,
+  "scope": "Bounded independent-seed Constructs cross-Kindred reproduction; descriptive AI evidence only",
+  "seed": 1614501,
+  "matchesPerPairing": 40,
+  "mirrored": true,
+  "totalMatches": 320,
+  "cardDefinitionDigest": "32227b28e74a122f1ca660f9d1d5e7130a9503e8d2b4129b426ab2738b900e86",
+  "starterDefinitionDigest": "aa4567b2270850d501e30e4c47366671da6ed957f151e38f07122e3c41da41f0",
+  "decks": [
+    {
+      "id": "nature",
+      "name": "Wildwood development",
+      "collection": "Nature",
+      "subtitle": "Unchanged forty-copy starter recommendation",
+      "strategy": "Wildwood development",
+      "cards": [
+        "n001",
+        "n001",
+        "n002",
+        "n002",
+        "n003",
+        "n004",
+        "n005",
+        "n005",
+        "n009",
+        "n010",
+        "n013",
+        "n013",
+        "n027",
+        "n028",
+        "n029"
+      ]
+    },
+    {
+      "id": "mythical",
+      "name": "Young sovereigns",
+      "collection": "Mythical",
+      "subtitle": "Unchanged forty-copy starter recommendation",
+      "strategy": "Young sovereigns",
+      "cards": [
+        "m001",
+        "m001",
+        "m002",
+        "m002",
+        "m003",
+        "m004",
+        "m005",
+        "m007",
+        "m010",
+        "m013",
+        "m014",
+        "m015",
+        "m028",
+        "m029",
+        "m030"
+      ]
+    },
+    {
+      "id": "arcane",
+      "name": "Elemental formation",
+      "collection": "Arcane",
+      "subtitle": "Unchanged forty-copy starter recommendation",
+      "strategy": "Elemental formation",
+      "cards": [
+        "a001",
+        "a001",
+        "a002",
+        "a002",
+        "a004",
+        "a004",
+        "a005",
+        "a006",
+        "a014",
+        "a015",
+        "a015",
+        "a021",
+        "a027",
+        "a028",
+        "a029"
+      ]
+    },
+    {
+      "id": "undead",
+      "name": "Bone and phantom",
+      "collection": "Undead",
+      "subtitle": "Unchanged forty-copy starter recommendation",
+      "strategy": "Bone and phantom",
+      "cards": [
+        "u001",
+        "u001",
+        "u002",
+        "u003",
+        "u003",
+        "u004",
+        "u005",
+        "u007",
+        "u009",
+        "u011",
+        "u015",
+        "u017",
+        "u027",
+        "u028",
+        "u030"
+      ]
+    },
+    {
+      "id": "constructs",
+      "name": "Forged advance",
+      "collection": "Constructs",
+      "subtitle": "Unchanged forty-copy starter recommendation",
+      "strategy": "Forged advance",
+      "cards": [
+        "c001",
+        "c001",
+        "c002",
+        "c002",
+        "c003",
+        "c003",
+        "c004",
+        "c005",
+        "c009",
+        "c013",
+        "c013",
+        "c015",
+        "c019",
+        "c027",
+        "c029"
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "scoring": "classic",
+      "opponent": "Nature",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 0,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 12,
+          "losses": 28,
+          "draws": 0,
+          "firstWins": 7,
+          "firstGames": 20,
+          "secondWins": 5,
+          "secondGames": 20,
+          "score": 404
+        },
+        "nature": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 28,
+          "losses": 12,
+          "draws": 0,
+          "firstWins": 15,
+          "firstGames": 20,
+          "secondWins": 13,
+          "secondGames": 20,
+          "score": 534
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 22
+      },
+      "digest": "0f5c7083",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "classic",
+      "opponent": "Mythical",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 0,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 5,
+          "losses": 35,
+          "draws": 0,
+          "firstWins": 5,
+          "firstGames": 20,
+          "secondWins": 0,
+          "secondGames": 20,
+          "score": 349
+        },
+        "mythical": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 35,
+          "losses": 5,
+          "draws": 0,
+          "firstWins": 20,
+          "firstGames": 20,
+          "secondWins": 15,
+          "secondGames": 20,
+          "score": 847
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 25
+      },
+      "digest": "70c30e37",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "classic",
+      "opponent": "Arcane",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 0,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 7,
+          "losses": 33,
+          "draws": 0,
+          "firstWins": 3,
+          "firstGames": 20,
+          "secondWins": 4,
+          "secondGames": 20,
+          "score": 308
+        },
+        "arcane": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 33,
+          "losses": 7,
+          "draws": 0,
+          "firstWins": 16,
+          "firstGames": 20,
+          "secondWins": 17,
+          "secondGames": 20,
+          "score": 667
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 19
+      },
+      "digest": "c09cac1a",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "classic",
+      "opponent": "Undead",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 1,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 9,
+          "losses": 30,
+          "draws": 1,
+          "firstWins": 3,
+          "firstGames": 20,
+          "secondWins": 6,
+          "secondGames": 20,
+          "score": 398
+        },
+        "undead": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 30,
+          "losses": 9,
+          "draws": 1,
+          "firstWins": 14,
+          "firstGames": 20,
+          "secondWins": 16,
+          "secondGames": 20,
+          "score": 525
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 17
+      },
+      "digest": "c842429d",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "domination",
+      "opponent": "Nature",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 0,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 12,
+          "losses": 28,
+          "draws": 0,
+          "firstWins": 6,
+          "firstGames": 20,
+          "secondWins": 6,
+          "secondGames": 20,
+          "score": 664
+        },
+        "nature": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 28,
+          "losses": 12,
+          "draws": 0,
+          "firstWins": 14,
+          "firstGames": 20,
+          "secondWins": 14,
+          "secondGames": 20,
+          "score": 796
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 20
+      },
+      "digest": "48614e2d",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "domination",
+      "opponent": "Mythical",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 0,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 7,
+          "losses": 33,
+          "draws": 0,
+          "firstWins": 6,
+          "firstGames": 20,
+          "secondWins": 1,
+          "secondGames": 20,
+          "score": 653
+        },
+        "mythical": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 33,
+          "losses": 7,
+          "draws": 0,
+          "firstWins": 19,
+          "firstGames": 20,
+          "secondWins": 14,
+          "secondGames": 20,
+          "score": 1095
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 25
+      },
+      "digest": "aa0c152e",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "domination",
+      "opponent": "Arcane",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 0,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 7,
+          "losses": 33,
+          "draws": 0,
+          "firstWins": 4,
+          "firstGames": 20,
+          "secondWins": 3,
+          "secondGames": 20,
+          "score": 554
+        },
+        "arcane": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 33,
+          "losses": 7,
+          "draws": 0,
+          "firstWins": 17,
+          "firstGames": 20,
+          "secondWins": 16,
+          "secondGames": 20,
+          "score": 968
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 21
+      },
+      "digest": "3c485098",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    },
+    {
+      "scoring": "domination",
+      "opponent": "Undead",
+      "attempted": 40,
+      "completed": 40,
+      "draws": 1,
+      "decks": {
+        "constructs": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 14,
+          "losses": 25,
+          "draws": 1,
+          "firstWins": 9,
+          "firstGames": 20,
+          "secondWins": 5,
+          "secondGames": 20,
+          "score": 650
+        },
+        "undead": {
+          "attempted": 40,
+          "completed": 40,
+          "wins": 25,
+          "losses": 14,
+          "draws": 1,
+          "firstWins": 15,
+          "firstGames": 20,
+          "secondWins": 10,
+          "secondGames": 20,
+          "score": 753
+        }
+      },
+      "first": {
+        "games": 40,
+        "wins": 24
+      },
+      "digest": "898ccc5c",
+      "faults": 0,
+      "timeouts": 0,
+      "invariants": 0,
+      "loopSafeguards": 0
+    }
+  ]
+}

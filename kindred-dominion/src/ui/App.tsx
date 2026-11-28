@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   act,
   coordinate,
@@ -363,13 +363,16 @@ export default function App({
     );
     setNotice("");
   }
+  const lastDispatched=useRef<GameState|null>(null);
   function dispatch(action: Action) {
-    if (!game) return;
+    if (!game||lastDispatched.current===game) return;
     try {
       const steps: DiagnosticStep[] = [];
       const next = act(game, action, CARDS, action.type === "play" ? { captureStates: true, onStep: s => steps.push(s) } : undefined);
+      lastDispatched.current=game;
       update(next, action, steps);
     } catch (error) {
+      lastDispatched.current=null;
       setNotice(error instanceof Error ? error.message : String(error));
     }
   }
@@ -748,7 +751,7 @@ export default function App({
             )}
             {content.id !== "v1.1-baseline" && (
               <p className="setup-foot">
-                {content.name} · All cards freely available for testing. Statistics and names are provisional; final artwork is pending.
+                {content.name} · Cards in this browser practice do not change your account collection or rewards.
               </p>
             )}
           </section>
@@ -891,8 +894,10 @@ export default function App({
                                     className={`cell ${cell.owner === null ? "neutral" : `player-${cell.owner}`} ${isLegal && !hidden ? "legal" : ""} ${target ? "targeted" : ""} ${marks.length ? "affected-cell" : ""}`}
                                     aria-label={`${coordinate(cell)}: ${cell.owner === null ? "neutral" : names[cell.owner]}, ${cell.tokens} tokens, ${cell.fortification} fortification${definition ? `, ${definition.name}, ${currentPower(field, CARDS, id!)} power` : ", empty"}${isLegal && !hidden ? ", legal placement" : ""}`}
                                     data-testid={`cell-${cell.row}-${cell.col}`}
-                                    onMouseEnter={() => setHovered(cell)}
-                                    onMouseLeave={() => setHovered(null)}
+                                    onMouseEnter={() => {setHovered(cell);setPending(cell);}}
+                                    onMouseLeave={() => {setHovered(null);setPending(null);}}
+                                    onFocus={() => {setHovered(cell);setPending(cell);}}
+                                    onBlur={() => {setHovered(null);setPending(null);}}
                                     onClick={() => {
                                       if (playback) { if (id) setInspect(id); return; }
                                       if (hidden || game.phase !== "playing") {
@@ -900,10 +905,7 @@ export default function App({
                                         return;
                                       }
                                       if (isLegal)
-                                        setPending({
-                                          row: cell.row,
-                                          col: cell.col,
-                                        });
+                                        dispatch({type:"play",player:game.active,card:selected!,row:cell.row,col:cell.col});
                                       else if (selected)
                                         setNotice(
                                           placementError(
@@ -1155,7 +1157,7 @@ export default function App({
                           dispatch({ type: "pass", player: game.active })
                         }
                       >
-                        {legal.length ? "Pass turn" : "Confirm forced pass"}
+                        {legal.length ? "Pass turn" : "Pass turn"}
                       </button>
                       <button
                         className="quiet danger"
@@ -1191,35 +1193,14 @@ export default function App({
                         <p className="preview-score">Immediate points: Jade {prospective.scoreBefore.totals[0]} → {prospective.scoreAfter.totals[0]} · Amber {prospective.scoreBefore.totals[1]} → {prospective.scoreAfter.totals[1]}</p>
                         <p>Immediate resolution, in order:</p>
                         <ol className="public-consequences">{previewChanges.map((change, i) => <li key={i}><b>{change.label}</b> {change.text}</li>)}</ol>
-                        {preferences.beginner && <p>{prospective.privateConsequencesOmitted ? (prospective.boundary==="before-random"?"Random targets and dependent effects resolve after confirmation.":prospective.boundary==="before-private-generate"?"Hand generation and dependent effects resolve after confirmation.":"This preview stops before a private draw. Remaining effects resolve after confirmation.") : "This shows immediate battlefield effects. Turn-end, turn-start and private draws resolve after confirmation."}</p>}
-                        {prospective.fault ? (
-                          <p className="error-text">{prospective.fault}</p>
-                        ) : (
-                          <button
-                            className="primary"
-                            onClick={() =>
-                              dispatch({
-                                type: "play",
-                                player: game.active,
-                                card: selected!,
-                                ...pending,
-                              })
-                            }
-                          >
-                            Place at {coordinate(pending)}
-                          </button>
-                        )}
-                        <button
-                          className="quiet"
-                          onClick={() => setPending(null)}
-                        >
-                          Cancel preview
-                        </button>
+                        {preferences.beginner && <p>{prospective.privateConsequencesOmitted ? (prospective.boundary==="before-random"?"Random targets and dependent effects resolve after placement.":prospective.boundary==="before-private-generate"?"Hand generation and dependent effects resolve after placement.":"This preview stops before a private draw. Remaining effects resolve after placement.") : "This shows immediate battlefield effects. Turn-end, turn-start and private draws resolve after placement."}</p>}
+                        {prospective.fault&&<p className="error-text">{prospective.fault}</p>}
+                        <p>Click or tap this legal tile to place immediately. Change your selection before committing.</p>
                       </div>
                     ) : (
                       <p className="tactical-hint">
                         {legal.some((a) => a.card === selected)
-                          ? "Select an illuminated territory. You can review the full effect chain before placement."
+                          ? "Hover or focus an illuminated tile to preview, then click or tap it to place immediately."
                           : "No legal territory for this card. You may need more tokens or a matching predecessor."}
                       </p>
                     )}
@@ -1624,7 +1605,7 @@ export default function App({
         <Modal title="How to play" close={() => setHelp(false)}>
           <div className="help-copy">
             <h3>Early tester notes</h3>
-            <p>Local practice makes all 150 owner-designed cards freely available for testing. Its browser saves belong to this device, browser and address. Player account stores your owned collection, decks and validated computer matches on the configured server across browsers. Statistics and names remain provisional, and final artwork is pending. Purchases and online human-versus-human play are not enabled.</p>
+            <p>Offline practice keeps its saves on this device, browser and address. Return to the player menu for your owned collection, saved battle decks, ordinary rewards, shop and supported account features. Practice results do not change those account records. Online human-versus-human play and live payments remain unavailable.</p>
             <p>To report feedback, send the owner the match seed, scoring mode, card numbers, a screenshot, and what you expected compared with what happened, using your usual external communication channel.</p>
             <p>
               Build from your edge of the field. Jade faces right; Amber faces

@@ -131,7 +131,6 @@ test("temporary artwork travels from Studio approval to a validated portable pac
   await expect(page.locator(".hand-card img").first()).toBeVisible();
   await page.locator(".hand-card").first().click();
   await page.locator(".cell.legal").first().click();
-  await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
   await expect(
     page.locator('.cell img[alt="Briar Sprout illustration"]'),
   ).toBeVisible();
@@ -169,6 +168,15 @@ test("published artwork and a new local illustration can be exported together wi
   await expect(
     page.getByText("Content operation saved.", { exact: false }),
   ).toBeVisible();
+  // Compiled player output deliberately excludes source masters. Restore the
+  // prior temporary source explicitly through the existing local-artwork UI.
+  await nav("Card Library");
+  await page.getByRole("button",{name:"Edit Briar Sprout",exact:true}).click();
+  await page.getByLabel("Local artwork (optional, PNG/JPEG/WebP/SVG, up to 10 MB)",{exact:true}).setInputFiles("tests/fixtures/artwork/test-sprout-source.png");
+  await expect(page.getByText("Source artwork preserved locally;",{exact:false})).toBeVisible();
+  await page.getByLabel("Artwork approval",{exact:true}).selectOption("testing");
+  await page.getByRole("button",{name:"Save card",exact:true}).first().click();
+  await expect(page.getByText("Card saved to the working draft.",{exact:false})).toBeVisible();
   await nav("Card Library");
   await page
     .getByRole("button", { name: "Edit Leafguard", exact: true })

@@ -46,9 +46,9 @@ async function placeFirst(page: Page) {
   const cards = page.locator(".hand-card:not(.unplayable)");
   if (await cards.count()) {
     await cards.first().click();
-    await page.locator(".cell.legal").first().click();
+    await page.locator(".cell.legal").first().hover();
     await expect(page.locator(".resolution-preview")).toBeVisible();
-    await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
+    await page.locator(".cell.targeted").click();
   } else
     await page
       .getByRole("button", { name: /Confirm forced pass|Pass turn/ })
@@ -215,13 +215,13 @@ test("touch-sized layout supports hand, board scroll, preview and surrender", as
       .evaluate((el) => el.scrollWidth > el.clientWidth),
   ).toBe(true);
   await page.locator(".hand-card:not(.unplayable)").first().tap();
-  await page.locator(".cell.legal").first().tap();
+  await page.locator(".cell.legal").first().focus();
   await expect(page.locator(".resolution-preview")).toBeVisible();
   await page.screenshot({
     path: ".local/browser-mobile-preview.png",
     fullPage: true,
   });
-  await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).tap();
+  await page.locator(".cell.targeted").tap();
   await reveal(page);
   await page.getByRole("button", { name: "Surrender", exact: true }).tap();
   await page
@@ -308,17 +308,17 @@ test("full battlefield permits replacement, evolution, death and graveyard inspe
   await page
     .getByRole("button", { name: /^Crypt Harvester, replacement/ })
     .click();
-  await page.getByTestId("cell-0-0").click();
+  await page.getByTestId("cell-0-0").hover();
   await expect(page.locator(".resolution-preview")).toContainText("sacrifice");
-  await page.getByRole("button", { name: "Place at A1", exact: true }).click();
+  await page.locator(".cell.targeted").click();
   await reveal(page);
   await page
     .getByRole("button", { name: /Pass turn|Confirm forced pass/ })
     .click();
   await reveal(page);
   await page.getByRole("button", { name: /^Elderroot, evolution/ }).click();
-  await page.getByTestId("cell-1-0").click();
-  await page.getByRole("button", { name: "Place at B1", exact: true }).click();
+  await page.getByTestId("cell-1-0").hover();
+  await page.locator(".cell.targeted").click();
   const next = await state(page);
   expect(next.board.filter((c) => c.creature)).toHaveLength(15);
   expect(next.cards[cellAt(next, 1, 0)!.creature!].stack).toHaveLength(1);
@@ -397,11 +397,11 @@ test("simultaneous destruction and limited resurrection resolve visibly in the b
   cellAt(s, 1, 0)!.tokens = 2;
   await load(s);
   await page.getByRole("button", { name: /^Convergence, standard/ }).click();
-  await page.getByTestId("cell-1-0").click();
+  await page.getByTestId("cell-1-0").hover();
   await expect(page.locator(".resolution-preview")).toContainText("Convergence enters play");
   await expect(page.locator(".resolution-preview")).toContainText("Convergence: is destroyed");
   await expect(page.locator(".resolution-preview .public-consequences li").filter({ hasText: "is destroyed" })).toHaveCount(3);
-  await page.getByRole("button", { name: "Place at B1", exact: true }).click();
+  await page.locator(".cell.targeted").click();
   let next = await state(page);
   expect(next.cards[jade].location).toBe("graveyard");
   expect(next.cards[amber].location).toBe("graveyard");
@@ -413,11 +413,11 @@ test("simultaneous destruction and limited resurrection resolve visibly in the b
   cellAt(s, 0, 0)!.tokens = 2;
   await load(s);
   await page.getByRole("button", { name: /^Sunlance, standard/ }).click();
-  await page.getByTestId("cell-0-0").click();
+  await page.getByTestId("cell-0-0").hover();
   await expect(page.locator(".resolution-preview")).toContainText(
     "resurrected",
   );
-  await page.getByRole("button", { name: "Place at A1", exact: true }).click();
+  await page.locator(".cell.targeted").click();
   next = await state(page);
   expect(next.cards[revenant].location).toBe("battlefield");
   expect(next.cards[revenant].resurrections).toBe(1);

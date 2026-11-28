@@ -51,9 +51,9 @@ for (const scoring of ["classic", "domination"] as const) test(`owner ${scoring}
   for (let i = 0; i < 2; i++) { await reveal(page); await page.getByRole("button", { name: "Keep hand", exact: true }).click(); }
   await reveal(page);
   await expect(page.locator(".playability.ready").first()).toBeVisible();
-  await page.locator(".hand-card:not(.unplayable)").first().click(); await page.locator(".cell.legal").first().click();
+  await page.locator(".hand-card:not(.unplayable)").first().click(); await page.locator(".cell.legal").first().hover();
   await expect(page.locator(".preview-score")).toContainText("Immediate points"); await expect(page.locator(".public-consequences li").first()).toBeVisible();
-  await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
+  await page.locator(".cell.targeted").click();
   const playback = page.getByRole("region", { name: "Action resolution playback" }); await expect(playback).toBeVisible();
   const committed = signature(await readGame(page));
   await page.getByRole("button", { name: "Next resolution step", exact: true }).click();
@@ -113,7 +113,7 @@ for (const mobile of [false, true]) test(`invited player build ${mobile ? "touch
   await speed(page, "fast"); await page.getByLabel("Jade deck", { exact: true }).selectOption(mobile ? pack.decks[4].id : pack.decks[2].id);
   await page.getByText("Play format & battlefield options", { exact: true }).click(); await page.getByLabel("Match seed (optional)", { exact: true }).fill("9461"); await page.getByRole("button", { name: "Begin match" }).click(); await page.getByRole("button", { name: "Keep hand", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Jade to command.", exact: true })).toBeVisible();
-  await page.locator(".hand-card:not(.unplayable)").first().click(); await page.locator(".cell.legal").first().click(); await expect(page.locator(".preview-score")).toBeVisible(); await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
+  await page.locator(".hand-card:not(.unplayable)").first().click(); await page.locator(".cell.legal").first().hover(); await expect(page.locator(".preview-score")).toBeVisible(); await page.locator(".cell.targeted").click();
   await expect(page.getByRole("heading", { name: "Jade to command.", exact: true })).toBeVisible({ timeout: 30000 });
   await expect(page.locator(".cell .power").first()).toContainText("printed");
   expect((await readGame(page)).fault).toBeNull();

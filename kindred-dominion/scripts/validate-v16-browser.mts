@@ -34,11 +34,21 @@ const groups:Group[]=[
  // Private temporary artwork and sandbox accounts never enter the official registry.
  {name:"cosmetics",file:"cosmetics",flag:"KINDRED_COSMETICS_ACCEPT",ports:[3108,5279],simulation:true,optional:true},
  {name:"trading-experience",file:"trading-experience",flag:"KINDRED_TRADING_EXPERIENCE_ACCEPT",ports:[3118,5289],optional:true},
+ {name:"onboarding",file:"onboarding",flag:"KINDRED_ONBOARDING_ACCEPT",ports:[3120,5291],optional:true},
+ {name:"offline-gameplay",file:"offline-gameplay",ports:[3122,5293],external:true,full:true,optional:true},
+ {name:"offline-invited",file:"offline-invited",ports:[3124,5295],external:true,optional:true},
+ {name:"clean-player",file:"clean-player",flag:"KINDRED_CLEAN_PLAYER_ACCEPT",ports:[3126,5297],optional:true},
  {name:"setup",file:"setup",flag:"KINDRED_SETUP_ACCEPT",ports:[3116,5287],optional:true},
  {name:"limited",file:"limited",flag:"KINDRED_LIMITED_ACCEPT",ports:[3114,5285],simulation:true,optional:true},
  {name:"store-acceptance",file:"store-acceptance",flag:"KINDRED_STORE_ACCEPT",ports:[3110,5281],simulation:true,optional:true},
 ];
 const only=args.find(a=>a.startsWith("--only="))?.slice(7).split(","),selected=groups.filter(g=>only?only.includes(g.name):!g.optional);if(!selected.length||only?.some(n=>!groups.some(g=>g.name===n)))throw Error("Unknown browser group; no service started.");
+const offlineSuites=["gameplay","owner","founding-artwork","advanced","artwork","clean-publication","studio","svg-artwork"],offlineFiles=args.find(a=>a.startsWith("--offline-files="))?.slice(16).split(",")??offlineSuites;
+if(offlineFiles.some(name=>!offlineSuites.includes(name))||args.some(a=>a.startsWith("--offline-files="))&&!selected.some(g=>g.name==="offline-gameplay"))throw Error("Choose supported offline browser files with the offline-gameplay group. No service started.");
+if(selected.some(g=>g.name==="clean-player")){
+ const status=spawnSync("git",["status","--porcelain"],{encoding:"utf8",windowsHide:true});
+ if(status.status!==0||status.stdout.trim())throw Error("Clean-player acceptance requires an unchanged committed checkout. No service started.");
+}
 if(env.PGDATABASE?.startsWith("kd_restore_")&&selected.some(g=>g.name!=="legacy-restored"))throw Error("Restored data is only used by the declared read-only restoration browser journey.");
 const directory=".local/v1.6g/browser-groups";fs.mkdirSync(directory,{recursive:true});fs.mkdirSync(".local/v1.4",{recursive:true});
 const results:any[]=[];
@@ -49,10 +59,16 @@ for(const group of selected){
  if(group.name==="cosmetics")processEnv.KINDRED_ROOT=path.resolve(".local/v1.6h56/browser-assets");
  if(group.name==="limited")processEnv.KINDRED_ROOT=path.resolve(".local/v1.6hl/browser-assets");
  if(group.name==="store-acceptance")processEnv.KINDRED_ROOT=path.resolve(".local/v1.6h78/browser-assets");
+ if(group.name==="offline-invited")processEnv.KINDRED_PLAYER_URL=`http://127.0.0.1:${frontend}`;
  const services=releaseServices(api,frontend,group.full?"dist":"dist-player"),previous=process.env.KINDRED_ENV_FILE,start=Date.now();
  try{
   process.env.KINDRED_ENV_FILE=privateFile;if(group.external)await services.start();
-  const command=group.file==="history"?["scripts/test-history-browser.mjs","--env",privateFile]:["node_modules/@playwright/test/cli.js","test","--config","server/playwright.config.ts",`server/tests/browser/${group.file}.spec.ts`,...(group.grep?["--grep",group.grep]:[])];
+  let command=group.file==="history"?["scripts/test-history-browser.mjs","--env",privateFile]:["node_modules/@playwright/test/cli.js","test","--config","server/playwright.config.ts",`server/tests/browser/${group.file}.spec.ts`,...(group.grep?["--grep",group.grep]:[])];
+  if(["offline-gameplay","offline-invited"].includes(group.name)){
+   const configFile=privateFile+".config.mjs";
+   fs.writeFileSync(configFile,"export default "+JSON.stringify({testDir:path.resolve("tests/browser"),fullyParallel:false,workers:1,timeout:60000,use:{baseURL:`http://127.0.0.1:${frontend}`,trace:"retain-on-failure"},outputDir:path.resolve(".local/v1.6i45/offline-results",path.basename(privateFile,".env")),projects:[{name:"offline-chromium",use:{browserName:"chromium",viewport:{width:1280,height:720}}}]}));
+   command=["node_modules/@playwright/test/cli.js","test","--config",configFile,...(group.name==="offline-invited"?["owner.spec.ts","--grep","invited player build"]:offlineFiles.map(name=>"(?:^|[/\\\\])"+name+"\\.spec\\.ts$"))];
+  }
   const result=spawnSync(process.execPath,command,{env:processEnv,encoding:"utf8",windowsHide:true,maxBuffer:50*1024*1024});
   fs.writeFileSync(directory+"/"+group.name+".log",result.stdout+"\n"+result.stderr);results.push({group:group.name,passed:result.status===0,elapsedSeconds:Math.round((Date.now()-start)/1000)});fs.writeFileSync(directory+"/results-"+selected.map(g=>g.name).join("_").slice(0,120)+".json",JSON.stringify(results,null,2));console.log(JSON.stringify(results.at(-1)));
   if(result.status!==0)throw Error("Compiled "+group.name+" failed; inspect its private group log. No limit or assertion was relaxed.");

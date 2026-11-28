@@ -349,7 +349,6 @@ test("E and G: complete original match is recorded, replayed and unchanged by dr
   await reveal();
   await page.locator(".hand-card:not(.unplayable)").first().click();
   await page.locator(".cell.legal").first().click();
-  await page.getByRole("button", { name: /^Place at [A-Z][0-9]+$/ }).click();
   await reveal();
   await page.getByRole("button", { name: "Pass turn", exact: true }).click();
   await reveal();

@@ -1,3 +1,4 @@
+import {learningRoutes} from "./learning";
 import {tradingCollectibleRoutes} from "./trading-collectibles";
 import {setupRoutes} from "./setup";
 import {registerLimitedRewards} from "./limited-rewards";
@@ -69,6 +70,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   const auth=authentication(app,pool,config,!!root);setupRoutes(app,pool,config,auth);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);cosmeticGalleryRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradingCollectibleRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   notificationRoutes(app,pool,auth);
   presentationRoutes(app,pool,auth,config);
+  learningRoutes(app,pool,auth,config);
   starterRoutes(app,pool,config,auth,inventoryTransaction);
   tradingSafetyRoutes(app,pool,config,auth);
   commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);storeAdministration(app,pool,config,auth);limitedRoutes(app,pool,config,auth);

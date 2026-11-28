@@ -34,7 +34,7 @@ export async function createPublication(
   const files: Record<string, Uint8Array> = {};
   const assets: OfficialAsset[] = [];
   const hashes = new Map<string, OfficialAsset>();
-  async function includeExisting(asset: OfficialAsset) {
+  async function includeExisting(asset: OfficialAsset,local?:{production:Uint8Array;source:Uint8Array}) {
     if (assets.some((a) => a.id === asset.id && a.revision === asset.revision))
       return;
     if (
@@ -44,7 +44,7 @@ export async function createPublication(
       throw new Error(
         "Referenced artwork is not approved for this publication level.",
       );
-    if (!import.meta.env.DEV)
+    if (!local&&!import.meta.env.DEV)
       throw new Error(
         "Re-export packaged source masters from the repository with scripts/export-content.mjs, or import the source locally. Production builds do not expose source masters.",
       );
@@ -55,6 +55,7 @@ export async function createPublication(
         hash: asset.sha256,
         size: asset.bytes,
         mime: asset.mime,
+        local: local?.production,
       },
       {
         name: asset.source.path,
@@ -62,12 +63,15 @@ export async function createPublication(
         hash: asset.source.sha256,
         size: asset.source.bytes,
         mime: asset.source.mime,
+        local: local?.source,
       },
     ]) {
-      const response = await fetch(`${import.meta.env.BASE_URL}${entry.url}`);
-      if (!response.ok)
-        throw new Error(`Missing repository artwork ${entry.name}.`);
-      const bytes = new Uint8Array(await response.arrayBuffer());
+      let bytes=entry.local;
+      if(!bytes){
+        const response = await fetch(`${import.meta.env.BASE_URL}${entry.url}`);
+        if (!response.ok)throw new Error(`Missing repository artwork ${entry.name}.`);
+        bytes = new Uint8Array(await response.arrayBuffer());
+      }
       if (
         bytes.length !== entry.size ||
         (await sha256(bytes)) !== entry.hash ||
@@ -105,7 +109,11 @@ export async function createPublication(
       if (!asset) {
         const known = pack.assets?.find((a) => a.sha256 === hash);
         if (known) {
-          await includeExisting(known);
+          // An exact local source can restore a known immutable revision in a
+          // compiled Studio. Never fetch private masters from public output or
+          // replace a pinned source with different bytes sharing its pixels.
+          const exactSource=await sha256(source.bytes)===known.source.sha256;
+          await includeExisting(known,exactSource?{production:production.bytes,source:source.bytes}:undefined);
           asset = known;
         }
       }

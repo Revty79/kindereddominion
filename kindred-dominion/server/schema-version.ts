@@ -1,1 +1,1 @@
-export const REQUIRED_MIGRATION="1798000000000_visual_collectible_listings.cjs";
+export const REQUIRED_MIGRATION="1798100000000_player_learning.cjs";

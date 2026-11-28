@@ -19,10 +19,17 @@
 .collectible-ability h3{font-size:3.4cqw;color:var(--card-accent);font-weight:600;margin:0 0 1.2cqw}.collectible-ability p{font:3.15cqw/1.35 system-ui,sans-serif;margin:0;color:#fffbed}
 .collectible-requirement{font:2.5cqw/1.25 system-ui,sans-serif;color:var(--card-accent);padding:1.6cqw .7cqw;position:relative}
 .collectible-footer{display:flex;align-items:end;justify-content:space-between;gap:2cqw;margin:0 .7cqw;padding-top:1.4cqw;border-top:1px solid #e8e8c336;font:1.7cqw/1.3 system-ui,sans-serif;text-transform:uppercase;color:#ecedda9e}.collectible-classification{max-width:60%;color:var(--card-accent)}.collectible-footer>span:last-child{text-align:right;max-width:40%;letter-spacing:.2cqw}
-.design-inspection-shade{position:fixed;inset:0;background:#050b0ee3;z-index:20;display:grid;place-items:center;padding:45px 20px 25px;overflow:auto;backdrop-filter:blur(10px)}
+.design-inspection-shade{position:fixed;inset:0;background:#050b0ee3;z-index:20;display:grid;place-items:center;padding:45px 20px 25px;overflow:auto;backdrop-filter:none}
 .design-inspection{width:min(470px,calc(100vw - 40px));position:relative}.design-inspection>p{font:11px/1.5 system-ui,sans-serif;color:#aab6af;text-align:center;margin-bottom:0}
 .design-close{position:absolute;right:-40px;top:0;color:#dfd6bf;background:#162329;border:1px solid #576367;width:32px;height:32px;border-radius:50%;font:24px Georgia,serif;cursor:pointer}
 @media(max-width:700px){.design-close{right:5px;top:-37px}.design-inspection{width:min(400px,calc(100vw - 40px))}}
 
 .card-face.fullbleed-face{display:block;background:none;border:0;padding:0;box-shadow:none;min-height:0;overflow:visible;aspect-ratio:3/4}.fullbleed-face .collectible-card{width:100%;height:auto}.scale-hand .collectible-ability p{font-size:3.5cqw;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.scale-battlefield .collectible-ability p{display:none}.scale-battlefield .collectible-ability h3{font-size:4cqw}
 .design-close{padding:0;display:grid;place-items:center;min-height:0;line-height:1}
+.design-inspection-shade{align-items:start}.design-inspection{width:min(940px,calc(100vw - 40px));display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:12px 24px}.design-inspection>.collectible-shell{grid-column:1;grid-row:1;width:100%}.design-inspection>p{grid-column:1}.design-inspection .inspection-readable{display:block;grid-column:2;grid-row:1/span 4;max-height:calc(100dvh - 100px);overflow:auto;padding:16px;background:#12251f;border:1px solid #647157;border-radius:8px;font:14px/1.65 system-ui,sans-serif;color:#edf0dd;text-shadow:none}.design-inspection .inspection-readable h2{font:26px Georgia,serif;margin:0 0 12px;color:#f5deb0}.design-inspection .inspection-readable h3{font:19px Georgia,serif;margin:20px 0 10px;color:#edcf94}.readable-card-rules>.collectible-influence{width:150px;aspect-ratio:1;gap:2px}.readable-card-rules .collectible-influence>span{font:11px system-ui,sans-serif;min-height:0}.readable-card-rules ul{padding-left:20px}.design-inspection .design-close{right:0;top:-38px}.design-inspection .inspection-readable:focus-visible{outline:3px solid #e8c777;outline-offset:3px}@media(max-width:650px){.design-inspection{display:block;width:min(400px,calc(100vw - 40px))}.design-inspection>.collectible-shell{width:min(100%,300px);margin:auto}.design-inspection .inspection-readable{max-height:none;overflow:visible;margin-top:16px}.design-inspection .design-close{right:0;top:-38px}}
+
+.readable-card-rules{--card-accent:#c8dfa0}
+
+body .design-inspection-shade .design-inspection .design-close{position:fixed;right:14px;top:10px;z-index:4}
+
+/* A backdrop filter on the scrolling shade would make fixed controls scroll with it. */
