@@ -33,6 +33,7 @@ const groups:Group[]=[
  {name:"storefront",file:"storefront",flag:"KINDRED_STOREFRONT_ACCEPT",ports:[3102,5273],simulation:true,optional:true},
  // Private temporary artwork and sandbox accounts never enter the official registry.
  {name:"cosmetics",file:"cosmetics",flag:"KINDRED_COSMETICS_ACCEPT",ports:[3108,5279],simulation:true,optional:true},
+ {name:"trading-experience",file:"trading-experience",flag:"KINDRED_TRADING_EXPERIENCE_ACCEPT",ports:[3118,5289],optional:true},
  {name:"setup",file:"setup",flag:"KINDRED_SETUP_ACCEPT",ports:[3116,5287],optional:true},
  {name:"limited",file:"limited",flag:"KINDRED_LIMITED_ACCEPT",ports:[3114,5285],simulation:true,optional:true},
  {name:"store-acceptance",file:"store-acceptance",flag:"KINDRED_STORE_ACCEPT",ports:[3110,5281],simulation:true,optional:true},

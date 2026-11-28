@@ -1,1 +1,1 @@
-export const REQUIRED_MIGRATION="1797900000400_limited_projection_updates.cjs";
+export const REQUIRED_MIGRATION="1798000000000_visual_collectible_listings.cjs";

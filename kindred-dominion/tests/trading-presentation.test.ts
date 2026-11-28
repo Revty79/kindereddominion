@@ -1,0 +1,9 @@
+import {describe,it,expect} from "vitest";
+import {inventoryBreakdown,playerTradeReason} from "../server/trading-presentation";
+describe("player trading inventory explanations",()=>{
+ it("partitions owned copies without making bound or waiting copies available",()=>{const lots=[{id:"starter",remaining:1,reserved:0,issues:["This acquisition is account-bound."]},{id:"good",remaining:4,reserved:1,issues:[]},{id:"hold",remaining:2,reserved:0,issues:["The original acquisition holding period has not ended."]}];expect(inventoryBreakdown(lots,7,true)).toEqual({reserved:1,accountBound:1,temporarilyRestricted:2,exactCopies:0,availableToOffer:3});});
+ it("accounts for exact collectible holds separately from card-quantity availability",()=>{const v=inventoryBreakdown([{id:"serial",remaining:2,reserved:0,issues:["Select the exact collectible instance"]}],2,true,new Set(["serial"]));expect(v.reserved).toBe(2);expect(v.availableToOffer).toBe(0);expect(v.exactCopies).toBe(0);});
+ it("explains account restrictions without classifying a starter as tradeable",()=>{const v=inventoryBreakdown([{id:"bound",remaining:1,reserved:0,issues:["This acquisition is account-bound."]},{id:"eligible",remaining:2,reserved:0,issues:[]}],3,false);expect(v.accountBound).toBe(1);expect(v.temporarilyRestricted).toBe(2);expect(v.availableToOffer).toBe(0);});
+ it("does not invent availability for ownership needing reconciliation",()=>{expect(inventoryBreakdown([],5,true).temporarilyRestricted).toBe(5);});
+ it("keeps acquisition-chain terminology out of ordinary explanations",()=>{expect(playerTradeReason("The transfer ancestry requires investigation.")).toBe("The history of these copies needs an administrator's review.");expect(playerTradeReason("This acquisition is account-bound.")).toContain("Starter and first-copy");});
+});

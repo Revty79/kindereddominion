@@ -1,5 +1,5 @@
 import {expect,type Page} from "@playwright/test";
-export const nav=(page:Page,name:string)=>page.getByRole("navigation",{name:"Main navigation"}).getByRole("button",{name,exact:true}).click();
+export const nav=async(page:Page,name:string)=>{await page.getByRole("navigation",{name:"Main navigation"}).getByRole("button",{name:name==="My artwork"?"Customization":name,exact:true}).click();if(name==="My artwork")await page.getByRole("navigation",{name:"Appearance sections"}).getByRole("button",{name:"My alternate artwork",exact:true}).click();};
 export async function playerApi(page:Page,path:string,method="GET",body?:unknown){return page.evaluate(async({path,method,body})=>{const session=await fetch("/api/session").then(r=>r.json()),response=await fetch(`/api${path}`,{method,headers:{"Content-Type":"application/json","X-CSRF-Token":session.csrf},...(body===undefined?{}:{body:JSON.stringify(body)})});return {status:response.status,body:await response.json()};},{path,method,body});}
 export async function register(page:Page,username:string,password:string,displayName="Test Traveler"){
   await page.goto("/#register");await page.getByLabel("Username",{exact:true}).fill(username);await page.getByLabel("Email address",{exact:true}).fill(`${username}@example.test`);await page.getByLabel("Display name",{exact:true}).fill(displayName);await page.getByLabel("Password",{exact:true}).fill(password);await page.getByLabel("Confirm password",{exact:true}).fill(password);
@@ -32,3 +32,5 @@ export async function completeNormalMatch(page:Page,capturePrefix?:string){
   }
   expect(value.status).toBe("finished");await expect(page.getByRole("region",{name:"Match result"})).toBeVisible();if(capturePrefix)await page.screenshot({path:`${capturePrefix}-result.png`,fullPage:true});return value;
 }
+
+export async function chooseTradeCard(page:Page,label:string,id:string){const group=page.getByRole("group",{name:label+" card selection",exact:true});await group.getByLabel("Search "+label.toLowerCase()+" cards",{exact:true}).fill(id);await group.locator(`button[data-card-id="${id}"]`).click();}
