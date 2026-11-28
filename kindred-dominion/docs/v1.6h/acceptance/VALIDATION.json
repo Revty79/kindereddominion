@@ -19,7 +19,8 @@
     "nativeVersion": 180000,
     "files": 30,
     "passed": 308,
-    "newStoreCases": 16
+    "newStoreCases": 17,
+    "expandedSuiteExpected": 309
   },
   "operator": {
     "total": 55,
@@ -125,6 +126,22 @@
   "livePaymentsEnabled": false,
   "v17Started": false,
   "exactCommitCi": {
-    "status": "pending source publication; exact immutable receipt follows"
+    "status": "awaiting corrected source validation",
+    "failedAttempts": [
+      {
+        "commit": "3b914f719d1ef5f60cfb0ec5834dabcc4a3079ac",
+        "runId": 46111016007,
+        "jobId": 140874333565,
+        "cause": "isolated test starter flag leaked into legacy backend suite",
+        "eligible": false
+      }
+    ]
+  },
+  "fixtureIsolationRegression": {
+    "reproducedFailuresBefore": 5,
+    "orderedStorePassedAfter": 17,
+    "orderedLegacyBackendPassedAfter": 17,
+    "originalAssertionsUnchanged": true,
+    "productionCodeChangedForFix": false
   }
 }
