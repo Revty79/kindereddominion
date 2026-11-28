@@ -1,1 +1,1 @@
-export const REQUIRED_MIGRATION="1797600000000_cosmetic_customization.cjs";
+export const REQUIRED_MIGRATION="1797900000400_limited_projection_updates.cjs";

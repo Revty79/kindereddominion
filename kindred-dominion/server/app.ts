@@ -1,3 +1,4 @@
+import {setupRoutes} from "./setup";
 import {registerLimitedRewards} from "./limited-rewards";
 import {limitedRoutes} from "./limited-routes";
 import {registerLimitedPublication} from "./limited-publication";
@@ -64,7 +65,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   app.get("/readyz",async(_,reply)=>{try{await readiness(pool,config);return {status:"ready",database:"connected",catalog:"available"};}catch{return reply.code(503).send({status:"not-ready"});}});
   const root=await controlRoot(config.controlDirectory);
   if(["test","prod"].includes(config.environment)&&!root)throw Error("Hosted backend requires the protected control application build.");
-  const auth=authentication(app,pool,config,!!root);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);cosmeticGalleryRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
+  const auth=authentication(app,pool,config,!!root);setupRoutes(app,pool,config,auth);controlRoutes(app,auth,root);administrationRoutes(app,pool,config,auth);configurationRoutes(app,pool,config,auth);economyRoutes(app,pool,config,auth);shopRoutes(app,pool,config,auth);cosmeticRoutes(app,pool,config,auth);cosmeticGalleryRoutes(app,pool,config,auth);tradingInventoryRoutes(app,pool,config,auth);tradeRoutes(app,pool,config,auth);tradingHallRoutes(app,pool,config,auth);identityRoutes(app,pool,config,auth);acquisitionRoutes(app,pool,config,auth);playerRoutes(app,pool,auth,config);matchRoutes(app,pool,auth,config);studioRoutes(app,pool,auth);
   notificationRoutes(app,pool,auth);
   presentationRoutes(app,pool,auth,config);
   starterRoutes(app,pool,config,auth,inventoryTransaction);
