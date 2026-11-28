@@ -6,7 +6,9 @@ import {commercialRestrictedCosmetics} from "./commerce-holds";
 export const appearanceURL=(id:string,revision:string)=>`/api/appearances/${encodeURIComponent(id)}/${encodeURIComponent(revision)}`;
 // License identity is the union of independent ordinary grants and active
 // limited instances; edition-instance purchases remain a separate asset kind.
-export async function ownedCosmeticIds(c:DB|Client,playerId:string){const ready=(await c.query("SELECT to_regclass('kd.limited_instance') r")).rows[0].r,query="SELECT cosmetic_id FROM kd.cosmetic_ownership WHERE player_id=$1 AND NOT revoked"+(ready?" UNION SELECT x.identity_id AS cosmetic_id FROM kd.limited_instance i JOIN kd.limited_component x ON x.instance_id=i.id AND x.kind='cosmetic' WHERE i.owner_id=$1 AND i.state='active'":"");return new Set<string>((await c.query(query,[playerId])).rows.map(r=>r.cosmetic_id));}
+// Startup requires the complete migration set. Resolve both license sources in
+// one bounded query rather than probing the schema on every storefront read.
+export async function ownedCosmeticIds(c:DB|Client,playerId:string){return new Set<string>((await c.query("SELECT cosmetic_id FROM kd.cosmetic_ownership WHERE player_id=$1 AND NOT revoked UNION SELECT x.identity_id AS cosmetic_id FROM kd.limited_instance i JOIN kd.limited_component x ON x.instance_id=i.id AND x.kind='cosmetic' WHERE i.owner_id=$1 AND i.state='active'",[playerId])).rows.map(r=>r.cosmetic_id));}
 export async function ownedCosmeticViews(c:DB|Client,playerId:string){
  const active=await selectedConfiguration(c,"shop"),current=active?shopSchema.parse(active.document):null;
  const rows=(await c.query("SELECT o.*,i.card_id,i.type,coalesce(a.config_version,o.limited_current_version) AS current_version,a.origin AS current_origin FROM kd.cosmetic_ownership o JOIN kd.cosmetic_identity i ON i.id=o.cosmetic_id LEFT JOIN kd.cosmetic_acquisition a ON a.id=o.current_acquisition WHERE o.player_id=$1 ORDER BY o.cosmetic_id",[playerId])).rows,account=(await c.query("SELECT sandbox FROM kd.economy_account WHERE player_id=$1",[playerId])).rows[0];
