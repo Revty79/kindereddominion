@@ -1,6 +1,6 @@
 import {z} from "zod";
 const money=z.number().finite().min(0).max(100000000),rate=z.number().finite().min(0).max(1);
-export const financialModelSchema=z.object({mau:z.number().int().min(0).max(100000000),conversion:rate,spend:money,ordersPerPayer:z.number().finite().min(0).max(10000),feeRate:rate,feePerOrder:money,refundRate:rate,disputeRate:rate,disputeCost:money,hosting:money,content:money,operations:money,redemptionRate:rate}).strict();
+export const financialModelSchema=z.object({mau:z.number().int().min(0).max(100000000),conversion:rate,spend:money,ordersPerPayer:z.number().finite().min(0).max(10000),feeRate:rate,feePerOrder:money,refundRate:rate,disputeRate:rate,disputeCost:money,hosting:money,content:money,operations:money,redemptionRate:rate}).strict().superRefine((v,c)=>{if(v.refundRate+v.disputeRate>1)c.addIssue({code:"custom",path:["refundRate"],message:"Modeled refunded and disputed sales are disjoint and cannot exceed all sales."});if(v.mau>0&&v.conversion>0&&v.spend>0&&v.ordersPerPayer===0)c.addIssue({code:"custom",path:["ordersPerPayer"],message:"Positive sales require a positive modeled Checkout frequency."});});
 export type Finance=z.infer<typeof financialModelSchema>;
 export const DEFAULT_FINANCE:Finance={mau:100,conversion:.05,spend:15,ordersPerPayer:2,feeRate:.029,feePerOrder:.30,refundRate:.02,disputeRate:.002,disputeCost:15,hosting:30,content:200,operations:100,redemptionRate:.75};
 // Values are explicit modeling assumptions, never a current provider rate quote

@@ -21,5 +21,5 @@ simulation.sets=shop.products.filter(p=>p.type==="bundle"&&p.id.match(/-(standar
 simulation.packageRates=commerce.products.filter(p=>p.type==="aether").map(p=>({id:p.id,usdMinor:p.amountMinor,aether:p.aether,usdCentsPerAether:p.amountMinor/p.aether}));
 const document={format:"kindred-dominion-proposed-launch-catalog",schema:1,contentVersion:pack.id,proposalOnly:true,liveSalesEnabled:false,deluxeOwnerApproved:DEFAULT_STARTERS.hostedApproval!==null,randomizedCommercialFundingAllowed:false,shop,commerce,products:[...shop.products,...direct].map(describe),simulations:simulation};
 const output="docs/v1.6h/LAUNCH-CATALOG.json",bytes=JSON.stringify(document,null,2)+"\n";
-if(process.argv.includes("--check")){if(fs.readFileSync(output,"utf8")!==bytes)throw Error("Launch catalog differs from source. Regenerate and review it.");}else fs.writeFileSync(output,bytes);
+if(process.argv.includes("--check")){if(fs.readFileSync(output,"utf8").replace(/\r\n/g,"\n")!==bytes)throw Error("Launch catalog differs from source. Regenerate and review it.");}else fs.writeFileSync(output,bytes);
 console.log(JSON.stringify({catalog:output,products:document.products.length,cashProducts:commerce.products.length,deluxeApproved:document.deluxeOwnerApproved,liveSalesEnabled:false,simulations:simulation}));

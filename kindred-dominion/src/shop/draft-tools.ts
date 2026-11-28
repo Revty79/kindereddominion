@@ -1,0 +1,15 @@
+type Document={products:any[];collections:any[];cosmetics:any[];rarities:Record<string,string>};
+const weights={common:7500,uncommon:2000,rare:400,epic:90,legendary:10};
+export const validDraftId=(id:string)=>/^[a-z][a-z0-9_-]{0,59}$/.test(id);
+// Pure private-draft editing only. The server remains the publication authority.
+export function createProductDraft(document:Document,id:string,kind:string,source?:string){
+ if(!validDraftId(id)||document.products.some(p=>p.id===id))throw Error("Choose a new lowercase identity, at most 60 characters.");
+ const next=structuredClone(document),original=source?next.products.find(p=>p.id===source):null;if(source&&!original)throw Error("The source product is unavailable.");
+ if(original){next.products.push({...structuredClone(original),id,name:original.name.slice(0,95)+" copy",status:"draft",enabled:false,featured:false,feature:undefined,promotion:undefined});return next;}
+ const cosmetic=["alternate_art","card_back","battlefield","border"].includes(kind),booster=kind.includes("booster"),first=kind==="first-copy-set"||kind==="gold-booster",mode=cosmetic?"cosmetic":first?"first_copy":kind==="completion-set"?"completion":"additional",collection=next.collections.find(c=>c.classification==="founding")?.id;
+ const p:any={id,name:"New product draft",description:"Review contents, price, ownership and publication before sale.",category:cosmetic?kind==="alternate_art"?"artwork":"cosmetics":booster?"boosters":"kindreds",type:cosmetic?"cosmetic":booster?"booster":"bundle",mode,status:"draft",enabled:false,testOnly:kind==="premium-booster",featured:false,edition:"standard",currency:first?"gold":"aether",price:booster?250:1000,pricing:"fixed",discountBasisPoints:0,pool:{collections:cosmetic?[]:collection?[collection]:[],kindreds:[],cards:[],exclude:[],rarities:[]},slots:booster?Array.from({length:5},(_,i)=>({id:"slot-"+(i+1),pool:{collections:[],kindreds:[],cards:[],exclude:[],rarities:[]},weights:{...weights},depleted:"available_pool"})):[],cosmetics:[],quantity:1,quantities:{},duplicates:kind==="premium-booster"?"allowed":"none",tradeable:false};
+ if(cosmetic){const cosmeticId=id+"-appearance";if(next.cosmetics.some(c=>c.id===cosmeticId))throw Error("That appearance identity is already used.");next.cosmetics.push({id:cosmeticId,name:"Unapproved appearance draft",description:"Supply reviewed content and approved artwork before publication.",type:kind,status:"draft",enabled:false,testOnly:false,...(kind==="border"?{treatment:"metallic"}:{})});p.cosmetics=[cosmeticId];}
+ next.products.push(p);return next;
+}
+export function createCollectionDraft(document:Document,id:string){if(!validDraftId(id)||document.collections.some(c=>c.id===id))throw Error("Choose a new permanent collection identity.");const next=structuredClone(document);next.collections.push({id,name:"New collection draft",description:"Publish gameplay identities through the existing content pipeline before using them here.",classification:"expansion",status:"draft",acquisition:"unavailable",cards:[]});return next;}
+export const splitIdentifiers=(text:string)=>[...new Set(text.split(/[\s,]+/).map(v=>v.trim()).filter(Boolean))];

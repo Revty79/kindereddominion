@@ -35,6 +35,7 @@ import {stripeWebhookRoutes,startCommerceMaintenance} from "./commerce-events";
 import {registerStarters,starterRoutes} from "./starters";
 import {inventoryTransaction} from "./inventory";
 import {presentationRoutes} from "./presentation";
+import {storeAdministration} from "./store-administration";
 import {cosmeticGalleryRoutes} from "./cosmetic-gallery";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
   registerShopPublication();registerShopRewards();registerTradingPublication();registerCommercePublication();registerStarters();
@@ -65,7 +66,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   presentationRoutes(app,pool,auth,config);
   starterRoutes(app,pool,config,auth,inventoryTransaction);
   tradingSafetyRoutes(app,pool,config,auth);
-  commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);
+  commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);storeAdministration(app,pool,config,auth);
   await stripeWebhookRoutes(app,pool,config);
   let stopMaintenance:undefined|(()=>Promise<void>);
   let stopCommerce:undefined|(()=>Promise<void>);

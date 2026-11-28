@@ -33,6 +33,7 @@ const groups:Group[]=[
  {name:"storefront",file:"storefront",flag:"KINDRED_STOREFRONT_ACCEPT",ports:[3102,5273],simulation:true,optional:true},
  // Private temporary artwork and sandbox accounts never enter the official registry.
  {name:"cosmetics",file:"cosmetics",flag:"KINDRED_COSMETICS_ACCEPT",ports:[3108,5279],simulation:true,optional:true},
+ {name:"store-acceptance",file:"store-acceptance",flag:"KINDRED_STORE_ACCEPT",ports:[3110,5281],simulation:true,optional:true},
 ];
 const only=args.find(a=>a.startsWith("--only="))?.slice(7).split(","),selected=groups.filter(g=>only?only.includes(g.name):!g.optional);if(!selected.length||only?.some(n=>!groups.some(g=>g.name===n)))throw Error("Unknown browser group; no service started.");
 if(env.PGDATABASE?.startsWith("kd_restore_")&&selected.some(g=>g.name!=="legacy-restored"))throw Error("Restored data is only used by the declared read-only restoration browser journey.");
@@ -43,6 +44,7 @@ for(const group of selected){
  fs.writeFileSync(privateFile,source+`\nAPI_PORT=${api}\nFRONTEND_ORIGIN=http://127.0.0.1:${frontend}\nSESSION_SECRET=${crypto.randomBytes(48).toString("base64url")}\nREGISTRATION_MODE=${group.invite?"invite":"local"}\nLOCAL_TEST_ACQUISITION=${!!group.sampler}\nCOMMERCE_MODE=${group.simulation?"simulation":"disabled"}\nECONOMY_ENABLED=${!group.sampler}\n`,{mode:0o600});
  const processEnv:NodeJS.ProcessEnv={...process.env,KINDRED_ENV_FILE:privateFile,KINDRED_ACCOUNT_URL:`http://127.0.0.1:${frontend}`};for(const g of groups)if(g.flag)delete processEnv[g.flag];if(group.flag)processEnv[group.flag]="yes";
  if(group.name==="cosmetics")processEnv.KINDRED_ROOT=path.resolve(".local/v1.6h56/browser-assets");
+ if(group.name==="store-acceptance")processEnv.KINDRED_ROOT=path.resolve(".local/v1.6h78/browser-assets");
  const services=releaseServices(api,frontend,group.full?"dist":"dist-player"),previous=process.env.KINDRED_ENV_FILE,start=Date.now();
  try{
   process.env.KINDRED_ENV_FILE=privateFile;if(group.external)await services.start();

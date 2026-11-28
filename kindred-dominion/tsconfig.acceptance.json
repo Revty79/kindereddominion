@@ -24,6 +24,10 @@
     "server/tests/browser/launch-catalog.spec.ts",
     "server/tests/cosmetic-fixtures.ts",
     "server/tests/cosmetics.integration.ts",
-    "server/tests/browser/cosmetics.spec.ts"
+    "server/tests/browser/cosmetics.spec.ts",
+    "server/tests/store-acceptance.integration.ts",
+    "server/tests/browser/store-acceptance.spec.ts",
+    "scripts/store-model.mts",
+    "server/tests/browser/store-stripe.spec.ts"
   ]
 }

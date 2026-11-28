@@ -1,0 +1,1950 @@
+{
+  "modelOnly": true,
+  "approvedPermanentPolicy": false,
+  "actualRevenueMinor": 0,
+  "seed": 16878,
+  "settings": {
+    "days": 180,
+    "trials": 20,
+    "premiumPacks": 100,
+    "seed": 16878,
+    "channel": "browser",
+    "mobileFeeRate": 0.3,
+    "cosmeticBudgetFraction": 0.25,
+    "tradesPerMonth": 4,
+    "copiesPerTrade": 1,
+    "salesMix": {
+      "boosters": 2000,
+      "singles": 1500,
+      "collections": 2500,
+      "cosmetics": 3000,
+      "expansions": 1000,
+      "other": 0
+    }
+  },
+  "startingCollection": {
+    "unique": 30,
+    "totalPlayableCopies": 40,
+    "remainingUnique": 120,
+    "starterRecipe": "founding-40-proposal-v1",
+    "starterOwnerApproved": false,
+    "assumptionOnly": true
+  },
+  "firstCopies": {
+    "trials": [
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24
+    ],
+    "allCompletedIn24": true,
+    "generalPacks": 24,
+    "generalGold": 6000,
+    "targetedPacks": 24,
+    "targetedGold": 7200,
+    "tutorialGiftPacks": 0,
+    "paidGeneralPacks": 24,
+    "individualGoldForRemaining": 31200,
+    "rarityTotals": {
+      "common": 960,
+      "uncommon": 640,
+      "rare": 400,
+      "epic": 240,
+      "legendary": 160
+    }
+  },
+  "players": [
+    {
+      "scenario": "casual-free",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 52,
+      "matches": 416,
+      "earnedGold": 24546,
+      "remainingGold": 18546,
+      "accountXP": 18150,
+      "accountLevel": 12,
+      "masteryXP": 12480,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.125,
+      "completionHour": 10.75,
+      "completionDay": 37,
+      "packs": 24,
+      "freePacks": 0,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 128.4,
+      "baseBoosterMinutes": 116.82242990654206,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 0,
+      "monthlyCosmeticBudget": 0,
+      "monthlyOtherBudget": 0,
+      "monthlyTrades": 4,
+      "monthlyCopiesExchanged": 4,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    },
+    {
+      "scenario": "average-free",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 130,
+      "matches": 1300,
+      "earnedGold": 58612,
+      "remainingGold": 52612,
+      "accountXP": 61580,
+      "accountLevel": 12,
+      "masteryXP": 39000,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 9.99999999999998,
+      "completionDay": 12,
+      "packs": 24,
+      "freePacks": 0,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 177.50000000000003,
+      "baseBoosterMinutes": 84.5070422535211,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 0,
+      "monthlyCosmeticBudget": 0,
+      "monthlyOtherBudget": 0,
+      "monthlyTrades": 4,
+      "monthlyCopiesExchanged": 4,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    },
+    {
+      "scenario": "highly-active-free",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 465,
+      "matches": 4650,
+      "earnedGold": 112330,
+      "remainingGold": 106330,
+      "accountXP": 189940,
+      "accountLevel": 12,
+      "masteryXP": 116250,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 17.099999999999973,
+      "completionDay": 6,
+      "packs": 24,
+      "freePacks": 0,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 186,
+      "baseBoosterMinutes": 80.64516129032258,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 0,
+      "monthlyCosmeticBudget": 0,
+      "monthlyOtherBudget": 0,
+      "monthlyTrades": 4,
+      "monthlyCopiesExchanged": 4,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    },
+    {
+      "scenario": "competitive-normal-ai-proxy",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 310,
+      "matches": 3100,
+      "earnedGold": 103721,
+      "remainingGold": 97721,
+      "accountXP": 161440,
+      "accountLevel": 12,
+      "masteryXP": 93000,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 12.399999999999972,
+      "completionDay": 8,
+      "packs": 24,
+      "freePacks": 0,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 203,
+      "baseBoosterMinutes": 73.89162561576354,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 0,
+      "monthlyCosmeticBudget": 0,
+      "monthlyOtherBudget": 0,
+      "monthlyTrades": 4,
+      "monthlyCopiesExchanged": 4,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    },
+    {
+      "scenario": "occasional-paying",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 130,
+      "matches": 1300,
+      "earnedGold": 58612,
+      "remainingGold": 52612,
+      "accountXP": 61580,
+      "accountLevel": 12,
+      "masteryXP": 39000,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 9.99999999999998,
+      "completionDay": 12,
+      "packs": 24,
+      "freePacks": 0,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 177.50000000000003,
+      "baseBoosterMinutes": 84.5070422535211,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 5,
+      "monthlyCosmeticBudget": 1.25,
+      "monthlyOtherBudget": 3.75,
+      "monthlyTrades": 4,
+      "monthlyCopiesExchanged": 4,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    },
+    {
+      "scenario": "regular-paying",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 130,
+      "matches": 1300,
+      "earnedGold": 58612,
+      "remainingGold": 52612,
+      "accountXP": 61580,
+      "accountLevel": 12,
+      "masteryXP": 39000,
+      "masteryLevel": 8,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": 0.1,
+      "completionHour": 9.99999999999998,
+      "completionDay": 12,
+      "packs": 24,
+      "freePacks": 0,
+      "uniqueCards": 150,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 177.50000000000003,
+      "baseBoosterMinutes": 84.5070422535211,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 15,
+      "monthlyCosmeticBudget": 3.75,
+      "monthlyOtherBudget": 11.25,
+      "monthlyTrades": 4,
+      "monthlyCopiesExchanged": 4,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    },
+    {
+      "scenario": "rapid-surrender-attempt",
+      "modelOnly": true,
+      "days": 180,
+      "hours": 720,
+      "matches": 0,
+      "earnedGold": 100,
+      "remainingGold": 100,
+      "accountXP": 0,
+      "accountLevel": 1,
+      "masteryXP": 0,
+      "masteryLevel": 1,
+      "referenceBoosterGold": 250,
+      "firstBoosterHour": null,
+      "completionHour": null,
+      "completionDay": null,
+      "packs": 0,
+      "freePacks": 0,
+      "uniqueCards": 30,
+      "additionalCopiesModeled": 0,
+      "baseGoldPerHour": 0,
+      "baseBoosterMinutes": null,
+      "startingPlayableCopies": 40,
+      "monthlyModeledSpend": 0,
+      "monthlyCosmeticBudget": 0,
+      "monthlyOtherBudget": 0,
+      "monthlyTrades": 0,
+      "monthlyCopiesExchanged": 0,
+      "tradeNetGlobalSupply": 0,
+      "notice": "Trading redistributes eligible existing copies; it does not mint currency/cards. Trades and spending are planning inputs, not an observed market or guaranteed matchmaking."
+    }
+  ],
+  "premiumBoosters": [
+    {
+      "id": "dominion-booster",
+      "name": "Dominion Booster",
+      "price": 200,
+      "currency": "aether",
+      "feasible": true,
+      "samples": 100,
+      "expectedDirectCopyPrice": 257.6,
+      "expectedValueToPrice": 1.288,
+      "rarityCounts": {
+        "common": 200,
+        "uncommon": 150,
+        "rare": 117,
+        "epic": 26,
+        "legendary": 7
+      },
+      "expectedCopies": 5,
+      "observedCopies": 500,
+      "repeatedCopies": 389,
+      "newUniqueIdentities": 111,
+      "commercialFundingAllowed": false,
+      "testOnly": true,
+      "warning": null
+    },
+    {
+      "id": "collector-booster",
+      "name": "Collector Booster",
+      "price": 400,
+      "currency": "aether",
+      "feasible": true,
+      "samples": 100,
+      "expectedDirectCopyPrice": 440.6,
+      "expectedValueToPrice": 1.1015000000000001,
+      "rarityCounts": {
+        "common": 73,
+        "uncommon": 131,
+        "rare": 181,
+        "epic": 87,
+        "legendary": 28
+      },
+      "expectedCopies": 5,
+      "observedCopies": 500,
+      "repeatedCopies": 394,
+      "newUniqueIdentities": 106,
+      "commercialFundingAllowed": false,
+      "testOnly": true,
+      "warning": null
+    }
+  ],
+  "collections": [
+    {
+      "id": "founding-all-complete",
+      "mode": "first_copy",
+      "currency": "gold",
+      "priceFromStartingCollection": 5100,
+      "fullTargetCopies": 150,
+      "deliveredCopies": 120,
+      "guaranteedSinglesFullTargetPrice": 10400,
+      "sameCurrencyComparison": false,
+      "discountAgainstSingles": null,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-nature-complete",
+      "mode": "first_copy",
+      "currency": "gold",
+      "priceFromStartingCollection": 0,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 0,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": false,
+      "discountAgainstSingles": null,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-mythical-complete",
+      "mode": "first_copy",
+      "currency": "gold",
+      "priceFromStartingCollection": 1500,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": false,
+      "discountAgainstSingles": null,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-arcane-complete",
+      "mode": "first_copy",
+      "currency": "gold",
+      "priceFromStartingCollection": 1500,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": false,
+      "discountAgainstSingles": null,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-undead-complete",
+      "mode": "first_copy",
+      "currency": "gold",
+      "priceFromStartingCollection": 1500,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": false,
+      "discountAgainstSingles": null,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-constructs-complete",
+      "mode": "first_copy",
+      "currency": "gold",
+      "priceFromStartingCollection": 1500,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": false,
+      "discountAgainstSingles": null,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-all-standard-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 2400,
+      "fullTargetCopies": 150,
+      "deliveredCopies": 120,
+      "guaranteedSinglesFullTargetPrice": 10400,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.7115384615384616,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-all-standard-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 3000,
+      "fullTargetCopies": 150,
+      "deliveredCopies": 150,
+      "guaranteedSinglesFullTargetPrice": 10400,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.7115384615384616,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-all-deluxe-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 3200,
+      "fullTargetCopies": 200,
+      "deliveredCopies": 160,
+      "guaranteedSinglesFullTargetPrice": 11640,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.6563573883161512,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-all-deluxe-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 4000,
+      "fullTargetCopies": 200,
+      "deliveredCopies": 200,
+      "guaranteedSinglesFullTargetPrice": 11640,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.6563573883161512,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-nature-standard-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 0,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 0,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-nature-standard-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-nature-deluxe-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 0,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 0,
+      "guaranteedSinglesFullTargetPrice": 2360,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.4491525423728814,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-nature-deluxe-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2360,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.4491525423728814,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-mythical-standard-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-mythical-standard-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-mythical-deluxe-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-mythical-deluxe-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-arcane-standard-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-arcane-standard-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-arcane-deluxe-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-arcane-deluxe-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-undead-standard-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-undead-standard-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-undead-deluxe-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-undead-deluxe-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-constructs-standard-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-constructs-standard-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1000,
+      "fullTargetCopies": 30,
+      "deliveredCopies": 30,
+      "guaranteedSinglesFullTargetPrice": 2080,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.5192307692307692,
+      "status": "published",
+      "testOnly": false,
+      "requiresStarterApproval": false,
+      "approvedForHosted": true
+    },
+    {
+      "id": "founding-constructs-deluxe-completion",
+      "mode": "completion",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    },
+    {
+      "id": "founding-constructs-deluxe-additional",
+      "mode": "additional",
+      "currency": "aether",
+      "priceFromStartingCollection": 1300,
+      "fullTargetCopies": 40,
+      "deliveredCopies": 40,
+      "guaranteedSinglesFullTargetPrice": 2320,
+      "sameCurrencyComparison": true,
+      "discountAgainstSingles": 0.43965517241379315,
+      "status": "draft",
+      "testOnly": false,
+      "requiresStarterApproval": true,
+      "approvedForHosted": false
+    }
+  ],
+  "packages": [
+    {
+      "id": "aether-500",
+      "aether": 500,
+      "amountMinor": 499,
+      "centsPerAether": 0.998
+    },
+    {
+      "id": "aether-1000",
+      "aether": 1000,
+      "amountMinor": 999,
+      "centsPerAether": 0.999
+    },
+    {
+      "id": "aether-2100",
+      "aether": 2100,
+      "amountMinor": 1999,
+      "centsPerAether": 0.9519047619047619
+    },
+    {
+      "id": "aether-5500",
+      "aether": 5500,
+      "amountMinor": 4999,
+      "centsPerAether": 0.9089090909090909
+    },
+    {
+      "id": "aether-11500",
+      "aether": 11500,
+      "amountMinor": 9999,
+      "centsPerAether": 0.8694782608695653
+    }
+  ],
+  "packageWarnings": [
+    {
+      "code": "package_rate_inversion",
+      "productId": "aether-1000",
+      "message": "This larger package has a worse per-unit rate than the preceding package. Prices remain unchanged pending owner review."
+    }
+  ],
+  "cosmetics": [
+    {
+      "id": "back-nature",
+      "licenses": 1,
+      "price": 199,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "battlefield-nature",
+      "licenses": 1,
+      "price": 499,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "artwork-n001",
+      "licenses": 1,
+      "price": 149,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "back-mythical",
+      "licenses": 1,
+      "price": 199,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "battlefield-mythical",
+      "licenses": 1,
+      "price": 499,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "artwork-m001",
+      "licenses": 1,
+      "price": 149,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "back-arcane",
+      "licenses": 1,
+      "price": 199,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "battlefield-arcane",
+      "licenses": 1,
+      "price": 499,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "artwork-a001",
+      "licenses": 1,
+      "price": 149,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "back-undead",
+      "licenses": 1,
+      "price": 199,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "battlefield-undead",
+      "licenses": 1,
+      "price": 499,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "artwork-u001",
+      "licenses": 1,
+      "price": 149,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "back-constructs",
+      "licenses": 1,
+      "price": 199,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "battlefield-constructs",
+      "licenses": 1,
+      "price": 499,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "artwork-c001",
+      "licenses": 1,
+      "price": 149,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": true
+    },
+    {
+      "id": "product-treatment-metallic",
+      "licenses": 1,
+      "price": 299,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": false
+    },
+    {
+      "id": "product-treatment-holographic",
+      "licenses": 1,
+      "price": 299,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": false
+    },
+    {
+      "id": "product-treatment-edge",
+      "licenses": 1,
+      "price": 299,
+      "currency": "aether",
+      "status": "draft",
+      "enabled": false,
+      "ownerArtPending": false
+    }
+  ],
+  "wholePackageOutlays": [
+    {
+      "requiredAether": 200,
+      "exact": true,
+      "outlayMinor": 499,
+      "deliveredAether": 500,
+      "leftoverAether": 300,
+      "packages": {
+        "aether-500": 1
+      }
+    },
+    {
+      "requiredAether": 400,
+      "exact": true,
+      "outlayMinor": 499,
+      "deliveredAether": 500,
+      "leftoverAether": 100,
+      "packages": {
+        "aether-500": 1
+      }
+    },
+    {
+      "requiredAether": 1000,
+      "exact": true,
+      "outlayMinor": 998,
+      "deliveredAether": 1000,
+      "leftoverAether": 0,
+      "packages": {
+        "aether-500": 2
+      }
+    },
+    {
+      "requiredAether": 1300,
+      "exact": true,
+      "outlayMinor": 1497,
+      "deliveredAether": 1500,
+      "leftoverAether": 200,
+      "packages": {
+        "aether-500": 3
+      }
+    },
+    {
+      "requiredAether": 2400,
+      "exact": true,
+      "outlayMinor": 2495,
+      "deliveredAether": 2500,
+      "leftoverAether": 100,
+      "packages": {
+        "aether-500": 5
+      }
+    },
+    {
+      "requiredAether": 3000,
+      "exact": true,
+      "outlayMinor": 2994,
+      "deliveredAether": 3000,
+      "leftoverAether": 0,
+      "packages": {
+        "aether-500": 6
+      }
+    },
+    {
+      "requiredAether": 4000,
+      "exact": true,
+      "outlayMinor": 3992,
+      "deliveredAether": 4000,
+      "leftoverAether": 0,
+      "packages": {
+        "aether-500": 8
+      }
+    }
+  ],
+  "cashComparisons": [
+    {
+      "id": "cash-founding-all-extra-set",
+      "directCashMinor": 2999,
+      "sameFullContents": true,
+      "aetherPrice": 2999,
+      "wholePackageOutlay": {
+        "requiredAether": 2999,
+        "exact": true,
+        "outlayMinor": 2994,
+        "deliveredAether": 3000,
+        "leftoverAether": 1,
+        "packages": {
+          "aether-500": 6
+        }
+      },
+      "differenceFromWholePackageMinor": 5,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-nature-extra-set",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 999,
+      "wholePackageOutlay": {
+        "requiredAether": 999,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 1,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-mythical-extra-set",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 999,
+      "wholePackageOutlay": {
+        "requiredAether": 999,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 1,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-arcane-extra-set",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 999,
+      "wholePackageOutlay": {
+        "requiredAether": 999,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 1,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-undead-extra-set",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 999,
+      "wholePackageOutlay": {
+        "requiredAether": 999,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 1,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-constructs-extra-set",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 999,
+      "wholePackageOutlay": {
+        "requiredAether": 999,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 1,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-all-standard-additional",
+      "directCashMinor": 2999,
+      "sameFullContents": true,
+      "aetherPrice": 3000,
+      "wholePackageOutlay": {
+        "requiredAether": 3000,
+        "exact": true,
+        "outlayMinor": 2994,
+        "deliveredAether": 3000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 6
+        }
+      },
+      "differenceFromWholePackageMinor": 5,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-all-deluxe-additional",
+      "directCashMinor": 3999,
+      "sameFullContents": true,
+      "aetherPrice": 4000,
+      "wholePackageOutlay": {
+        "requiredAether": 4000,
+        "exact": true,
+        "outlayMinor": 3992,
+        "deliveredAether": 4000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 8
+        }
+      },
+      "differenceFromWholePackageMinor": 7,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-nature-standard-additional",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 1000,
+      "wholePackageOutlay": {
+        "requiredAether": 1000,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-nature-deluxe-additional",
+      "directCashMinor": 1299,
+      "sameFullContents": true,
+      "aetherPrice": 1300,
+      "wholePackageOutlay": {
+        "requiredAether": 1300,
+        "exact": true,
+        "outlayMinor": 1497,
+        "deliveredAether": 1500,
+        "leftoverAether": 200,
+        "packages": {
+          "aether-500": 3
+        }
+      },
+      "differenceFromWholePackageMinor": -198,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-mythical-standard-additional",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 1000,
+      "wholePackageOutlay": {
+        "requiredAether": 1000,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-mythical-deluxe-additional",
+      "directCashMinor": 1299,
+      "sameFullContents": true,
+      "aetherPrice": 1300,
+      "wholePackageOutlay": {
+        "requiredAether": 1300,
+        "exact": true,
+        "outlayMinor": 1497,
+        "deliveredAether": 1500,
+        "leftoverAether": 200,
+        "packages": {
+          "aether-500": 3
+        }
+      },
+      "differenceFromWholePackageMinor": -198,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-arcane-standard-additional",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 1000,
+      "wholePackageOutlay": {
+        "requiredAether": 1000,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-arcane-deluxe-additional",
+      "directCashMinor": 1299,
+      "sameFullContents": true,
+      "aetherPrice": 1300,
+      "wholePackageOutlay": {
+        "requiredAether": 1300,
+        "exact": true,
+        "outlayMinor": 1497,
+        "deliveredAether": 1500,
+        "leftoverAether": 200,
+        "packages": {
+          "aether-500": 3
+        }
+      },
+      "differenceFromWholePackageMinor": -198,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-undead-standard-additional",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 1000,
+      "wholePackageOutlay": {
+        "requiredAether": 1000,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-undead-deluxe-additional",
+      "directCashMinor": 1299,
+      "sameFullContents": true,
+      "aetherPrice": 1300,
+      "wholePackageOutlay": {
+        "requiredAether": 1300,
+        "exact": true,
+        "outlayMinor": 1497,
+        "deliveredAether": 1500,
+        "leftoverAether": 200,
+        "packages": {
+          "aether-500": 3
+        }
+      },
+      "differenceFromWholePackageMinor": -198,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-constructs-standard-additional",
+      "directCashMinor": 999,
+      "sameFullContents": true,
+      "aetherPrice": 1000,
+      "wholePackageOutlay": {
+        "requiredAether": 1000,
+        "exact": true,
+        "outlayMinor": 998,
+        "deliveredAether": 1000,
+        "leftoverAether": 0,
+        "packages": {
+          "aether-500": 2
+        }
+      },
+      "differenceFromWholePackageMinor": 1,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    },
+    {
+      "id": "cash-founding-constructs-deluxe-additional",
+      "directCashMinor": 1299,
+      "sameFullContents": true,
+      "aetherPrice": 1300,
+      "wholePackageOutlay": {
+        "requiredAether": 1300,
+        "exact": true,
+        "outlayMinor": 1497,
+        "deliveredAether": 1500,
+        "leftoverAether": 200,
+        "packages": {
+          "aether-500": 3
+        }
+      },
+      "differenceFromWholePackageMinor": -198,
+      "notice": "Whole-package comparisons disclose leftover currency. Completion products depend on ownership; repeated cosmetics grant no extra license."
+    }
+  ],
+  "promotions": [],
+  "directCash": [
+    {
+      "id": "cash-founding-all-extra-set",
+      "amountMinor": 2999,
+      "components": [
+        "founding-all-extra-set"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-nature-extra-set",
+      "amountMinor": 999,
+      "components": [
+        "founding-nature-extra-set"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-mythical-extra-set",
+      "amountMinor": 999,
+      "components": [
+        "founding-mythical-extra-set"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-arcane-extra-set",
+      "amountMinor": 999,
+      "components": [
+        "founding-arcane-extra-set"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-undead-extra-set",
+      "amountMinor": 999,
+      "components": [
+        "founding-undead-extra-set"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-constructs-extra-set",
+      "amountMinor": 999,
+      "components": [
+        "founding-constructs-extra-set"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-all-standard-additional",
+      "amountMinor": 2999,
+      "components": [
+        "founding-all-standard-additional"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-all-deluxe-additional",
+      "amountMinor": 3999,
+      "components": [
+        "founding-all-deluxe-additional"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "cash-founding-nature-standard-additional",
+      "amountMinor": 999,
+      "components": [
+        "founding-nature-standard-additional"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-nature-deluxe-additional",
+      "amountMinor": 1299,
+      "components": [
+        "founding-nature-deluxe-additional"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "cash-founding-mythical-standard-additional",
+      "amountMinor": 999,
+      "components": [
+        "founding-mythical-standard-additional"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-mythical-deluxe-additional",
+      "amountMinor": 1299,
+      "components": [
+        "founding-mythical-deluxe-additional"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "cash-founding-arcane-standard-additional",
+      "amountMinor": 999,
+      "components": [
+        "founding-arcane-standard-additional"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-arcane-deluxe-additional",
+      "amountMinor": 1299,
+      "components": [
+        "founding-arcane-deluxe-additional"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "cash-founding-undead-standard-additional",
+      "amountMinor": 999,
+      "components": [
+        "founding-undead-standard-additional"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-undead-deluxe-additional",
+      "amountMinor": 1299,
+      "components": [
+        "founding-undead-deluxe-additional"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "cash-founding-constructs-standard-additional",
+      "amountMinor": 999,
+      "components": [
+        "founding-constructs-standard-additional"
+      ],
+      "status": "published"
+    },
+    {
+      "id": "cash-founding-constructs-deluxe-additional",
+      "amountMinor": 1299,
+      "components": [
+        "founding-constructs-deluxe-additional"
+      ],
+      "status": "draft"
+    }
+  ],
+  "finance": {
+    "modelOnly": true,
+    "actualRevenueMinor": 0,
+    "channel": "browser",
+    "baseAssumptions": {
+      "mau": 100,
+      "conversion": 0.05,
+      "spend": 15,
+      "ordersPerPayer": 2,
+      "feeRate": 0.029,
+      "feePerOrder": 0.3,
+      "refundRate": 0.02,
+      "disputeRate": 0.002,
+      "disputeCost": 15,
+      "hosting": 30,
+      "content": 200,
+      "operations": 100,
+      "redemptionRate": 0.75
+    },
+    "assumptions": {
+      "mau": 100,
+      "conversion": 0.05,
+      "spend": 15,
+      "ordersPerPayer": 2,
+      "feeRate": 0.029,
+      "feePerOrder": 0.3,
+      "refundRate": 0.02,
+      "disputeRate": 0.002,
+      "disputeCost": 15,
+      "hosting": 30,
+      "content": 200,
+      "operations": 100,
+      "redemptionRate": 0.75
+    },
+    "projection": {
+      "modelOnly": true,
+      "payers": 5,
+      "grossSales": 75,
+      "netSales": 73.35,
+      "disputedSales": 0.15,
+      "disputeFees": 0.3,
+      "processing": 5.175000000000001,
+      "refunds": 1.5,
+      "disputes": 0.44999999999999996,
+      "cashReceipts": 67.875,
+      "fixedCosts": 330,
+      "contributionAfterModeledCosts": -262.125,
+      "breakEvenPayers": 25,
+      "breakEvenMAU": 487,
+      "illustrativeRecognizedRevenue": 55.012499999999996,
+      "illustrativeDeferredConsideration": 18.3375
+    },
+    "averageCheckoutValue": 7.5,
+    "salesAllocation": [
+      {
+        "category": "boosters",
+        "basisPoints": 2000,
+        "estimatedGrossSales": 15
+      },
+      {
+        "category": "singles",
+        "basisPoints": 1500,
+        "estimatedGrossSales": 11.25
+      },
+      {
+        "category": "collections",
+        "basisPoints": 2500,
+        "estimatedGrossSales": 18.75
+      },
+      {
+        "category": "cosmetics",
+        "basisPoints": 3000,
+        "estimatedGrossSales": 22.5
+      },
+      {
+        "category": "expansions",
+        "basisPoints": 1000,
+        "estimatedGrossSales": 7.5
+      },
+      {
+        "category": "other",
+        "basisPoints": 0,
+        "estimatedGrossSales": 0
+      }
+    ],
+    "communities": [
+      {
+        "mau": 100,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
+      },
+      {
+        "mau": 500,
+        "modelOnly": true,
+        "payers": 25,
+        "grossSales": 375,
+        "netSales": 366.75,
+        "disputedSales": 0.75,
+        "disputeFees": 1.5,
+        "processing": 25.875,
+        "refunds": 7.5,
+        "disputes": 2.25,
+        "cashReceipts": 339.375,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 9.375,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 275.0625,
+        "illustrativeDeferredConsideration": 91.6875
+      },
+      {
+        "mau": 1000,
+        "modelOnly": true,
+        "payers": 50,
+        "grossSales": 750,
+        "netSales": 733.5,
+        "disputedSales": 1.5,
+        "disputeFees": 3,
+        "processing": 51.75,
+        "refunds": 15,
+        "disputes": 4.5,
+        "cashReceipts": 678.75,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 348.75,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 550.125,
+        "illustrativeDeferredConsideration": 183.375
+      },
+      {
+        "mau": 5000,
+        "modelOnly": true,
+        "payers": 250,
+        "grossSales": 3750,
+        "netSales": 3667.5,
+        "disputedSales": 7.5,
+        "disputeFees": 15,
+        "processing": 258.75,
+        "refunds": 75,
+        "disputes": 22.5,
+        "cashReceipts": 3393.75,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 3063.75,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 2750.625,
+        "illustrativeDeferredConsideration": 916.875
+      },
+      {
+        "mau": 10000,
+        "modelOnly": true,
+        "payers": 500,
+        "grossSales": 7500,
+        "netSales": 7335,
+        "disputedSales": 15,
+        "disputeFees": 30,
+        "processing": 517.5,
+        "refunds": 150,
+        "disputes": 45,
+        "cashReceipts": 6787.5,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 6457.5,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 5501.25,
+        "illustrativeDeferredConsideration": 1833.75
+      },
+      {
+        "mau": 50000,
+        "modelOnly": true,
+        "payers": 2500,
+        "grossSales": 37500,
+        "netSales": 36675,
+        "disputedSales": 75,
+        "disputeFees": 150,
+        "processing": 2587.5,
+        "refunds": 750,
+        "disputes": 225,
+        "cashReceipts": 33937.5,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": 33607.5,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 27506.25,
+        "illustrativeDeferredConsideration": 9168.75
+      }
+    ],
+    "sensitivity": [
+      {
+        "conversion": 0.02,
+        "spend": 5,
+        "modelOnly": true,
+        "payers": 2,
+        "grossSales": 10,
+        "netSales": 9.780000000000001,
+        "disputedSales": 0.02,
+        "disputeFees": 0.12,
+        "processing": 1.49,
+        "refunds": 0.2,
+        "disputes": 0.13999999999999999,
+        "cashReceipts": 8.17,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -321.83,
+        "breakEvenPayers": 81,
+        "breakEvenMAU": 4040,
+        "illustrativeRecognizedRevenue": 7.335000000000001,
+        "illustrativeDeferredConsideration": 2.4450000000000003
+      },
+      {
+        "conversion": 0.02,
+        "spend": 15,
+        "modelOnly": true,
+        "payers": 2,
+        "grossSales": 30,
+        "netSales": 29.34,
+        "disputedSales": 0.06,
+        "disputeFees": 0.12,
+        "processing": 2.07,
+        "refunds": 0.6,
+        "disputes": 0.18,
+        "cashReceipts": 27.15,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -302.85,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 1216,
+        "illustrativeRecognizedRevenue": 22.005,
+        "illustrativeDeferredConsideration": 7.335
+      },
+      {
+        "conversion": 0.02,
+        "spend": 30,
+        "modelOnly": true,
+        "payers": 2,
+        "grossSales": 60,
+        "netSales": 58.68,
+        "disputedSales": 0.12,
+        "disputeFees": 0.12,
+        "processing": 2.94,
+        "refunds": 1.2,
+        "disputes": 0.24,
+        "cashReceipts": 55.62,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -274.38,
+        "breakEvenPayers": 12,
+        "breakEvenMAU": 594,
+        "illustrativeRecognizedRevenue": 44.01,
+        "illustrativeDeferredConsideration": 14.67
+      },
+      {
+        "conversion": 0.05,
+        "spend": 5,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 25,
+        "netSales": 24.45,
+        "disputedSales": 0.05,
+        "disputeFees": 0.3,
+        "processing": 3.725,
+        "refunds": 0.5,
+        "disputes": 0.35,
+        "cashReceipts": 20.424999999999997,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -309.575,
+        "breakEvenPayers": 81,
+        "breakEvenMAU": 1616,
+        "illustrativeRecognizedRevenue": 18.3375,
+        "illustrativeDeferredConsideration": 6.1125
+      },
+      {
+        "conversion": 0.05,
+        "spend": 15,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 75,
+        "netSales": 73.35,
+        "disputedSales": 0.15,
+        "disputeFees": 0.3,
+        "processing": 5.175000000000001,
+        "refunds": 1.5,
+        "disputes": 0.44999999999999996,
+        "cashReceipts": 67.875,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -262.125,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 487,
+        "illustrativeRecognizedRevenue": 55.012499999999996,
+        "illustrativeDeferredConsideration": 18.3375
+      },
+      {
+        "conversion": 0.05,
+        "spend": 30,
+        "modelOnly": true,
+        "payers": 5,
+        "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.3,
+        "processing": 7.3500000000000005,
+        "refunds": 3,
+        "disputes": 0.6,
+        "cashReceipts": 139.05,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -190.95,
+        "breakEvenPayers": 12,
+        "breakEvenMAU": 238,
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
+      },
+      {
+        "conversion": 0.1,
+        "spend": 5,
+        "modelOnly": true,
+        "payers": 10,
+        "grossSales": 50,
+        "netSales": 48.9,
+        "disputedSales": 0.1,
+        "disputeFees": 0.6,
+        "processing": 7.45,
+        "refunds": 1,
+        "disputes": 0.7,
+        "cashReceipts": 40.849999999999994,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -289.15,
+        "breakEvenPayers": 81,
+        "breakEvenMAU": 808,
+        "illustrativeRecognizedRevenue": 36.675,
+        "illustrativeDeferredConsideration": 12.225
+      },
+      {
+        "conversion": 0.1,
+        "spend": 15,
+        "modelOnly": true,
+        "payers": 10,
+        "grossSales": 150,
+        "netSales": 146.7,
+        "disputedSales": 0.3,
+        "disputeFees": 0.6,
+        "processing": 10.350000000000001,
+        "refunds": 3,
+        "disputes": 0.8999999999999999,
+        "cashReceipts": 135.75,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -194.25,
+        "breakEvenPayers": 25,
+        "breakEvenMAU": 244,
+        "illustrativeRecognizedRevenue": 110.02499999999999,
+        "illustrativeDeferredConsideration": 36.675
+      },
+      {
+        "conversion": 0.1,
+        "spend": 30,
+        "modelOnly": true,
+        "payers": 10,
+        "grossSales": 300,
+        "netSales": 293.4,
+        "disputedSales": 0.6,
+        "disputeFees": 0.6,
+        "processing": 14.700000000000001,
+        "refunds": 6,
+        "disputes": 1.2,
+        "cashReceipts": 278.1,
+        "fixedCosts": 330,
+        "contributionAfterModeledCosts": -51.89999999999998,
+        "breakEvenPayers": 12,
+        "breakEvenMAU": 119,
+        "illustrativeRecognizedRevenue": 220.04999999999998,
+        "illustrativeDeferredConsideration": 73.35
+      }
+    ],
+    "browserProcessing": {
+      "rate": 0.029,
+      "fixedPerOrder": 0.3
+    },
+    "mobilePlatform": {
+      "rate": 0.3,
+      "fixedPerOrder": 0,
+      "assumptionOnly": true
+    },
+    "notice": "Estimates, not observed player behavior, actual revenue, fee quotes or approved commercial/accounting policy. Platform fees are modeled separately, not added to browser fees. Aether redemption is not a second sale."
+  },
+  "recommendations": [
+    "This larger package has a worse per-unit rate than the preceding package. Prices remain unchanged pending owner review.",
+    "Keep guaranteed first-copy completion at its actual 24-pack bound; forty starting copies still contain thirty unique identities.",
+    "Preserve guaranteed individual/collection options. Do not use unfavorable randomness as a revenue policy.",
+    "Cosmetics, optional expansions and repeat deck-building can support engagement without combat-stat advantages or artificially delayed founding collection completion.",
+    "Prices, sales mix, retention and spending are provisional hypotheses. Measure real cohort behavior before permanent policy decisions."
+  ],
+  "limitations": [
+    "No actual purchases, revenue, retention or market prices are inferred.",
+    "Premium Monte Carlo values are sample averages against configured singles, not resale value or a guarantee.",
+    "Initial premium pools are modeled explicitly; exhaustion, individual choices and trading counterparties change later outcomes.",
+    "Gold trajectories reuse the existing objective/mastery model and its disclosed participation assumptions; paying does not alter match power or Gold rules.",
+    "An unapproved starter recipe is a forty-copy planning assumption, never authorization to activate deluxe products.",
+    "Mobile fees are separate adjustable assumptions; no platform agreement or tax/legal compliance is established."
+  ]
+}

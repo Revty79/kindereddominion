@@ -1,0 +1,130 @@
+{
+  "scope": "V1.6H.7-8 closure of H.1-8",
+  "date": "2026-11-27",
+  "baseCommit": "07be27888678b07a6d7c312ac1990f0c3058b2af",
+  "typechecking": {
+    "root": true,
+    "backend": true,
+    "acceptance": true
+  },
+  "lint": {
+    "configured": false
+  },
+  "unit": {
+    "files": 37,
+    "passed": 1140
+  },
+  "postgres": {
+    "major": 18,
+    "nativeVersion": 180000,
+    "files": 30,
+    "passed": 308,
+    "newStoreCases": 16
+  },
+  "operator": {
+    "total": 55,
+    "passed": 53,
+    "unixOnlySkipped": 2
+  },
+  "compiledBrowsers": {
+    "groupCounts": {
+      "placement": 10,
+      "tactical": 11,
+      "resolution": 13,
+      "history": 14,
+      "viewport": 4,
+      "shop": 1,
+      "commerce": 1,
+      "commerce-admin": 1,
+      "control": 1,
+      "launch-catalog": 3,
+      "storefront": 3,
+      "cosmetics": 4,
+      "store-acceptance": 2
+    },
+    "ordinaryCases": 68,
+    "genuineStripeCases": 1,
+    "total": 69,
+    "animationRepeatPassed": 3,
+    "finalAdminRenderRepeatPassed": 1
+  },
+  "genuineStripe": {
+    "genuineStripeSandbox": true,
+    "hostedCheckout": true,
+    "cliSignedInitialDelivery": true,
+    "paidOrders": 3,
+    "aetherDelivered": 500,
+    "aetherRemaining": 480,
+    "fixedGameplayCopiesAfter": 71,
+    "cosmeticLicensesPurchased": 4,
+    "cosmeticRefundMinor": 499,
+    "originalLicensesRevoked": true,
+    "declined": true,
+    "cancelledByExpiry": true,
+    "concurrentResignedReplay": true,
+    "invalidSignatureRejected": true,
+    "fulfillmentOnce": true,
+    "programmaticCatalogProducts": 7,
+    "catalogSecondRunReused": true,
+    "serviceRestartPersistence": true,
+    "reconciled": true,
+    "realRevenue": 0,
+    "livePayments": false,
+    "hostedServerTouched": false
+  },
+  "preservation": {
+    "v15": {
+      "fromSchema": 20,
+      "toSchema": 24,
+      "originalRelations": 107,
+      "originalRows": 566098,
+      "allExistingColumnsPreserved": true,
+      "originalSourceUntouched": true,
+      "newMigrationsInH78": 0,
+      "normalDevWrites": false,
+      "hostedAccessed": false,
+      "sourceRoot": "isolated V1.6H worktree"
+    },
+    "v16": {
+      "fromSchema": 24,
+      "toSchema": 24,
+      "relations": 115,
+      "rows": 16289,
+      "allRowAndColumnHashesIdentical": true,
+      "backupChecksumVerified": true,
+      "sourceUnchanged": true,
+      "newMigrations": 0,
+      "privateFixtureAssetsRetained": true,
+      "normalDevWrites": false,
+      "hostedAccessed": false
+    }
+  },
+  "assets": {
+    "registry": 153,
+    "playerChecksums": 152,
+    "sourceMastersPackaged": false,
+    "developmentChunks": 0
+  },
+  "productionBuilds": {
+    "backend": true,
+    "development": true,
+    "player": true,
+    "control": true
+  },
+  "secrets": {
+    "trackedPrivateFiles": 0,
+    "privateValuesChecked": 3,
+    "buildFilesChecked": 546,
+    "matches": 0
+  },
+  "newMigrations": 0,
+  "officialArtworkChanged": false,
+  "gameplayMechanicsChanged": false,
+  "normalOwnerDatabaseWrites": false,
+  "hostDeploymentPerformed": false,
+  "livePaymentsEnabled": false,
+  "v17Started": false,
+  "exactCommitCi": {
+    "status": "pending source publication; exact immutable receipt follows"
+  }
+}

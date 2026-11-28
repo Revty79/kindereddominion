@@ -1,0 +1,1417 @@
+{
+  "proposalOnly": true,
+  "officialArtworkApproved": false,
+  "gameplayIdentityCount": 150,
+  "explicitProducts": [
+    {
+      "id": "founding-first",
+      "type": "booster",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "boosters",
+      "currency": "gold",
+      "price": 250,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-additional",
+      "type": "booster",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 199,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-all-complete",
+      "type": "bundle",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "gold",
+      "price": 50,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-all-extra-set",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 2999,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-first",
+      "type": "booster",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "boosters",
+      "currency": "gold",
+      "price": 300,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-additional",
+      "type": "booster",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 249,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-complete",
+      "type": "bundle",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "gold",
+      "price": 50,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-extra-set",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 999,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-first",
+      "type": "booster",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "boosters",
+      "currency": "gold",
+      "price": 300,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-additional",
+      "type": "booster",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 249,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-complete",
+      "type": "bundle",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "gold",
+      "price": 50,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-extra-set",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 999,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-first",
+      "type": "booster",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "boosters",
+      "currency": "gold",
+      "price": 300,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-additional",
+      "type": "booster",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 249,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-complete",
+      "type": "bundle",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "gold",
+      "price": 50,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-extra-set",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 999,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-first",
+      "type": "booster",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "boosters",
+      "currency": "gold",
+      "price": 300,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-additional",
+      "type": "booster",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 249,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-complete",
+      "type": "bundle",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "gold",
+      "price": 50,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-extra-set",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 999,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-first",
+      "type": "booster",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "boosters",
+      "currency": "gold",
+      "price": 300,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-additional",
+      "type": "booster",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 249,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-complete",
+      "type": "bundle",
+      "mode": "first_copy",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "gold",
+      "price": 50,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-extra-set",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "archived",
+      "enabled": false,
+      "testOnly": false,
+      "category": "additional",
+      "currency": "aether",
+      "price": 999,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "dominion-booster",
+      "type": "booster",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": true,
+      "category": "boosters",
+      "currency": "aether",
+      "price": 200,
+      "edition": "premium",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "collector-booster",
+      "type": "booster",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": true,
+      "category": "boosters",
+      "currency": "aether",
+      "price": 400,
+      "edition": "collector",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-all-standard-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 3000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-all-standard-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 3000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-all-deluxe-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 4000,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Nature",
+          "Mythical",
+          "Arcane",
+          "Undead",
+          "Constructs"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-all-deluxe-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 4000,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Nature",
+          "Mythical",
+          "Arcane",
+          "Undead",
+          "Constructs"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-standard-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-standard-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-deluxe-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Nature"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-nature-deluxe-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Nature"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-standard-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-standard-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-deluxe-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Mythical"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-mythical-deluxe-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Mythical"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-standard-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-standard-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-deluxe-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Arcane"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-arcane-deluxe-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Arcane"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-standard-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-standard-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-deluxe-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Undead"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-undead-deluxe-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Undead"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-standard-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-standard-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "published",
+      "enabled": true,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1000,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-deluxe-completion",
+      "type": "bundle",
+      "mode": "completion",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Constructs"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "founding-constructs-deluxe-additional",
+      "type": "bundle",
+      "mode": "additional",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "kindreds",
+      "currency": "aether",
+      "price": 1300,
+      "edition": "deluxe",
+      "starterRecipe": {
+        "version": "founding-40-proposal-v1",
+        "digest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+        "kindreds": [
+          "Constructs"
+        ]
+      },
+      "cosmetics": []
+    },
+    {
+      "id": "back-nature",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 199,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-back-nature"
+      ]
+    },
+    {
+      "id": "battlefield-nature",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 499,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-battlefield-nature"
+      ]
+    },
+    {
+      "id": "artwork-n001",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "artwork",
+      "currency": "aether",
+      "price": 149,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "alternate-study-n001"
+      ]
+    },
+    {
+      "id": "back-mythical",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 199,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-back-mythical"
+      ]
+    },
+    {
+      "id": "battlefield-mythical",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 499,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-battlefield-mythical"
+      ]
+    },
+    {
+      "id": "artwork-m001",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "artwork",
+      "currency": "aether",
+      "price": 149,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "alternate-study-m001"
+      ]
+    },
+    {
+      "id": "back-arcane",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 199,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-back-arcane"
+      ]
+    },
+    {
+      "id": "battlefield-arcane",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 499,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-battlefield-arcane"
+      ]
+    },
+    {
+      "id": "artwork-a001",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "artwork",
+      "currency": "aether",
+      "price": 149,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "alternate-study-a001"
+      ]
+    },
+    {
+      "id": "back-undead",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 199,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-back-undead"
+      ]
+    },
+    {
+      "id": "battlefield-undead",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 499,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-battlefield-undead"
+      ]
+    },
+    {
+      "id": "artwork-u001",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "artwork",
+      "currency": "aether",
+      "price": 149,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "alternate-study-u001"
+      ]
+    },
+    {
+      "id": "back-constructs",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 199,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-back-constructs"
+      ]
+    },
+    {
+      "id": "battlefield-constructs",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 499,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "standard-battlefield-constructs"
+      ]
+    },
+    {
+      "id": "artwork-c001",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "artwork",
+      "currency": "aether",
+      "price": 149,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "alternate-study-c001"
+      ]
+    },
+    {
+      "id": "product-treatment-metallic",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 299,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "treatment-metallic"
+      ]
+    },
+    {
+      "id": "product-treatment-holographic",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 299,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "treatment-holographic"
+      ]
+    },
+    {
+      "id": "product-treatment-edge",
+      "type": "cosmetic",
+      "mode": "cosmetic",
+      "status": "draft",
+      "enabled": false,
+      "testOnly": false,
+      "category": "cosmetics",
+      "currency": "aether",
+      "price": 299,
+      "edition": "standard",
+      "starterRecipe": null,
+      "cosmetics": [
+        "treatment-edge"
+      ]
+    }
+  ],
+  "virtualDirectProducts": {
+    "firstCopy": 150,
+    "additional": 150
+  },
+  "commercialProducts": [
+    {
+      "id": "aether-500",
+      "type": "aether",
+      "amountMinor": 499,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "aether-1000",
+      "type": "aether",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "aether-2100",
+      "type": "aether",
+      "amountMinor": 1999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "aether-5500",
+      "type": "aether",
+      "amountMinor": 4999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "aether-11500",
+      "type": "aether",
+      "amountMinor": 9999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-all-extra-set",
+      "type": "assets",
+      "amountMinor": 2999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-nature-extra-set",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-mythical-extra-set",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-arcane-extra-set",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-undead-extra-set",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-constructs-extra-set",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-all-standard-additional",
+      "type": "assets",
+      "amountMinor": 2999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-all-deluxe-additional",
+      "type": "assets",
+      "amountMinor": 3999,
+      "status": "draft",
+      "enabled": false,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-nature-standard-additional",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-nature-deluxe-additional",
+      "type": "assets",
+      "amountMinor": 1299,
+      "status": "draft",
+      "enabled": false,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-mythical-standard-additional",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-mythical-deluxe-additional",
+      "type": "assets",
+      "amountMinor": 1299,
+      "status": "draft",
+      "enabled": false,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-arcane-standard-additional",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-arcane-deluxe-additional",
+      "type": "assets",
+      "amountMinor": 1299,
+      "status": "draft",
+      "enabled": false,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-undead-standard-additional",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-undead-deluxe-additional",
+      "type": "assets",
+      "amountMinor": 1299,
+      "status": "draft",
+      "enabled": false,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-constructs-standard-additional",
+      "type": "assets",
+      "amountMinor": 999,
+      "status": "published",
+      "enabled": true,
+      "sandbox": true,
+      "liveEligible": false
+    },
+    {
+      "id": "cash-founding-constructs-deluxe-additional",
+      "type": "assets",
+      "amountMinor": 1299,
+      "status": "draft",
+      "enabled": false,
+      "sandbox": true,
+      "liveEligible": false
+    }
+  ],
+  "cosmeticDefinitions": [
+    {
+      "id": "standard-back-nature",
+      "type": "card_back",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-battlefield-nature",
+      "type": "battlefield",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "alternate-study-n001",
+      "type": "alternate_art",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-back-mythical",
+      "type": "card_back",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-battlefield-mythical",
+      "type": "battlefield",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "alternate-study-m001",
+      "type": "alternate_art",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-back-arcane",
+      "type": "card_back",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-battlefield-arcane",
+      "type": "battlefield",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "alternate-study-a001",
+      "type": "alternate_art",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-back-undead",
+      "type": "card_back",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-battlefield-undead",
+      "type": "battlefield",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "alternate-study-u001",
+      "type": "alternate_art",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-back-constructs",
+      "type": "card_back",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "standard-battlefield-constructs",
+      "type": "battlefield",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "alternate-study-c001",
+      "type": "alternate_art",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "treatment-metallic",
+      "type": "border",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "treatment-holographic",
+      "type": "border",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    },
+    {
+      "id": "treatment-edge",
+      "type": "border",
+      "status": "draft",
+      "enabled": false,
+      "asset": null
+    }
+  ],
+  "featuredProducts": []
+}
