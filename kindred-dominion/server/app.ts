@@ -1,3 +1,6 @@
+import {registerLimitedRewards} from "./limited-rewards";
+import {limitedRoutes} from "./limited-routes";
+import {registerLimitedPublication} from "./limited-publication";
 import {commerceAdministration} from "./commerce-administration";
 import {commercialFinancialRoutes} from "./commerce-financial-routes";
 import Fastify from "fastify";
@@ -38,7 +41,7 @@ import {presentationRoutes} from "./presentation";
 import {storeAdministration} from "./store-administration";
 import {cosmeticGalleryRoutes} from "./cosmetic-gallery";
 export async function createApi(config:BackendConfig,suppliedPool?:DB){
-  registerShopPublication();registerShopRewards();registerTradingPublication();registerCommercePublication();registerStarters();
+  registerLimitedPublication();registerLimitedRewards();registerShopPublication();registerShopRewards();registerTradingPublication();registerCommercePublication();registerStarters();
   const pool=suppliedPool??database(config),app=Fastify({logger:false,bodyLimit:256*1024,trustProxy:false,requestTimeout:30000,connectionTimeout:10000});
   await app.register(cookie);await app.register(cors,{origin:config.origin,credentials:true,methods:["GET","POST","PUT","PATCH","DELETE"],allowedHeaders:["Content-Type","X-CSRF-Token"]});
   app.addHook("onRequest",async(req,reply)=>{
@@ -66,7 +69,7 @@ export async function createApi(config:BackendConfig,suppliedPool?:DB){
   presentationRoutes(app,pool,auth,config);
   starterRoutes(app,pool,config,auth,inventoryTransaction);
   tradingSafetyRoutes(app,pool,config,auth);
-  commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);storeAdministration(app,pool,config,auth);
+  commerceRoutes(app,pool,config,auth);commercialFinancialRoutes(app,pool,config,auth);commerceAdministration(app,pool,config,auth);storeAdministration(app,pool,config,auth);limitedRoutes(app,pool,config,auth);
   await stripeWebhookRoutes(app,pool,config);
   let stopMaintenance:undefined|(()=>Promise<void>);
   let stopCommerce:undefined|(()=>Promise<void>);

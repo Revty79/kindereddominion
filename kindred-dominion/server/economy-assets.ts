@@ -6,7 +6,7 @@ import type {EconomyRules} from "./economy-rules";
 import {commercialRestrictedLots} from "./commerce-holds";
 export type Client=PoolClient;
 export type AssetOrigin="legacy_unknown"|"starter"|"first_copy"|"mastery"|"achievement"|"administrator"|"promotional"|"purchased"|"sandbox"|"traded";
-export type Provenance={origin:AssetOrigin;tradeable?:boolean;sandbox?:boolean;configVersion?:string;sourceReference?:string;sourceLot?:string;holdUntil?:string;onlyLots?:string[];exactLots?:{id:string;quantity:number}[];returnOriginalHeldLots?:boolean};
+export type Provenance={origin:AssetOrigin;tradeable?:boolean;sandbox?:boolean;configVersion?:string;sourceReference?:string;sourceLot?:string;holdUntil?:string;onlyLots?:string[];exactLots?:{id:string;quantity:number}[];returnOriginalHeldLots?:boolean;limitedInstance?:{id:string;operation:"issue"|"transfer"|"retire";parties?:string[]}};
 export async function lockPlayer(c:Client,id:string){if(!(await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[id])).rowCount)reject(404,"player_missing","Player was not found.");await c.query("INSERT INTO kd.economy_account(player_id) VALUES($1) ON CONFLICT DO NOTHING",[id]);}
 export async function assetEnvironment(c:Client){const row=(await c.query("SELECT environment FROM kd.environment_guard WHERE singleton")).rows[0];if(!row)reject(503,"environment_unavailable","Database environment is unavailable.");return row.environment as string;}
 export async function applyOwnershipLots(c:Client,playerId:string,acquisitionId:string,changes:{editionId:string;quantity:number}[],provenance:Provenance={origin:"administrator",tradeable:false}){

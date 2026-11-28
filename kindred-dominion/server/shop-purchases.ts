@@ -1,3 +1,6 @@
+import {ownedCosmeticIds} from "./cosmetic-views";
+import {limitedEdition} from "./limited-supply";
+import {issueLimited} from "./limited-assets";
 import crypto from "node:crypto";
 import type {BackendConfig} from "./config";
 import {transaction,type DB} from "./db";
@@ -10,7 +13,7 @@ import {requireEconomy} from "./configuration";
 import {contentVersion} from "./catalog";
 import {shopSchema,productSchema,type Product} from "./shop-rules";
 import {drawPack,packPlan} from "./shop-draw";
-import {shopState,offer,permittedPool,type ShopState} from "./shop-catalog";
+import {shopState,offer,permittedPool,resolveProduct,type ShopState} from "./shop-catalog";
 import {registerRewardEntitlement,type RewardEntitlement,type EntitlementContext} from "./reward-entitlements";
 import {reject} from "./errors";
 import {bundleQuantities} from "./shop-quantities";
@@ -22,8 +25,9 @@ export async function fulfillShopAssets(c:Client,playerId:string,state:ShopState
  if(product.testOnly&&!sandbox)reject(403,"sandbox_account_required","Testing artwork and products require a permanently designated sandbox account.");
  await checkRandomizedFunding(c,product,context.funding?.map(lot=>lot.lot_id)??[],sandbox,context.source==="commercial");
  const originalQuantities=new Map(state.quantities),observed=new Set(state.lifetime),now=new Date((await c.query("SELECT now() AS value")).rows[0].value),purchasedFunds=await commerciallyFunded(c,context.funding?.map(lot=>lot.lot_id)??[]);
- const origin:Provenance["origin"]=sandbox?"sandbox":testFunding?"administrator":context.cardOrigin??(product.mode==="first_copy"?"first_copy":"purchased"),tradeable=["additional","completion"].includes(product.mode)&&product.tradeable&&!sandbox&&!testFunding&&origin!=="administrator";
+ const origin:Provenance["origin"]=sandbox?"sandbox":testFunding?"administrator":context.cardOrigin??(product.mode==="first_copy"?"first_copy":"purchased"),tradeable=(["additional","completion"].includes(product.mode)||!!product.limitedEdition)&&product.tradeable&&!sandbox&&!testFunding&&origin!=="administrator";
  const provenance:Provenance={origin,tradeable,sandbox,configVersion:state.id,sourceReference:context.purchaseId,...(tradeable&&purchasedFunds&&state.rules.purchasedHoldHours?{holdUntil:new Date(now.getTime()+state.rules.purchasedHoldHours*3600000).toISOString()}: {})};
+ if(product.limitedEdition)return issueLimited(c,{editionId:product.limitedEdition,playerId,method:"shop",reference:context.source==="commercial"?"commercial:"+context.sourceReference+":"+product.id:"shop:"+context.purchaseId,purchaseId:context.purchaseId,commercialOrderId:context.source==="commercial"?context.sourceReference:undefined,actorId:context.actorId,reason:product.name,provenance});
  let slots:ReturnType<typeof drawPack>=[],items:{cardId:string;quantity:number;newCard:boolean;rarity:string;previousQuantity:number;currentQuantity:number}[]=[],acquisition:any=null;
  const cosmetics:string[]=[],packIds:string[]=[];
  if(product.type==="booster"){
@@ -38,7 +42,7 @@ export async function fulfillShopAssets(c:Client,playerId:string,state:ShopState
  }
  for(const cosmeticId of product.cosmetics){const definition=state.rules.cosmetics.find(cosmetic=>cosmetic.id===cosmeticId);if(!definition||!definition.enabled||definition.status!=="published"||definition.testOnly&&!sandbox)reject(409,"cosmetic_unavailable","This cosmetic's published snapshot or account eligibility is unavailable.");
   const acquisitionId=crypto.randomUUID(),cosmeticOrigin=sandbox?"sandbox":context.source==="reward"?(context.cardOrigin??"achievement"):testFunding?"administrator":"purchased";
-  const owned=await c.query("INSERT INTO kd.cosmetic_ownership(player_id,cosmetic_id,acquired_version,origin,environment,sandbox,current_acquisition) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT(player_id,cosmetic_id) DO UPDATE SET revoked=false,current_acquisition=$7 WHERE kd.cosmetic_ownership.revoked AND NOT kd.cosmetic_ownership.restricted",[playerId,cosmeticId,state.id,cosmeticOrigin,await assetEnvironment(c),sandbox,acquisitionId]);
+  const owned=await c.query("INSERT INTO kd.cosmetic_ownership(player_id,cosmetic_id,acquired_version,origin,environment,sandbox,current_acquisition) VALUES($1,$2,$3,$4,$5,$6,$7) ON CONFLICT(player_id,cosmetic_id) DO UPDATE SET revoked=false,current_acquisition=$7,limited_projection=false,limited_current_version=NULL WHERE (kd.cosmetic_ownership.revoked OR kd.cosmetic_ownership.limited_projection) AND NOT kd.cosmetic_ownership.restricted",[playerId,cosmeticId,state.id,cosmeticOrigin,await assetEnvironment(c),sandbox,acquisitionId]);
   if(owned.rowCount){await c.query("INSERT INTO kd.cosmetic_acquisition(id,player_id,cosmetic_id,purchase_id,config_version,origin,operation,reason) VALUES($1,$2,$3,$4,$5,$6,'grant',$7)",[acquisitionId,playerId,cosmeticId,context.purchaseId,state.id,cosmeticOrigin,product.name]);cosmetics.push(cosmeticId);}
  }
  if(product.type==="cosmetic"&&!cosmetics.length&&!context.allowEmpty)reject(409,"cosmetics_already_owned","No unowned cosmetic remains; no currency was charged.");
@@ -53,7 +57,7 @@ export async function purchaseShop(c:Client,playerId:string,quoteId:string,key:s
  const sameQuote=(await c.query("SELECT result FROM kd.shop_purchase WHERE player_id=$1 AND quote_id=$2",[playerId,quoteId])).rows[0];if(sameQuote)return {...sameQuote.result,replayed:true};
  const quote=(await c.query("SELECT *,expires_at>now() AS fresh FROM kd.shop_quote WHERE id=$1 AND player_id=$2 FOR UPDATE",[quoteId,playerId])).rows[0];if(!quote)reject(404,"quote_missing","This account's purchase confirmation was not found.");if(!quote.fresh)reject(409,"quote_expired","This confirmation expired. Review a fresh exact price and eligible contents.");
  await c.query("SELECT domain FROM kd.configuration_selection WHERE domain=ANY($1) ORDER BY domain FOR SHARE",[["economy","shop"]]);
- const state=await shopState(c,playerId,config),current=await offer(c,state,playerId,quote.product_id);if(!current.available)reject(409,"product_unavailable",current.reasons.join(" "));if(quote.fingerprint!==current.fingerprint)reject(409,"quote_changed","Price, publication or first-copy eligibility changed. Review and confirm the new terms before spending.");
+ const state=await shopState(c,playerId,config),definition=resolveProduct(state,quote.product_id);if(definition?.limitedEdition)await limitedEdition(c,definition.limitedEdition,true);const current=await offer(c,state,playerId,quote.product_id);if(!current.available)reject(409,"product_unavailable",current.reasons.join(" "));if(quote.fingerprint!==current.fingerprint)reject(409,"quote_changed","Price, publication or first-copy eligibility changed. Review and confirm the new terms before spending.");
  const id=crypto.randomUUID(),money=await moveCurrency(c,playerId,"shop-debit:"+id,{[current.product.currency]:-current.terms.price},{type:"shop-purchase",reason:current.product.name,origin:state.account.sandbox?"sandbox":"earned",configVersion:state.economy.id,referenceId:id,actorId:actorId??null},state.economy.rules),funding=(await c.query("SELECT l.id AS lot_id,l.origin,s.quantity,l.source_reference FROM kd.currency_consumption s JOIN kd.currency_lot l ON l.id=s.lot_id WHERE s.transaction_id=$1 ORDER BY l.id",[money.id])).rows;
  const source=state.account.sandbox?"sandbox":"wallet",assets=await fulfillShopAssets(c,playerId,state,current.product,current.eligible,{purchaseId:id,source,actorId,funding}),result={id,productId:current.product.id,label:current.product.name,shopVersion:state.id,economyVersion:state.economy.id,contentVersion:state.pack.id,currency:current.terms.currency,price:current.terms.price,transactionId:money.id,source,funding,...assets};
  await c.query("INSERT INTO kd.shop_purchase(id,player_id,idempotency_key,fingerprint,quote_id,product_id,shop_version,economy_version,content_version,environment,source,currency_id,price,transaction_id,result) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",[id,playerId,key,fingerprint,quoteId,current.product.id,state.id,state.economy.id,state.pack.id,await assetEnvironment(c),source,current.terms.currency,current.terms.price,money.id,result]);
@@ -63,7 +67,7 @@ export async function purchaseShop(c:Client,playerId:string,quoteId:string,key:s
 }
 async function entitlementShopState(c:Client,playerId:string,snapshot:any,context:EntitlementContext):Promise<ShopState>{
  const pack=await contentVersion(c,snapshot.content_version),rules=shopSchema.parse(snapshot.snapshot.rules),economyRow=(await c.query("SELECT document FROM kd.configuration_version WHERE id=$1 AND domain='economy'",[context.economyVersion])).rows[0];if(!economyRow)reject(409,"reward_version_missing","The original economy reward publication is unavailable.");
- const identities=new Set((await c.query("SELECT id FROM kd.card_identity WHERE NOT retired")).rows.map(row=>row.id)),quantities=new Map<string,number>((await c.query("SELECT e.card_id,sum(i.quantity)::text AS quantity FROM kd.inventory i JOIN kd.edition e ON e.id=i.edition_id WHERE player_id=$1 GROUP BY e.card_id",[playerId])).rows.map(row=>[row.card_id,Number(row.quantity)])),lifetime=new Set<string>((await c.query("SELECT card_id FROM kd.lifetime_card WHERE player_id=$1",[playerId])).rows.map(row=>row.card_id)),ownedCosmetics=new Set<string>((await c.query("SELECT cosmetic_id FROM kd.cosmetic_ownership WHERE player_id=$1 AND NOT revoked",[playerId])).rows.map(row=>row.cosmetic_id)),account=(await c.query("SELECT e.*,p.status FROM kd.economy_account e JOIN kd.player p ON p.id=e.player_id WHERE e.player_id=$1",[playerId])).rows[0];
+ const identities=new Set((await c.query("SELECT id FROM kd.card_identity WHERE NOT retired")).rows.map(row=>row.id)),quantities=new Map<string,number>((await c.query("SELECT e.card_id,sum(i.quantity)::text AS quantity FROM kd.inventory i JOIN kd.edition e ON e.id=i.edition_id WHERE player_id=$1 GROUP BY e.card_id",[playerId])).rows.map(row=>[row.card_id,Number(row.quantity)])),lifetime=new Set<string>((await c.query("SELECT card_id FROM kd.lifetime_card WHERE player_id=$1",[playerId])).rows.map(row=>row.card_id)),ownedCosmetics=await ownedCosmeticIds(c,playerId),account=(await c.query("SELECT e.*,p.status FROM kd.economy_account e JOIN kd.player p ON p.id=e.player_id WHERE e.player_id=$1",[playerId])).rows[0];
  if(!account||account.status!=="active"||context.origin==="sandbox"&&!account.sandbox)reject(409,"reward_account_unavailable","The reward account or its sandbox boundary is unavailable.");
  return {id:snapshot.shop_version,economy:{id:context.economyVersion,rules:economySchema.parse(economyRow.document)},pack,cards:pack.cards.filter(card=>identities.has(card.id)),rules,quantities,lifetime,ownedCosmetics,account};
 }

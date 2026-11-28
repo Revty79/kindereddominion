@@ -19,7 +19,7 @@ const windowSchema={startsAt:z.string().datetime().optional(),endsAt:z.string().
 const featureSchema=z.object({enabled:z.boolean(),section:z.enum(["new","seasonal","themed","expansion","collector","event"]),order:z.number().int().min(0).max(10000),...windowSchema}).strict();
 const promotionSchema=z.object({id:portable,startsAt:z.string().datetime(),endsAt:z.string().datetime(),discountBasisPoints:z.number().int().min(1).max(9500),eligibility:z.object({sandboxOnly:z.boolean().optional(),kindreds:z.array(z.string().min(1).max(80)).max(50).optional(),minimumLevel:z.number().int().min(1).max(10000).optional()}).strict().optional()}).strict();
 export const productSchema=z.object({
- id:portable,name:z.string().min(1).max(100),description:z.string().max(600),category:z.enum(["boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]),
+ id:portable,limitedEdition:portable.optional(),name:z.string().min(1).max(100),description:z.string().max(600),category:z.enum(["boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]),
  type:z.enum(["booster","bundle","cosmetic"]),mode:z.enum(["first_copy","additional","completion","cosmetic"]),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false),
  artwork:assetRefSchema.optional(),featured:z.boolean().default(false),edition:z.enum(["standard","premium","collector","deluxe","expansion"]).default("standard"),currency:portable,price:units.refine(n=>n>0),pricing:z.enum(["fixed","per_card","sum_rarity"]).default("fixed"),discountBasisPoints:z.number().int().min(0).max(9500).default(0),
  pool:poolSchema.default(()=>poolSchema.parse({})),slots:z.array(slotSchema).max(50).default([]),cosmetics:z.array(portable).max(100).default([]),
@@ -28,13 +28,14 @@ export const productSchema=z.object({
  feature:featureSchema.optional(),promotion:promotionSchema.optional(),
  startsAt:z.string().datetime().optional(),endsAt:z.string().datetime().optional(),limit:z.object({period:z.enum(["lifetime","daily","weekly"]),quantity:z.number().int().min(1).max(10000)}).strict().optional(),
 }).strict().superRefine((p,c)=>{
+ if(p.limitedEdition&&(p.type==="booster"||!["additional","cosmetic"].includes(p.mode)||p.pricing!=="fixed"||p.quantity!==1))c.addIssue({code:"custom",message:"Limited products are exact fixed-content units, separate from randomized/first-copy/completion acquisition."});
  if(p.type==="booster"&&(!p.slots.length||p.pricing!=="fixed"))c.addIssue({code:"custom",message:"Boosters require explicit slots and a fixed full-pack price."});
  if(new Set(p.slots.map(slot=>slot.id)).size!==p.slots.length)c.addIssue({code:"custom",message:"Slot identifiers must be distinct within a pack."});
  if(p.type==="booster"&&p.duplicates==="allowed"&&p.slots.length*p.quantity>1000)c.addIssue({code:"custom",message:"A repeated identity must fit the supported 1,000-copy atomic inventory change."});
  if(p.type!=="booster"&&p.slots.length)c.addIssue({code:"custom",message:"Only booster products have randomized slots."});
- if(p.type==="cosmetic"?(p.mode!=="cosmetic"||!p.cosmetics.length):(p.mode==="cosmetic"||!!p.cosmetics.length))c.addIssue({code:"custom",message:"Cosmetic products and gameplay products use separate asset grants."});
+ if(p.type==="cosmetic"?(p.mode!=="cosmetic"||!p.cosmetics.length):(p.mode==="cosmetic"||!!p.cosmetics.length&&!p.limitedEdition))c.addIssue({code:"custom",message:"Cosmetic products and gameplay products use separate asset grants."});
  if(p.type==="cosmetic"&&p.pricing==="sum_rarity")c.addIssue({code:"custom",message:"Cosmetic licenses have no gameplay rarity price. Use fixed or per-license pricing."});
- if(p.type==="cosmetic"&&(p.quantity!==1||p.tradeable||p.duplicates!=="none"||new Set(p.cosmetics).size!==p.cosmetics.length))c.addIssue({code:"custom",message:"Cosmetic ownership is distinct, single, nontransferable and separate from playable quantities."});
+ if(p.type==="cosmetic"&&(p.quantity!==1||p.tradeable&&!p.limitedEdition||p.duplicates!=="none"||new Set(p.cosmetics).size!==p.cosmetics.length))c.addIssue({code:"custom",message:"Cosmetic ownership is distinct, single, nontransferable and separate from playable quantities."});
  if(p.mode==="first_copy"&&(p.quantity!==1||p.duplicates!=="none"||p.tradeable))c.addIssue({code:"custom",message:"Ordinary first-copy products grant one bound copy per distinct identity."});
  if(Object.keys(p.quantities).length&&(p.type!=="bundle"||p.mode==="first_copy"))c.addIssue({code:"custom",message:"Per-identity quantities require a guaranteed completion or additional-set bundle."});
  if(p.mode==="completion"&&p.type!=="bundle")c.addIssue({code:"custom",message:"Target-quantity completion requires a guaranteed bundle."});

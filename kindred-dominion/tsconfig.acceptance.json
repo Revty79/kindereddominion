@@ -28,6 +28,8 @@
     "server/tests/store-acceptance.integration.ts",
     "server/tests/browser/store-acceptance.spec.ts",
     "scripts/store-model.mts",
-    "server/tests/browser/store-stripe.spec.ts"
+    "server/tests/browser/store-stripe.spec.ts",
+    "server/tests/limited.integration.ts",
+    "server/tests/browser/limited.spec.ts"
   ]
 }

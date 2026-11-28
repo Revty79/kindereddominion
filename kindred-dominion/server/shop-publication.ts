@@ -1,3 +1,5 @@
+import {limitedEdition} from "./limited-supply";
+import {validateLimitedProduct,guardUnlimitedProducts} from "./limited-products";
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -44,8 +46,9 @@ export async function validateShopPublication(c:Client,rules:ShopRules,config:Ba
   currency(product.currency);
   for(const id of [...product.pool.collections,...product.slots.flatMap(s=>s.pool.collections)])if(rules.collections.find(k=>k.id===id)?.status!=="published")reject(400,"collection_unpublished","Active products require published collection definitions.");
   for(const id of product.cosmetics){const cosmetic=rules.cosmetics.find(v=>v.id===id);if(!cosmetic?.enabled||cosmetic.status!=="published"||cosmetic.testOnly&&!product.testOnly)reject(400,"cosmetic_unavailable","Active cosmetic products need an active published cosmetic and the same testing boundary.");}
-  const pool=pack.cards.filter(card=>inPool(card,product.pool,rules)&&rules.collections.some(k=>k.status==="published"&&k.acquisition!=="unavailable"&&k.acquisition!=="cosmetic"&&k.cards.includes(card.id)&&(product.mode!=="first_copy"||k.acquisition==="free")));
+  const pool=product.type==="cosmetic"?[]:pack.cards.filter(card=>inPool(card,product.pool,rules)&&rules.collections.some(k=>k.status==="published"&&k.acquisition!=="unavailable"&&k.acquisition!=="cosmetic"&&k.cards.includes(card.id)&&(product.mode!=="first_copy"||k.acquisition==="free")));
   if(product.type!=="cosmetic"&&pool.some(card=>!rules.rarities[card.id]))reject(400,"rarity_unassigned","Every active product identity needs an explicit rarity assignment.");
+  if(product.limitedEdition)await validateLimitedProduct(c,product,pool.map(card=>card.id));else await guardUnlimitedProducts(c,pool.map(card=>card.id));
   const quantities=bundleQuantities(product,pool.map(card=>card.id));
   if(Object.keys(product.quantities).some(id=>!pool.some(card=>card.id===id)))reject(400,"quantity_outside_pool","Per-card quantities must belong to this published product pool.");
   if(product.type==="bundle"&&quantities.fullTotal>10000)reject(400,"bundle_delivery_limit","A bundle exceeds the 10,000-copy atomic delivery limit.");
@@ -53,7 +56,7 @@ export async function validateShopPublication(c:Client,rules:ShopRules,config:Ba
   if(product.type==="booster"&&!packPlan(product,pool,rules).feasible)reject(400,"pack_unavailable","The published full pool cannot satisfy this pack's slot guarantees.");
   const ids=product.type==="cosmetic"?product.cosmetics:product.type==="booster"?product.slots.map(s=>s.id):pool.map(card=>card.id);offerPrice(product,ids,ids.length,rules,product.type==="bundle"?quantities:undefined);
  }
- for(const direct of [rules.directFirst,rules.directAdditional])if(direct.enabled){currency(direct.currency);for(const card of pack.cards.filter(card=>inPool(card,direct.pool,rules))){if(!rules.rarities[card.id])reject(400,"rarity_unassigned","Every active direct acquisition needs an explicit rarity.");if(BigInt(direct.overrides[card.id]??direct.prices[rules.rarities[card.id]])*BigInt(direct.quantity)>1000000000000n)reject(400,"price_limit","Direct quantity pricing exceeds the supported operation limit.");}}
+ for(const direct of [rules.directFirst,rules.directAdditional])if(direct.enabled){currency(direct.currency);for(const card of pack.cards.filter(card=>inPool(card,direct.pool,rules))){await guardUnlimitedProducts(c,[card.id]);if(!rules.rarities[card.id])reject(400,"rarity_unassigned","Every active direct acquisition needs an explicit rarity.");if(BigInt(direct.overrides[card.id]??direct.prices[rules.rarities[card.id]])*BigInt(direct.quantity)>1000000000000n)reject(400,"price_limit","Direct quantity pricing exceeds the supported operation limit.");}}
  for(const cosmetic of rules.cosmetics)await validateCosmetic(cosmetic,config);
  await validateStartingCosmetics(rules,config);
  for(const announcement of rules.announcements??[])if(announcement.artwork)await checkedArtwork(config,announcement.artwork,false);
@@ -67,7 +70,7 @@ export async function validateShopPublication(c:Client,rules:ShopRules,config:Ba
 }
 export async function publishShopIdentities(c:Client,rules:ShopRules){
  for(const collection of rules.collections)await remember(c,"collection",collection.id,{classification:collection.classification,...(collection.classification==="founding"?{cards:[...collection.cards].sort()}: {})});
- for(const product of rules.products)await remember(c,"product",product.id,{type:product.type,mode:product.mode});
+ for(const product of rules.products)await remember(c,"product",product.id,{type:product.type,mode:product.mode,...(product.limitedEdition?{limitedEdition:product.limitedEdition}: {})});
  for(const [id]of Object.entries(rules.rarities))for(const mode of ["first","additional"])await remember(c,"product",`card-${mode}-${id}`,{type:"direct",mode,cardId:id});
  for(const format of rules.formats)await remember(c,"format",format.id,{kind:"deck-eligibility"});
  for(const cosmetic of rules.cosmetics){const old=(await c.query("SELECT * FROM kd.cosmetic_identity WHERE id=$1",[cosmetic.id])).rows[0];if(old&&(old.card_id!==(cosmetic.cardId??null)||old.type!==cosmetic.type))reject(409,"permanent_cosmetic_identity","A cosmetic ID cannot be reassigned to a different gameplay card or cosmetic type.");if(!old)await c.query("INSERT INTO kd.cosmetic_identity(id,card_id,type) VALUES($1,$2,$3)",[cosmetic.id,cosmetic.cardId??null,cosmetic.type]);}
@@ -82,7 +85,7 @@ export function registerShopPublication(){
  registerConfiguration("economy",v=>economySchema.parse(v),proposal,{rewardEntitlements:true,validate:async(c,document:EconomyRules)=>{
   const references=rewardReferences(document);if(!references.length)return [];
   const selected=await selectedConfiguration(c,"shop");if(!selected)reject(400,"reward_shop_required","Publish a validated shop before configuring booster or cosmetic rewards.");const shop=shopSchema.parse(selected.document),pack=await activeContent(c),snapshots=new Map<string,unknown>();let maximumUnits=0;
-  for(const reference of references){if(reference.type==="title")reject(400,"reward_type_inactive","Player-title rendering is inactive.");
+  for(const reference of references){if(reference.type==="limited"){const e=await limitedEdition(c,reference.id),allocation=e.spec.allocations.find(a=>a.id===reference.allocationId);if(e.spec.status!=="published"||!e.spec.enabled||!allocation)reject(400,"limited_reward_allocation_required","Limited rewards need a published enabled edition and a named reserved reward allocation.");if(reference.automatic&&e.spec.testOnly)reject(400,"sandbox_reward_boundary","Sandbox limited rewards cannot enter ordinary automatic progression.");maximumUnits+=reference.quantity*e.spec.contents.length;if(maximumUnits>10000)reject(400,"reward_bundle_limit","Too many reward components.");snapshots.set("limited:"+e.id,{type:"limited",id:e.id,shopVersion:e.shop_version,contentVersion:e.content_version,snapshot:{definition:e.spec,core:e.core}});continue;}if(reference.type==="title")reject(400,"reward_type_inactive","Player-title rendering is inactive.");
    const definition=reference.type==="booster"?shop.products.find(p=>p.id===reference.id&&p.type==="booster"):shop.cosmetics.find(v=>v.id===reference.id);
    if(!definition||!definition.enabled||definition.status!=="published")reject(400,"reward_product_unavailable","Reward entitlements require an active published booster or cosmetic.");if(reference.automatic&&definition.testOnly)reject(400,"sandbox_reward_boundary","Testing-only artwork/products belong in explicitly issued sandbox bundles, not ordinary automatic rewards or promotions.");
    maximumUnits+=reference.quantity*("slots"in definition?definition.slots.length:1);if(maximumUnits>10000)reject(400,"reward_bundle_limit","This publication queues too many entitlement assets for one atomic reward configuration.");

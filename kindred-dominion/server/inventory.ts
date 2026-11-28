@@ -1,3 +1,4 @@
+import {guardLimitedInventory} from "./limited-guard";
 import crypto from "node:crypto";
 import {grantStartingCosmetics} from "./cosmetic-grants";
 import type {PoolClient} from "pg";
@@ -29,6 +30,7 @@ export async function inventoryTransaction(c:PoolClient,playerId:string,key:stri
   const fingerprint=digest({source,changes}),{rows:[previous]}=await c.query("SELECT fingerprint,result FROM kd.acquisition WHERE player_id=$1 AND idempotency_key=$2",[playerId,key]);
   if(previous){if(previous.fingerprint!==fingerprint)reject(409,"idempotency_conflict","This operation identifier was used for a different grant.");return {...previous.result,replayed:true};}
   if(new Set(changes.map(x=>x.editionId)).size!==changes.length)reject(400,"duplicate_edition","Combine edition quantities before submitting a grant.");
+  await guardLimitedInventory(c,playerId,changes,provenance);
   const id=crypto.randomUUID(),result={id,source,changes};
   await c.query("INSERT INTO kd.acquisition(id,player_id,idempotency_key,fingerprint,source,initiated_by,result) VALUES($1,$2,$3,$4,$5,$6,$7)",[id,playerId,key,fingerprint,source,actorId,result]);
   for(const change of [...changes].sort((a,b)=>a.editionId.localeCompare(b.editionId))){

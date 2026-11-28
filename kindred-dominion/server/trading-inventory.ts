@@ -1,3 +1,4 @@
+import {limitedReady} from "./limited-supply";
 import crypto from "node:crypto";
 import type {DB} from "./db";
 import type {BackendConfig} from "./config";
@@ -20,7 +21,8 @@ export async function lockTradingAncestry(c:Client,parties:{playerId:string;card
 }
 export async function tradeableLots(c:Client|DB,playerId:string,rules:TradingRules,cardIds?:string[],lock=false){
  if(lock)await lockTradingAncestry(c as Client,[{playerId,cardIds}]);const environment=await assetEnvironment(c as Client),now=(await c.query("SELECT now() AS value")).rows[0].value,rows=(await c.query("SELECT l.*,e.card_id,i.retired,EXISTS(SELECT 1 FROM kd.card_revision r JOIN kd.content_selection s ON s.version_id=r.version_id WHERE r.card_id=e.card_id) AS published FROM kd.ownership_lot l JOIN kd.edition e ON e.id=l.edition_id JOIN kd.card_identity i ON i.id=e.card_id WHERE l.player_id=$1 AND l.remaining>0 AND ($2::text[] IS NULL OR e.card_id=ANY($2)) ORDER BY l.id",[playerId,cardIds??null])).rows,result=[];
- for(const lot of rows){const chain=await lotAncestry(c,lot.id),issues=originIssues(chain,environment,rules,now);if(lot.retired||!lot.published)issues.push("This permanent card is unavailable for new trades.");result.push({...lot,root:chain.at(-1),issues,available:issues.length?0:lot.remaining-lot.reserved});}return result;
+ const limited=await limitedReady(c)?new Set((await c.query("SELECT inventory_edition FROM kd.limited_card_edition")).rows.map(r=>r.inventory_edition)):new Set();
+ for(const lot of rows){const chain=await lotAncestry(c,lot.id),issues=originIssues(chain,environment,rules,now);if(limited.has(lot.edition_id))issues.push("Select the exact collectible instance; generic quantity trades cannot substitute a serial.");if(lot.retired||!lot.published)issues.push("This permanent card is unavailable for new trades.");result.push({...lot,root:chain.at(-1),issues,available:issues.length?0:lot.remaining-lot.reserved});}return result;
 }
 export async function releaseReservations(c:Client,playerId:string,scopeId:string,reason:string){
  await lockPlayer(c,playerId);const rows=(await c.query("SELECT r.* FROM kd.inventory_reservation r WHERE scope_id=$1 AND player_id=$2 AND released_at IS NULL ORDER BY lot_id FOR UPDATE",[scopeId,playerId])).rows;

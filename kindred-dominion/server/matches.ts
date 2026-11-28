@@ -57,7 +57,7 @@ export function matchRoutes(app:FastifyInstance,pool:DB,auth:Authentication,serv
     const actor=await auth.actor(req),query=z.object({deckId:uuid}).strict().parse(req.query),deck=await getDeck(pool,query.deckId,actor.id),pack=await activeContent(pool);
     if(deck.draft||deck.testingAccess)reject(400,"deck_not_ready","Choose a legal ordinary playing deck.");
     await validateOwnedDeck(pool,actor,deck.cards,pack,deck.config);
-    const eligibility=await deckFormat(pool,deck.cards,pack,deck.config,deck.formatId);if(eligibility.errors.length)reject(400,"deck_format_ineligible",eligibility.errors.join(" "));
+    const eligibility=await deckFormat(pool,deck.cards,pack,deck.config,deck.formatId,actor.id);if(eligibility.errors.length)reject(400,"deck_format_ineligible",eligibility.errors.join(" "));
     return {deckRevision:deck.revision,contentVersion:pack.id,configuration:deck.config,opponents:opponents(pack,deck.config).map(deck=>({id:deck.id,name:deck.name,kindred:deck.collection,count:deck.cards.length}))};
   });
   app.post("/api/matches",async req=>{

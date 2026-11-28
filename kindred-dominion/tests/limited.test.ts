@@ -1,0 +1,16 @@
+import {describe,it,expect} from "vitest";
+import {limitedEditionSchema,limitedCore,limitedRulesSchema,DEFAULT_LIMITED} from "../server/limited-rules";
+import {productSchema} from "../server/shop-rules";
+const base={id:"collector-one",name:"One collectible",description:"Draft fixture",type:"gameplay_card",maxSupply:1,contents:[{kind:"card",id:"n003",quantity:1}],methods:["shop"]};
+describe("Limited collectible promises",()=>{
+ it("ships no real edition or product by default",()=>expect(DEFAULT_LIMITED.editions).toEqual([]));
+ it.each([1,2,100000,Number.MAX_SAFE_INTEGER])("accepts a positive exact lifetime maximum %s",maxSupply=>expect(limitedEditionSchema.parse({...base,maxSupply}).maxSupply).toBe(maxSupply));
+ it.each([0,-1,1.5,Number.MAX_SAFE_INTEGER+1,Infinity])("rejects an invalid supply %s",maxSupply=>expect(limitedEditionSchema.safeParse({...base,maxSupply}).success).toBe(false));
+ it("defaults cosmetic trading and issuance to inactive",()=>expect(limitedEditionSchema.parse(base)).toMatchObject({tradeable:false,cosmeticTrading:false,enabled:false,status:"draft",testOnly:true}));
+ it("keeps lifecycle policy out of the immutable collectible promise",()=>{const a=limitedEditionSchema.parse(base),b=limitedEditionSchema.parse({...base,status:"suspended",enabled:false,tradeable:true,cosmeticTrading:true});expect(limitedCore(a)).toEqual(limitedCore(b));expect(limitedCore(a)).not.toEqual(limitedCore({...a,maxSupply:2}));});
+ it("protects reserved reward quota and requires the matching enabled method",()=>{for(const e of[{allocations:[{id:"prize",method:"achievement",quantity:2}],methods:["achievement"]},{allocations:[{id:"prize",method:"achievement",quantity:1}]}])expect(limitedEditionSchema.safeParse({...base,...e}).success).toBe(false);});
+ it("rejects duplicate contents and edition IDs",()=>{const e=limitedEditionSchema.parse(base);expect(limitedRulesSchema.safeParse({label:"Duplicate",editions:[e,e]}).success).toBe(false);expect(limitedEditionSchema.safeParse({...base,type:"bundle",contents:[...base.contents,...base.contents]}).success).toBe(false);});
+ it("separates cosmetic licenses and explicit multi-component bundles",()=>{expect(limitedEditionSchema.safeParse({...base,type:"alternate_art",contents:[{kind:"cosmetic",id:"fox-study",quantity:2}]}).success).toBe(false);expect(limitedEditionSchema.parse({...base,type:"bundle",contents:[...base.contents,{kind:"cosmetic",id:"fox-study",quantity:1}]}).contents).toHaveLength(2);});
+ it("accepts approved content hash revisions beginning with a digit",()=>expect(limitedEditionSchema.parse({...base,artwork:{id:"fox-study",revision:"012345abcdef"}}).artwork?.revision).toBe("012345abcdef"));
+ it("restricts limited store products to one fixed edition unit per sale",()=>{const p={id:"collector-sale",limitedEdition:"collector-one",name:"One edition unit",description:"Exact contents",category:"additional",type:"bundle",mode:"additional",status:"draft",enabled:false,currency:"gold",price:10,pool:{cards:["n003"]}};expect(productSchema.parse(p).limitedEdition).toBe("collector-one");for(const change of[{quantity:2},{mode:"completion"},{type:"booster"},{pricing:"per_card"}])expect(productSchema.safeParse({...p,...change}).success).toBe(false);});
+});

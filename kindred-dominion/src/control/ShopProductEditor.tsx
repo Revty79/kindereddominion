@@ -10,6 +10,7 @@ export function ProductCreation({document,onChange,onSelected}:{document:any;onC
 export function ProductFields({product:p,document,currencies=["gold","aether"],onChange}:{product:any;document:any;currencies?:string[];onChange:(fn:(p:any)=>void)=>void}){
  const[card,setCard]=useState(""),[quantity,setQuantity]=useState(1);const change=(key:string,value:any)=>onChange(p=>p[key]=value);
  return <fieldset><legend>Product contents, price and availability</legend><p><strong>{p.id}</strong> · {p.type} / {p.mode}. Use a new identity to change these permanent semantics.</p>
+ <label>Limited edition identity (optional)<input value={p.limitedEdition??""} onChange={e=>change("limitedEdition",e.target.value||undefined)}/></label>
  <label>Product description<textarea aria-label="Product description" maxLength={600} value={p.description} onChange={e=>change("description",e.target.value)}/></label>
  <label>Product category<select aria-label="Product category" value={p.category} onChange={e=>change("category",e.target.value)}>{["boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"].map(v=><option key={v}>{v}</option>)}</select></label>
  <label>Product status<select aria-label="Product status" value={p.status} onChange={e=>change("status",e.target.value)}>{["draft","published","archived"].map(v=><option key={v}>{v}</option>)}</select></label>
