@@ -1,0 +1,42 @@
+{
+  "format": "kindred-cosmetics-validation",
+  "sourceCommit": "b00b6af5bf7fc9e7dc9449d90057ced9b09c428a",
+  "ci": {
+    "runId": 46104195731,
+    "jobId": 140853155594,
+    "url": "https://github.com/Revty79/kindereddominion/actions/runs/46104195731",
+    "conclusion": "success",
+    "unitTestsPassed": 1130,
+    "operatorTestsPassed": 55,
+    "backendIntegrationTestsPassed": 292,
+    "postgresVersion": 180007,
+    "legacySevenToCurrentMigrationsVerified": true,
+    "backupAndSourceBundleVerified": true,
+    "completeHostRehearsalVerified": true,
+    "postPublicationPreservationVerified": true,
+    "rowColumnAndDuplicateCorruptionDetected": true,
+    "runtimePermissionFailuresDetected": true,
+    "runtimeDmlWithoutDdl": true,
+    "backendReadyWithRuntimeRole": true,
+    "sourceDatabaseUnchanged": true,
+    "hostDatabaseAccessed": false,
+    "networklessReadOnlyFullSuite": true,
+    "sourceWritesDenied": true,
+    "postgres18FullRehearsal": true,
+    "hostDeploymentPerformed": false
+  },
+  "local": {
+    "postgresVersion": 180000,
+    "broadDatabaseTestsPassed": 291,
+    "finalCosmeticTestsPassed": 16,
+    "finalExistingShopTestsPassed": 18,
+    "compiledBrowserTestsPassed": 28,
+    "existingRelationsPreserved": 107,
+    "existingRowsPreserved": 566098,
+    "migrationFrom": 20,
+    "migrationTo": 24
+  },
+  "officialArtworkGenerated": 0,
+  "genuineStripeSessionPerformed": false,
+  "livePaymentsActivated": false
+}
