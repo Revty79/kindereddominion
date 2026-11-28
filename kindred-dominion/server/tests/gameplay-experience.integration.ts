@@ -1,4 +1,4 @@
-import {beforeAll,afterAll,describe,it,expect} from "vitest";
+import {beforeAll,afterAll,describe,it,expect,vi} from "vitest";
 import crypto from "node:crypto";
 import {readConfig} from "../config";
 import {database,transaction} from "../db";
@@ -29,6 +29,16 @@ async function matchHash(id:string){return(await pool.query("SELECT md5(state::t
 async function buy(c:Client,id:string){const q=await c.request("POST","/shop/quotes",{productId:id});expect(q.status,JSON.stringify(q.body)).toBe(200);const r=await c.request("POST","/shop/purchases",{quoteId:q.body.id,idempotencyKey:crypto.randomUUID()});expect(r.status,JSON.stringify(r.body)).toBe(200);return r.body;}
 async function fund(c:Client){expect((await admin.request("POST","/admin/economy/grants",{playerId:c.player.id,currency:"aether",amount:2000,origin:"promotional",idempotencyKey:crypto.randomUUID(),reason:"Declared isolated promotional virtual purchase funding, not a real payment"})).status).toBe(200);}
 const action=(value:any)=>value.status==="mulligan"?{type:"mulligan",cards:[]}:value.legalActions[0]??{type:"pass"};
+async function reproducibleMatch(c:Client,deckId:string,seed=163400,startingPlayer:0|1=0){
+ // Pin only this synthetic API request's match entropy. Registration/session
+ // entropy, production APIs, reward thresholds and real browser journeys stay
+ // unchanged. Random openings do not all qualify for participation rewards.
+ const options=await c.request("GET",`/match-options?deckId=${deckId}`);expect(options.status).toBe(200);
+ const originalBytes=crypto.randomBytes,originalInt=crypto.randomInt,bytes=Buffer.alloc(4);bytes.writeUInt32LE(seed);
+ const byteSpy=vi.spyOn(crypto,"randomBytes").mockImplementation(((...args:any[])=>args.length===1&&args[0]===4?Buffer.from(bytes):(originalBytes as any)(...args)) as any);
+ const intSpy=vi.spyOn(crypto,"randomInt").mockImplementation(((...args:any[])=>args.length===1&&args[0]===2?startingPlayer:(originalInt as any)(...args)) as any);
+ try{const response=await c.request("POST","/matches",{deckId,opponentDeckId:options.body.opponents[0].id});expect(response.status,JSON.stringify(response.body)).toBe(200);expect((await pool.query("SELECT seed,starting_player FROM kd.match WHERE id=$1",[response.body.id])).rows[0]).toEqual({seed:String(seed),starting_player:startingPlayer});return response.body;}finally{byteSpy.mockRestore();intSpy.mockRestore();}
+}
 beforeAll(async()=>{await applyMigrations(pool,config);await seedRepository(pool);await publishContent(pool,content,"official",true);app=await createApi(config,pool);admin=await new Client().register();await pool.query("UPDATE kd.player SET role='administrator' WHERE id=$1",[admin.player.id]);await publish("economy",DEFAULT_ECONOMY);await publish("shop",DEFAULT_SHOP);await publish("starters",proposal());});
 afterAll(async()=>{try{await publish("starters",proposal(false));await publish("shop",DEFAULT_SHOP);await publish("economy",DEFAULT_ECONOMY);await publish("trading",DEFAULT_TRADING);}finally{await app?.close();await pool.end();}});
 describe.sequential("Integrated V1.6 gameplay and economy acceptance",()=>{
@@ -36,7 +46,7 @@ describe.sequential("Integrated V1.6 gameplay and economy acceptance",()=>{
   const c=await new Client().register(definition.kindred),owned=await inventory(c);expect(new Set(owned.map((r:any)=>r.card_id)).size).toBe(30);expect(owned.reduce((n:number,r:any)=>n+r.quantity,0)).toBe(40);
   for(const type of["guide_viewed","collection_viewed"])expect((await c.request("POST","/economy/activity",{type,idempotencyKey:crypto.randomUUID()})).status).toBe(200);
   const created=await c.request("POST","/decks",{name:"Custom "+definition.kindred,cards:definition.recommended.cards,config:{mode:"standard",scoring:"classic",collection:definition.kindred},draft:false});expect(created.status).toBe(201);expect((await c.request("GET","/decks")).body.decks.find((d:any)=>d.id===created.body.id).legal).toBe(true);expect(new Set(created.body.cards).size).toBeLessThan(15);expect((await c.request("POST",`/decks/${created.body.id}/default`,{})).status).toBe(200);
-  let value=(await c.request("POST","/matches",{deckId:created.body.id})).body;
+  let value=await reproducibleMatch(c,created.body.id);
   // Declared elapsed-time fixture; default reward rules remain unchanged. The
   // compiled browser journeys separately wait the real minimum duration.
   await pool.query("UPDATE kd.match SET created_at=now()-interval '5 minutes' WHERE id=$1",[value.id]);
@@ -46,10 +56,17 @@ describe.sequential("Integrated V1.6 gameplay and economy acceptance",()=>{
    lastRequest={revision:value.revision,requestId:crypto.randomUUID(),action:next};const result=await c.request("POST",`/matches/${value.id}/actions`,lastRequest);expect(result.status,JSON.stringify(result.body)).toBe(200);value=result.body;
    const hash=await matchHash(value.id),h=await c.request("GET",`/matches/${value.id}/recent-presentation?revision=${value.revision}`);expect(h.body).toEqual(value.recentPresentation);for(const move of h.body.moves)expandRecentMove(move);expect(await matchHash(value.id)).toEqual(hash);
   }
-  expect(value.status).toBe("finished");expect(value.rewardSummary.status).toBe("granted");expect(value.rewardSummary.evidence.humanPlacements).toBeGreaterThanOrEqual(3);
+  expect(value.status).toBe("finished");expect(value.rewardSummary.status,JSON.stringify(value.rewardSummary)).toBe("granted");expect(value.rewardSummary.evidence.humanPlacements).toBeGreaterThanOrEqual(3);
   const before=(await c.request("GET","/economy")).body,hash=await matchHash(value.id);expect(before.progression.xp).toBeGreaterThan(0);expect(before.mastery.some((m:any)=>m.kindred===definition.kindred&&Number(m.xp)>0)).toBe(true);
   expect((await c.request("POST",`/matches/${value.id}/actions`,lastRequest)).status).toBe(409);for(let n=0;n<3;n++){const h=await c.request("GET",`/matches/${value.id}/recent-presentation`);for(const m of h.body.moves)expandRecentMove(m);}
   expect((await c.request("GET","/economy")).body).toEqual(before);expect(await matchHash(value.id)).toEqual(hash);expect((await transaction(pool,t=>reconcileEconomy(t,c.player.id))).ok).toBe(true);expect((await c.request("GET","/decks")).body.decks.find((d:any)=>d.id===created.body.id).cards).toEqual(definition.recommended.cards);
+ });
+ it("denies a reproducible short Arcane match without granting XP, currency or mastery",async()=>{
+  const c=await new Client().register("Arcane"),definition=DEFAULT_STARTERS.definitions.find(d=>d.kindred==="Arcane")!,deck=await c.request("POST","/decks",{name:"Short opening regression",cards:definition.recommended.cards,config:{mode:"standard",scoring:"classic",collection:"Arcane"},draft:false});expect(deck.status).toBe(201);
+  const before=(await c.request("GET","/economy")).body;let value=await reproducibleMatch(c,deck.body.id,64,1);await pool.query("UPDATE kd.match SET created_at=now()-interval '5 minutes' WHERE id=$1",[value.id]);
+  for(let turn=0;turn<100&&value.status!=="finished";turn++){const r=await c.request("POST",`/matches/${value.id}/actions`,{revision:value.revision,requestId:crypto.randomUUID(),action:action(value)});expect(r.status,JSON.stringify(r.body)).toBe(200);value=r.body;}
+  expect(value.status).toBe("finished");expect(value.rewardSummary).toMatchObject({status:"denied",reason:"insufficient_participation",evidence:{humanPlacements:1}});
+  const after=(await c.request("GET","/economy")).body;expect(after.progression).toEqual(before.progression);expect(after.currencies).toEqual(before.currencies);expect(after.mastery).toEqual(before.mastery);expect((await pool.query("SELECT count(*)::int n FROM kd.reward_grant WHERE player_id=$1 AND source='match' AND source_id=$2",[c.player.id,value.id])).rows[0].n).toBe(0);expect((await transaction(pool,t=>reconcileEconomy(t,c.player.id))).ok).toBe(true);
  });
  it("freezes an active legacy match across edits, purchases, concurrent starter upgrades, trade settlement, rewards and preferences",async()=>{
   const shop=structuredClone(DEFAULT_SHOP);shop.purchasedHoldHours=0;shop.cosmetics.push({id:"v16g-alt-n001",name:"Disposable appearance fixture",description:"Existing approved illustration reused only in this isolated integration example",type:"alternate_art",cardId:"n001",asset:content.metadata.n003.artworkRef!,status:"published",enabled:true,testOnly:false});shop.products.push(productSchema.parse({id:"v16g-art",name:"Disposable appearance product",description:"Isolated integration only",category:"artwork",type:"cosmetic",mode:"cosmetic",status:"published",enabled:true,currency:"aether",price:1,cosmetics:["v16g-alt-n001"]}));await publish("shop",shop);

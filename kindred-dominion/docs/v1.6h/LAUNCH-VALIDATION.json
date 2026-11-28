@@ -15,7 +15,8 @@
     "fullFiles": 28,
     "fullPassed": 274,
     "finalFocusedCatalogPassed": 14,
-    "fullSuitePrecedesAdditionalCopyCapRegression": true
+    "fullSuitePrecedesAdditionalCopyCapRegression": true,
+    "postCiGameplayAcceptancePassed": 8
   },
   "browser": {
     "passed": 23,
@@ -101,7 +102,14 @@
   "genuineStripeVerificationClaimed": false,
   "ci": {
     "required": "existing exact-commit Ubuntu TEST eligibility workflow",
-    "result": "supplied in final delivery after push"
+    "result": "supplied in final delivery after push",
+    "firstAttempt": {
+      "commit": "3aed1da97ab7ec37ce2f5e1f0b8eb5f0101752b1",
+      "run": 46096639894,
+      "conclusion": "failure",
+      "regression": "Existing Arcane randomized opening incorrectly assumed to always qualify for rewards"
+    },
+    "correction": "Test-only deterministic qualifying match entropy plus separate one-placement reward-denial regression; production game and reward rules unchanged"
   },
   "ownerTasks": [
     "Approve exact V1.6A deluxe recipe before hosted publication",
