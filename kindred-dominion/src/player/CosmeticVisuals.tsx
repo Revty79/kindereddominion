@@ -1,0 +1,5 @@
+import {useEffect,useState} from "react";
+import type {CosmeticPresentation} from "../shop/cosmetic-types";
+import "./cosmetics.css";
+export function CosmeticBack({value,concealed=false}:{value?:CosmeticPresentation;concealed?:boolean}){const[failed,setFailed]=useState(false);useEffect(()=>setFailed(false),[value?.url]);return <span className="cosmetic-card-back" data-cosmetic-back={value?.cosmeticId??"neutral"} role="img" aria-label={concealed?"Concealed card back":value?.name??"Neutral Kindred Dominion card back"}>{value?.url&&!failed?<img src={value.url} alt="" loading="lazy" decoding="async" onError={()=>setFailed(true)}/>:<span aria-hidden="true">◇</span>}</span>;}
+export function CosmeticBattlefield({value,neutral=false}:{value?:CosmeticPresentation;neutral?:boolean}){const[failed,setFailed]=useState(false);useEffect(()=>setFailed(false),[value?.url]);return value?.url&&!neutral&&!failed?<img className="cosmetic-battlefield-image" data-cosmetic-battlefield={value.cosmeticId} src={value.url} alt="" aria-hidden="true" decoding="async" onError={()=>setFailed(true)}/>:null;}

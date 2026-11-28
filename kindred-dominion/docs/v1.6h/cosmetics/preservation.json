@@ -1,0 +1,19 @@
+{
+  "fromSchema": 20,
+  "toSchema": 24,
+  "originalRelations": 107,
+  "originalRows": 566098,
+  "allExistingColumnsPreserved": true,
+  "originalSourceUntouched": true,
+  "storeMigrations": 1,
+  "normalDevWrites": false,
+  "hostedAccessed": false,
+  "sourceRoot": "isolated V1.6H worktree",
+  "newCosmeticTables": {
+    "cosmetic_preferences": 0,
+    "starting_cosmetic_grant": 0,
+    "match_cosmetic_presentation": 0
+  },
+  "automaticGrants": 0,
+  "restoredApiReady": true
+}

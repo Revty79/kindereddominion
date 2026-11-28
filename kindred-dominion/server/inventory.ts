@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import {grantStartingCosmetics} from "./cosmetic-grants";
 import type {PoolClient} from "pg";
 import type {ContentPack} from "../src/content/types";
 import type {GameConfig} from "../src/engine/types";
@@ -100,6 +101,7 @@ export async function startingCollection(pool:DB,actor:Actor,kindred:string,key:
     await c.query("INSERT INTO kd.deck_history(deck_id,revision,snapshot) VALUES($1,1,$2)",[deckId,{name:starter.name,cards:starter.cards,config,version:pack.id}]);
     await c.query("UPDATE kd.player SET starting_kindred=$2,default_deck_id=$3 WHERE id=$1",[actor.id,kindred,deckId]);
     if(onAcquired)await onAcquired(c,cards.map(card=>card.id));
-    return {...result,deckId,kindred,upgrade};
+    const startingCosmetics=serverConfig?await grantStartingCosmetics(c,actor.id,serverConfig,"new_player"):null;
+    return {...result,deckId,kindred,upgrade,startingCosmetics};
   });
 }

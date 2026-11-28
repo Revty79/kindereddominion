@@ -21,6 +21,9 @@
     "server/tests/browser/storefront.spec.ts",
     "scripts/launch-catalog.mts",
     "server/tests/launch-catalog.integration.ts",
-    "server/tests/browser/launch-catalog.spec.ts"
+    "server/tests/browser/launch-catalog.spec.ts",
+    "server/tests/cosmetic-fixtures.ts",
+    "server/tests/cosmetics.integration.ts",
+    "server/tests/browser/cosmetics.spec.ts"
   ]
 }

@@ -15,6 +15,9 @@ import {offerPrice} from "./shop-catalog";
 import {packPlan} from "./shop-draw";
 import {bundleQuantities} from "./shop-quantities";
 import {checkDeluxe} from "./shop-deluxe";
+import {identifyImage,sanitizeSVG} from "../src/assets/artwork";
+import {validateCosmetic,validateStartingCosmetics} from "./cosmetic-publication";
+import {cosmeticProposal} from "./cosmetic-proposals";
 
 export async function artworkRegistry(config:BackendConfig){
  const candidates=[{manifest:path.join(config.root,"public/assets/manifest.json"),root:path.join(config.root,"public")},{manifest:path.join(config.controlDirectory,"assets/manifest.json"),root:config.controlDirectory}];
@@ -26,7 +29,8 @@ export async function checkedArtwork(config:BackendConfig,reference:{id:string;r
  if(!asset||(!testing&&asset.approval!=="production"))reject(400,"artwork_not_approved","Choose an immutable approved repository artwork reference. Testing artwork requires an explicitly isolated cosmetic.");
  if(!/^assets\/[a-z0-9/_-]+\.(webp|png|jpe?g|svg)$/.test(asset.path)||!["image/webp","image/png","image/jpeg","image/svg+xml"].includes(asset.mime))reject(400,"artwork_format_unavailable","Repository artwork must use a validated portable image format.");
  let file:string,bytes:Buffer;try{file=await fs.realpath(path.join(registry.root,asset.path));const root=await fs.realpath(registry.root);if(!file.startsWith(root+path.sep))throw Error();bytes=await fs.readFile(file);}catch{reject(400,"artwork_file_missing","The referenced optimized artwork is missing from this application package.");}
- if(bytes!.length!==asset.bytes||crypto.createHash("sha256").update(bytes!).digest("hex")!==asset.sha256)reject(400,"artwork_integrity","The referenced artwork failed its immutable checksum validation.");return {asset,file:file!,bytes:bytes!};
+ if(bytes!.length!==asset.bytes||crypto.createHash("sha256").update(bytes!).digest("hex")!==asset.sha256)reject(400,"artwork_integrity","The referenced artwork failed its immutable checksum validation.");
+ try{if(identifyImage(bytes!)!==asset.mime)throw Error();if(asset.mime==="image/svg+xml")sanitizeSVG(bytes!.toString("utf8"));}catch{reject(400,"artwork_format_unavailable","The referenced image is corrupt, incorrectly typed or contains unsafe SVG content.");}return {asset,file:file!,bytes:bytes!};
 }
 async function remember(c:Client,kind:string,id:string,semantic:unknown){const existing=(await c.query("SELECT semantic FROM kd.shop_identity WHERE kind=$1 AND id=$2",[kind,id])).rows[0];if(existing&&economyDigest(existing.semantic)!==economyDigest(semantic))reject(409,"permanent_shop_identity","This permanent shop identity cannot be reassigned to another content classification or product mode.");if(!existing)await c.query("INSERT INTO kd.shop_identity(kind,id,semantic) VALUES($1,$2,$3)",[kind,id,semantic]);}
 export async function validateShopPublication(c:Client,rules:ShopRules,config:BackendConfig){
@@ -50,7 +54,9 @@ export async function validateShopPublication(c:Client,rules:ShopRules,config:Ba
   const ids=product.type==="cosmetic"?product.cosmetics:product.type==="booster"?product.slots.map(s=>s.id):pool.map(card=>card.id);offerPrice(product,ids,ids.length,rules,product.type==="bundle"?quantities:undefined);
  }
  for(const direct of [rules.directFirst,rules.directAdditional])if(direct.enabled){currency(direct.currency);for(const card of pack.cards.filter(card=>inPool(card,direct.pool,rules))){if(!rules.rarities[card.id])reject(400,"rarity_unassigned","Every active direct acquisition needs an explicit rarity.");if(BigInt(direct.overrides[card.id]??direct.prices[rules.rarities[card.id]])*BigInt(direct.quantity)>1000000000000n)reject(400,"price_limit","Direct quantity pricing exceeds the supported operation limit.");}}
- for(const cosmetic of rules.cosmetics){if(cosmetic.asset)await checkedArtwork(config,cosmetic.asset,cosmetic.testOnly);if(cosmetic.enabled&&cosmetic.asset){const {asset}=await checkedArtwork(config,cosmetic.asset,cosmetic.testOnly);if(asset.category!=="cards")reject(400,"creature_art_required","Alternate creature artwork must use an independent card illustration asset.");}}
+ for(const cosmetic of rules.cosmetics)await validateCosmetic(cosmetic,config);
+ await validateStartingCosmetics(rules,config);
+ for(const announcement of rules.announcements??[])if(announcement.artwork)await checkedArtwork(config,announcement.artwork,false);
  const covered=new Set<string>();
  if(rules.directFirst.enabled)for(const card of pack.cards)if(inPool(card,rules.directFirst.pool,rules)&&rules.collections.some(k=>k.status==="published"&&k.acquisition==="free"&&k.cards.includes(card.id)))covered.add(card.id);
  for(const product of rules.products.filter(p=>p.enabled&&p.status==="published"&&p.mode==="first_copy"&&p.currency==="gold"&&!p.testOnly&&!p.startsAt&&!p.endsAt&&!p.limit))for(const card of pack.cards)if(inPool(card,product.pool,rules)&&(product.type==="bundle"||product.slots.some(s=>inPool(card,s.pool,rules)&&(s.depleted==="available_pool"||s.weights[rules.rarities[card.id]]>0))))covered.add(card.id);
@@ -71,7 +77,7 @@ function rewardReferences(rules:EconomyRules){
  return [...automatic,...promotions,...Object.values(rules.bundles)].flatMap(bundle=>bundle.entitlements.map(entitlement=>({...entitlement,automatic:automatic.includes(bundle)||promotions.includes(bundle)})));
 }
 export function registerShopPublication(){
- registerConfiguration("shop",v=>shopSchema.parse(v),DEFAULT_SHOP,{validate:validateShopPublication,published:async(c,document)=>publishShopIdentities(c,document)});
+ registerConfiguration("shop",v=>shopSchema.parse(v),cosmeticProposal(DEFAULT_SHOP),{validate:validateShopPublication,published:async(c,document)=>publishShopIdentities(c,document)});
  const proposal=structuredClone(DEFAULT_ECONOMY);proposal.objectives.find(o=>o.id==="intro-tutorial")!.reward.entitlements=[{type:"booster",id:"founding-first",quantity:1}];
  registerConfiguration("economy",v=>economySchema.parse(v),proposal,{rewardEntitlements:true,validate:async(c,document:EconomyRules)=>{
   const references=rewardReferences(document);if(!references.length)return [];

@@ -25,14 +25,14 @@ export async function saveRecent(db:any,matchId:string,revision:number,batch:Res
 }
 export function presentationRoutes(app:FastifyInstance,pool:DB,auth:Authentication,config:BackendConfig){
  app.get("/api/preferences/presentation",async req=>readPresentation(pool,(await auth.actor(req)).id));
- const preferences=z.object({schema:z.literal(1),mode:z.enum(PRESENTATION_MODES),cardMovement:z.boolean(),abilityAnimations:z.boolean(),scoreAnimations:z.boolean(),highlighting:z.boolean(),descriptions:z.boolean()}).strict();
+ const preferences=z.object({schema:z.literal(1),mode:z.enum(PRESENTATION_MODES),cardMovement:z.boolean(),abilityAnimations:z.boolean(),scoreAnimations:z.boolean(),highlighting:z.boolean(),descriptions:z.boolean(),neutralBattlefield:z.boolean().optional()}).strict();
  app.put("/api/preferences/presentation",async req=>{
   const actor=await auth.actor(req),body=z.object({revision:z.number().int().min(0),preferences}).strict().parse(req.body);
   await rateLimit(pool,"presentation-settings:"+keyed(actor.id,config),30,60);
   return transaction(pool,async c=>{
    await c.query("SELECT id FROM kd.player WHERE id=$1 FOR UPDATE",[actor.id]);const previous=await readPresentation(c,actor.id);
    if(previous.revision!==body.revision)reject(409,"stale_preferences","Presentation settings changed on another device. Reload before saving.");
-   const revision=previous.revision+1;await c.query("INSERT INTO kd.player_presentation(player_id,revision,preferences) VALUES($1,$2,$3) ON CONFLICT(player_id) DO UPDATE SET revision=$2,preferences=$3,updated_at=now()",[actor.id,revision,body.preferences]);return {revision,preferences:body.preferences};
+   const normalized=normalizePresentation(body.preferences),revision=previous.revision+1;await c.query("INSERT INTO kd.player_presentation(player_id,revision,preferences) VALUES($1,$2,$3) ON CONFLICT(player_id) DO UPDATE SET revision=$2,preferences=$3,updated_at=now()",[actor.id,revision,normalized]);return {revision,preferences:normalized};
   });
  });
 }

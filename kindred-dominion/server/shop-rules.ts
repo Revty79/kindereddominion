@@ -4,6 +4,7 @@ import {ownerContent} from "../src/content/owner";
 import type {CardDefinition} from "../src/engine/types";
 import {DEFAULT_STARTERS} from "./starter-rules";
 import {economyDigest} from "./economy-hash";
+import {TREATMENTS,FUNCTIONAL_COSMETICS} from "../src/shop/cosmetic-types";
 
 export const rarities=["common","uncommon","rare","epic","legendary"] as const;
 export const raritySchema=z.enum(rarities);
@@ -14,6 +15,9 @@ export const poolSchema=z.object({collections:z.array(portable).max(100).default
 export const slotSchema=z.object({id:portable,pool:poolSchema.default(()=>poolSchema.parse({})),weights:weightsSchema,depleted:z.enum(["available_pool","unavailable"]).default("available_pool")}).strict();
 export const pricesSchema=z.object({common:units,uncommon:units,rare:units,epic:units,legendary:units}).strict().refine(prices=>Object.values(prices).every(n=>n>0),"Prices must use positive integer units.");
 const directSchema=z.object({enabled:z.boolean(),currency:portable,prices:pricesSchema,overrides:z.record(portable,units.refine(n=>n>0)).default({}),pool:poolSchema,quantity:z.number().int().min(1).max(100).default(1),tradeable:z.boolean().default(false)}).strict();
+const windowSchema={startsAt:z.string().datetime().optional(),endsAt:z.string().datetime().optional()};
+const featureSchema=z.object({enabled:z.boolean(),section:z.enum(["new","seasonal","themed","expansion","collector","event"]),order:z.number().int().min(0).max(10000),...windowSchema}).strict();
+const promotionSchema=z.object({id:portable,startsAt:z.string().datetime(),endsAt:z.string().datetime(),discountBasisPoints:z.number().int().min(1).max(9500),eligibility:z.object({sandboxOnly:z.boolean().optional(),kindreds:z.array(z.string().min(1).max(80)).max(50).optional(),minimumLevel:z.number().int().min(1).max(10000).optional()}).strict().optional()}).strict();
 export const productSchema=z.object({
  id:portable,name:z.string().min(1).max(100),description:z.string().max(600),category:z.enum(["boosters","kindreds","cards","additional","expansions","artwork","cosmetics","offers"]),
  type:z.enum(["booster","bundle","cosmetic"]),mode:z.enum(["first_copy","additional","completion","cosmetic"]),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false),
@@ -21,6 +25,7 @@ export const productSchema=z.object({
  pool:poolSchema.default(()=>poolSchema.parse({})),slots:z.array(slotSchema).max(50).default([]),cosmetics:z.array(portable).max(100).default([]),
  quantity:z.number().int().min(1).max(100).default(1),quantities:z.record(portable,z.number().int().min(1).max(100)).default({}),duplicates:z.enum(["none","allowed"]).default("none"),tradeable:z.boolean().default(false),
  starterRecipe:z.object({version:portable,digest:z.string().regex(/^[a-f0-9]{64}$/),kindreds:z.array(z.enum(["Nature","Mythical","Arcane","Undead","Constructs"])).min(1).max(5)}).strict().optional(),
+ feature:featureSchema.optional(),promotion:promotionSchema.optional(),
  startsAt:z.string().datetime().optional(),endsAt:z.string().datetime().optional(),limit:z.object({period:z.enum(["lifetime","daily","weekly"]),quantity:z.number().int().min(1).max(10000)}).strict().optional(),
 }).strict().superRefine((p,c)=>{
  if(p.type==="booster"&&(!p.slots.length||p.pricing!=="fixed"))c.addIssue({code:"custom",message:"Boosters require explicit slots and a fixed full-pack price."});
@@ -35,14 +40,25 @@ export const productSchema=z.object({
  if(p.mode==="completion"&&p.currency==="gold")c.addIssue({code:"custom",message:"Guaranteed premium target completion uses premium currency; ordinary Gold acquisition retains lifetime first-copy protection."});
  if(p.starterRecipe&&(p.type!=="bundle"||new Set(p.starterRecipe.kindreds).size!==p.starterRecipe.kindreds.length))c.addIssue({code:"custom",message:"A deluxe starter recipe requires a bundle and distinct Kindreds."});
  if(p.endsAt&&p.startsAt&&Date.parse(p.endsAt)<=Date.parse(p.startsAt))c.addIssue({code:"custom",message:"Availability must have an increasing UTC window."});
+ for(const schedule of[p.feature,p.promotion])if(schedule?.startsAt&&schedule.endsAt&&Date.parse(schedule.endsAt)<=Date.parse(schedule.startsAt))c.addIssue({code:"custom",message:"Featured and promotional windows require an increasing UTC range."});
+ if(p.promotion&&p.promotion.discountBasisPoints<=p.discountBasisPoints)c.addIssue({code:"custom",message:"A promotion must offer a genuine additional discount against the published ordinary price."});
 });
 const collectionSchema=z.object({id:portable,name:z.string().min(1).max(100),description:z.string().max(600),classification:z.enum(["founding","expansion","premium","promotional","cosmetic"]),status:z.enum(["draft","published","archived"]),acquisition:z.enum(["free","premium","promotional","cosmetic","unavailable"]),cards:z.array(portable).max(10000),artwork:assetRefSchema.optional(),releaseAt:z.string().datetime().optional()}).strict();
-const cosmeticSchema=z.object({id:portable,name:z.string().min(1).max(100),description:z.string().max(600),type:z.enum(["alternate_art","animated_art","border","card_back","battlefield","title","victory_effect","evolution_effect"]),cardId:portable.optional(),asset:assetRefSchema.optional(),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false)}).strict().superRefine((v,c)=>{if(v.enabled&&(v.type!=="alternate_art"||!v.cardId||!v.asset))c.addIssue({code:"custom",message:"Only readable alternate artwork with a permanent card identity and approved asset is rendered in this milestone."});});
+export const cosmeticSchema=z.object({id:portable,name:z.string().min(1).max(100),description:z.string().max(600),type:z.enum(["alternate_art","animated_art","border","card_back","battlefield","title","victory_effect","evolution_effect","emblem","portrait","theme"]),cardId:portable.optional(),asset:assetRefSchema.optional(),status:z.enum(["draft","published","archived"]),enabled:z.boolean(),testOnly:z.boolean().default(false),themes:z.array(portable).max(20).optional(),kindred:z.string().min(1).max(80).optional(),treatment:z.enum(TREATMENTS).optional()}).strict().superRefine((v,c)=>{
+ if(v.enabled&&!(FUNCTIONAL_COSMETICS as readonly string[]).includes(v.type))c.addIssue({code:"custom",message:"Unsupported future cosmetics must remain unpublished and disabled."});
+ if(v.status==="published"&&!(FUNCTIONAL_COSMETICS as readonly string[]).includes(v.type))c.addIssue({code:"custom",message:"Nonfunctional future cosmetics cannot be published."});
+ if(v.enabled&&((v.type==="alternate_art"?(!v.cardId||!v.asset):v.cardId!==undefined)||(v.type==="card_back"||v.type==="battlefield")&&!v.asset||v.type==="border"&&!v.treatment))c.addIssue({code:"custom",message:"Functional cosmetics require their matching image or supported treatment; only alternate art references gameplay cards."});
+ if(v.treatment&&v.type!=="border")c.addIssue({code:"custom",message:"Treatment styles belong to decorative card treatments."});
+ if(v.enabled&&v.type==="border"&&v.asset)c.addIssue({code:"custom",message:"Functional treatments currently use the supported static styles. Asset-based frames remain unpublished until their renderer is implemented."});
+});
+export const startingCosmeticsSchema=z.object({enabled:z.boolean(),backfillEnabled:z.boolean(),kindreds:z.record(z.enum(["Nature","Mythical","Arcane","Undead","Constructs"]),z.object({cardBack:portable,battlefield:portable}).strict()),approval:z.object({digest:z.string().regex(/^[a-f0-9]{64}$/),reference:z.string().trim().min(10).max(200)}).strict().nullable()}).strict();
+const announcementSchema=z.object({id:portable,title:z.string().min(1).max(100),description:z.string().max(600),section:z.enum(["new","seasonal","themed","expansion","collector","event"]),published:z.boolean(),order:z.number().int().min(0).max(10000),...windowSchema,artwork:assetRefSchema.optional()}).strict().refine(v=>!v.startsAt||!v.endsAt||Date.parse(v.endsAt)>Date.parse(v.startsAt),"Announcements require an increasing UTC range.");
 export const formatSchema=z.object({id:portable,name:z.string().min(1).max(100),description:z.string().max(600),enabled:z.boolean(),collections:z.array(portable).max(100),excludeCollections:z.array(portable).max(100),kindreds:z.array(z.string().min(1).max(80)).max(50),excludeCards:z.array(portable).max(10000),rarities:z.array(raritySchema).max(5),deckSize:z.number().int().min(1).max(100),maxCopies:z.number().int().min(1).max(100),cardLimits:z.record(portable,z.number().int().min(0).max(100)),standardArtwork:z.boolean().default(false),eventPool:z.array(portable).max(10000).default([])}).strict();
 export const shopSchema=z.object({
  label:z.string().min(1).max(100),enabled:z.boolean(),quoteSeconds:z.number().int().min(30).max(900),
  collections:z.array(collectionSchema).max(300),rarities:z.record(portable,raritySchema),products:z.array(productSchema).max(500),cosmetics:z.array(cosmeticSchema).max(1000),formats:z.array(formatSchema).min(1).max(100),defaultFormat:portable,
  directFirst:directSchema,directAdditional:directSchema,purchasedHoldHours:z.number().int().min(0).max(8760),
+ startingCosmetics:startingCosmeticsSchema.optional(),announcements:z.array(announcementSchema).max(100).optional(),
 }).strict().superRefine((v,c)=>{
  for(const field of ["collections","products","cosmetics","formats"] as const)if(new Set(v[field].map(x=>x.id)).size!==v[field].length)c.addIssue({code:"custom",path:[field],message:"Permanent identifiers must be unique."});
  if(!v.formats.some(f=>f.id===v.defaultFormat&&f.enabled))c.addIssue({code:"custom",message:"Choose an enabled default playing format."});
@@ -51,6 +67,8 @@ export const shopSchema=z.object({
  const collectionIds=new Set(v.collections.map(x=>x.id)),cosmeticIds=new Set(v.cosmetics.map(x=>x.id));
  for(const pool of [v.directFirst.pool,v.directAdditional.pool,...v.products.flatMap(p=>[p.pool,...p.slots.map(s=>s.pool)])])if(pool.collections.some(id=>!collectionIds.has(id)))c.addIssue({code:"custom",message:"A product pool references an unknown collection."});
  for(const p of v.products)if(p.cosmetics.some(id=>!cosmeticIds.has(id)))c.addIssue({code:"custom",message:"A product references an unknown cosmetic."});
+ if(v.announcements&&new Set(v.announcements.map(a=>a.id)).size!==v.announcements.length)c.addIssue({code:"custom",message:"Announcement identities must be distinct."});
+ if(v.startingCosmetics)for(const definition of Object.values(v.startingCosmetics.kindreds))if(!cosmeticIds.has(definition.cardBack)||!cosmeticIds.has(definition.battlefield))c.addIssue({code:"custom",message:"Starting cosmetics must reference configured permanent cosmetic identities."});
  for(const f of v.formats){if([...f.collections,...f.excludeCollections].some(id=>!collectionIds.has(id)))c.addIssue({code:"custom",message:"Format collections must exist."});if(f.enabled&&f.deckSize!==15)c.addIssue({code:"custom",message:"Active permanent game formats preserve the established 15-card rule; other event sizes remain inactive."});}
  for(const collection of v.collections)if(new Set(collection.cards).size!==collection.cards.length)c.addIssue({code:"custom",message:"Collection membership must contain distinct identities."});
 });
