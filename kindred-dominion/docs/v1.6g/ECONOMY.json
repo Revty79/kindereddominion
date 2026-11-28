@@ -1,0 +1,141 @@
+{
+  "proposalOnly": true,
+  "proposalDigest": "6420f2e5ee092fed9e09f7d7efcd81cfd9608b3e24fea8e5b4be2e0e9023cee3",
+  "runtimeActivationAutomatic": false,
+  "startingUnique": 30,
+  "startingPlayableCopies": 40,
+  "boundAdditional": 10,
+  "remainingUnique": 120,
+  "maximumFiveNewBoosters": 24,
+  "firstCopy": {
+    "starter": 30,
+    "startingPlayableCopies": 40,
+    "startingBoundAdditionalCopies": 10,
+    "remaining": 120,
+    "packSize": 5,
+    "maximumRemainingPacks": 24,
+    "tutorialGiftIncluded": 1,
+    "maximumPaidPacksWithGift": 23,
+    "goldAt250": 5750
+  },
+  "tutorialGift": {
+    "modeled": 1,
+    "unmodifiedDefaultGrant": 0,
+    "requiresExplicitPublication": true,
+    "paidPacksWithConfiguredGift": 23,
+    "paidPacksWithoutGift": 24
+  },
+  "profiles": [
+    {
+      "id": "casual-free",
+      "legacyOwnedCopies": 151,
+      "expandedOwnedCopies": 161,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 32,
+      "goldRemaining": 20202,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "average-free",
+      "legacyOwnedCopies": 177,
+      "expandedOwnedCopies": 187,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52895,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "highly-active-free",
+      "legacyOwnedCopies": 177,
+      "expandedOwnedCopies": 187,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 6,
+      "goldRemaining": 106589,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "competitive-normal-ai-proxy",
+      "legacyOwnedCopies": 177,
+      "expandedOwnedCopies": 187,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 6,
+      "goldRemaining": 97817,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "rapid-surrender-attempt",
+      "legacyOwnedCopies": 30,
+      "expandedOwnedCopies": 40,
+      "uniqueCards": 30,
+      "paidPacks": 0,
+      "giftPacks": 0,
+      "completionDay": null,
+      "goldRemaining": 100,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "occasional-paying",
+      "legacyOwnedCopies": 327,
+      "expandedOwnedCopies": 337,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52895,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "regular-paying",
+      "legacyOwnedCopies": 552,
+      "expandedOwnedCopies": 562,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52895,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "collection-focused",
+      "legacyOwnedCopies": 677,
+      "expandedOwnedCopies": 687,
+      "uniqueCards": 150,
+      "paidPacks": 0,
+      "giftPacks": 1,
+      "completionDay": 1,
+      "goldRemaining": 112339,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    },
+    {
+      "id": "active-trader",
+      "legacyOwnedCopies": 176,
+      "expandedOwnedCopies": 186,
+      "uniqueCards": 150,
+      "paidPacks": 23,
+      "giftPacks": 1,
+      "completionDay": 12,
+      "goldRemaining": 52945,
+      "additionalBoundStarterCopies": 10,
+      "conserved": true
+    }
+  ],
+  "tradingSupplyUnchanged": true,
+  "actualRevenue": 0,
+  "assumptions": "Existing V1.5 model and provisional settings; deterministic comparison of 30 original unique founders versus those same identities plus 10 bound additional copies. The model includes one explicitly configured tutorial booster; the unmodified economy default does not automatically grant that pack. Without a published gift, the full pack route requires 24 paid packs. This does not approve prices, paid products or collection pacing. The starter proposal remains inactive until explicit approval. Simulated results are not actual rewards or revenue."
+}

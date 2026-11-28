@@ -1,0 +1,115 @@
+{
+  "compiledBrowserGroups": 26,
+  "compiledBrowserCases": 80,
+  "groups": [
+    {
+      "group": "experience-nature",
+      "passed": 1
+    },
+    {
+      "group": "experience-mythical",
+      "passed": 1
+    },
+    {
+      "group": "experience-arcane",
+      "passed": 1
+    },
+    {
+      "group": "experience-undead",
+      "passed": 1
+    },
+    {
+      "group": "experience-constructs",
+      "passed": 1
+    },
+    {
+      "group": "deck-builder",
+      "passed": 2
+    },
+    {
+      "group": "placement",
+      "passed": 10
+    },
+    {
+      "group": "tactical",
+      "passed": 11
+    },
+    {
+      "group": "resolution",
+      "passed": 13
+    },
+    {
+      "group": "history",
+      "passed": 14
+    },
+    {
+      "group": "viewport",
+      "passed": 4
+    },
+    {
+      "group": "accounts",
+      "passed": 4
+    },
+    {
+      "group": "identity",
+      "passed": 2
+    },
+    {
+      "group": "collections",
+      "passed": 1
+    },
+    {
+      "group": "matches",
+      "passed": 1
+    },
+    {
+      "group": "economy",
+      "passed": 1
+    },
+    {
+      "group": "shop",
+      "passed": 1
+    },
+    {
+      "group": "trading",
+      "passed": 1
+    },
+    {
+      "group": "trading-safety",
+      "passed": 2
+    },
+    {
+      "group": "commerce",
+      "passed": 1
+    },
+    {
+      "group": "commerce-admin",
+      "passed": 1
+    },
+    {
+      "group": "control",
+      "passed": 1
+    },
+    {
+      "group": "release",
+      "passed": 1
+    },
+    {
+      "group": "starters",
+      "passed": 1
+    },
+    {
+      "group": "legacy-restored",
+      "passed": 1
+    },
+    {
+      "group": "compiled-player-only-local-practice",
+      "passed": 2
+    }
+  ],
+  "inheritedDevelopmentCases": 38,
+  "inheritedConditionalSkips": 3,
+  "conditionalPlayerOnlyCasesSeparatelyPassed": 2,
+  "historicalTemporaryArtFixtureNotRerun": true,
+  "physicalOwnerAcceptance": false
+}

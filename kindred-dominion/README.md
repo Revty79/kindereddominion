@@ -1,16 +1,18 @@
 ﻿# Kindred Dominion
 
-Version **0.7.0 - V1.5: Economy Integration and Sandbox Foundation**
+Version **0.7.0 - V1.6: Gameplay Integration and Acceptance**
 
 A persistent tactical card game with 150 illustrated Founding Kindreds cards, custom decks and server-run computer battles. The main application is the player game. Card ownership, saved decks, account permissions, results and acquisition history live in PostgreSQL. The approved full-bleed 3:4 card renderer is shared across the catalog, collection, deck builder, hand, battlefield, inspection, pack opening and authorized Studio.
 
-V1.6F adds [durable Last Move inspection, visual replay and account presentation preferences](docs/V1.6F-VALIDATION.md). Follow the [current startup, schema 23 migration and owner checklist](docs/V1.6F-OWNER-ACCEPTANCE.md). Historical views remain separate from saved gameplay and cannot settle actions or rewards.
+V1.6G integrates the [complete gameplay experience and regression acceptance](docs/V1.6G-VALIDATION.md), including [Gameplay Correction 01](docs/GAMEPLAY-CORRECTION-01.md): a legal click, tap or drop places the selected card immediately. Hover, focus or hold a drag over a tile to preview its effects first. There is no placement confirmation mode or undo for committed moves. Follow the [current startup, schema 23 and owner checklist](docs/V1.6-OWNER-ACCEPTANCE.md). The [five forty-copy starter proposals](docs/V1.6-STARTER-COLLECTION-PROPOSALS.md) remain subject to owner approval; updating does not activate hosted grants. [Future multiplayer readiness](docs/V1.7-MULTIPLAYER-READINESS.md) is a design handoff, not multiplayer implementation.
+
+V1.6F adds [durable Last Move inspection, visual replay and account presentation preferences](docs/V1.6F-VALIDATION.md). Historical views remain separate from saved gameplay and cannot settle actions or rewards.
 
 V1.6E adds [accepted player/opponent action presentation](docs/V1.6E-VALIDATION.md): opponent card flight, actual influence and ability effects, score changes and interruption-safe reconciliation. Animation never controls persistent gameplay or reward settlement.
 
 V1.6D adds [authoritative tactical placement previews](docs/V1.6D-VALIDATION.md), affected-tile numbers, ability/evolution explanations and explicit hidden/random uncertainty. [Representative examples and screenshots](docs/V1.6D-VALIDATION.md#representative-examples-and-screenshots) show the original founding mechanics without changing card balance or artwork.
 
-V1.6C adds [interactive player card pickup, dragging and battlefield placement](docs/V1.6C-VALIDATION.md), keyboard/touch controls, review/direct confirmation modes and larger tile numbers. Its [testing guide](docs/V1.6C-OWNER-ACCEPTANCE.md) includes the disclosed local DEV migration incident. [Visual evidence](docs/V1.6C-VALIDATION.md#visual-evidence) covers desktop, pending placement, tablet and touch layouts.
+V1.6C adds [interactive player card pickup, dragging and battlefield placement](docs/V1.6C-VALIDATION.md), keyboard/touch controls and larger tile numbers. Its original confirmation modes are superseded by Correction 01. Its [testing guide](docs/V1.6C-OWNER-ACCEPTANCE.md) includes the disclosed local DEV migration incident. [Visual evidence](docs/V1.6C-VALIDATION.md#visual-evidence) covers desktop, pending placement, tablet and touch layouts.
 
 V1.6B completes [persistent player deck construction and battle selection](docs/V1.6B-VALIDATION.md), including recoverable working edits, legal duplicate copies, repair and responsive collection controls. [Interface screenshots](docs/V1.6B-VALIDATION.md#player-interface-and-screenshots) show the compiled desktop, tablet, mobile and custom-match journeys.
 

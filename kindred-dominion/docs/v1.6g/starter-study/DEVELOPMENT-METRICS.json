@@ -1,0 +1,134 @@
+{
+  "aiOnly": true,
+  "matches": 240,
+  "existingRunnerSignaturesMatched": 30,
+  "definitions": {
+    "noLegalPlacementSlots": "An instance in the active player's hand had no legal engine placement on that turn. It may become playable later; not all such instances are permanently dead.",
+    "availableCoordinates": "Mean distinct coordinates with at least one legal action before each AI turn.",
+    "rankTwoPositions": "Controlled board positions currently at two or more placement tokens before the active turn."
+  },
+  "samples": [
+    {
+      "scoring": "classic",
+      "matches": 120,
+      "metrics": {
+        "Nature": {
+          "turns": 482,
+          "handSlots": 2436,
+          "noLegalPlacementSlots": 860,
+          "turnsWithoutLegalAction": 47,
+          "availableCoordinates": 1347,
+          "ownPositions": 3149,
+          "rankTwoPositions": 1052,
+          "evolutionInHand": 524,
+          "unplayableEvolution": 366
+        },
+        "Mythical": {
+          "turns": 470,
+          "handSlots": 2376,
+          "noLegalPlacementSlots": 946,
+          "turnsWithoutLegalAction": 60,
+          "availableCoordinates": 1177,
+          "ownPositions": 2763,
+          "rankTwoPositions": 660,
+          "evolutionInHand": 392,
+          "unplayableEvolution": 278
+        },
+        "Arcane": {
+          "turns": 553,
+          "handSlots": 2925,
+          "noLegalPlacementSlots": 1342,
+          "turnsWithoutLegalAction": 76,
+          "availableCoordinates": 1580,
+          "ownPositions": 3675,
+          "rankTwoPositions": 1088,
+          "evolutionInHand": 517,
+          "unplayableEvolution": 338
+        },
+        "Undead": {
+          "turns": 522,
+          "handSlots": 2509,
+          "noLegalPlacementSlots": 643,
+          "turnsWithoutLegalAction": 33,
+          "availableCoordinates": 1461,
+          "ownPositions": 3292,
+          "rankTwoPositions": 1018,
+          "evolutionInHand": 458,
+          "unplayableEvolution": 288
+        },
+        "Constructs": {
+          "turns": 418,
+          "handSlots": 2104,
+          "noLegalPlacementSlots": 889,
+          "turnsWithoutLegalAction": 48,
+          "availableCoordinates": 1125,
+          "ownPositions": 2407,
+          "rankTwoPositions": 393,
+          "evolutionInHand": 174,
+          "unplayableEvolution": 74
+        }
+      }
+    },
+    {
+      "scoring": "domination",
+      "matches": 120,
+      "metrics": {
+        "Nature": {
+          "turns": 483,
+          "handSlots": 2437,
+          "noLegalPlacementSlots": 876,
+          "turnsWithoutLegalAction": 44,
+          "availableCoordinates": 1329,
+          "ownPositions": 3137,
+          "rankTwoPositions": 1068,
+          "evolutionInHand": 545,
+          "unplayableEvolution": 377
+        },
+        "Mythical": {
+          "turns": 472,
+          "handSlots": 2390,
+          "noLegalPlacementSlots": 978,
+          "turnsWithoutLegalAction": 65,
+          "availableCoordinates": 1174,
+          "ownPositions": 2757,
+          "rankTwoPositions": 647,
+          "evolutionInHand": 399,
+          "unplayableEvolution": 271
+        },
+        "Arcane": {
+          "turns": 574,
+          "handSlots": 3018,
+          "noLegalPlacementSlots": 1416,
+          "turnsWithoutLegalAction": 79,
+          "availableCoordinates": 1584,
+          "ownPositions": 3812,
+          "rankTwoPositions": 1176,
+          "evolutionInHand": 552,
+          "unplayableEvolution": 331
+        },
+        "Undead": {
+          "turns": 528,
+          "handSlots": 2534,
+          "noLegalPlacementSlots": 690,
+          "turnsWithoutLegalAction": 29,
+          "availableCoordinates": 1499,
+          "ownPositions": 3372,
+          "rankTwoPositions": 986,
+          "evolutionInHand": 511,
+          "unplayableEvolution": 308
+        },
+        "Constructs": {
+          "turns": 475,
+          "handSlots": 2401,
+          "noLegalPlacementSlots": 1082,
+          "turnsWithoutLegalAction": 55,
+          "availableCoordinates": 1311,
+          "ownPositions": 2908,
+          "rankTwoPositions": 522,
+          "evolutionInHand": 259,
+          "unplayableEvolution": 78
+        }
+      }
+    }
+  ]
+}

@@ -30,6 +30,7 @@ export function useCardPlacement(options:Options){
     const overlaps=avoided.some(r=>pos.x<r.right&&pos.x+width>r.left&&pos.y<r.bottom&&pos.y+height>r.top);floating.current.style.visibility=overlaps?"hidden":"visible";
     position.current={...pos,width};floating.current.style.width=width+"px";floating.current.style.transform=`translate3d(${pos.x}px,${pos.y}px,0)`;
   }
+  function reposition(){if(raf.current)cancelAnimationFrame(raf.current);raf.current=0;paint();}
   function schedule(){if(!raf.current)raf.current=requestAnimationFrame(paint);}
   function animateEnd(phase:"returning"|"placing",destination?:Target){
     clearTimer();release();const previous=visualRef.current;selection.current="";setSelected("");updateTarget(null);
@@ -87,5 +88,5 @@ export function useCardPlacement(options:Options){
     if(row===undefined||col===undefined){if(!event.key.startsWith("Arrow"))return;const first=latest.current.value.legalActions.find(a=>a.card===selection.current);if(first){event.preventDefault();tile(first.row,first.col)?.querySelector<HTMLButtonElement>(".player-tile-action")?.focus();}return;}
     const field=latest.current.value.configuration.battlefield,next=adjacentTile(row,col,event.key,field.rows,field.cols);if(next){event.preventDefault();tile(next.row,next.col)?.querySelector<HTMLButtonElement>(".player-tile-action")?.focus();}
   }
-  return {selected,target,visual,reposition:schedule,floating,dragging,message,cancel,choose,clickCard,pointerDown,navigate,focusTile,lostCapture:(id:number)=>{if(gesture.current?.id===id)cancel();},accepted:(destination:Target)=>{animateEnd("placing",destination);setMessage("Placement accepted and saved.");},rejected:()=>{release();updateTarget(null);setMessage("Placement was not accepted. Your hand is preserved; review the saved position before retrying.");},pointTo:(at:Point)=>{point.current=at;schedule();}};
+  return {selected,target,visual,reposition,floating,dragging,message,cancel,choose,clickCard,pointerDown,navigate,focusTile,lostCapture:(id:number)=>{if(gesture.current?.id===id)cancel();},accepted:(destination:Target)=>{animateEnd("placing",destination);setMessage("Placement accepted and saved.");},rejected:()=>{release();updateTarget(null);setMessage("Placement was not accepted. Your hand is preserved; review the saved position before retrying.");},pointTo:(at:Point)=>{point.current=at;schedule();}};
 }

@@ -102,6 +102,7 @@ test("temporary artwork travels from Studio approval to a validated portable pac
   await row
     .getByRole("button", { name: "Activate for new matches", exact: true })
     .click();
+  await expect(row.getByRole("cell").nth(1)).toContainText("ACTIVE");
   await page
     .getByRole("button", { name: "Return to game", exact: true })
     .click();

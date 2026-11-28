@@ -30,9 +30,9 @@ export default function DeckManager({content,decks,player,quantities,onSaved,run
     <div className="player-section-heading"><div><p className="player-eyebrow">YOUR COLLECTION, YOUR FORMATION</p><h1>Deck Builder</h1><p>Your collection holds every owned copy. Each standard battle deck uses exactly fifteen.</p></div>{!editing&&<button className="primary" disabled={busy} onClick={()=>run(()=>create())}>Create deck</button>}</div>
     {error&&<p role="alert">{error}</p>}
     {!editing?<>
-      <section className="player-panel deck-template-choice" aria-label="Recommended starter configurations"><h2>Start with a recommended formation</h2><p>Templates do not grant cards. Missing quantities remain visible in the resulting draft. Inactive V1.6A proposals do not replace published recommendations.</p>
+      <section className="player-panel deck-template-choice" aria-label="Recommended starter configurations"><h2>Start with a recommended formation</h2><p>Templates use the published starter configurations and do not grant cards. Missing quantities remain visible in the resulting draft.</p>
         <label>Recommended formation<select aria-label="Recommended formation" value={template} disabled={!metadata} onChange={e=>setTemplate(e.target.value)}>{metadata?.recommendations.map(r=><option key={r.id} value={r.id}>{r.name} · {r.collection}</option>)}</select></label>
-        {selectedTemplate&&<p>{selectedTemplate.cards.length} cards · {selectedTemplate.source}</p>}
+        {selectedTemplate&&<p>{selectedTemplate.cards.length} cards · Recommended formation</p>}
         <button disabled={busy||!selectedTemplate} onClick={()=>run(()=>create({name:(selectedTemplate.name+" custom").slice(0,80),cards:selectedTemplate.cards,config:{scoring:"classic",mode:"standard",collection:selectedTemplate.collection},formatId:null,testingAccess:false}))}>Create from recommended formation</button><button disabled={busy} onClick={()=>run(refresh)}>Refresh collection and decks</button>
       </section>
       <div className="player-deck-grid">{decks.map(deck=><article className="player-panel" key={deck.id} data-deck-id={deck.id}>

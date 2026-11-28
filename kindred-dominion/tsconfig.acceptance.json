@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "scripts/study-output.ts",
+    "scripts/validate-v16-browser.mts",
+    "scripts/validate-v16-preservation.mts",
+    "scripts/verify-v16-economy.mts",
+    "scripts/starter-analysis.mts",
+    "scripts/starter-metrics.mts",
+    "scripts/starter-legacy-baseline.mts",
+    "server/tests/browser/experience.spec.ts",
+    "server/tests/browser/experience-restore.spec.ts",
+    "server/tests/browser/placement.spec.ts",
+    "server/tests/browser/tactical.spec.ts",
+    "server/tests/browser/resolution.spec.ts",
+    "server/tests/browser/history.spec.ts",
+    "server/tests/browser/viewport.spec.ts",
+    "server/tests/browser/shop.spec.ts",
+    "server/tests/gameplay-experience.integration.ts"
+  ]
+}

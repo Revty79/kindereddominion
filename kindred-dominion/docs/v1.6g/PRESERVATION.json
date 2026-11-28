@@ -1,0 +1,17 @@
+{
+  "fromSchema": 20,
+  "toSchema": 23,
+  "originalRelations": 107,
+  "originalRows": 566098,
+  "allExistingColumnsPreserved": true,
+  "automaticChanges": {
+    "starter_upgrade_grant": 0,
+    "deck_workspace": 0,
+    "player_presentation": 0,
+    "match_recent_presentation": 0
+  },
+  "declaredPostPreservationPasswordResets": 2,
+  "originalSourceUntouched": true,
+  "normalDevWrites": false,
+  "hostedAccessed": false
+}
